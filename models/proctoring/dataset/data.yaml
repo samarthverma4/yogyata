@@ -1,0 +1,13 @@
+train: ../train/images
+val: ../valid/images
+test: ../test/images
+
+nc: 1
+names: ['notebook']
+
+roboflow:
+  workspace: ai-mock-interview
+  project: ai-mock-interview
+  version: 1
+  license: CC BY 4.0
+  url: https://universe.roboflow.com/ai-mock-interview/ai-mock-interview/dataset/1
