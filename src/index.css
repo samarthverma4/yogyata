@@ -1,3 +1,5 @@
+@import './founder-workspace/workspace.css';
+
 /* ==========================================================================
    YOGYATA Design System
    Visual Identity: Primary Navy (#171B4D), Primary Blue (#465FA8),
@@ -3012,6 +3014,33 @@ body {
     flex-direction: column;
     align-items: flex-start;
   }
+
+  .ob-review-edit-banner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .ob-review-return-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .founder-unsaved-warning-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .founder-warning-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .ob-draft-banner-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
 }
 
 /* ==========================================================================
@@ -3440,6 +3469,215 @@ body {
   gap: 14px;
   padding-bottom: 14px;
   border-bottom: 1px solid var(--color-border);
+}
+
+/* ── Review Edit Banner ── */
+.ob-review-edit-banner-wrap {
+  width: 100%;
+  max-width: 680px;
+  margin: 0 auto 16px;
+  padding: 0 14px;
+}
+
+.ob-review-edit-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  background: #EEF2FF;
+  border: 1.5px solid #C7D2FE;
+  border-radius: var(--radius-lg);
+  padding: 12px 18px;
+  box-shadow: var(--shadow-sm);
+  animation: fadeInStep 200ms ease;
+}
+
+.ob-review-edit-banner-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.ob-review-edit-pill {
+  background: #4F46E5;
+  color: #FFFFFF;
+  font-size: 0.72rem;
+  font-weight: 800;
+  padding: 3px 8px;
+  border-radius: 4px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.ob-review-edit-text {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #3730A3;
+}
+
+.ob-review-return-btn {
+  background: #4F46E5;
+  color: #FFFFFF;
+  border: none;
+  border-radius: var(--radius-md);
+  padding: 7px 16px;
+  font-size: 0.84rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: background var(--transition-fast);
+  white-space: nowrap;
+  font-family: inherit;
+}
+
+.ob-review-return-btn:hover {
+  background: #4338CA;
+}
+
+/* ── Draft Restored Notification Banner ── */
+.ob-draft-banner-wrap {
+  background: #EFF6FF;
+  border-bottom: 1px solid #BFDBFE;
+  padding: 8px 24px;
+  animation: fadeInStep 200ms ease;
+}
+
+.ob-draft-banner-inner {
+  max-width: 1080px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.ob-draft-banner-text {
+  font-size: 0.83rem;
+  color: #1E40AF;
+  font-weight: 500;
+}
+
+.ob-draft-reset-btn {
+  background: none;
+  border: none;
+  color: #1D4ED8;
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  text-decoration: underline;
+  padding: 2px 4px;
+  font-family: inherit;
+}
+
+.ob-draft-reset-btn:hover {
+  color: #1E3A8A;
+}
+
+/* ── Unsaved Talent Requirement Box ── */
+.founder-unsaved-warning-box {
+  background: #FFFBEB;
+  border: 1.5px solid #FCD34D;
+  border-radius: var(--radius-lg);
+  padding: 16px 20px;
+  margin: 18px 0 12px;
+  animation: fadeInStep 200ms ease;
+}
+
+.founder-unsaved-warning-header {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.founder-unsaved-warning-icon {
+  color: #D97706;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.founder-unsaved-warning-title {
+  font-size: 0.98rem;
+  font-weight: 700;
+  color: #92400E;
+  margin-bottom: 4px;
+}
+
+.founder-unsaved-warning-text {
+  font-size: 0.86rem;
+  color: #B45309;
+  line-height: 1.48;
+}
+
+.founder-unsaved-warning-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(245, 158, 11, 0.25);
+}
+
+.founder-warning-btn {
+  padding: 8px 16px;
+  font-size: 0.86rem;
+}
+
+/* ── Interactive Step in Progress Indicator ── */
+button.ob-progress-step.is-clickable {
+  background: none;
+  border: none;
+  padding: 0;
+  font-family: inherit;
+  cursor: pointer;
+  text-align: left;
+}
+
+button.ob-progress-step.is-clickable:hover .ob-progress-dot {
+  transform: scale(1.08);
+  background: #324a87;
+  box-shadow: 0 0 0 3px rgba(70, 95, 168, 0.25);
+}
+
+button.ob-progress-step.is-clickable:hover .ob-progress-label {
+  text-decoration: underline;
+  color: var(--color-navy);
+}
+
+button.ob-progress-step.is-clickable:focus-visible {
+  outline: 2px solid var(--color-blue);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+/* ── Footer Link Buttons ── */
+.ob-footer-link-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  color: var(--color-text-muted);
+  font-size: 0.84rem;
+  cursor: pointer;
+  font-family: inherit;
+  transition: color var(--transition-fast);
+}
+
+.ob-footer-link-btn:hover {
+  color: var(--color-blue);
+  text-decoration: underline;
+}
+
+/* ── Legal Modal Body ── */
+.legal-modal-content {
+  padding: 4px 2px;
+  max-height: 60vh;
+  overflow-y: auto;
 }
 
 
