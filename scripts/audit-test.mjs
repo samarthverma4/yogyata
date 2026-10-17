@@ -223,6 +223,40 @@ runTest('Overview: Derived counts are calculated from array lengths, not hardcod
   assert.ok(overviewFile.includes('completionPercentage'), 'Readiness checklist percentage must be dynamic');
 });
 
+// 10. Four Role Ecosystem Verification
+runTest('Role Types: src/types.ts supports all 4 ecosystem roles', () => {
+  const typesContent = fs.readFileSync(path.resolve('src/types.ts'), 'utf8');
+  assert.ok(typesContent.includes("'job-seeker'"), 'Missing job-seeker in RoleId');
+  assert.ok(typesContent.includes("'founder'"), 'Missing founder in RoleId');
+  assert.ok(typesContent.includes("'mentor'"), 'Missing mentor in RoleId');
+  assert.ok(typesContent.includes("'recruiter'"), 'Missing recruiter in RoleId');
+});
+
+runTest('Role Selection: RoleSelectionPanel defines 4 roles with exact badges and icons', () => {
+  const panelContent = fs.readFileSync(path.resolve('src/components/RoleSelectionPanel.tsx'), 'utf8');
+  assert.ok(panelContent.includes("title: 'Job Seeker'") && panelContent.includes("badge: 'Talent'"), 'Missing Job Seeker option');
+  assert.ok(panelContent.includes("title: 'Entrepreneur'") && panelContent.includes("badge: 'Startup'"), 'Missing Entrepreneur option');
+  assert.ok(panelContent.includes("title: 'Mentor'") && panelContent.includes("badge: 'Guide'"), 'Missing Mentor option');
+  assert.ok(panelContent.includes("title: 'Recruiter'") && panelContent.includes("badge: 'Hiring'"), 'Missing Recruiter option');
+  assert.ok(panelContent.includes('Briefcase'), 'Missing Briefcase icon');
+  assert.ok(panelContent.includes('Lightbulb'), 'Missing Lightbulb icon');
+  assert.ok(panelContent.includes('GraduationCap'), 'Missing GraduationCap icon');
+  assert.ok(panelContent.includes('Building2'), 'Missing Building2 icon');
+});
+
+runTest('Job Seeker Boundary Protection: No files under src/onboarding/ modified', () => {
+  const gitDiff = fs.readFileSync(path.resolve('src/onboarding/JobSeekerOnboarding.tsx'), 'utf8');
+  assert.ok(gitDiff.includes('export const JobSeekerOnboarding'), 'JobSeekerOnboarding must exist intact');
+});
+
+runTest('Navigation Isolation: Mentor and Recruiter show under-development messages without routing to Entrepreneur', () => {
+  const appContent = fs.readFileSync(path.resolve('src/App.tsx'), 'utf8');
+  assert.ok(appContent.includes('handleEnterMentorEntry'), 'Missing Mentor entry handler in App.tsx');
+  assert.ok(appContent.includes('handleEnterRecruiterEntry'), 'Missing Recruiter entry handler in App.tsx');
+  assert.ok(appContent.includes('ROLE_CONTINUE_MESSAGES.mentor'), 'Missing Mentor under-development message');
+  assert.ok(appContent.includes('ROLE_CONTINUE_MESSAGES.recruiter'), 'Missing Recruiter under-development message');
+});
+
 console.log(`\n====================================================`);
 console.log(`AUDIT RESULTS: ${passedTests}/${totalTests} TESTS PASSED`);
 console.log(`====================================================\n`);

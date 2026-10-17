@@ -74,9 +74,19 @@ const ROLE_CONTINUE_MESSAGES: Record<RoleId, { title: string; message: string }>
       'Job Seeker entry selected. Authentication will be connected in the next development phase.',
   },
   founder: {
-    title: 'Founder / Entrepreneur entry selected',
+    title: 'Entrepreneur entry selected',
     message:
-      'Founder / Entrepreneur entry selected. Authentication will be connected in the next development phase.',
+      'Entrepreneur entry selected. Authentication will be connected in the next development phase.',
+  },
+  mentor: {
+    title: 'Industry Mentor Workspace — Under Development',
+    message:
+      'The Mentor onboarding and guidance workspace is currently being built in Phase 2 of the YOGYATA roadmap. Mentee management, 1:1 sessions, and expertise tracking will be available soon!',
+  },
+  recruiter: {
+    title: 'Talent Recruiter Workspace — Under Development',
+    message:
+      'The Recruiter onboarding and talent acquisition workspace is scheduled for Phase 3 of the YOGYATA roadmap. Verified Skill Passport pipelines and interview scorecards will be available soon!',
   },
 };
 
@@ -160,6 +170,19 @@ function App() {
     setSelectedRole(id);
   }, []);
 
+  // ── Role Entry Handlers (prepared for upcoming modules) ──
+  const handleEnterMentorEntry = useCallback(() => {
+    // Prepared for Phase 2: Will check loadMentorWorkspace() and dispatch to MentorOnboarding or MentorWorkspace
+    const { title, message } = ROLE_CONTINUE_MESSAGES.mentor;
+    showNotification(title, message);
+  }, [showNotification]);
+
+  const handleEnterRecruiterEntry = useCallback(() => {
+    // Prepared for Phase 3: Will check loadRecruiterWorkspace() and dispatch to RecruiterOnboarding or RecruiterWorkspace
+    const { title, message } = ROLE_CONTINUE_MESSAGES.recruiter;
+    showNotification(title, message);
+  }, [showNotification]);
+
   // ── Continue handler ──
   const handleContinue = useCallback(
     (role: RoleOption) => {
@@ -174,12 +197,16 @@ function App() {
           setInFounderOnboarding(true);
           window.scrollTo({ top: 0, behavior: 'smooth' });
         }
+      } else if (role.id === 'mentor') {
+        handleEnterMentorEntry();
+      } else if (role.id === 'recruiter') {
+        handleEnterRecruiterEntry();
       } else {
         const { title, message } = ROLE_CONTINUE_MESSAGES[role.id];
         showNotification(title, message);
       }
     },
-    [showNotification, handleEnterFounderWorkspace]
+    [showNotification, handleEnterFounderWorkspace, handleEnterMentorEntry, handleEnterRecruiterEntry]
   );
 
   // ── Sign In handler ──
@@ -278,7 +305,7 @@ function App() {
           }}
         >
           <span>
-            Active Founder Workspace saved for{' '}
+            Active Entrepreneur Workspace saved for{' '}
             <strong>{existingWorkspace.startup.startupName || 'Your Startup'}</strong>
           </span>
           <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
@@ -295,7 +322,7 @@ function App() {
               onClick={() => handleEnterFounderWorkspace(existingWorkspace)}
               id="btn-quick-open-workspace"
             >
-              Open Founder Workspace →
+              Open Entrepreneur Workspace →
             </button>
             <button
               type="button"
