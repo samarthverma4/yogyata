@@ -1,0 +1,30 @@
+{
+  "disclaimer": "DEMONSTRATION LABELS. Profiles are built from the demo resumes; relevance (0 none, 1 partial, 2 strong fit) and expected eligibility exclusions were assigned by hand by the project author BEFORE running the matcher. Omitted pairs mean 0. Single rater, 12 opportunities: sanity check only.",
+  "n_profiles_ranked": 5,
+  "n_opportunities": 12,
+  "ranking_metrics_mean_over_profiles": {
+    "full_system": {
+      "p@3": 0.867,
+      "ndcg@3": 1.0,
+      "ndcg@5": 0.998
+    },
+    "baseline_tfidf_only": {
+      "p@3": 0.8,
+      "ndcg@3": 0.953,
+      "ndcg@5": 0.947
+    },
+    "baseline_plain_skill_coverage": {
+      "p@3": 0.8,
+      "ndcg@3": 0.906,
+      "ndcg@5": 0.929
+    }
+  },
+  "eligibility_exact_match": "6/6",
+  "eligibility_mismatches": {},
+  "stuffing_resistance_pairs_honest_ranked_above_stuffer": {
+    "full_system": "4/4",
+    "baseline_tfidf_only": "2/4",
+    "baseline_plain_skill_coverage": "2/4"
+  },
+  "note": "Embedding backend not evaluated (sentence-transformers not installed here)."
+}
