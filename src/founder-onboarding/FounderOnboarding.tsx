@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import type { FounderOnboardingView, FounderOnboardingState } from './types';
 import { INITIAL_FOUNDER_ONBOARDING_STATE } from './types';
 import { FounderOnboardingLayout } from './FounderOnboardingLayout';
@@ -11,18 +11,78 @@ import { TalentRequirementsStep } from './steps/TalentRequirementsStep';
 import { ProjectTaskStep } from './steps/ProjectTaskStep';
 import { FounderReviewStep } from './steps/FounderReviewStep';
 import { FounderCompleteStep } from './steps/FounderCompleteStep';
+import {
+  loadFounderDraft,
+  saveFounderDraft,
+  clearFounderDraft,
+  formatTimeAgo,
+  MAX_IMAGE_STORAGE_LENGTH,
+} from './storage';
+import {
+  initializeWorkspaceFromOnboarding,
+  saveFounderWorkspace,
+} from '../founder-workspace/storage';
+import type { FounderWorkspaceState } from '../founder-workspace/types';
 
 interface FounderOnboardingProps {
   onExit: () => void;
   onSignInClick?: () => void;
+  onEnterWorkspace?: (workspace: FounderWorkspaceState) => void;
 }
 
 export const FounderOnboarding: React.FC<FounderOnboardingProps> = ({
   onExit,
   onSignInClick,
+  onEnterWorkspace,
 }) => {
-  const [view, setView] = useState<FounderOnboardingView>('signup');
-  const [state, setState] = useState<FounderOnboardingState>(INITIAL_FOUNDER_ONBOARDING_STATE);
+  // Initialize state lazily from stored draft if available
+  const [initialData] = useState(() => {
+    const draft = loadFounderDraft();
+    if (draft) {
+      const hasMeaningfulData = Boolean(
+        draft.state.account.email ||
+        draft.state.account.fullName ||
+        draft.state.profile.fullName ||
+        draft.state.startup.startupName ||
+        draft.state.goals.primaryGoal ||
+        draft.state.talentRequirements.length > 0 ||
+        (draft.state.taskDraft && !draft.state.taskDraft.isSkipped && draft.state.taskDraft.taskTitle)
+      );
+
+      if (hasMeaningfulData) {
+        return {
+          state: draft.state,
+          view: draft.currentView || 'signup',
+          draftRestoredTime: formatTimeAgo(draft.savedAt),
+        };
+      }
+    }
+    return {
+      state: INITIAL_FOUNDER_ONBOARDING_STATE,
+      view: 'signup' as FounderOnboardingView,
+      draftRestoredTime: null,
+    };
+  });
+
+  const [view, setView] = useState<FounderOnboardingView>(initialData.view);
+  const [state, setState] = useState<FounderOnboardingState>(initialData.state);
+  const [isEditingFromReview, setIsEditingFromReview] = useState(false);
+  const [draftRestoredTime, setDraftRestoredTime] = useState<string | null>(initialData.draftRestoredTime);
+
+  // Derive whether photo or logo is omitted from local storage due to payload size
+  const imageOmittedNotice = Boolean(
+    (state.profile.profilePhotoUrl && state.profile.profilePhotoUrl.length > MAX_IMAGE_STORAGE_LENGTH) ||
+    (state.startup.logoUrl && state.startup.logoUrl.length > MAX_IMAGE_STORAGE_LENGTH)
+  );
+
+  // Save non-sensitive draft on state or view changes
+  useEffect(() => {
+    if (view === 'complete') {
+      clearFounderDraft();
+      return;
+    }
+    saveFounderDraft(state, view);
+  }, [state, view]);
 
   const updateState = useCallback(
     <K extends keyof FounderOnboardingState>(key: K, value: FounderOnboardingState[K]) => {
@@ -33,6 +93,30 @@ export const FounderOnboarding: React.FC<FounderOnboardingProps> = ({
 
   const goTo = useCallback((next: FounderOnboardingView) => {
     setView(next);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, []);
+
+  const handleEditFromReview = useCallback((target: FounderOnboardingView) => {
+    setIsEditingFromReview(true);
+    goTo(target);
+  }, [goTo]);
+
+  const handleReturnToReview = useCallback(() => {
+    setIsEditingFromReview(false);
+    goTo('review');
+  }, [goTo]);
+
+  const handleStageClick = useCallback((targetView: FounderOnboardingView) => {
+    setIsEditingFromReview(false);
+    goTo(targetView);
+  }, [goTo]);
+
+  const handleResetDraft = useCallback(() => {
+    clearFounderDraft();
+    setState(INITIAL_FOUNDER_ONBOARDING_STATE);
+    setView('signup');
+    setIsEditingFromReview(false);
+    setDraftRestoredTime(null);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, []);
 
@@ -68,6 +152,8 @@ export const FounderOnboarding: React.FC<FounderOnboardingProps> = ({
             onChange={(d) => updateState('profile', d)}
             onNext={() => goTo('startup')}
             onBack={() => goTo('verify-email')}
+            isEditingFromReview={isEditingFromReview}
+            onReturnToReview={handleReturnToReview}
           />
         );
       case 'startup':
@@ -77,6 +163,8 @@ export const FounderOnboarding: React.FC<FounderOnboardingProps> = ({
             onChange={(d) => updateState('startup', d)}
             onNext={() => goTo('goals')}
             onBack={() => goTo('profile')}
+            isEditingFromReview={isEditingFromReview}
+            onReturnToReview={handleReturnToReview}
           />
         );
       case 'goals':
@@ -86,6 +174,8 @@ export const FounderOnboarding: React.FC<FounderOnboardingProps> = ({
             onChange={(d) => updateState('goals', d)}
             onNext={() => goTo('talent')}
             onBack={() => goTo('startup')}
+            isEditingFromReview={isEditingFromReview}
+            onReturnToReview={handleReturnToReview}
           />
         );
       case 'talent':
@@ -95,6 +185,8 @@ export const FounderOnboarding: React.FC<FounderOnboardingProps> = ({
             onChange={(reqs) => updateState('talentRequirements', reqs)}
             onNext={() => goTo('task')}
             onBack={() => goTo('goals')}
+            isEditingFromReview={isEditingFromReview}
+            onReturnToReview={handleReturnToReview}
           />
         );
       case 'task':
@@ -104,14 +196,19 @@ export const FounderOnboarding: React.FC<FounderOnboardingProps> = ({
             onChange={(d) => updateState('taskDraft', d)}
             onNext={() => goTo('review')}
             onBack={() => goTo('talent')}
+            isEditingFromReview={isEditingFromReview}
+            onReturnToReview={handleReturnToReview}
           />
         );
       case 'review':
         return (
           <FounderReviewStep
             state={state}
-            onEdit={(target) => goTo(target)}
-            onComplete={() => goTo('complete')}
+            onEdit={handleEditFromReview}
+            onComplete={() => {
+              clearFounderDraft();
+              goTo('complete');
+            }}
             onBack={() => goTo('task')}
             onChangePrivacy={(p) => updateState('privacy', p)}
           />
@@ -120,7 +217,20 @@ export const FounderOnboarding: React.FC<FounderOnboardingProps> = ({
         return (
           <FounderCompleteStep
             state={state}
-            onExit={onExit}
+            onExit={() => {
+              clearFounderDraft();
+              onExit();
+            }}
+            onEnterWorkspace={() => {
+              clearFounderDraft();
+              const ws = initializeWorkspaceFromOnboarding(state);
+              saveFounderWorkspace(ws);
+              if (onEnterWorkspace) {
+                onEnterWorkspace(ws);
+              } else {
+                onExit();
+              }
+            }}
           />
         );
       default:
@@ -129,7 +239,16 @@ export const FounderOnboarding: React.FC<FounderOnboardingProps> = ({
   };
 
   return (
-    <FounderOnboardingLayout currentView={view} onExit={onExit}>
+    <FounderOnboardingLayout
+      currentView={view}
+      onExit={onExit}
+      onStageClick={handleStageClick}
+      isEditingFromReview={isEditingFromReview}
+      onReturnToReview={handleReturnToReview}
+      draftRestoredTime={draftRestoredTime}
+      imageOmittedNotice={imageOmittedNotice}
+      onResetDraft={handleResetDraft}
+    >
       {renderStep()}
     </FounderOnboardingLayout>
   );
