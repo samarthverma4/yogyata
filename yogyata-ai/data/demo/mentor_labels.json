@@ -1,0 +1,135 @@
+{
+ "_disclaimer": "Author-written relevance labels (0-2) for synthetic mentors, assigned before running the system. Tiny; sanity check only.",
+ "cases": [
+  {
+   "id": "c1_ml_python",
+   "payload": {
+    "profile": {
+     "declared_skills": [
+      "Python"
+     ],
+     "goals": "become a machine learning engineer"
+    },
+    "role_id": "ml_engineer"
+   },
+   "relevance": {
+    "dm1": 2,
+    "dm4": 1,
+    "dm7": 1,
+    "dm5": 1
+   }
+  },
+  {
+   "id": "c2_analyst_sql",
+   "payload": {
+    "profile": {
+     "goals": "get a data analyst internship, weak at SQL",
+     "evidence": [
+      {
+       "skill": "SQL",
+       "source": "task_review",
+       "strength": 0.2,
+       "ref_id": "t"
+      }
+     ]
+    },
+    "role_id": "data_analyst"
+   },
+   "relevance": {
+    "dm2": 2,
+    "dm6": 2,
+    "dm4": 1
+   }
+  },
+  {
+   "id": "c3_fullstack_js_weak",
+   "payload": {
+    "profile": {
+     "goals": "build web apps",
+     "evidence": [
+      {
+       "skill": "JavaScript",
+       "source": "task_review",
+       "strength": 0.2,
+       "ref_id": "t"
+      }
+     ]
+    },
+    "role_id": "full_stack_developer"
+   },
+   "relevance": {
+    "dm3": 2,
+    "dm9": 2,
+    "dm6": 1,
+    "dm5": 1
+   }
+  },
+  {
+   "id": "c4_ml_budget_500",
+   "payload": {
+    "profile": {
+     "declared_skills": [
+      "Python"
+     ],
+     "goals": "machine learning engineer",
+     "budget_per_session_inr": 500
+    },
+    "role_id": "ml_engineer"
+   },
+   "relevance": {
+    "dm4": 1,
+    "dm8": 0
+   }
+  },
+  {
+   "id": "c5_analyst_bi_gap",
+   "payload": {
+    "profile": {
+     "goals": "dashboards and visualization",
+     "evidence": [
+      {
+       "skill": "Tableau",
+       "source": "task_review",
+       "strength": 0.2,
+       "ref_id": "t"
+      },
+      {
+       "skill": "Data Visualization",
+       "source": "task_review",
+       "strength": 0.3,
+       "ref_id": "t2"
+      }
+     ]
+    },
+    "role_id": "data_analyst"
+   },
+   "relevance": {
+    "dm2": 2
+   },
+   "note": "dm10 is the ideal BI mentor but is not accepting students; relevance lists only eligible mentors. (Label corrected after the first run revealed it wrongly counted an ineligible mentor; disclosed.)"
+  },
+  {
+   "id": "c6_ml_sunday_morning",
+   "payload": {
+    "profile": {
+     "declared_skills": [
+      "Python"
+     ],
+     "goals": "machine learning engineer"
+    },
+    "role_id": "ml_engineer",
+    "availability": [
+     {
+      "day": "Sun",
+      "start": "10:00",
+      "end": "11:30"
+     }
+    ]
+   },
+   "relevance": {
+    "dm5": 1,
+    "dm7": 1
+   }
+  }
+ ]
+}
