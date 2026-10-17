@@ -1,0 +1,63 @@
+{
+  "_disclaimer": "DEMONSTRATION DATA. Answers were written by the project author and the 'human_overall' ratings (0-100) were assigned by the same author BEFORE running the evaluator. They are a single rater's judgements, not a validated gold standard, so agreement metrics are sanity checks only. Replace with answers rated by several qualified reviewers.",
+  "answers": [
+    {"id": "a01", "question_id": "ml_overfitting", "category": "strong", "human_overall": 90,
+     "text": "Overfitting is when a model learns the training data too closely, including its noise, so it performs well on training data but poorly on unseen data. It usually happens because the model is too complex for the amount of data. You can reduce it with more data, regularization or early stopping, because these limit how much the model can memorize."},
+    {"id": "a02", "question_id": "ml_overfitting", "category": "partial", "human_overall": 50,
+     "text": "Overfitting means the model memorizes the training set so it does not work well on new data. I think using more data helps."},
+    {"id": "a03", "question_id": "ml_overfitting", "category": "stuffed", "human_overall": 25,
+     "text": "overfitting, regularization, dropout, cross-validation, noise, complex model, unseen data, early stopping"},
+    {"id": "a04", "question_id": "ml_overfitting", "category": "misconception", "human_overall": 10,
+     "text": "Overfitting is when the model performs poorly on the training data, so you should make the model bigger."},
+    {"id": "a05", "question_id": "ml_overfitting", "category": "off_topic", "human_overall": 0,
+     "text": "I enjoy playing cricket on weekends and my favourite colour is blue."},
+
+    {"id": "a06", "question_id": "sql_join_types", "category": "strong", "human_overall": 90,
+     "text": "An inner join returns only the rows that have matching values in both tables. A left join returns all rows from the left table and the matching rows from the right, and the right-side columns are NULL where there is no match. For example, to list all customers including those with no orders I would use a left join, but to list only customers who placed orders an inner join is enough."},
+    {"id": "a07", "question_id": "sql_join_types", "category": "partial", "human_overall": 55,
+     "text": "Inner join gives only the matching rows from both tables. Left join keeps everything from the first table."},
+    {"id": "a08", "question_id": "sql_join_types", "category": "short", "human_overall": 15,
+     "text": "They join tables."},
+    {"id": "a09", "question_id": "sql_join_types", "category": "misconception", "human_overall": 15,
+     "text": "A left join returns only the matching rows and an inner join returns all the rows from both tables."},
+
+    {"id": "a10", "question_id": "py_list_vs_tuple", "category": "strong", "human_overall": 90,
+     "text": "Lists are mutable, so you can change, add or remove elements after creating them, while tuples are immutable and cannot be modified. Because tuples are hashable they can be used as dictionary keys, which lists cannot. I use a list for a collection that changes and a tuple for a fixed record such as coordinates."},
+    {"id": "a11", "question_id": "py_list_vs_tuple", "category": "partial", "human_overall": 50,
+     "text": "A tuple cannot be changed after you create it but a list can be changed. Tuples are written with round brackets."},
+    {"id": "a12", "question_id": "py_list_vs_tuple", "category": "stuffed", "human_overall": 25,
+     "text": "mutable, immutable, hashable, dictionary key, fixed, record, coordinates"},
+
+    {"id": "a13", "question_id": "stats_p_value", "category": "strong", "human_overall": 88,
+     "text": "The p-value is the probability of seeing data at least as extreme as what we observed, assuming the null hypothesis is true. If it is below the significance level, such as 0.05, we reject the null hypothesis. It does not measure the effect size, so a tiny effect can still have a small p-value with a big sample."},
+    {"id": "a14", "question_id": "stats_p_value", "category": "misconception", "human_overall": 15,
+     "text": "The p-value is the probability that the null hypothesis is true, so a p-value of 0.03 means there is a 3 percent chance the null is correct."},
+
+    {"id": "a15", "question_id": "rest_http_methods", "category": "strong", "human_overall": 88,
+     "text": "GET is used to read a resource and it is safe and idempotent. POST is used to create a new resource. PUT replaces a resource and PATCH updates part of it, and DELETE removes it. A server returns status codes such as 200 for success, 201 when something is created and 404 when it is not found."},
+    {"id": "a16", "question_id": "rest_http_methods", "category": "partial", "human_overall": 50,
+     "text": "GET is to read data and POST is to create data. You also have PUT to update."},
+
+    {"id": "a17", "question_id": "git_merge_rebase", "category": "partial", "human_overall": 50,
+     "text": "Merge makes a merge commit and keeps the history as it was. Rebase is a different way to combine branches."},
+    {"id": "a18", "question_id": "git_merge_rebase", "category": "off_topic", "human_overall": 0,
+     "text": "I have used GitHub for college assignments and I like the green contribution graph."},
+
+    {"id": "h01", "question_id": "hr_team_conflict", "category": "strong", "human_overall": 88,
+     "text": "During my third year project, our team disagreed about which database to use. My role was to coordinate the work, so I asked each person to explain their reasons and I listened first. I suggested a small test with 2 options, and we measured query time. As a result we picked PostgreSQL, finished 3 days early, and I learned to resolve conflicts with data."},
+    {"id": "h02", "question_id": "hr_team_conflict", "category": "generic", "human_overall": 25,
+     "text": "I am a hard worker and a team player. I always get along with everyone and I am passionate about teamwork."},
+    {"id": "h03", "question_id": "hr_team_conflict", "category": "short", "human_overall": 10,
+     "text": "I talk to them."},
+
+    {"id": "h04", "question_id": "hr_tell_me_about_yourself", "category": "strong", "human_overall": 80,
+     "text": "I am a final-year computer science student interested in data analysis. During my internship at a retail company I analysed 50,000 sales records in SQL and built a dashboard that cut reporting time by 40 percent. I also built a churn prediction project in Python. I am looking for a data analyst role where I can keep learning."},
+    {"id": "h05", "question_id": "hr_tell_me_about_yourself", "category": "short", "human_overall": 15,
+     "text": "I am a student and I like computers."},
+
+    {"id": "h06", "question_id": "hr_failure_learning", "category": "strong", "human_overall": 82,
+     "text": "In my second year, I led a small app project and we missed the demo deadline because I had not split the work clearly. My responsibility was planning, so I changed our process: I wrote tasks on a shared board and set 2 check-ins per week. In the next project we delivered on time, and I learned to plan early and share the work clearly."},
+    {"id": "h07", "question_id": "hr_failure_learning", "category": "vague", "human_overall": 25,
+     "text": "Sometimes things go wrong but I always try my best and stay positive. It is important to learn from everything."}
+  ]
+}
