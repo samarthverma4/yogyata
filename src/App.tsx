@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
 import './index.css';
 import { Navbar } from './components/Navbar';
 import { HeroSection } from './components/HeroSection';
@@ -10,6 +10,16 @@ import { FounderOnboarding } from './founder-onboarding/FounderOnboarding';
 import { FounderWorkspace } from './founder-workspace/FounderWorkspace';
 import { loadFounderWorkspace } from './founder-workspace/storage';
 import type { FounderWorkspaceState } from './founder-workspace/types';
+import { MentorOnboarding } from './mentor-onboarding/MentorOnboarding';
+import { MentorWorkspace } from './mentor-workspace/MentorWorkspace';
+import {
+  loadMentorWorkspace,
+  saveMentorWorkspace,
+  initializeMentorWorkspaceFromOnboarding,
+} from './mentor-workspace/storage';
+import type { MentorWorkspaceState } from './mentor-workspace/types';
+import type { MentorOnboardingState } from './mentor-onboarding/types';
+import { INITIAL_MENTOR_ONBOARDING_STATE } from './mentor-onboarding/types';
 import type { NotificationState, RoleId, RoleOption } from './types';
 
 // ─── Modal Content ────────────────────────────────────────────────────────────
@@ -79,9 +89,9 @@ const ROLE_CONTINUE_MESSAGES: Record<RoleId, { title: string; message: string }>
       'Entrepreneur entry selected. Authentication will be connected in the next development phase.',
   },
   mentor: {
-    title: 'Industry Mentor Workspace — Under Development',
+    title: 'Mentor Workspace Selected',
     message:
-      'The Mentor onboarding and guidance workspace is currently being built in Phase 2 of the YOGYATA roadmap. Mentee management, 1:1 sessions, and expertise tracking will be available soon!',
+      'Mentor guidance workspace and onboarding active.',
   },
   recruiter: {
     title: 'Talent Recruiter Workspace — Under Development',
@@ -116,14 +126,43 @@ function App() {
     return false;
   });
 
+  const [inMentorOnboarding, setInMentorOnboarding] = useState(() => {
+    if (typeof window !== 'undefined') {
+      if (
+        (window.location.hash === '#mentor-workspace' && !loadMentorWorkspace()) ||
+        sessionStorage.getItem('yogyata_active_view') === 'mentor-onboarding'
+      ) {
+        return true;
+      }
+    }
+    return false;
+  });
+  const [inMentorWorkspace, setInMentorWorkspace] = useState(() => {
+    if (typeof window !== 'undefined') {
+      if (
+        window.location.hash === '#mentor-workspace' ||
+        sessionStorage.getItem('yogyata_active_view') === 'mentor-workspace'
+      ) {
+        return true;
+      }
+    }
+    return false;
+  });
+
   const [existingWorkspace, setExistingWorkspace] = useState<FounderWorkspaceState | null>(() =>
     loadFounderWorkspace()
+  );
+
+  const [existingMentorWorkspace, setExistingMentorWorkspace] = useState<MentorWorkspaceState | null>(() =>
+    loadMentorWorkspace()
   );
 
   // Sync existing workspace on state transitions
   const handleEnterFounderWorkspace = useCallback((state?: FounderWorkspaceState) => {
     setInFounderOnboarding(false);
     setInJobSeekerOnboarding(false);
+    setInMentorOnboarding(false);
+    setInMentorWorkspace(false);
     setInFounderWorkspace(true);
     if (typeof window !== 'undefined') {
       sessionStorage.setItem('yogyata_active_view', 'founder-workspace');
@@ -149,6 +188,89 @@ function App() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, []);
 
+  const handleEnterMentorWorkspace = useCallback(
+    (stateOrOnboarding?: MentorWorkspaceState | MentorOnboardingState) => {
+      setInMentorOnboarding(false);
+      setInJobSeekerOnboarding(false);
+      setInFounderOnboarding(false);
+      setInFounderWorkspace(false);
+      setInMentorWorkspace(true);
+
+      let ws: MentorWorkspaceState | null = null;
+      if (stateOrOnboarding) {
+        if ('mentor' in stateOrOnboarding) {
+          ws = stateOrOnboarding as MentorWorkspaceState;
+        } else {
+          ws = initializeMentorWorkspaceFromOnboarding(stateOrOnboarding as MentorOnboardingState);
+          saveMentorWorkspace(ws);
+        }
+      } else {
+        ws = loadMentorWorkspace();
+        if (!ws) {
+          ws = initializeMentorWorkspaceFromOnboarding(INITIAL_MENTOR_ONBOARDING_STATE);
+          saveMentorWorkspace(ws);
+        }
+      }
+
+      setExistingMentorWorkspace(ws);
+      if (typeof window !== 'undefined') {
+        sessionStorage.setItem('yogyata_active_view', 'mentor-workspace');
+        window.location.hash = '#mentor-workspace';
+      }
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    },
+    []
+  );
+
+  const handleExitMentorWorkspace = useCallback(() => {
+    setInMentorWorkspace(false);
+    if (typeof window !== 'undefined') {
+      sessionStorage.removeItem('yogyata_active_view');
+      if (window.location.hash === '#mentor-workspace') {
+        window.history.replaceState(null, '', window.location.pathname);
+      }
+    }
+    setExistingMentorWorkspace(loadMentorWorkspace());
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, []);
+
+  // Hash navigation listener
+  useEffect(() => {
+    const handleHashChange = () => {
+      const hash = window.location.hash;
+      if (hash === '#mentor-workspace') {
+        const saved = loadMentorWorkspace();
+        if (saved) {
+          setExistingMentorWorkspace(saved);
+          setInMentorWorkspace(true);
+          setInMentorOnboarding(false);
+          setInFounderWorkspace(false);
+          setInFounderOnboarding(false);
+          setInJobSeekerOnboarding(false);
+        } else {
+          setInMentorOnboarding(true);
+          setInMentorWorkspace(false);
+        }
+      } else if (hash === '#founder-workspace' || hash === '#workspace') {
+        const saved = loadFounderWorkspace();
+        if (saved) {
+          setExistingWorkspace(saved);
+          setInFounderWorkspace(true);
+          setInFounderOnboarding(false);
+          setInMentorWorkspace(false);
+          setInMentorOnboarding(false);
+          setInJobSeekerOnboarding(false);
+        } else {
+          setInFounderOnboarding(true);
+          setInFounderWorkspace(false);
+        }
+      }
+    };
+
+    window.addEventListener('hashchange', handleHashChange);
+    return () => window.removeEventListener('hashchange', handleHashChange);
+  }, []);
+
   // ── Notification helpers ──
   const showNotification = useCallback(
     (title: string, message: string) => {
@@ -170,12 +292,16 @@ function App() {
     setSelectedRole(id);
   }, []);
 
-  // ── Role Entry Handlers (prepared for upcoming modules) ──
+  // ── Role Entry Handlers ──
   const handleEnterMentorEntry = useCallback(() => {
-    // Prepared for Phase 2: Will check loadMentorWorkspace() and dispatch to MentorOnboarding or MentorWorkspace
-    const { title, message } = ROLE_CONTINUE_MESSAGES.mentor;
-    showNotification(title, message);
-  }, [showNotification]);
+    const savedWs = loadMentorWorkspace() || existingMentorWorkspace;
+    if (savedWs) {
+      handleEnterMentorWorkspace(savedWs);
+    } else {
+      setInMentorOnboarding(true);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }, [handleEnterMentorWorkspace, existingMentorWorkspace]);
 
   const handleEnterRecruiterEntry = useCallback(() => {
     // Prepared for Phase 3: Will check loadRecruiterWorkspace() and dispatch to RecruiterOnboarding or RecruiterWorkspace
@@ -249,11 +375,21 @@ function App() {
     setShowAdminSignIn(false);
   }, []);
 
-  // Workspace View
+  // Founder Workspace View
   if (inFounderWorkspace) {
     return (
       <FounderWorkspace
         onExitToHome={handleExitFounderWorkspace}
+      />
+    );
+  }
+
+  // Mentor Workspace View
+  if (inMentorWorkspace && existingMentorWorkspace) {
+    return (
+      <MentorWorkspace
+        initialWorkspace={existingMentorWorkspace}
+        onExitToHome={handleExitMentorWorkspace}
       />
     );
   }
@@ -284,12 +420,89 @@ function App() {
     );
   }
 
+  // Mentor Onboarding View
+  if (inMentorOnboarding) {
+    return (
+      <div className="yogyata-app">
+        <div className="yogyata-bg-pattern" aria-hidden="true" />
+        <MentorOnboarding
+          onExit={() => setInMentorOnboarding(false)}
+          onSignInClick={handleSignIn}
+          onEnterWorkspace={handleEnterMentorWorkspace}
+        />
+        <Notification notification={notification} onClose={dismissNotification} />
+      </div>
+    );
+  }
+
   return (
     <div className="yogyata-app">
       {/* Subtle Background Pattern (non-distracting grid) */}
       <div className="yogyata-bg-pattern" aria-hidden="true" />
 
-      {/* Optional Active Workspace Banner */}
+      {/* Optional Active Mentor Workspace Banner */}
+      {existingMentorWorkspace && (
+        <div
+          style={{
+            background: '#FAF5FF',
+            borderBottom: '1px solid #E9D5FF',
+            color: '#581C87',
+            padding: '0.5rem 1rem',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            gap: '0.875rem',
+            fontSize: '0.8125rem',
+            flexWrap: 'wrap',
+          }}
+        >
+          <span>
+            Active Mentor Workspace saved for{' '}
+            <strong>{existingMentorWorkspace.mentor.fullName || 'Mentor Guide'}</strong>
+          </span>
+          <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
+            <button
+              type="button"
+              className="yw-btn yw-btn-primary yw-btn-sm"
+              style={{
+                padding: '0.2rem 0.625rem',
+                fontSize: '0.75rem',
+                background: '#9333EA',
+                border: 'none',
+                color: '#FFFFFF',
+                borderRadius: '4px',
+                cursor: 'pointer',
+              }}
+              onClick={() => handleEnterMentorWorkspace(existingMentorWorkspace)}
+              id="btn-quick-open-mentor-workspace"
+            >
+              Open Mentor Workspace →
+            </button>
+            <button
+              type="button"
+              className="yw-btn yw-btn-secondary yw-btn-sm"
+              style={{
+                padding: '0.2rem 0.625rem',
+                fontSize: '0.75rem',
+                color: '#581C87',
+                background: '#FFFFFF',
+                border: '1px solid #E9D5FF',
+                borderRadius: '4px',
+                cursor: 'pointer',
+              }}
+              onClick={() => {
+                setInMentorOnboarding(true);
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
+              id="btn-quick-start-mentor-onboarding"
+            >
+              Start New Onboarding +
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* Optional Active Entrepreneur Workspace Banner */}
       {existingWorkspace && (
         <div
           style={{
