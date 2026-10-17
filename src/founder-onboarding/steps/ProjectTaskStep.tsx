@@ -26,6 +26,8 @@ interface ProjectTaskStepProps {
   onChange: (d: ProjectTaskDraft) => void;
   onNext: () => void;
   onBack: () => void;
+  isEditingFromReview?: boolean;
+  onReturnToReview?: () => void;
 }
 
 interface Errors {
@@ -42,6 +44,8 @@ export const ProjectTaskStep: React.FC<ProjectTaskStepProps> = ({
   onChange,
   onNext,
   onBack,
+  isEditingFromReview,
+  onReturnToReview,
 }) => {
   const [isCreating, setIsCreating] = useState(!data.isSkipped);
   const [skillInput, setSkillInput] = useState('');
@@ -80,7 +84,11 @@ export const ProjectTaskStep: React.FC<ProjectTaskStepProps> = ({
       ...data,
       isSkipped: true,
     });
-    onNext();
+    if (isEditingFromReview && onReturnToReview) {
+      onReturnToReview();
+    } else {
+      onNext();
+    }
   };
 
   const handleStartCreating = () => {
@@ -112,7 +120,11 @@ export const ProjectTaskStep: React.FC<ProjectTaskStepProps> = ({
 
   const handleNext = () => {
     if (data.isSkipped || validate()) {
-      onNext();
+      if (isEditingFromReview && onReturnToReview) {
+        onReturnToReview();
+      } else {
+        onNext();
+      }
     }
   };
 
@@ -377,7 +389,7 @@ export const ProjectTaskStep: React.FC<ProjectTaskStepProps> = ({
       <FormNav
         onBack={onBack}
         onNext={handleNext}
-        nextLabel="Continue to Review & Privacy"
+        nextLabel={isEditingFromReview ? 'Save & Return to Review' : 'Continue to Review & Privacy'}
         nextId="task-next-btn"
       />
     </StepWrapper>
