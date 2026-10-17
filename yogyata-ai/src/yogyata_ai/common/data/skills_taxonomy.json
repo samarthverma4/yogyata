@@ -1,0 +1,338 @@
+{
+ "_comment": "DEMONSTRATION taxonomy: small hand-written starter list shared by all modules. Extend (or point YOGYATA_TAXONOMY_PATH to your own file) before production use.",
+ "skills": {
+  "Python": {
+   "category": "language",
+   "aliases": [
+    "python",
+    "python3"
+   ]
+  },
+  "Java": {
+   "category": "language",
+   "aliases": [
+    "java"
+   ]
+  },
+  "JavaScript": {
+   "category": "language",
+   "aliases": [
+    "javascript",
+    "js",
+    "ecmascript"
+   ]
+  },
+  "TypeScript": {
+   "category": "language",
+   "aliases": [
+    "typescript"
+   ]
+  },
+  "C++": {
+   "category": "language",
+   "aliases": [
+    "c++",
+    "cpp"
+   ]
+  },
+  "SQL": {
+   "category": "data",
+   "aliases": [
+    "sql",
+    "mysql",
+    "postgresql",
+    "postgres",
+    "sqlite"
+   ]
+  },
+  "Pandas": {
+   "category": "data",
+   "aliases": [
+    "pandas"
+   ]
+  },
+  "NumPy": {
+   "category": "data",
+   "aliases": [
+    "numpy"
+   ]
+  },
+  "Excel": {
+   "category": "data",
+   "aliases": [
+    "excel",
+    "microsoft excel",
+    "ms excel"
+   ]
+  },
+  "Power BI": {
+   "category": "data",
+   "aliases": [
+    "power bi",
+    "powerbi"
+   ]
+  },
+  "Tableau": {
+   "category": "data",
+   "aliases": [
+    "tableau"
+   ]
+  },
+  "Data Analysis": {
+   "category": "data",
+   "aliases": [
+    "data analysis",
+    "data analytics",
+    "exploratory data analysis",
+    "eda"
+   ]
+  },
+  "Machine Learning": {
+   "category": "ml",
+   "aliases": [
+    "machine learning",
+    "ml"
+   ]
+  },
+  "Deep Learning": {
+   "category": "ml",
+   "aliases": [
+    "deep learning",
+    "neural networks",
+    "neural network"
+   ]
+  },
+  "scikit-learn": {
+   "category": "ml",
+   "aliases": [
+    "scikit-learn",
+    "sklearn",
+    "scikit learn"
+   ]
+  },
+  "TensorFlow": {
+   "category": "ml",
+   "aliases": [
+    "tensorflow"
+   ]
+  },
+  "PyTorch": {
+   "category": "ml",
+   "aliases": [
+    "pytorch"
+   ]
+  },
+  "NLP": {
+   "category": "ml",
+   "aliases": [
+    "nlp",
+    "natural language processing"
+   ]
+  },
+  "Computer Vision": {
+   "category": "ml",
+   "aliases": [
+    "computer vision",
+    "opencv"
+   ]
+  },
+  "Statistics": {
+   "category": "ml",
+   "aliases": [
+    "statistics",
+    "statistical analysis",
+    "hypothesis testing"
+   ]
+  },
+  "React": {
+   "category": "web",
+   "aliases": [
+    "react",
+    "reactjs",
+    "react.js"
+   ]
+  },
+  "Node.js": {
+   "category": "web",
+   "aliases": [
+    "node.js",
+    "nodejs",
+    "node js"
+   ]
+  },
+  "HTML": {
+   "category": "web",
+   "aliases": [
+    "html",
+    "html5"
+   ]
+  },
+  "CSS": {
+   "category": "web",
+   "aliases": [
+    "css",
+    "css3"
+   ]
+  },
+  "REST APIs": {
+   "category": "web",
+   "aliases": [
+    "rest api",
+    "rest apis",
+    "restful",
+    "restful apis"
+   ]
+  },
+  "Django": {
+   "category": "web",
+   "aliases": [
+    "django"
+   ]
+  },
+  "Flask": {
+   "category": "web",
+   "aliases": [
+    "flask"
+   ]
+  },
+  "FastAPI": {
+   "category": "web",
+   "aliases": [
+    "fastapi"
+   ]
+  },
+  "MongoDB": {
+   "category": "data",
+   "aliases": [
+    "mongodb",
+    "mongo"
+   ]
+  },
+  "Git": {
+   "category": "tools",
+   "aliases": [
+    "git",
+    "github",
+    "gitlab"
+   ]
+  },
+  "Docker": {
+   "category": "tools",
+   "aliases": [
+    "docker"
+   ]
+  },
+  "Linux": {
+   "category": "tools",
+   "aliases": [
+    "linux",
+    "ubuntu"
+   ]
+  },
+  "AWS": {
+   "category": "cloud",
+   "aliases": [
+    "aws",
+    "amazon web services"
+   ]
+  },
+  "Data Structures": {
+   "category": "cs",
+   "aliases": [
+    "data structures",
+    "dsa",
+    "algorithms"
+   ]
+  },
+  "Communication": {
+   "category": "soft",
+   "aliases": [
+    "communication",
+    "public speaking"
+   ]
+  },
+  "Teamwork": {
+   "category": "soft",
+   "aliases": [
+    "teamwork",
+    "collaboration"
+   ]
+  },
+  "Leadership": {
+   "category": "soft",
+   "aliases": [
+    "leadership",
+    "team lead"
+   ]
+  },
+  "Data Visualization": {
+   "category": "data",
+   "aliases": [
+    "data visualization",
+    "data visualisation",
+    "matplotlib",
+    "seaborn",
+    "plotly"
+   ]
+  },
+  "Feature Engineering": {
+   "category": "ml",
+   "aliases": [
+    "feature engineering"
+   ]
+  },
+  "Model Evaluation": {
+   "category": "ml",
+   "aliases": [
+    "model evaluation",
+    "cross-validation",
+    "cross validation"
+   ]
+  },
+  "MLOps": {
+   "category": "ml",
+   "aliases": [
+    "mlops",
+    "model deployment"
+   ]
+  },
+  "Unit Testing": {
+   "category": "tools",
+   "aliases": [
+    "unit testing",
+    "unit tests",
+    "pytest",
+    "jest"
+   ]
+  },
+  "System Design": {
+   "category": "cs",
+   "aliases": [
+    "system design"
+   ]
+  },
+  "OOP": {
+   "category": "cs",
+   "aliases": [
+    "oop",
+    "object-oriented programming",
+    "object oriented programming"
+   ]
+  },
+  "DBMS": {
+   "category": "cs",
+   "aliases": [
+    "dbms",
+    "database design",
+    "database management"
+   ]
+  },
+  "Problem Solving": {
+   "category": "soft",
+   "aliases": [
+    "problem solving",
+    "problem-solving"
+   ]
+  }
+ }
+}
