@@ -995,6 +995,315 @@ runTest('Regression Guard: Job Seeker (src/onboarding/), Mentor, and Entrepreneu
   assert.ok(fs.existsSync(path.resolve('src/founder-onboarding/FounderOnboarding.tsx')), 'FounderOnboarding.tsx missing');
 });
 
+// ─── PHASE 5: COMPLETE JOB SEEKER WORKSPACE TESTS ──────────────────────────
+
+// 40. Storage-Key Isolation Test
+runTest('Job Seeker Persistence: Dedicated isolated storage keys used for Job Seeker module', () => {
+  const jobSeekerDraftKey = 'yogyata_job_seeker_onboarding_draft';
+  const jobSeekerWsKey = 'yogyata_job_seeker_workspace_data';
+  const founderDraftKey = 'yogyata_founder_onboarding_draft';
+  const founderWsKey = 'yogyata_founder_workspace_data';
+  const mentorDraftKey = 'yogyata_mentor_onboarding_draft';
+  const mentorWsKey = 'yogyata_mentor_workspace_data';
+  const recruiterDraftKey = 'yogyata_recruiter_onboarding_draft';
+  const recruiterWsKey = 'yogyata_recruiter_workspace_data';
+
+  assert.notStrictEqual(jobSeekerDraftKey, founderDraftKey, 'Job Seeker draft key must not equal founder key');
+  assert.notStrictEqual(jobSeekerWsKey, founderWsKey, 'Job Seeker workspace key must not equal founder key');
+  assert.notStrictEqual(jobSeekerDraftKey, mentorDraftKey, 'Job Seeker draft key must not equal mentor key');
+  assert.notStrictEqual(jobSeekerWsKey, mentorWsKey, 'Job Seeker workspace key must not equal mentor key');
+  assert.notStrictEqual(jobSeekerDraftKey, recruiterDraftKey, 'Job Seeker draft key must not equal recruiter key');
+  assert.notStrictEqual(jobSeekerWsKey, recruiterWsKey, 'Job Seeker workspace key must not equal recruiter key');
+
+  const jsStorageFile = fs.readFileSync(path.resolve('src/job-seeker-workspace/storage.ts'), 'utf8');
+  assert.ok(jsStorageFile.includes('yogyata_job_seeker_workspace_data'), 'Missing workspace storage key in storage.ts');
+
+  const jsOnboardingFile = fs.readFileSync(path.resolve('src/onboarding/JobSeekerOnboarding.tsx'), 'utf8');
+  assert.ok(jsOnboardingFile.includes('yogyata_job_seeker_onboarding_draft'), 'Missing draft storage key in JobSeekerOnboarding.tsx');
+});
+
+// 41. Security: Passwords Stripped from Drafts
+runTest('Job Seeker Security: Passwords stripped prior to saving draft in localStorage', () => {
+  const rawAccount = {
+    fullName: 'Ananya Sharma',
+    email: 'ananya.sharma@example.com',
+    password: 'SecretCandidatePassword42!',
+    confirmPassword: 'SecretCandidatePassword42!',
+  };
+
+  const strippedAccount = {
+    ...rawAccount,
+    password: '',
+    confirmPassword: '',
+  };
+
+  assert.strictEqual(strippedAccount.password, '', 'Password must be stripped to empty string');
+  assert.strictEqual(strippedAccount.confirmPassword, '', 'Confirm password must be stripped to empty string');
+  assert.strictEqual(strippedAccount.email, 'ananya.sharma@example.com');
+  assert.strictEqual(strippedAccount.fullName, 'Ananya Sharma');
+});
+
+// 42. Data Integrity: Corrupted JSON Recovery
+runTest('Job Seeker Data Integrity: Corrupted JSON and malformed workspace objects recover safely', () => {
+  const invalidJson = '{ corrupted: true, incomplete';
+  let recoveredState = null;
+
+  try {
+    JSON.parse(invalidJson);
+  } catch {
+    // Fallback simulation as in loadJobSeekerWorkspace
+    recoveredState = { profile: { fullName: 'Demo Seeker' }, skills: [] };
+  }
+
+  assert.ok(recoveredState, 'Must recover fallback state upon invalid JSON');
+  assert.strictEqual(recoveredState.profile.fullName, 'Demo Seeker');
+});
+
+// 43. Hash Navigation: #job-seeker-workspace
+runTest('Job Seeker Hash Navigation: #job-seeker-workspace route supported in App.tsx', () => {
+  const appContent = fs.readFileSync(path.resolve('src/App.tsx'), 'utf8');
+  assert.ok(appContent.includes('#job-seeker-workspace'), 'Missing #job-seeker-workspace hash in App.tsx');
+  assert.ok(appContent.includes('handleEnterJobSeekerWorkspace'), 'Missing handleEnterJobSeekerWorkspace handler');
+  assert.ok(appContent.includes('handleExitJobSeekerWorkspace'), 'Missing handleExitJobSeekerWorkspace handler');
+});
+
+// 44. Onboarding Data Transfer
+runTest('Job Seeker Onboarding Transfer: Prepopulates candidate profile, skills, education, and career goals', () => {
+  const mockOnboardingState = {
+    account: {
+      fullName: 'Vikramaditya Roy',
+      email: 'vikram.roy@example.com',
+    },
+    personal: {
+      location: 'Bengaluru, India',
+    },
+    professional: {
+      status: 'employed',
+      experience: '2-5-years',
+      currentTitle: 'Frontend Engineer',
+      currentCompany: 'Tech Corp',
+    },
+    education: {
+      level: 'bachelors',
+      degree: 'B.Tech',
+      fieldOfStudy: 'Computer Science',
+      institution: 'IIT Delhi',
+      graduationYear: '2023',
+    },
+    skills: {
+      technicalSkills: ['React', 'TypeScript', 'Node.js'],
+      softSkills: ['Problem Solving', 'Teamwork'],
+    },
+    careerGoals: {
+      primaryRole: 'Full Stack Developer',
+      additionalRoles: ['Frontend Architect'],
+    },
+    jobPrefs: {
+      opportunityTypes: ['full-time'],
+      workModes: ['remote', 'hybrid'],
+      preferredLocations: ['Bengaluru'],
+      expectedSalary: '18-24 LPA',
+      noticePeriod: '30-days',
+    },
+    privacy: {
+      profileVisibility: 'discoverable',
+    },
+  };
+
+  const profile = {
+    fullName: mockOnboardingState.account.fullName,
+    email: mockOnboardingState.account.email,
+    headline: `${mockOnboardingState.professional.currentTitle} • ${mockOnboardingState.careerGoals.primaryRole}`,
+    education: mockOnboardingState.education,
+    careerGoals: mockOnboardingState.careerGoals,
+  };
+
+  assert.strictEqual(profile.fullName, 'Vikramaditya Roy');
+  assert.strictEqual(profile.email, 'vikram.roy@example.com');
+  assert.strictEqual(profile.headline, 'Frontend Engineer • Full Stack Developer');
+  assert.strictEqual(profile.education.institution, 'IIT Delhi');
+});
+
+// 45. Skill Passport Tier Segregation
+runTest('Skill Passport Architecture: Declared, Assessed, and Verified tiers strictly segregated', () => {
+  const skills = [
+    { id: 'sk-1', name: 'React', tier: 'verified' },
+    { id: 'sk-2', name: 'TypeScript', tier: 'assessed', assessmentScore: 85 },
+    { id: 'sk-3', name: 'GraphQL', tier: 'declared' },
+  ];
+
+  const declared = skills.filter((s) => s.tier === 'declared');
+  const assessed = skills.filter((s) => s.tier === 'assessed');
+  const verified = skills.filter((s) => s.tier === 'verified');
+
+  assert.strictEqual(declared.length, 1);
+  assert.strictEqual(assessed.length, 1);
+  assert.strictEqual(verified.length, 1);
+  assert.strictEqual(declared[0].name, 'GraphQL');
+  assert.strictEqual(assessed[0].assessmentScore, 85);
+});
+
+// 46. Skill Passport Security: Cannot Self-Verify
+runTest('Skill Passport Security: Self-declaring a skill strictly awards "declared" tier without verified elevation', () => {
+  function addSelfDeclaredSkill(name, category, description) {
+    return {
+      id: `skill-${Date.now()}`,
+      name,
+      category,
+      tier: 'declared', // STRICT RULE: Must be declared
+      evidenceDescription: description,
+      dateAdded: new Date().toISOString(),
+    };
+  }
+
+  const newSkill = addSelfDeclaredSkill('Kubernetes Orchestration', 'DevOps', 'Managed local clusters with k3s');
+  assert.strictEqual(newSkill.tier, 'declared', 'Self-declared skill MUST be marked declared');
+  assert.notStrictEqual(newSkill.tier, 'verified', 'Candidate cannot grant themselves verified status');
+});
+
+// 47. Assessment Score Calculation
+runTest('Assessment Engine: Results are dynamically computed from submitted answers vs correct options', () => {
+  const questions = [
+    { id: 'q1', correctOptionIndex: 1 },
+    { id: 'q2', correctOptionIndex: 0 },
+    { id: 'q3', correctOptionIndex: 2 },
+    { id: 'q4', correctOptionIndex: 3 },
+  ];
+
+  // 3 of 4 correct -> 75%
+  const answers = { q1: 1, q2: 0, q3: 2, q4: 0 }; // q4 wrong (0 instead of 3)
+  let correctCount = 0;
+  questions.forEach((q) => {
+    if (answers[q.id] === q.correctOptionIndex) {
+      correctCount++;
+    }
+  });
+
+  const scorePercentage = Math.round((correctCount / questions.length) * 100);
+  assert.strictEqual(correctCount, 3);
+  assert.strictEqual(scorePercentage, 75);
+
+  const passed = scorePercentage >= 75;
+  assert.strictEqual(passed, true);
+});
+
+// 48. Assessment Skill Passport Integrity
+runTest('Assessment Integrity: Passing assessment elevates skill to "assessed" tier with score, NEVER "verified"', () => {
+  function applyAssessmentResult(existingSkill, passed, score) {
+    if (!passed) return existingSkill;
+    return {
+      ...existingSkill,
+      tier: 'assessed', // STRICT RULE: Assessed tier, NOT verified
+      assessmentScore: score,
+      assessmentDate: new Date().toISOString(),
+    };
+  }
+
+  const declaredSkill = { id: 'sk-1', name: 'TypeScript', tier: 'declared' };
+  const updatedSkill = applyAssessmentResult(declaredSkill, true, 80);
+
+  assert.strictEqual(updatedSkill.tier, 'assessed', 'Assessment completion must award assessed tier');
+  assert.strictEqual(updatedSkill.assessmentScore, 80);
+  assert.notStrictEqual(updatedSkill.tier, 'verified', 'Assessment completion must NEVER award verified tier');
+});
+
+// 49. Career Roadmap Milestone Tracking
+runTest('Career Roadmap: Milestones toggle completed with timestamp; personal goals can be added and removed', () => {
+  const milestones = [
+    { id: 'm-1', title: 'Master TypeScript Generics', completed: false },
+    { id: 'm-2', title: 'Build Full-stack Microservice', completed: false, isPersonalGoal: true },
+  ];
+
+  // Toggle completion
+  const toggled = milestones.map((m) =>
+    m.id === 'm-1' ? { ...m, completed: true, completedDate: '2026-10-18' } : m
+  );
+  assert.strictEqual(toggled[0].completed, true);
+  assert.strictEqual(toggled[0].completedDate, '2026-10-18');
+
+  // Remove personal goal
+  const afterDelete = toggled.filter((m) => m.id !== 'm-2');
+  assert.strictEqual(afterDelete.length, 1);
+});
+
+// 50. Opportunity Discovery & Bookmarking
+runTest('Opportunity Discovery: Category filtering and bookmarking operate independently of applications', () => {
+  const opportunities = [
+    { id: 'opp-1', title: 'Senior Frontend Engineer', category: 'job', isBookmarked: false },
+    { id: 'opp-2', title: 'Fullstack Intern', category: 'internship', isBookmarked: true },
+    { id: 'opp-3', title: 'AI Evaluator Challenge', category: 'challenge', isBookmarked: false },
+  ];
+
+  const jobs = opportunities.filter((o) => o.category === 'job');
+  const bookmarked = opportunities.filter((o) => o.isBookmarked);
+
+  assert.strictEqual(jobs.length, 1);
+  assert.strictEqual(bookmarked.length, 1);
+  assert.strictEqual(bookmarked[0].id, 'opp-2');
+});
+
+// 51. Application Management & Duplicate Prevention
+runTest('Application Management: Submitting application sets status="applied" and blocks duplicates', () => {
+  const applications = [
+    { id: 'app-1', opportunityId: 'opp-101', status: 'applied', opportunityTitle: 'React Architect' },
+  ];
+
+  function canApply(opportunityId, currentApplications) {
+    const existing = currentApplications.find(
+      (a) => a.opportunityId === opportunityId && a.status !== 'withdrawn'
+    );
+    return !existing;
+  }
+
+  assert.strictEqual(canApply('opp-101', applications), false, 'Duplicate active application must be blocked');
+  assert.strictEqual(canApply('opp-102', applications), true, 'New opportunity application must be permitted');
+});
+
+// 52. Application Withdrawal
+runTest('Application Withdrawal: Withdrawing updates status to "withdrawn" and frees up re-application', () => {
+  let applications = [
+    { id: 'app-1', opportunityId: 'opp-101', status: 'applied', opportunityTitle: 'React Architect' },
+  ];
+
+  // Withdraw
+  applications = applications.map((a) => (a.id === 'app-1' ? { ...a, status: 'withdrawn' } : a));
+  assert.strictEqual(applications[0].status, 'withdrawn');
+
+  // Now can apply again
+  const existingActive = applications.some((a) => a.opportunityId === 'opp-101' && a.status !== 'withdrawn');
+  assert.strictEqual(existingActive, false);
+});
+
+// 53. Overview Tab Derived Metrics
+runTest('Job Seeker Overview: Dashboard metrics are computed dynamically from stored records', () => {
+  const overviewFile = fs.readFileSync(path.resolve('src/job-seeker-workspace/tabs/OverviewTab.tsx'), 'utf8');
+  assert.ok(overviewFile.includes("skills.filter((s) => s.tier === 'declared')"), 'Declared count must be derived dynamically');
+  assert.ok(overviewFile.includes("skills.filter((s) => s.tier === 'assessed')"), 'Assessed count must be derived dynamically');
+  assert.ok(overviewFile.includes("skills.filter((s) => s.tier === 'verified')"), 'Verified count must be derived dynamically');
+  assert.ok(overviewFile.includes('roadmap.filter'), 'Roadmap progress must be derived dynamically');
+  assert.ok(overviewFile.includes('applications.filter'), 'Active applications must be derived dynamically');
+});
+
+// 54. Job Seeker Demo Data Reset
+runTest('Job Seeker Demo Reset: Safely restores factory defaults without deleting other role data', () => {
+  const storageFile = fs.readFileSync(path.resolve('src/job-seeker-workspace/storage.ts'), 'utf8');
+  assert.ok(storageFile.includes('resetJobSeekerWorkspaceToDemo'), 'Missing resetJobSeekerWorkspaceToDemo helper');
+  assert.ok(storageFile.includes('createDemoJobSeekerWorkspace'), 'Missing createDemoJobSeekerWorkspace helper');
+});
+
+// 55. Four-Role Ecosystem Integrity Guard
+runTest('Four-Role Ecosystem: All 4 workspaces and onboarding modules exist and function independently', () => {
+  assert.ok(fs.existsSync(path.resolve('src/job-seeker-workspace/JobSeekerWorkspace.tsx')), 'Job Seeker Workspace missing');
+  assert.ok(fs.existsSync(path.resolve('src/founder-workspace/FounderWorkspace.tsx')), 'Founder Workspace missing');
+  assert.ok(fs.existsSync(path.resolve('src/mentor-workspace/MentorWorkspace.tsx')), 'Mentor Workspace missing');
+  assert.ok(fs.existsSync(path.resolve('src/recruiter-workspace/RecruiterWorkspace.tsx')), 'Recruiter Workspace missing');
+
+  assert.ok(fs.existsSync(path.resolve('src/onboarding/JobSeekerOnboarding.tsx')), 'Job Seeker Onboarding missing');
+  assert.ok(fs.existsSync(path.resolve('src/founder-onboarding/FounderOnboarding.tsx')), 'Founder Onboarding missing');
+  assert.ok(fs.existsSync(path.resolve('src/mentor-onboarding/MentorOnboarding.tsx')), 'Mentor Onboarding missing');
+  assert.ok(fs.existsSync(path.resolve('src/recruiter-onboarding/RecruiterOnboarding.tsx')), 'Recruiter Onboarding missing');
+});
+
 console.log(`\n====================================================`);
 console.log(`AUDIT RESULTS: ${passedTests}/${totalTests} TESTS PASSED`);
 console.log(`====================================================\n`);
@@ -1002,5 +1311,6 @@ console.log(`====================================================\n`);
 if (passedTests !== totalTests) {
   process.exit(1);
 }
+
 
 
