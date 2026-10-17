@@ -95,7 +95,7 @@ export const FounderWorkspace: React.FC<FounderWorkspaceProps> = ({
       const now = new Date().toISOString();
       const newProject: Project = {
         ...projectData,
-        id: `proj-${Date.now()}`,
+        id: `proj-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`,
         createdAt: now,
         updatedAt: now,
       };
@@ -148,7 +148,7 @@ export const FounderWorkspace: React.FC<FounderWorkspaceProps> = ({
       const now = new Date().toISOString();
       const newTask: WorkspaceTask = {
         ...taskData,
-        id: `task-${Date.now()}`,
+        id: `task-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`,
         createdAt: now,
         updatedAt: now,
       };

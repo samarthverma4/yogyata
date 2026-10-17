@@ -66,6 +66,7 @@ export const TasksTab: React.FC<TasksTabProps> = ({
   const projectMap = useMemo(() => {
     const map = new Map<string, string>();
     projects.forEach((p) => map.set(p.id, p.title));
+    map.set('proj-unassigned', 'Unassigned / Standalone');
     return map;
   }, [projects]);
 
@@ -286,6 +287,9 @@ export const TasksTab: React.FC<TasksTabProps> = ({
                   {p.title}
                 </option>
               ))}
+              {tasks.some((t) => t.projectId === 'proj-unassigned') && (
+                <option value="proj-unassigned">Unassigned Challenges</option>
+              )}
             </select>
 
             {/* Status pills */}

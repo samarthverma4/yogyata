@@ -212,26 +212,65 @@ export function createInitialDemoSubmissions(tasks: WorkspaceTask[]): TaskSubmis
 }
 
 // ─── Workspace Initialization from Onboarding ────────────────────────────────
+// ─── Safe URL Sanitizer for external links ──────────────────────────────────
+export function sanitizeUrl(url?: string): string {
+  if (!url || typeof url !== 'string') return '';
+  const trimmed = url.trim();
+  if (/^(javascript|data|vbscript):/i.test(trimmed)) {
+    return '#';
+  }
+  if (!/^https?:\/\//i.test(trimmed) && !trimmed.startsWith('/')) {
+    return `https://${trimmed}`;
+  }
+  return trimmed;
+}
+
+// ─── Workspace Initialization from Onboarding ────────────────────────────────
 export function initializeWorkspaceFromOnboarding(
   onboarding: FounderOnboardingState
 ): FounderWorkspaceState {
   const now = new Date().toISOString();
 
+  const safeStartup = onboarding.startup || {
+    startupName: 'Venture',
+    description: '',
+    industry: '',
+    websiteUrl: '',
+    stage: 'Idea Stage',
+    teamSize: 'Just me',
+    country: '',
+    city: '',
+    workMode: 'remote',
+  };
+
+  const safeGoals = onboarding.goals || {
+    primaryGoal: 'MVP Development & Market Validation',
+    projectDescription: '',
+    projectCategory: 'Software / Web',
+  };
+
+  const safeProfile = onboarding.profile || {
+    fullName: onboarding.account?.fullName || 'Founder',
+    professionalTitle: 'Founder & CEO',
+    country: '',
+    city: '',
+  };
+
   // 1. Initial Project derived from onboarding business goals
   const initialProjects: Project[] = [];
   const projectTitle =
-    onboarding.goals.primaryGoal && onboarding.goals.primaryGoal !== 'Other'
-      ? onboarding.goals.primaryGoal
-      : onboarding.goals.customPrimaryGoal || `${onboarding.startup.startupName || 'Venture'} Alpha Milestone`;
+    safeGoals.primaryGoal && safeGoals.primaryGoal !== 'Other'
+      ? safeGoals.primaryGoal
+      : safeGoals.customPrimaryGoal || `${safeStartup.startupName || 'Venture'} Alpha Milestone`;
 
   const initialProject: Project = {
-    id: 'proj-1',
+    id: `proj-${Date.now()}-1`,
     title: projectTitle,
     description:
-      onboarding.goals.projectDescription ||
-      `Core deliverables and business objectives for ${onboarding.startup.startupName || 'our startup'}.`,
-    category: onboarding.goals.projectCategory || 'Software / Web',
-    projectUrl: onboarding.goals.projectLink || onboarding.startup.websiteUrl || '',
+      safeGoals.projectDescription ||
+      `Core deliverables and business objectives for ${safeStartup.startupName || 'our startup'}.`,
+    category: safeGoals.projectCategory || 'Software / Web',
+    projectUrl: sanitizeUrl(safeGoals.projectLink || safeStartup.websiteUrl),
     status: 'active',
     createdAt: now,
     updatedAt: now,
@@ -240,18 +279,20 @@ export function initializeWorkspaceFromOnboarding(
 
   // 2. Initial Task derived from onboarding task draft if created
   const initialTasks: WorkspaceTask[] = [];
-  if (!onboarding.taskDraft.isSkipped && onboarding.taskDraft.taskTitle.trim()) {
+  const safeTaskDraft = onboarding.taskDraft;
+
+  if (safeTaskDraft && !safeTaskDraft.isSkipped && safeTaskDraft.taskTitle?.trim()) {
     initialTasks.push({
-      id: 'task-1',
-      projectId: 'proj-1',
-      title: onboarding.taskDraft.taskTitle,
-      problemStatement: onboarding.taskDraft.problemStatement,
-      requiredSkills: onboarding.taskDraft.requiredSkills,
-      expectedDeliverable: onboarding.taskDraft.expectedDeliverable,
-      evaluationCriteria: onboarding.taskDraft.evaluationCriteria,
-      deadline: onboarding.taskDraft.deadline || '',
-      compensationType: onboarding.taskDraft.compensationModel || 'unspecified',
-      rewardDetails: onboarding.taskDraft.rewardDetails || '',
+      id: `task-${Date.now()}-1`,
+      projectId: initialProject.id,
+      title: safeTaskDraft.taskTitle,
+      problemStatement: safeTaskDraft.problemStatement || 'Solve core challenge deliverable.',
+      requiredSkills: safeTaskDraft.requiredSkills || ['React', 'TypeScript'],
+      expectedDeliverable: safeTaskDraft.expectedDeliverable || 'Working prototype implementation.',
+      evaluationCriteria: safeTaskDraft.evaluationCriteria || 'Clean architecture and zero warnings.',
+      deadline: safeTaskDraft.deadline || '',
+      compensationType: safeTaskDraft.compensationModel || 'unspecified',
+      rewardDetails: safeTaskDraft.rewardDetails || '',
       status: 'published',
       createdAt: now,
       updatedAt: now,
@@ -259,8 +300,8 @@ export function initializeWorkspaceFromOnboarding(
   } else {
     // Provide a sample draft task to guide the founder
     initialTasks.push({
-      id: 'task-1',
-      projectId: 'proj-1',
+      id: `task-${Date.now()}-1`,
+      projectId: initialProject.id,
       title: 'Implement Core Authentication & Protected Route Guard',
       problemStatement:
         'Build a resilient frontend route protection system that handles session expiration and graceful redirection.',
@@ -283,12 +324,19 @@ export function initializeWorkspaceFromOnboarding(
 
   return {
     version: WORKSPACE_STORAGE_VERSION,
-    founder: onboarding.profile,
-    accountEmail: onboarding.account.email,
-    startup: onboarding.startup,
-    goals: onboarding.goals,
-    talentRequirements: onboarding.talentRequirements,
-    privacy: onboarding.privacy,
+    founder: safeProfile,
+    accountEmail: onboarding.account?.email || '',
+    startup: safeStartup,
+    goals: safeGoals,
+    talentRequirements: Array.isArray(onboarding.talentRequirements)
+      ? onboarding.talentRequirements
+      : [],
+    privacy: onboarding.privacy || {
+      profileVisibility: 'discoverable',
+      projectVisibility: 'discoverable',
+      allowContactSharing: true,
+      receiveContributorExpressions: true,
+    },
     projects: initialProjects,
     tasks: initialTasks,
     submissions: initialSubmissions,
@@ -296,8 +344,8 @@ export function initializeWorkspaceFromOnboarding(
       emailNotifications: true,
       contributorAlerts: true,
       weeklyDigest: true,
-      stealthMode: onboarding.privacy.profileVisibility === 'private',
-      allowPublicApplications: onboarding.privacy.receiveContributorExpressions,
+      stealthMode: onboarding.privacy?.profileVisibility === 'private',
+      allowPublicApplications: onboarding.privacy?.receiveContributorExpressions ?? true,
     },
     createdAt: now,
     lastUpdatedAt: now,
@@ -333,11 +381,45 @@ export function loadFounderWorkspace(): FounderWorkspaceState | null {
       return null;
     }
 
-    if (!parsed.founder || !parsed.startup || !Array.isArray(parsed.projects)) {
+    if (!parsed.founder || !parsed.startup) {
       return null;
     }
 
-    return parsed as FounderWorkspaceState;
+    // Sanitize and guarantee defaults for arrays and objects
+    const sanitized: FounderWorkspaceState = {
+      version: WORKSPACE_STORAGE_VERSION,
+      founder: parsed.founder,
+      accountEmail: parsed.accountEmail || '',
+      startup: parsed.startup,
+      goals: parsed.goals || {
+        primaryGoal: 'MVP Development',
+        projectDescription: '',
+        projectCategory: 'Software',
+      },
+      talentRequirements: Array.isArray(parsed.talentRequirements)
+        ? parsed.talentRequirements
+        : [],
+      privacy: parsed.privacy || {
+        profileVisibility: 'discoverable',
+        projectVisibility: 'discoverable',
+        allowContactSharing: true,
+        receiveContributorExpressions: true,
+      },
+      projects: Array.isArray(parsed.projects) ? parsed.projects : [],
+      tasks: Array.isArray(parsed.tasks) ? parsed.tasks : [],
+      submissions: Array.isArray(parsed.submissions) ? parsed.submissions : [],
+      settings: parsed.settings || {
+        emailNotifications: true,
+        contributorAlerts: true,
+        weeklyDigest: true,
+        stealthMode: false,
+        allowPublicApplications: true,
+      },
+      createdAt: parsed.createdAt || new Date().toISOString(),
+      lastUpdatedAt: parsed.lastUpdatedAt || new Date().toISOString(),
+    };
+
+    return sanitized;
   } catch {
     return null;
   }

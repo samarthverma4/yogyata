@@ -453,6 +453,24 @@ export const TalentDiscoveryTab: React.FC<TalentDiscoveryTabProps> = ({ tasks })
                     </tbody>
                   </table>
                 </div>
+
+                <div
+                  style={{
+                    marginTop: '0.75rem',
+                    padding: '0.625rem 0.75rem',
+                    background: '#F8FAFC',
+                    borderRadius: '6px',
+                    border: '1px solid #E2E8F0',
+                    fontSize: '0.75rem',
+                    color: '#64748B',
+                    lineHeight: 1.45,
+                  }}
+                >
+                  <strong>Evidence Standard Notice:</strong> Declared skills are self-reported on resumes;
+                  Assessed skills represent benchmark technical tests; Verified skills are backed by practical deliverables
+                  explicitly approved by evaluators. In this frontend prototype, endorsements are held in local state
+                  and do not represent cryptographically verified or decentralized ledger credentials.
+                </div>
               </div>
             </div>
 

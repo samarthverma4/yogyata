@@ -5,6 +5,7 @@ import type {
   ProjectStatus,
   WorkspaceTab,
 } from '../types';
+import { sanitizeUrl } from '../storage';
 
 interface ProjectsTabProps {
   projects: Project[];
@@ -260,9 +261,9 @@ export const ProjectsTab: React.FC<ProjectsTabProps> = ({
                   <span className="yw-badge yw-badge-neutral">{project.category}</span>
                   {project.projectUrl && (
                     <a
-                      href={project.projectUrl.startsWith('http') ? project.projectUrl : `https://${project.projectUrl}`}
+                      href={sanitizeUrl(project.projectUrl)}
                       target="_blank"
-                      rel="noreferrer"
+                      rel="noopener noreferrer"
                       style={{ fontSize: '0.75rem', color: '#D97706', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.25rem' }}
                     >
                       Spec Link ↗

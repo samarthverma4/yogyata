@@ -343,6 +343,9 @@
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
   padding: 24px;
   margin-bottom: 20px;
+  min-width: 0;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 .yw-card-title,
@@ -439,6 +442,15 @@
   border: 1px solid transparent;
   line-height: 1.4;
   text-decoration: none;
+}
+
+.yw-btn:focus-visible,
+.ws-btn:focus-visible,
+.ws-shortcut-btn:focus-visible,
+.ws-nav-btn:focus-visible,
+.ws-brand-btn:focus-visible {
+  outline: 2px solid #2563EB;
+  outline-offset: 2px;
 }
 
 .yw-btn-primary,
@@ -940,5 +952,29 @@
   }
   .ws-header-sub {
     display: none;
+  }
+  .yw-modal-overlay {
+    padding: 8px;
+  }
+  .yw-modal-header {
+    padding: 12px 14px;
+  }
+  .yw-modal-body {
+    padding: 14px 14px;
+  }
+  .yw-modal-footer {
+    padding: 10px 14px;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .yw-card,
+  .ws-card {
+    padding: 14px 12px;
+  }
+  .ws-shortcuts-grid {
+    grid-template-columns: 1fr;
+  }
+  .ws-stat-card {
+    padding: 12px 14px;
   }
 }

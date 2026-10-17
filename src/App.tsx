@@ -281,21 +281,41 @@ function App() {
             Active Founder Workspace saved for{' '}
             <strong>{existingWorkspace.startup.startupName || 'Your Startup'}</strong>
           </span>
-          <button
-            type="button"
-            className="yw-btn yw-btn-primary yw-btn-sm"
-            style={{
-              padding: '0.2rem 0.625rem',
-              fontSize: '0.75rem',
-              background: '#D97706',
-              border: 'none',
-              color: '#FFFFFF',
-            }}
-            onClick={() => handleEnterFounderWorkspace(existingWorkspace)}
-            id="btn-quick-open-workspace"
-          >
-            Open Founder Workspace →
-          </button>
+          <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
+            <button
+              type="button"
+              className="yw-btn yw-btn-primary yw-btn-sm"
+              style={{
+                padding: '0.2rem 0.625rem',
+                fontSize: '0.75rem',
+                background: '#D97706',
+                border: 'none',
+                color: '#FFFFFF',
+              }}
+              onClick={() => handleEnterFounderWorkspace(existingWorkspace)}
+              id="btn-quick-open-workspace"
+            >
+              Open Founder Workspace →
+            </button>
+            <button
+              type="button"
+              className="yw-btn yw-btn-secondary yw-btn-sm"
+              style={{
+                padding: '0.2rem 0.625rem',
+                fontSize: '0.75rem',
+                color: '#FFFFFF',
+                background: 'rgba(255, 255, 255, 0.12)',
+                borderColor: 'rgba(255, 255, 255, 0.25)',
+              }}
+              onClick={() => {
+                setInFounderOnboarding(true);
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
+              id="btn-quick-start-onboarding"
+            >
+              Start New Onboarding +
+            </button>
+          </div>
         </div>
       )}
 

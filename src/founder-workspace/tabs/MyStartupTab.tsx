@@ -3,6 +3,7 @@ import type {
   FounderWorkspaceState,
   WorkspaceTab,
 } from '../types';
+import { sanitizeUrl } from '../storage';
 import type {
   StartupProfile,
   FounderProfile,
@@ -118,7 +119,7 @@ export const MyStartupTab: React.FC<MyStartupTabProps> = ({
   // Talent requirement helpers
   const handleAddRequirement = () => {
     const newReq: TalentRequirement = {
-      id: `req-${Date.now()}`,
+      id: `req-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`,
       roleTitle: 'Frontend Engineer',
       requiredSkills: ['React', 'TypeScript'],
       contributorsCount: '1',
@@ -246,13 +247,9 @@ export const MyStartupTab: React.FC<MyStartupTabProps> = ({
               <>
                 {workspace.startup.websiteUrl && (
                   <a
-                    href={
-                      workspace.startup.websiteUrl.startsWith('http')
-                        ? workspace.startup.websiteUrl
-                        : `https://${workspace.startup.websiteUrl}`
-                    }
+                    href={sanitizeUrl(workspace.startup.websiteUrl)}
                     target="_blank"
-                    rel="noreferrer"
+                    rel="noopener noreferrer"
                     className="yw-btn yw-btn-secondary"
                   >
                     <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor">
@@ -375,9 +372,9 @@ export const MyStartupTab: React.FC<MyStartupTabProps> = ({
             {workspace.founder.linkedInUrl && (
               <div style={{ marginTop: '0.75rem' }}>
                 <a
-                  href={workspace.founder.linkedInUrl}
+                  href={sanitizeUrl(workspace.founder.linkedInUrl)}
                   target="_blank"
-                  rel="noreferrer"
+                  rel="noopener noreferrer"
                   style={{ color: '#D97706', fontSize: '0.8125rem', fontWeight: 600, textDecoration: 'none' }}
                 >
                   LinkedIn Profile →
@@ -418,9 +415,9 @@ export const MyStartupTab: React.FC<MyStartupTabProps> = ({
                   <span>
                     <strong>Specification:</strong>{' '}
                     <a
-                      href={workspace.goals.projectLink}
+                      href={sanitizeUrl(workspace.goals.projectLink)}
                       target="_blank"
-                      rel="noreferrer"
+                      rel="noopener noreferrer"
                       style={{ color: '#D97706' }}
                     >
                       {workspace.goals.projectLink}

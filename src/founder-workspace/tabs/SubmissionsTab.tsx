@@ -4,6 +4,7 @@ import type {
   WorkspaceTask,
   SubmissionStatus,
 } from '../types';
+import { sanitizeUrl } from '../storage';
 
 interface SubmissionsTabProps {
   submissions: TaskSubmission[];
@@ -72,21 +73,26 @@ export const SubmissionsTab: React.FC<SubmissionsTabProps> = ({
     e.preventDefault();
     if (!reviewingSubmission) return;
 
+    // Strict Skill Passport Rule: Only accepted / approved submissions can endorse a verified skill
+    const canEndorse = reviewStatus === 'accepted' && isVerifiedEndorsed;
+
     const updated: TaskSubmission = {
       ...reviewingSubmission,
       status: reviewStatus,
       reviewNotes: reviewNotes.trim(),
       feedback: feedback.trim(),
       rating,
-      isVerifiedEndorsed,
-      endorsedSkill: isVerifiedEndorsed ? endorsedSkill : undefined,
+      isVerifiedEndorsed: canEndorse,
+      endorsedSkill: canEndorse ? endorsedSkill : undefined,
       reviewedAt: new Date().toISOString(),
     };
 
     onReviewSubmission(updated);
     setReviewingSubmission(null);
     setSaveSuccessNotice(
-      `Evaluation saved for ${updated.candidateName}. Skill Passport status updated in local prototype.`
+      canEndorse
+        ? `Evaluation saved for ${updated.candidateName}. Practical skill "${endorsedSkill}" verified in local prototype.`
+        : `Evaluation saved for ${updated.candidateName} (Status: ${reviewStatus}).`
     );
     setTimeout(() => setSaveSuccessNotice(null), 4000);
   };
@@ -305,9 +311,9 @@ export const SubmissionsTab: React.FC<SubmissionsTabProps> = ({
                       </td>
                       <td>
                         <a
-                          href={sub.deliverableUrl}
+                          href={sanitizeUrl(sub.deliverableUrl)}
                           target="_blank"
-                          rel="noreferrer"
+                          rel="noopener noreferrer"
                           style={{
                             color: '#D97706',
                             fontSize: '0.8125rem',
@@ -393,9 +399,9 @@ export const SubmissionsTab: React.FC<SubmissionsTabProps> = ({
                       Task: {reviewingSubmission.taskTitle}
                     </strong>
                     <a
-                      href={reviewingSubmission.deliverableUrl}
+                      href={sanitizeUrl(reviewingSubmission.deliverableUrl)}
                       target="_blank"
-                      rel="noreferrer"
+                      rel="noopener noreferrer"
                       className="yw-btn yw-btn-secondary yw-btn-sm"
                     >
                       Open Submitted URL ↗
@@ -423,7 +429,13 @@ export const SubmissionsTab: React.FC<SubmissionsTabProps> = ({
                       id="review-status-select"
                       className="yw-form-select"
                       value={reviewStatus}
-                      onChange={(e) => setReviewStatus(e.target.value as SubmissionStatus)}
+                      onChange={(e) => {
+                        const nextStatus = e.target.value as SubmissionStatus;
+                        setReviewStatus(nextStatus);
+                        if (nextStatus !== 'accepted') {
+                          setIsVerifiedEndorsed(false);
+                        }
+                      }}
                     >
                       <option value="under-review">Under Review</option>
                       <option value="accepted">Accepted / Approved</option>
@@ -488,30 +500,43 @@ export const SubmissionsTab: React.FC<SubmissionsTabProps> = ({
                 {/* Explicit Skill Passport Verification Box */}
                 <div
                   style={{
-                    background: '#F0FDF4',
-                    border: '1px solid #BBF7D0',
+                    background: reviewStatus === 'accepted' ? '#F0FDF4' : '#F8FAFC',
+                    border: `1px solid ${reviewStatus === 'accepted' ? '#BBF7D0' : '#E2E8F0'}`,
                     borderRadius: '8px',
                     padding: '1rem',
+                    opacity: reviewStatus === 'accepted' ? 1 : 0.75,
                   }}
                 >
                   <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.75rem' }}>
                     <input
                       id="check-endorse-skill"
                       type="checkbox"
-                      checked={isVerifiedEndorsed}
+                      disabled={reviewStatus !== 'accepted'}
+                      checked={reviewStatus === 'accepted' && isVerifiedEndorsed}
                       onChange={(e) => setIsVerifiedEndorsed(e.target.checked)}
-                      style={{ marginTop: '0.25rem', width: '16px', height: '16px', cursor: 'pointer' }}
+                      style={{
+                        marginTop: '0.25rem',
+                        width: '16px',
+                        height: '16px',
+                        cursor: reviewStatus === 'accepted' ? 'pointer' : 'not-allowed',
+                      }}
                     />
                     <div style={{ flex: 1 }}>
                       <label
                         htmlFor="check-endorse-skill"
-                        style={{ fontWeight: 600, color: '#166534', fontSize: '0.9375rem', cursor: 'pointer' }}
+                        style={{
+                          fontWeight: 600,
+                          color: reviewStatus === 'accepted' ? '#166534' : '#64748B',
+                          fontSize: '0.9375rem',
+                          cursor: reviewStatus === 'accepted' ? 'pointer' : 'not-allowed',
+                        }}
                       >
                         Endorse Practical Skill Verification for Candidate's Skill Passport
                       </label>
-                      <p style={{ margin: '0.25rem 0 0 0', color: '#15803D', fontSize: '0.8125rem', lineHeight: 1.4 }}>
-                        By checking this box, you confirm that you reviewed the submitted practical work
-                        and that it directly demonstrates proficiency in the selected competency.
+                      <p style={{ margin: '0.25rem 0 0 0', color: reviewStatus === 'accepted' ? '#15803D' : '#64748B', fontSize: '0.8125rem', lineHeight: 1.4 }}>
+                        {reviewStatus === 'accepted'
+                          ? 'By checking this box, you confirm that you reviewed the submitted practical work and that it directly demonstrates proficiency in the selected competency.'
+                          : 'Practical skill verification endorsement is only enabled when the submission status is Accepted / Approved.'}
                       </p>
 
                       {isVerifiedEndorsed && (
