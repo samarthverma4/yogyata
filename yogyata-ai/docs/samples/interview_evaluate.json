@@ -1,0 +1,70 @@
+{
+  "request": {
+    "question_id": "sql_join_types",
+    "answer_text": "An inner join keeps only matching rows; a left join keeps all left rows and fills NULL where there is no match."
+  },
+  "response": {
+    "evaluation": {
+      "question_id": "sql_join_types",
+      "attempt_id": null,
+      "assessed_at": null,
+      "interview_type": "technical",
+      "topic": "sql",
+      "difficulty": 1,
+      "scores": {
+        "correctness": 79.6,
+        "reasoning": 0.0,
+        "completeness": 100.0,
+        "relevance": 100.0
+      },
+      "overall": 71.8,
+      "confidence": "medium",
+      "evaluator": "deterministic",
+      "strengths": [
+        "Covered 'inner join matches only'.",
+        "Covered 'left join keeps all left rows'.",
+        "Covered 'null for unmatched'."
+      ],
+      "improvements": [
+        "Explain why, not just what: use 'because/therefore' reasoning and give a concrete example."
+      ],
+      "evidence": [
+        {
+          "dimension": "correctness",
+          "quote": "An inner join keeps only matching rows; a left join keeps all left rows and fills NULL where there is no match.",
+          "note": "Addresses 'inner join matches only'"
+        },
+        {
+          "dimension": "correctness",
+          "quote": "An inner join keeps only matching rows; a left join keeps all left rows and fills NULL where there is no match.",
+          "note": "Addresses 'left join keeps all left rows'"
+        },
+        {
+          "dimension": "correctness",
+          "quote": "An inner join keeps only matching rows; a left join keeps all left rows and fills NULL where there is no match.",
+          "note": "Addresses 'null for unmatched'"
+        }
+      ],
+      "missed_concepts": [],
+      "misconceptions_detected": [],
+      "follow_up_questions": [
+        "Walk me through a concrete example of this."
+      ],
+      "practice_topics": [],
+      "uncertainty_notes": [
+        "Deterministic lexical/statistical evaluation; correct answers in unfamiliar wording may be under-scored."
+      ],
+      "llm_status": "not_used",
+      "status": "automated_unverified",
+      "disclaimer": "Automated assessment. It estimates answer quality against a rubric and cannot verify correctness or competence; it is not a human-reviewed result."
+    },
+    "history_item": {
+      "question_id": "sql_join_types",
+      "topic": "sql",
+      "difficulty": 1,
+      "overall": 71.8,
+      "interview_type": "technical",
+      "confidence": "medium"
+    }
+  }
+}

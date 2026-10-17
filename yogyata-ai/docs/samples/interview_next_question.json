@@ -1,0 +1,27 @@
+{
+  "request": {
+    "interview_type": "technical",
+    "role": "data_analyst",
+    "history": [
+      {
+        "question_id": "sql_join_types",
+        "topic": "sql",
+        "difficulty": 1,
+        "overall": 71.8,
+        "interview_type": "technical",
+        "confidence": "medium"
+      }
+    ]
+  },
+  "response": {
+    "question": {
+      "id": "da_data_cleaning",
+      "type": "technical",
+      "topic": "data_analysis",
+      "difficulty": 1,
+      "text": "You receive a messy dataset. What steps do you take to clean it before analysis?"
+    },
+    "reason": "Covering a topic not yet assessed ('data_analysis'). Target difficulty 1.",
+    "target_difficulty": 1
+  }
+}
