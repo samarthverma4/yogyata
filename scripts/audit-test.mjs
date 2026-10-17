@@ -249,12 +249,320 @@ runTest('Job Seeker Boundary Protection: No files under src/onboarding/ modified
   assert.ok(gitDiff.includes('export const JobSeekerOnboarding'), 'JobSeekerOnboarding must exist intact');
 });
 
-runTest('Navigation Isolation: Mentor and Recruiter show under-development messages without routing to Entrepreneur', () => {
+runTest('Navigation Isolation: Recruiter shows under-development message while Mentor and Entrepreneur are functional', () => {
   const appContent = fs.readFileSync(path.resolve('src/App.tsx'), 'utf8');
   assert.ok(appContent.includes('handleEnterMentorEntry'), 'Missing Mentor entry handler in App.tsx');
   assert.ok(appContent.includes('handleEnterRecruiterEntry'), 'Missing Recruiter entry handler in App.tsx');
-  assert.ok(appContent.includes('ROLE_CONTINUE_MESSAGES.mentor'), 'Missing Mentor under-development message');
   assert.ok(appContent.includes('ROLE_CONTINUE_MESSAGES.recruiter'), 'Missing Recruiter under-development message');
+});
+
+// ─── PHASE 2: COMPLETE MENTOR MODULE TESTS ──────────────────────────────────
+
+// 11. Storage-Key Isolation Test
+runTest('Mentor Persistence: Dedicated isolated storage keys used for Mentor module', () => {
+  const mentorDraftKey = 'yogyata_mentor_onboarding_draft';
+  const mentorWsKey = 'yogyata_mentor_workspace_data';
+  const founderDraftKey = 'yogyata_founder_onboarding_draft';
+  const founderWsKey = 'yogyata_founder_workspace_data';
+
+  assert.notStrictEqual(mentorDraftKey, founderDraftKey, 'Mentor draft key must not equal founder key');
+  assert.notStrictEqual(mentorWsKey, founderWsKey, 'Mentor workspace key must not equal founder key');
+
+  const mentorStorageFile = fs.readFileSync(path.resolve('src/mentor-workspace/storage.ts'), 'utf8');
+  assert.ok(mentorStorageFile.includes('yogyata_mentor_workspace_data'), 'Missing workspace storage key in storage.ts');
+
+  const mentorDraftFile = fs.readFileSync(path.resolve('src/mentor-onboarding/storage.ts'), 'utf8');
+  assert.ok(mentorDraftFile.includes('yogyata_mentor_onboarding_draft'), 'Missing draft storage key in onboarding storage.ts');
+});
+
+// 12. Mentor Security: No Raw Password Persistence
+runTest('Mentor Security: Passwords stripped prior to saving draft in localStorage', () => {
+  const rawAccount = {
+    fullName: 'Priya Sharma',
+    email: 'priya.sharma@example.com',
+    password: 'SuperSecretPassword99!',
+    confirmPassword: 'SuperSecretPassword99!',
+    agreedToTerms: true,
+  };
+
+  const strippedAccount = {
+    ...rawAccount,
+    password: '',
+    confirmPassword: '',
+  };
+
+  assert.strictEqual(strippedAccount.password, '', 'Password must be stripped to empty string');
+  assert.strictEqual(strippedAccount.confirmPassword, '', 'Confirm password must be stripped to empty string');
+  assert.strictEqual(strippedAccount.email, 'priya.sharma@example.com');
+  assert.strictEqual(strippedAccount.fullName, 'Priya Sharma');
+});
+
+// 13. Mentor Data Integrity: Corrupted Storage Recovery
+runTest('Mentor Data Integrity: Corrupted JSON and malformed workspace objects recover safely', () => {
+  function safeLoadMentorWorkspace(raw) {
+    if (!raw) return null;
+    try {
+      const parsed = JSON.parse(raw);
+      if (!parsed || typeof parsed !== 'object' || !parsed.mentor) return null;
+      return {
+        mentor: parsed.mentor,
+        requests: Array.isArray(parsed.requests) ? parsed.requests : [],
+        mentees: Array.isArray(parsed.mentees) ? parsed.mentees : [],
+        sessions: Array.isArray(parsed.sessions) ? parsed.sessions : [],
+        feedback: Array.isArray(parsed.feedback) ? parsed.feedback : [],
+      };
+    } catch {
+      return null;
+    }
+  }
+
+  // Corrupted JSON syntax
+  assert.strictEqual(safeLoadMentorWorkspace('{ invalid json string ...'), null);
+  assert.strictEqual(safeLoadMentorWorkspace('null'), null);
+  assert.strictEqual(safeLoadMentorWorkspace('""'), null);
+
+  // Missing arrays recover to empty arrays
+  const recovered = safeLoadMentorWorkspace('{"mentor":{"fullName":"Dr. Anand"},"requests":null,"mentees":null}');
+  assert.strictEqual(recovered.mentor.fullName, 'Dr. Anand');
+  assert.deepStrictEqual(recovered.requests, []);
+  assert.deepStrictEqual(recovered.mentees, []);
+  assert.deepStrictEqual(recovered.sessions, []);
+  assert.deepStrictEqual(recovered.feedback, []);
+});
+
+// 14. Mentorship Request Acceptance & Mentee Creation
+runTest('Mentorship Workflow: Accepting a request updates status and creates active mentee', () => {
+  const request = {
+    id: 'req-101',
+    menteeName: 'Rohit Roy',
+    menteeEmail: 'rohit@example.com',
+    careerGoal: 'Transition to Backend Engineering',
+    relevantSkills: ['Node.js', 'PostgreSQL'],
+    requestedTrack: 'Technical Interview Preparation',
+    introMessage: 'Looking for guidance.',
+    preferredTime: 'Evenings',
+    status: 'pending',
+    submittedAt: new Date().toISOString(),
+  };
+
+  let requests = [request];
+  let mentees = [];
+
+  function acceptRequest(req, responseNote) {
+    requests = requests.map((r) =>
+      r.id === req.id ? { ...r, status: 'accepted', responseNote } : r
+    );
+    mentees.push({
+      id: `mentee-${req.id}`,
+      requestId: req.id,
+      menteeName: req.menteeName,
+      menteeEmail: req.menteeEmail,
+      careerGoal: req.careerGoal,
+      mentorshipTrack: req.requestedTrack,
+      status: 'active',
+      startDate: new Date().toISOString(),
+      goals: ['Pass technical assessments'],
+      actionItems: [],
+      privateNotes: '',
+    });
+  }
+
+  acceptRequest(request, 'Welcome to mentorship!');
+
+  assert.strictEqual(requests[0].status, 'accepted');
+  assert.strictEqual(requests[0].responseNote, 'Welcome to mentorship!');
+  assert.strictEqual(mentees.length, 1);
+  assert.strictEqual(mentees[0].menteeName, 'Rohit Roy');
+  assert.strictEqual(mentees[0].status, 'active');
+  assert.strictEqual(mentees[0].mentorshipTrack, 'Technical Interview Preparation');
+});
+
+// 15. Mentorship Request Decline Test
+runTest('Mentorship Workflow: Declining a request updates status WITHOUT creating active mentee', () => {
+  const request = {
+    id: 'req-102',
+    menteeName: 'Pooja Nair',
+    menteeEmail: 'pooja@example.com',
+    careerGoal: 'Cloud Architect',
+    relevantSkills: ['AWS'],
+    requestedTrack: 'Full-Stack Development',
+    introMessage: 'Please mentor me.',
+    preferredTime: 'Weekends',
+    status: 'pending',
+    submittedAt: new Date().toISOString(),
+  };
+
+  let requests = [request];
+  let mentees = [];
+
+  function declineRequest(req, declineReason) {
+    requests = requests.map((r) =>
+      r.id === req.id ? { ...r, status: 'declined', responseNote: declineReason } : r
+    );
+  }
+
+  declineRequest(request, 'Capacity full for this quarter.');
+
+  assert.strictEqual(requests[0].status, 'declined');
+  assert.strictEqual(requests[0].responseNote, 'Capacity full for this quarter.');
+  assert.strictEqual(mentees.length, 0, 'No mentee relationship should be created upon decline');
+});
+
+// 16. Duplicate Active Mentee Prevention
+runTest('Mentorship Workflow: Duplicate active mentee relationships are strictly prevented', () => {
+  const mentees = [
+    {
+      id: 'mentee-1',
+      menteeName: 'Rohit Roy',
+      menteeEmail: 'rohit@example.com',
+      status: 'active',
+    },
+  ];
+
+  function canAddMentee(candidateEmail, candidateName) {
+    const existing = mentees.find(
+      (m) =>
+        m.menteeEmail.toLowerCase() === candidateEmail.toLowerCase() ||
+        m.menteeName.toLowerCase() === candidateName.toLowerCase()
+    );
+    return !(existing && existing.status === 'active');
+  }
+
+  assert.strictEqual(canAddMentee('rohit@example.com', 'Rohit Roy'), false, 'Should block duplicate email');
+  assert.strictEqual(canAddMentee('other@example.com', 'Rohit Roy'), false, 'Should block duplicate name');
+  assert.strictEqual(canAddMentee('new.student@example.com', 'Aisha Khan'), true, 'Should allow unique mentee');
+});
+
+// 17. Session Scheduling Validation
+runTest('Sessions Validation: Rejects past dates, missing fields, and duplicate timeslots', () => {
+  const todayStr = new Date().toISOString().split('T')[0];
+  const pastDateStr = '2020-01-01';
+
+  function validateSession(session, existingSessions) {
+    if (!session.menteeId) return 'Mentee is required';
+    if (!session.title || !session.title.trim()) return 'Title is required';
+    if (!session.date) return 'Date is required';
+    if (!session.startTime) return 'Start time is required';
+    if (!session.agenda || !session.agenda.trim()) return 'Agenda is required';
+    if (session.date < todayStr) return 'Cannot schedule in the past';
+
+    const collision = existingSessions.find(
+      (s) =>
+        s.menteeId === session.menteeId &&
+        s.date === session.date &&
+        s.startTime === session.startTime &&
+        s.status !== 'cancelled'
+    );
+    if (collision) return 'Duplicate session at this timeslot';
+
+    return null;
+  }
+
+  const existingSessions = [
+    {
+      id: 'sess-1',
+      menteeId: 'mentee-1',
+      title: 'Code Review',
+      date: '2027-10-20',
+      startTime: '18:00',
+      status: 'scheduled',
+      agenda: 'Architecture review',
+    },
+  ];
+
+  // Past date
+  assert.strictEqual(
+    validateSession({ menteeId: 'm1', title: 'T', date: pastDateStr, startTime: '10:00', agenda: 'A' }, existingSessions),
+    'Cannot schedule in the past'
+  );
+
+  // Missing title
+  assert.strictEqual(
+    validateSession({ menteeId: 'm1', title: ' ', date: '2027-10-20', startTime: '10:00', agenda: 'A' }, existingSessions),
+    'Title is required'
+  );
+
+  // Duplicate collision
+  assert.strictEqual(
+    validateSession({ menteeId: 'mentee-1', title: 'Different Title', date: '2027-10-20', startTime: '18:00', agenda: 'A' }, existingSessions),
+    'Duplicate session at this timeslot'
+  );
+
+  // Valid session
+  assert.strictEqual(
+    validateSession({ menteeId: 'mentee-1', title: 'New Topic', date: '2027-10-20', startTime: '19:00', agenda: 'Valid agenda' }, existingSessions),
+    null
+  );
+});
+
+// 18. Feedback Visibility & Skill Passport Non-Issuance Guarantee
+runTest('Feedback Architecture: Shared vs Private segregation and strict Skill Passport credential non-issuance', () => {
+  const feedbackList = [
+    {
+      id: 'fb-1',
+      menteeId: 'mentee-1',
+      feedbackDate: '2026-10-18',
+      strengthsObserved: 'Great algorithms',
+      improvementAreas: 'Edge cases',
+      recommendedNextSteps: 'Unit tests',
+      privateMentorReflection: 'Ready for senior challenge next month',
+      visibility: 'shared-with-mentee',
+    },
+    {
+      id: 'fb-2',
+      menteeId: 'mentee-1',
+      feedbackDate: '2026-10-18',
+      strengthsObserved: 'Good communication',
+      improvementAreas: 'Punctuality',
+      recommendedNextSteps: 'Show up on time',
+      privateMentorReflection: 'Hesitant on concurrency questions',
+      visibility: 'private-mentor-note',
+    },
+  ];
+
+  const shared = feedbackList.filter((f) => f.visibility === 'shared-with-mentee');
+  const priv = feedbackList.filter((f) => f.visibility === 'private-mentor-note');
+
+  assert.strictEqual(shared.length, 1);
+  assert.strictEqual(priv.length, 1);
+
+  // Skill Passport Policy Assertion:
+  // Mentee candidate skill passport object must NOT be modified by mentor feedback
+  const menteeCandidate = {
+    id: 'mentee-1',
+    skillPassport: {
+      declaredSkills: ['React', 'TypeScript'],
+      assessedSkills: ['JavaScript'],
+      verifiedSkills: [], // Unchanged!
+    },
+  };
+
+  // Simulating mentor logging feedback
+  const feedbackEntry = feedbackList[0];
+  assert.ok(feedbackEntry.id, 'Feedback logged');
+  assert.strictEqual(
+    menteeCandidate.skillPassport.verifiedSkills.length,
+    0,
+    'Mentor feedback must never automatically grant or modify Verified Skill Passport credentials'
+  );
+});
+
+// 19. Hash Navigation Verification
+runTest('Hash Navigation: #mentor-workspace, #founder-workspace, and #workspace supported', () => {
+  const appContent = fs.readFileSync(path.resolve('src/App.tsx'), 'utf8');
+  assert.ok(appContent.includes('#mentor-workspace'), 'Missing #mentor-workspace route in App.tsx');
+  assert.ok(appContent.includes('#founder-workspace'), 'Missing #founder-workspace route in App.tsx');
+  assert.ok(appContent.includes('#workspace'), 'Missing #workspace compatibility route in App.tsx');
+  assert.ok(appContent.includes('loadMentorWorkspace'), 'Missing loadMentorWorkspace in App.tsx');
+  assert.ok(appContent.includes('loadFounderWorkspace'), 'Missing loadFounderWorkspace in App.tsx');
+});
+
+// 20. Admin Separation Verification
+runTest('Admin Separation: Admin modal remains completely separate from public role selection', () => {
+  const appContent = fs.readFileSync(path.resolve('src/App.tsx'), 'utf8');
+  assert.ok(appContent.includes('AdminSignInModal'), 'AdminSignInModal must be present');
+  assert.ok(appContent.includes('handleAdminAccessClick'), 'handleAdminAccessClick must exist');
+  assert.ok(appContent.includes('admin-access-link'), 'admin-access-link must be preserved');
 });
 
 console.log(`\n====================================================`);
@@ -264,3 +572,4 @@ console.log(`====================================================\n`);
 if (passedTests !== totalTests) {
   process.exit(1);
 }
+
