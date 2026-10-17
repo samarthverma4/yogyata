@@ -1,0 +1,10 @@
+Imran Khan
+imran.khan@example.com | +91 90000 12345
+
+Education
+B.Tech Mechanical, Sample Tech, 2025
+
+Projects
+- Built a Python script to analyze sensor data from a robotics lab experiment
+- Created a Flask web page to display results
+- Designed a CAD model for a gearbox in a course project
