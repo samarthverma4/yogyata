@@ -9,11 +9,13 @@ import {
 interface FounderCompleteStepProps {
   state: FounderOnboardingState;
   onExit: () => void;
+  onEnterWorkspace?: () => void;
 }
 
 export const FounderCompleteStep: React.FC<FounderCompleteStepProps> = ({
   state,
   onExit,
+  onEnterWorkspace,
 }) => {
   const [activeModal, setActiveModal] = useState<'startup' | 'tasks' | 'talent' | null>(null);
   const founderName = state.profile.fullName || state.account.fullName;
@@ -31,7 +33,7 @@ export const FounderCompleteStep: React.FC<FounderCompleteStepProps> = ({
           Your next chapter starts here, {firstName}.
         </h1>
         <p className="ob-complete-subtitle">
-          Your founder profile is ready for the next step. Define your projects, discover talent, and build meaningful collaborations with YOGYATA.
+          Your founder profile is ready. Enter your operational workspace to manage projects, publish challenge benchmarks, and discover talent with evidenced Skill Passports.
         </p>
 
         {/* 3 Next-Step Cards */}
@@ -108,20 +110,30 @@ export const FounderCompleteStep: React.FC<FounderCompleteStepProps> = ({
         <div className="ob-prototype-alert" role="status">
           <ShieldCheck size={20} className="ob-alert-icon" aria-hidden="true" />
           <div className="ob-alert-body">
-            <strong>Frontend Milestone Completed:</strong> Your founder onboarding walkthrough and local state management are fully operational. Full venture publishing, matching services, and persistence will be connected in the next phase.
+            <strong>Frontend Milestone Completed:</strong> Your onboarding profile is saved. Click below to launch your dedicated Founder Workspace with active project and task management.
           </div>
         </div>
 
-        {/* Exit CTA */}
-        <div className="ob-complete-cta-wrap">
+        {/* Primary and secondary exit CTAs */}
+        <div className="ob-complete-cta-wrap" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.75rem' }}>
           <button
             type="button"
             className="ob-btn-primary ob-complete-btn"
+            onClick={onEnterWorkspace || onExit}
+            id="founder-complete-enter-workspace-btn"
+          >
+            <span>Enter Founder Workspace</span>
+            <ArrowRight size={18} aria-hidden="true" />
+          </button>
+
+          <button
+            type="button"
+            className="ob-btn-secondary"
             onClick={onExit}
             id="founder-complete-return-home-btn"
+            style={{ fontSize: '0.875rem' }}
           >
-            <span>Return to YOGYATA Home</span>
-            <ArrowRight size={18} aria-hidden="true" />
+            Return to YOGYATA Home
           </button>
         </div>
       </div>
