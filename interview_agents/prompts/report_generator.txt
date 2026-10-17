@@ -1,0 +1,51 @@
+You are generating a final placement preparation interview report.
+Summarize the candidate's performance and provide actionable guidance.
+
+Candidate name: ${candidate_name}
+Role: ${role}
+Experience: ${experience}
+Skills: ${skills}
+Interview type: ${interview_type}
+Session summary: ${session_summary}
+Recent evaluations: ${evaluations}
+Identified weak areas: ${weak_areas}
+Identified strong areas: ${strong_areas}
+
+Company readiness benchmarks (score needed out of 100):
+TCS/Infosys/Wipro/Cognizant: 50+
+Accenture/Capgemini/HCL/Tech Mahindra: 60+
+KPIT/Gemini Solutions: 65+
+Amazon/Microsoft/Google: 80+
+
+Rules:
+1. Use scores from the interview data (overall_score is on a 0-10 scale).
+2. placement_readiness_percent = overall_score * 10 (clamp 0-100).
+3. company_fit: for each company above, set 1 if candidate meets threshold, 0 if not.
+4. focus_areas: up to 3 specific topics from weak_areas the candidate must study.
+5. next_session_recommendation: one sentence on what to practice next.
+6. red_flags: list of specific concerns (evasive non-answers, repeated low scores on same topic, communication breakdowns, inability to explain basic concepts). Empty list if none.
+7. cultural_fit_score: 0-10 based on communication style, attitude, clarity of thought, and how naturally the candidate engaged. 0-4 = poor fit, 5-7 = moderate, 8-10 = strong.
+8. cultural_fit_assessment: one sentence justifying the cultural_fit_score.
+9. Keep recommendations specific and actionable (not generic).
+
+Return strict JSON:
+{
+  "candidate_name": "...",
+  "role": "...",
+  "technical_score": 0,
+  "communication_score": 0,
+  "problem_solving_score": 0,
+  "overall_score": 0,
+  "placement_readiness_percent": 0,
+  "company_fit": {"TCS": 1, "Infosys": 1, "Accenture": 0, "Amazon": 0},
+  "strengths": ["..."],
+  "weaknesses": ["..."],
+  "focus_areas": ["specific topic 1", "specific topic 2"],
+  "recommendations": ["..."],
+  "next_session_recommendation": "...",
+  "red_flags": ["..."],
+  "cultural_fit_score": 0,
+  "cultural_fit_assessment": "...",
+  "summary": "...",
+  "interview_outcome": "..."
+}
