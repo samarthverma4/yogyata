@@ -1,0 +1,119 @@
+{
+  "request": {
+    "records": "<26 pseudonymous synthetic records>",
+    "group_by": "department",
+    "k": 10
+  },
+  "response": {
+    "group_by": "department",
+    "k": 10,
+    "overall": {
+      "label": "All students",
+      "n": 26,
+      "readiness_mean": 5.7,
+      "readiness_mean_range": [
+        5.7,
+        92.9
+      ],
+      "evidence_sufficiency_share": {
+        "low": 1.0,
+        "medium": 0.0,
+        "high": 0.0
+      },
+      "skill_rows": [
+        {
+          "skill": "SQL",
+          "applicable_n": 26,
+          "assessed_n": 26,
+          "weakness_share_of_assessed": 0.46,
+          "met_share_of_assessed": 0.54,
+          "unassessed_share_of_applicable": 0.0
+        }
+      ],
+      "top_gaps": [
+        "SQL"
+      ],
+      "placement": {
+        "suppressed": "fewer than k students with a known outcome"
+      },
+      "members": []
+    },
+    "groups": [
+      {
+        "label": "CSE",
+        "n": 12,
+        "readiness_mean": 1.3,
+        "readiness_mean_range": [
+          1.3,
+          88.5
+        ],
+        "evidence_sufficiency_share": {
+          "low": 1.0,
+          "medium": 0.0,
+          "high": 0.0
+        },
+        "skill_rows": [
+          {
+            "skill": "SQL",
+            "applicable_n": 12,
+            "assessed_n": 12,
+            "weakness_share_of_assessed": 1.0,
+            "met_share_of_assessed": 0.0,
+            "unassessed_share_of_applicable": 0.0
+          }
+        ],
+        "top_gaps": [
+          "SQL"
+        ],
+        "placement": {
+          "suppressed": "fewer than k students with a known outcome"
+        },
+        "members": []
+      }
+    ],
+    "pooled": {
+      "label": "Other (small groups pooled)",
+      "n": 14,
+      "readiness_mean": 9.5,
+      "readiness_mean_range": [
+        9.5,
+        96.7
+      ],
+      "evidence_sufficiency_share": {
+        "low": 1.0,
+        "medium": 0.0,
+        "high": 0.0
+      },
+      "skill_rows": [
+        {
+          "skill": "SQL",
+          "applicable_n": 14,
+          "assessed_n": 14,
+          "weakness_share_of_assessed": 0.0,
+          "met_share_of_assessed": 1.0,
+          "unassessed_share_of_applicable": 0.0
+        }
+      ],
+      "top_gaps": [],
+      "placement": {
+        "suppressed": "fewer than k students with a known outcome"
+      },
+      "members": [
+        "ECE",
+        "MECH"
+      ]
+    },
+    "suppression_notes": [
+      "A larger group was pooled with the small groups so that suppressed counts cannot be derived by subtraction.",
+      "1 group(s) with fewer than 10 students were pooled."
+    ],
+    "skipped_records": 0,
+    "warnings": [],
+    "interpretation": [
+      "Figures describe current, evidence-based skill status of the supplied cohort, not individuals.",
+      "'Unassessed' means no assessment exists yet; it is not poor performance.",
+      "Placement shares use only students with a known outcome and are associations, not predictions or guarantees.",
+      "Small groups are suppressed or pooled to protect individuals."
+    ]
+  }
+}
