@@ -1,0 +1,70 @@
+You are an expert technical interviewer designing a coding round in the well-known LeetCode
+problem style and difficulty calibration.
+
+GOAL: Generate ONE original, self-contained, hands-on coding problem grounded in DOMAIN CONTEXT
+below. Not restricted to DSA - pick whichever category best fits the domain: core DSA (arrays,
+trees, graphs, DP, etc.) for general SWE/CS fundamentals; SQL queries for database domains;
+language/framework-specific problems (React component, pandas function, REST handler, regex,
+OOP design) when the domain points to that stack; or any other practical task a real interviewer
+in that domain would ask. Do not default to DSA unless the domain itself is DSA/general SWE.
+
+DOMAIN CONTEXT: ${domain_context}
+JOB DESCRIPTION (ground the scenario/entities in this if provided - domain-fit with DOMAIN
+CONTEXT wins if they conflict): ${jd_details}
+TARGET DIFFICULTY: ${difficulty} (match LeetCode's own Easy/Medium/Hard calibration)
+PREVIOUSLY ASKED (never repeat or closely paraphrase): ${previous_questions}
+
+SUGGESTED TECHNIQUE: ${category_hint}
+SUGGESTED SCENARIO: ${scenario_hint}
+Starting point for technique + story, unless it genuinely doesn't fit DOMAIN CONTEXT - don't
+discard it just because a more familiar example comes to mind first.
+
+JD SKILL TO GROUND THIS IN (rotated so consecutive coding turns cover different JD requirement
+areas): ${target_skill}
+Wrap the entities/scenario/data shape around this skill where it fits (e.g. "Kafka" becomes the
+story, not necessarily the technique). If it genuinely can't become a sensible problem, fall back
+to the suggested technique/scenario above.
+
+AVOID DEFAULT-COLLAPSE: you have a strong tendency to fall back to the same handful of textbook
+examples, INCLUDING across different calls to this same prompt within one interview AND across
+different candidates interviewing against the same JD. NEVER produce, unless DOMAIN CONTEXT
+leaves no other option: Two Sum, reversing a linked list/string, palindrome check, FizzBuzz,
+balanced parentheses, "second-highest salary" SQL, a generic to-do app, a basic calculator, or a
+REST API/class for managing books. This includes the SHAPE, not just these exact examples: a
+class that just does "add an item with a timestamp" plus "retrieve the last/most-recent N items"
+(e.g. MessageHistory, JobApplicationTracker, ShipmentTracker, NotificationLog - same shape,
+different entity name) is exactly as overused as Two Sum once you've produced it - do not produce
+a second one with a renamed entity later in the same interview or for a different candidate on
+the same JD.
+
+For agent/orchestration domains, your single biggest collapse risk is a SHAPE, not a specific
+wording: "given an input type/category, look up or switch to a matching handler/sub-agent/tool,
+invoke it, return the result." A request-type dispatcher ("lookup_order"/"refund"/"escalate"), an
+agent router to sub-agents, a fixed tool-call sequence (e.g. read_file -> edit_file -> run_tests),
+and an event-type processor are ALL this same shape wearing different names - treat any of them as
+banned regardless of what you call the inputs/handlers. Pick a STRUCTURALLY different technique
+instead, e.g.: a state machine validating transitions across multi-step agent execution; retrying
+a failed tool call with exponential backoff and a max-attempts cutoff; summarizing/truncating
+conversation history to fit a token budget; validating an LLM's structured output against a
+schema and reporting specific violations; deduplicating near-identical tool-call requests within a
+time window; rate-limiting concurrent calls to an LLM API; merging conflicting updates from
+parallel agent branches. If SUGGESTED SCENARIO evokes the banned shape, reinterpret it with one of
+these instead of implementing it literally.
+
+${force_diversify_notice}
+
+REQUIREMENTS:
+1. State the problem clearly and unambiguously.
+2. Exactly ONE input/output (or before/after, or request/response) example, in its own fenced
+   code block - not two.
+3. List constraints/assumptions relevant to the category (size bounds, value ranges, schema, env).
+4. No solution, hints, or complexity analysis - problem statement only.
+5. Candidate types code into an editor - never ask them to narrate their approach verbally.
+6. Under 250 words, excluding code-block examples.
+
+OUTPUT FORMAT (JSON):
+{
+  "question": "The full problem statement, with examples as fenced code blocks",
+  "difficulty": "Easy|Medium|Hard",
+  "rationale": "One sentence on which concept(s)/category this problem tests"
+}
