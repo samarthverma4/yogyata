@@ -63,6 +63,8 @@ interface TalentRequirementsStepProps {
   onChange: (reqs: TalentRequirement[]) => void;
   onNext: () => void;
   onBack: () => void;
+  isEditingFromReview?: boolean;
+  onReturnToReview?: () => void;
 }
 
 interface NewRequirementFormState {
@@ -96,12 +98,15 @@ export const TalentRequirementsStep: React.FC<TalentRequirementsStepProps> = ({
   onChange,
   onNext,
   onBack,
+  isEditingFromReview,
+  onReturnToReview,
 }) => {
   const [isAdding, setIsAdding] = useState(requirements.length === 0);
   const [editingId, setEditingId] = useState<string | null>(null);
   const [form, setForm] = useState<NewRequirementFormState>(INITIAL_FORM);
   const [skillInput, setSkillInput] = useState('');
   const [formError, setFormError] = useState<string | null>(null);
+  const [showUnsavedWarning, setShowUnsavedWarning] = useState(false);
 
   const addSkill = () => {
     const trimmed = skillInput.trim();
@@ -120,16 +125,39 @@ export const TalentRequirementsStep: React.FC<TalentRequirementsStepProps> = ({
     }));
   };
 
-  const saveRequirement = () => {
+  /**
+   * Detects whether the editor contains meaningful unsaved information.
+   */
+  const hasUnsavedRequirement = (): boolean => {
+    if (!isAdding) return false;
+    // If editing existing requirement, the editor has an active edit in progress
+    if (editingId !== null) return true;
+    // If creating new: check if role title selected or custom entered or skills entered or duration/dates entered
+    return Boolean(
+      form.roleTitle.trim() ||
+      form.customRoleTitle.trim() ||
+      form.skills.length > 0 ||
+      skillInput.trim() ||
+      form.duration.trim() ||
+      form.startDate.trim() ||
+      (form.contributorsCount !== '1' && form.contributorsCount.trim() !== '') ||
+      form.experiencePreference !== 'flexible' ||
+      form.workArrangement !== 'remote' ||
+      form.engagementType !== 'project-based' ||
+      form.compensation !== 'paid'
+    );
+  };
+
+  const saveRequirement = (): boolean => {
     setFormError(null);
     const finalRole = form.roleTitle === 'Other' ? form.customRoleTitle.trim() : form.roleTitle;
     if (!finalRole) {
       setFormError('Please select or specify a role title.');
-      return;
+      return false;
     }
     if (!form.contributorsCount || parseInt(form.contributorsCount, 10) < 1) {
       setFormError('Number of contributors must be at least 1.');
-      return;
+      return false;
     }
 
     if (editingId) {
@@ -170,6 +198,48 @@ export const TalentRequirementsStep: React.FC<TalentRequirementsStepProps> = ({
 
     setForm(INITIAL_FORM);
     setIsAdding(false);
+    setShowUnsavedWarning(false);
+    return true;
+  };
+
+  const handleNextClick = () => {
+    if (hasUnsavedRequirement()) {
+      setShowUnsavedWarning(true);
+      return;
+    }
+    // No unsaved data:
+    if (isAdding && !hasUnsavedRequirement()) {
+      setIsAdding(false);
+    }
+    if (isEditingFromReview && onReturnToReview) {
+      onReturnToReview();
+    } else {
+      onNext();
+    }
+  };
+
+  const handleSaveAndContinue = () => {
+    const success = saveRequirement();
+    if (success) {
+      if (isEditingFromReview && onReturnToReview) {
+        onReturnToReview();
+      } else {
+        onNext();
+      }
+    }
+  };
+
+  const handleDiscardAndContinue = () => {
+    setShowUnsavedWarning(false);
+    setForm(INITIAL_FORM);
+    setEditingId(null);
+    setIsAdding(false);
+    setFormError(null);
+    if (isEditingFromReview && onReturnToReview) {
+      onReturnToReview();
+    } else {
+      onNext();
+    }
   };
 
   const startEdit = (req: TalentRequirement) => {
@@ -188,6 +258,7 @@ export const TalentRequirementsStep: React.FC<TalentRequirementsStepProps> = ({
     });
     setEditingId(req.id);
     setIsAdding(true);
+    setShowUnsavedWarning(false);
   };
 
   const duplicateRequirement = (req: TalentRequirement) => {
@@ -204,6 +275,7 @@ export const TalentRequirementsStep: React.FC<TalentRequirementsStepProps> = ({
     if (editingId === id) {
       setIsAdding(false);
       setEditingId(null);
+      setShowUnsavedWarning(false);
     }
   };
 
@@ -212,6 +284,7 @@ export const TalentRequirementsStep: React.FC<TalentRequirementsStepProps> = ({
     setEditingId(null);
     setForm(INITIAL_FORM);
     setFormError(null);
+    setShowUnsavedWarning(false);
   };
 
   return (
@@ -526,10 +599,55 @@ export const TalentRequirementsStep: React.FC<TalentRequirementsStepProps> = ({
         </p>
       )}
 
+      {showUnsavedWarning && (
+        <div className="founder-unsaved-warning-box" role="alert">
+          <div className="founder-unsaved-warning-header">
+            <AlertCircle size={22} className="founder-unsaved-warning-icon" aria-hidden="true" />
+            <div>
+              <h4 className="founder-unsaved-warning-title">
+                {editingId ? 'Unsaved edits to talent requirement' : 'Unsaved talent requirement in progress'}
+              </h4>
+              <p className="founder-unsaved-warning-text">
+                {editingId
+                  ? 'You are currently editing an existing requirement card. Would you like to save your edits before continuing?'
+                  : 'You have entered details for a talent requirement card that has not been saved yet. Would you like to save it before continuing?'}
+              </p>
+            </div>
+          </div>
+          <div className="founder-unsaved-warning-actions">
+            <button
+              type="button"
+              className="ob-btn-primary founder-warning-btn"
+              onClick={handleSaveAndContinue}
+              id="talent-save-and-continue-btn"
+            >
+              <Check size={16} aria-hidden="true" />
+              <span>Save & Continue</span>
+            </button>
+            <button
+              type="button"
+              className="ob-btn-secondary founder-warning-btn"
+              onClick={handleDiscardAndContinue}
+              id="talent-discard-and-continue-btn"
+            >
+              <span>Discard Draft & Continue</span>
+            </button>
+            <button
+              type="button"
+              className="ob-inline-link-btn"
+              onClick={() => setShowUnsavedWarning(false)}
+              id="talent-keep-editing-btn"
+            >
+              Keep Editing
+            </button>
+          </div>
+        </div>
+      )}
+
       <FormNav
         onBack={onBack}
-        onNext={onNext}
-        nextLabel="Continue to Optional Task"
+        onNext={handleNextClick}
+        nextLabel={isEditingFromReview ? 'Save & Return to Review' : 'Continue to Optional Task'}
         nextId="talent-next-btn"
       />
     </StepWrapper>
