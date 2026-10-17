@@ -6,6 +6,13 @@ import { Notification } from './components/Notification';
 import { Modal } from './components/Modal';
 import { AdminSignInModal } from './components/AdminSignInModal';
 import { JobSeekerOnboarding } from './onboarding/JobSeekerOnboarding';
+import { JobSeekerWorkspace } from './job-seeker-workspace/JobSeekerWorkspace';
+import {
+  loadJobSeekerWorkspace,
+  saveJobSeekerWorkspace,
+  initializeJobSeekerWorkspaceFromOnboarding,
+} from './job-seeker-workspace/storage';
+import type { JobSeekerWorkspaceState } from './job-seeker-workspace/types';
 import { FounderOnboarding } from './founder-onboarding/FounderOnboarding';
 import { FounderWorkspace } from './founder-workspace/FounderWorkspace';
 import { loadFounderWorkspace } from './founder-workspace/storage';
@@ -122,6 +129,18 @@ function App() {
   } | null>(null);
   const [showAdminSignIn, setShowAdminSignIn] = useState(false);
   const [inJobSeekerOnboarding, setInJobSeekerOnboarding] = useState(false);
+  const [inJobSeekerWorkspace, setInJobSeekerWorkspace] = useState(() => {
+    if (typeof window !== 'undefined') {
+      if (
+        window.location.hash === '#job-seeker-workspace' ||
+        sessionStorage.getItem('yogyata_active_view') === 'job-seeker-workspace'
+      ) {
+        return true;
+      }
+    }
+    return false;
+  });
+
   const [inFounderOnboarding, setInFounderOnboarding] = useState(false);
   const [inFounderWorkspace, setInFounderWorkspace] = useState(() => {
     if (typeof window !== 'undefined') {
@@ -182,6 +201,10 @@ function App() {
     return false;
   });
 
+  const [existingJobSeekerWorkspace, setExistingJobSeekerWorkspace] = useState<JobSeekerWorkspaceState | null>(() =>
+    loadJobSeekerWorkspace()
+  );
+
   const [existingWorkspace, setExistingWorkspace] = useState<FounderWorkspaceState | null>(() =>
     loadFounderWorkspace()
   );
@@ -198,6 +221,7 @@ function App() {
   const handleEnterFounderWorkspace = useCallback((state?: FounderWorkspaceState) => {
     setInFounderOnboarding(false);
     setInJobSeekerOnboarding(false);
+    setInJobSeekerWorkspace(false);
     setInMentorOnboarding(false);
     setInMentorWorkspace(false);
     setInRecruiterOnboarding(false);
@@ -231,6 +255,7 @@ function App() {
     (stateOrOnboarding?: MentorWorkspaceState | MentorOnboardingState) => {
       setInMentorOnboarding(false);
       setInJobSeekerOnboarding(false);
+      setInJobSeekerWorkspace(false);
       setInFounderOnboarding(false);
       setInFounderWorkspace(false);
       setInRecruiterOnboarding(false);
@@ -279,6 +304,7 @@ function App() {
     (stateOrOnboarding?: RecruiterWorkspaceState | RecruiterOnboardingState) => {
       setInRecruiterOnboarding(false);
       setInJobSeekerOnboarding(false);
+      setInJobSeekerWorkspace(false);
       setInFounderOnboarding(false);
       setInFounderWorkspace(false);
       setInMentorOnboarding(false);
@@ -323,11 +349,76 @@ function App() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, []);
 
+  const handleEnterJobSeekerWorkspace = useCallback(
+    (stateOrOnboarding?: JobSeekerWorkspaceState | any) => {
+      setInJobSeekerOnboarding(false);
+      setInFounderOnboarding(false);
+      setInFounderWorkspace(false);
+      setInMentorOnboarding(false);
+      setInMentorWorkspace(false);
+      setInRecruiterOnboarding(false);
+      setInRecruiterWorkspace(false);
+      setInJobSeekerWorkspace(true);
+
+      let ws: JobSeekerWorkspaceState | null = null;
+      if (stateOrOnboarding) {
+        if ('skills' in stateOrOnboarding && 'profile' in stateOrOnboarding) {
+          ws = stateOrOnboarding as JobSeekerWorkspaceState;
+        } else {
+          ws = initializeJobSeekerWorkspaceFromOnboarding(stateOrOnboarding);
+          saveJobSeekerWorkspace(ws);
+        }
+      } else {
+        ws = loadJobSeekerWorkspace();
+        if (!ws) {
+          ws = initializeJobSeekerWorkspaceFromOnboarding({} as any);
+          saveJobSeekerWorkspace(ws);
+        }
+      }
+
+      setExistingJobSeekerWorkspace(ws);
+      if (typeof window !== 'undefined') {
+        sessionStorage.setItem('yogyata_active_view', 'job-seeker-workspace');
+        window.location.hash = '#job-seeker-workspace';
+      }
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    },
+    []
+  );
+
+  const handleExitJobSeekerWorkspace = useCallback(() => {
+    setInJobSeekerWorkspace(false);
+    if (typeof window !== 'undefined') {
+      sessionStorage.removeItem('yogyata_active_view');
+      if (window.location.hash === '#job-seeker-workspace') {
+        window.history.replaceState(null, '', window.location.pathname);
+      }
+    }
+    setExistingJobSeekerWorkspace(loadJobSeekerWorkspace());
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, []);
+
   // Hash navigation listener
   useEffect(() => {
     const handleHashChange = () => {
       const hash = window.location.hash;
-      if (hash === '#recruiter-workspace') {
+      if (hash === '#job-seeker-workspace') {
+        const saved = loadJobSeekerWorkspace();
+        if (saved) {
+          setExistingJobSeekerWorkspace(saved);
+          setInJobSeekerWorkspace(true);
+          setInJobSeekerOnboarding(false);
+          setInRecruiterWorkspace(false);
+          setInRecruiterOnboarding(false);
+          setInMentorWorkspace(false);
+          setInMentorOnboarding(false);
+          setInFounderWorkspace(false);
+          setInFounderOnboarding(false);
+        } else {
+          setInJobSeekerOnboarding(true);
+          setInJobSeekerWorkspace(false);
+        }
+      } else if (hash === '#recruiter-workspace') {
         const saved = loadRecruiterWorkspace();
         if (saved) {
           setExistingRecruiterWorkspace(saved);
@@ -338,6 +429,7 @@ function App() {
           setInFounderWorkspace(false);
           setInFounderOnboarding(false);
           setInJobSeekerOnboarding(false);
+          setInJobSeekerWorkspace(false);
         } else {
           setInRecruiterOnboarding(true);
           setInRecruiterWorkspace(false);
@@ -351,6 +443,7 @@ function App() {
           setInFounderWorkspace(false);
           setInFounderOnboarding(false);
           setInJobSeekerOnboarding(false);
+          setInJobSeekerWorkspace(false);
         } else {
           setInMentorOnboarding(true);
           setInMentorWorkspace(false);
@@ -364,6 +457,7 @@ function App() {
           setInMentorWorkspace(false);
           setInMentorOnboarding(false);
           setInJobSeekerOnboarding(false);
+          setInJobSeekerWorkspace(false);
         } else {
           setInFounderOnboarding(true);
           setInFounderWorkspace(false);
@@ -421,8 +515,13 @@ function App() {
   const handleContinue = useCallback(
     (role: RoleOption) => {
       if (role.id === 'job-seeker') {
-        setInJobSeekerOnboarding(true);
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        const savedWs = loadJobSeekerWorkspace() || existingJobSeekerWorkspace;
+        if (savedWs) {
+          handleEnterJobSeekerWorkspace(savedWs);
+        } else {
+          setInJobSeekerOnboarding(true);
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
       } else if (role.id === 'founder') {
         const savedWs = loadFounderWorkspace();
         if (savedWs) {
@@ -440,7 +539,14 @@ function App() {
         showNotification(title, message);
       }
     },
-    [showNotification, handleEnterFounderWorkspace, handleEnterMentorEntry, handleEnterRecruiterEntry]
+    [
+      showNotification,
+      handleEnterJobSeekerWorkspace,
+      existingJobSeekerWorkspace,
+      handleEnterFounderWorkspace,
+      handleEnterMentorEntry,
+      handleEnterRecruiterEntry,
+    ]
   );
 
   // ── Sign In handler ──
@@ -483,6 +589,16 @@ function App() {
     setShowAdminSignIn(false);
   }, []);
 
+  // Job Seeker Workspace View
+  if (inJobSeekerWorkspace && existingJobSeekerWorkspace) {
+    return (
+      <JobSeekerWorkspace
+        initialWorkspace={existingJobSeekerWorkspace}
+        onExitToHome={handleExitJobSeekerWorkspace}
+      />
+    );
+  }
+
   // Founder Workspace View
   if (inFounderWorkspace) {
     return (
@@ -517,7 +633,10 @@ function App() {
     return (
       <div className="yogyata-app">
         <div className="yogyata-bg-pattern" aria-hidden="true" />
-        <JobSeekerOnboarding onExit={() => setInJobSeekerOnboarding(false)} />
+        <JobSeekerOnboarding
+          onExit={() => setInJobSeekerOnboarding(false)}
+          onEnterWorkspace={handleEnterJobSeekerWorkspace}
+        />
         <Notification notification={notification} onClose={dismissNotification} />
       </div>
     );
@@ -572,6 +691,69 @@ function App() {
     <div className="yogyata-app">
       {/* Subtle Background Pattern (non-distracting grid) */}
       <div className="yogyata-bg-pattern" aria-hidden="true" />
+
+      {/* Optional Active Job Seeker Workspace Banner */}
+      {existingJobSeekerWorkspace && (
+        <div
+          style={{
+            background: '#EFF6FF',
+            borderBottom: '1px solid #BFDBFE',
+            color: '#1D4ED8',
+            padding: '0.5rem 1rem',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            gap: '0.875rem',
+            fontSize: '0.8125rem',
+            flexWrap: 'wrap',
+          }}
+        >
+          <span>
+            Active Job Seeker Workspace saved for{' '}
+            <strong>{existingJobSeekerWorkspace.profile.fullName || 'Job Seeker'}</strong>
+            {existingJobSeekerWorkspace.profile.headline ? ` (${existingJobSeekerWorkspace.profile.headline})` : ''}
+          </span>
+          <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
+            <button
+              type="button"
+              className="yw-btn yw-btn-primary yw-btn-sm"
+              style={{
+                padding: '0.2rem 0.625rem',
+                fontSize: '0.75rem',
+                background: '#2563EB',
+                border: 'none',
+                color: '#FFFFFF',
+                borderRadius: '4px',
+                cursor: 'pointer',
+              }}
+              onClick={() => handleEnterJobSeekerWorkspace(existingJobSeekerWorkspace)}
+              id="btn-quick-open-job-seeker-workspace"
+            >
+              Open Job Seeker Workspace →
+            </button>
+            <button
+              type="button"
+              className="yw-btn yw-btn-secondary yw-btn-sm"
+              style={{
+                padding: '0.2rem 0.625rem',
+                fontSize: '0.75rem',
+                color: '#1D4ED8',
+                background: '#FFFFFF',
+                border: '1px solid #BFDBFE',
+                borderRadius: '4px',
+                cursor: 'pointer',
+              }}
+              onClick={() => {
+                setInJobSeekerOnboarding(true);
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
+              id="btn-quick-start-job-seeker-onboarding"
+            >
+              Start New Onboarding +
+            </button>
+          </div>
+        </div>
+      )}
 
       {/* Optional Active Recruiter Workspace Banner */}
       {existingRecruiterWorkspace && (
