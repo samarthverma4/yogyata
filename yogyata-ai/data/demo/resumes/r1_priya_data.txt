@@ -1,0 +1,21 @@
+Priya Sharma
+priya.sharma@example.com | +91 91234 56789 | linkedin.com/in/priya-demo | github.com/priya-demo
+
+Summary
+Final-year B.Tech student focused on data analysis and machine learning.
+
+Education
+B.Tech Computer Science, Demo Institute of Technology, 2026
+
+Skills
+Python, SQL, Pandas, NumPy, scikit-learn, Tableau, Statistics
+
+Experience
+Data Analyst Intern, Example Retail Pvt Ltd (Jun 2025 - Aug 2025)
+- Analyzed 50,000 sales records using SQL and Pandas to find 3 underperforming product lines
+- Built a Tableau dashboard used by 12 store managers, cutting weekly reporting time by 40%
+- Automated data cleaning in Python, reducing manual effort by 6 hours per week
+
+Projects
+- Developed a customer churn model with scikit-learn, improving recall by 18% over a baseline
+- Implemented hypothesis testing for an A/B experiment on 2,000 users

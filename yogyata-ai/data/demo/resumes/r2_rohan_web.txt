@@ -1,0 +1,18 @@
+Rohan Mehta
+rohan.mehta@example.com | +91 99887 76655 | github.com/rohan-demo
+
+Education
+B.E. Information Technology, Sample College of Engineering, 2025
+
+Technical Skills
+JavaScript, TypeScript, React, Node.js, MongoDB, HTML, CSS, Git, Docker
+
+Projects
+- Built a full-stack expense tracker with React, Node.js and MongoDB serving 300 beta users
+- Designed REST APIs with 99.5% uptime over 3 months and documented them for 4 teammates
+- Deployed the app using Docker on an AWS EC2 instance, reducing deployment time by 60%
+
+Experience
+Web Development Intern, Placeholder Labs (Jan 2025 - Mar 2025)
+- Developed 5 reusable React components adopted across 2 internal tools
+- Improved page load time by 35% by optimizing CSS and JavaScript bundles

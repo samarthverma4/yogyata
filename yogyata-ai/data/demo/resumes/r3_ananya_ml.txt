@@ -1,0 +1,17 @@
+Ananya Iyer
+ananya.iyer@example.com | 9876501234 | github.com/ananya-demo
+
+Education
+B.Tech Artificial Intelligence, Demo University, 2026
+
+Skills
+Python, PyTorch, TensorFlow, NLP, Computer Vision, Git, Linux
+
+Projects
+- Trained a sentiment classifier with PyTorch reaching 91% accuracy on a 10,000-review dataset
+- Built an OpenCV pipeline detecting defects in 500 sample images with 88% precision
+- Created a text summarization prototype for NLP coursework, presented to 40 classmates
+
+Achievements
+- Won 2nd place among 30 teams at a college hackathon
+- Led a 4-member team for the machine learning club

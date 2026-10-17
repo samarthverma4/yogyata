@@ -1,0 +1,13 @@
+Karan Verma
+karan.verma@example.com
+
+Education
+BCA, Sample Institute, 2026
+
+Skills
+Java, C++, SQL, HTML, CSS
+
+Projects
+Library management system in Java with SQL database.
+Personal portfolio website using HTML and CSS.
+Worked on a small group project about data structures.
