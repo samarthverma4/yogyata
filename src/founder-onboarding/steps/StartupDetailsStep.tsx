@@ -73,6 +73,8 @@ interface StartupDetailsStepProps {
   onChange: (d: StartupProfile) => void;
   onNext: () => void;
   onBack: () => void;
+  isEditingFromReview?: boolean;
+  onReturnToReview?: () => void;
 }
 
 interface Errors {
@@ -94,6 +96,8 @@ export const StartupDetailsStep: React.FC<StartupDetailsStepProps> = ({
   onChange,
   onNext,
   onBack,
+  isEditingFromReview,
+  onReturnToReview,
 }) => {
   const [errors, setErrors] = useState<Errors>({});
   const logoInputRef = useRef<HTMLInputElement>(null);
@@ -167,7 +171,13 @@ export const StartupDetailsStep: React.FC<StartupDetailsStepProps> = ({
   };
 
   const handleNext = () => {
-    if (validate()) onNext();
+    if (validate()) {
+      if (isEditingFromReview && onReturnToReview) {
+        onReturnToReview();
+      } else {
+        onNext();
+      }
+    }
   };
 
   return (
@@ -424,7 +434,7 @@ export const StartupDetailsStep: React.FC<StartupDetailsStepProps> = ({
       <FormNav
         onBack={onBack}
         onNext={handleNext}
-        nextLabel="Continue to Business Goals"
+        nextLabel={isEditingFromReview ? 'Save & Return to Review' : 'Continue to Business Goals'}
         nextId="startup-next-btn"
       />
     </StepWrapper>
