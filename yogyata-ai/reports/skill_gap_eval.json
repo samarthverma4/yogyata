@@ -1,0 +1,50 @@
+{
+  "disclaimer": "DEMONSTRATION SCENARIOS. Profiles and expected outputs were specified by hand by the project author before running the engine, to check that the documented rules behave as intended. They test internal consistency of the rules, not real-world validity of the competency model.",
+  "n_scenarios": 9,
+  "assertions_passed": "45/45",
+  "per_scenario": {
+    "s1_declared_only_analyst": {
+      "assertions": 8,
+      "failed": []
+    },
+    "s2_partly_verified_analyst": {
+      "assertions": 8,
+      "failed": []
+    },
+    "s3_verified_weakness_ml": {
+      "assertions": 5,
+      "failed": []
+    },
+    "s4_automated_weakness_fullstack": {
+      "assertions": 7,
+      "failed": []
+    },
+    "s5_empty_profile_ml": {
+      "assertions": 5,
+      "failed": []
+    },
+    "s6_mixed_signals_ml": {
+      "assertions": 3,
+      "failed": []
+    },
+    "s7_review_overrides_resume": {
+      "assertions": 3,
+      "failed": []
+    },
+    "s8_alias_evidence_ml": {
+      "assertions": 2,
+      "failed": []
+    },
+    "s9_well_assessed_analyst": {
+      "assertions": 4,
+      "failed": []
+    }
+  },
+  "consistency_properties": {
+    "P1_order_invariance": "9/9",
+    "P2_monotonic_verified_evidence": "108/108",
+    "P3_unknown_not_weakness": "83/83",
+    "P4_declared_never_met": "5/5"
+  },
+  "all_consistency_properties_hold": true
+}

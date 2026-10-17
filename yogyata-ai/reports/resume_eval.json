@@ -1,0 +1,72 @@
+{
+  "disclaimer": "DEMONSTRATION DATA. All resumes and job descriptions are synthetic, written by the project author, and all labels were assigned by hand by the same author. Names are invented. This set is tiny and is meant for smoke-testing and sanity checks only; metrics computed on it do NOT estimate real-world performance.",
+  "n_resumes": 8,
+  "n_job_descriptions": 4,
+  "skill_extraction": {
+    "micro_precision": 1.0,
+    "micro_recall": 1.0,
+    "micro_f1": 1.0,
+    "tp": 56,
+    "fp": 0,
+    "fn": 0,
+    "mismatches": {}
+  },
+  "quality_scoring": {
+    "scores": {
+      "r1_priya_data": 92.7,
+      "r2_rohan_web": 92.4,
+      "r3_ananya_ml": 86.7,
+      "r4_karan_basic": 46.0,
+      "r5_neha_office": 45.2,
+      "r6_imran_noskills": 54.2,
+      "r7_rahul_minimal": 1.0,
+      "r8_sneha_keywords": 24.4
+    },
+    "spearman_vs_band": 0.945,
+    "pairwise_order_accuracy": 1.0,
+    "pairs": 21,
+    "misordered_pairs": []
+  },
+  "job_matching": {
+    "per_jd": {
+      "jd_data_analyst": {
+        "ndcg": 0.979,
+        "top_ranked": "r1_priya_data"
+      },
+      "jd_frontend": {
+        "ndcg": 1.0,
+        "top_ranked": "r2_rohan_web"
+      },
+      "jd_ml_intern": {
+        "ndcg": 1.0,
+        "top_ranked": "r3_ananya_ml"
+      },
+      "jd_java_junior": {
+        "ndcg": 0.86,
+        "top_ranked": "r8_sneha_keywords"
+      }
+    },
+    "mean_ndcg": 0.96,
+    "top1_hit_rate": 0.75
+  },
+  "structure_extraction": {
+    "exact_match_accuracy": {
+      "n_education": 1.0,
+      "graduation_year": 1.0,
+      "n_experience": 1.0,
+      "n_projects": 1.0,
+      "n_certifications": 1.0
+    },
+    "misses": []
+  },
+  "comparison_vs_baseline": {
+    "match_job_baseline": {
+      "mean_ndcg": 0.96,
+      "top1_hit_rate": 0.75
+    },
+    "compare_resume_to_job": {
+      "mean_ndcg": 0.995,
+      "top1_hit_rate": 1.0
+    }
+  }
+}
