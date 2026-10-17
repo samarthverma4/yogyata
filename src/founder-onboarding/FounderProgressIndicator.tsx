@@ -23,10 +23,12 @@ function getStageForView(view: FounderOnboardingView): Stage | undefined {
 
 interface FounderProgressIndicatorProps {
   currentView: FounderOnboardingView;
+  onStageClick?: (view: FounderOnboardingView) => void;
 }
 
 export const FounderProgressIndicator: React.FC<FounderProgressIndicatorProps> = ({
   currentView,
+  onStageClick,
 }) => {
   const currentStage = getStageForView(currentView);
   const currentStep = currentStage?.step ?? 1;
@@ -40,12 +42,15 @@ export const FounderProgressIndicator: React.FC<FounderProgressIndicatorProps> =
 
         return (
           <React.Fragment key={stage.id}>
-            <div
-              className={`ob-progress-step ${isActive ? 'is-active' : ''} ${isComplete ? 'is-complete' : ''} ${isUpcoming ? 'is-upcoming' : ''}`}
-              aria-current={isActive ? 'step' : undefined}
-            >
-              <div className="ob-progress-dot" aria-hidden="true">
-                {isComplete ? (
+            {isComplete && onStageClick ? (
+              <button
+                type="button"
+                className="ob-progress-step is-complete is-clickable"
+                onClick={() => onStageClick(stage.views[0])}
+                aria-label={`Go back to ${stage.label}`}
+                title={`Go back to ${stage.label}`}
+              >
+                <div className="ob-progress-dot" aria-hidden="true">
                   <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
                     <path
                       d="M2 6L5 9L10 3"
@@ -55,12 +60,32 @@ export const FounderProgressIndicator: React.FC<FounderProgressIndicatorProps> =
                       strokeLinejoin="round"
                     />
                   </svg>
-                ) : (
-                  <span className="ob-progress-num">{stage.step}</span>
-                )}
+                </div>
+                <span className="ob-progress-label">{stage.label}</span>
+              </button>
+            ) : (
+              <div
+                className={`ob-progress-step ${isActive ? 'is-active' : ''} ${isComplete ? 'is-complete' : ''} ${isUpcoming ? 'is-upcoming' : ''}`}
+                aria-current={isActive ? 'step' : undefined}
+              >
+                <div className="ob-progress-dot" aria-hidden="true">
+                  {isComplete ? (
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                      <path
+                        d="M2 6L5 9L10 3"
+                        stroke="currentColor"
+                        strokeWidth="1.8"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                  ) : (
+                    <span className="ob-progress-num">{stage.step}</span>
+                  )}
+                </div>
+                <span className="ob-progress-label">{stage.label}</span>
               </div>
-              <span className="ob-progress-label">{stage.label}</span>
-            </div>
+            )}
             {idx < STAGES.length - 1 && (
               <div
                 className={`ob-progress-connector ${stage.step < currentStep ? 'is-complete' : ''}`}
