@@ -44,6 +44,8 @@ interface BusinessGoalsStepProps {
   onChange: (d: BusinessGoal) => void;
   onNext: () => void;
   onBack: () => void;
+  isEditingFromReview?: boolean;
+  onReturnToReview?: () => void;
 }
 
 interface Errors {
@@ -59,6 +61,8 @@ export const BusinessGoalsStep: React.FC<BusinessGoalsStepProps> = ({
   onChange,
   onNext,
   onBack,
+  isEditingFromReview,
+  onReturnToReview,
 }) => {
   const [errors, setErrors] = useState<Errors>({});
 
@@ -91,7 +95,13 @@ export const BusinessGoalsStep: React.FC<BusinessGoalsStepProps> = ({
   };
 
   const handleNext = () => {
-    if (validate()) onNext();
+    if (validate()) {
+      if (isEditingFromReview && onReturnToReview) {
+        onReturnToReview();
+      } else {
+        onNext();
+      }
+    }
   };
 
   return (
@@ -206,7 +216,7 @@ export const BusinessGoalsStep: React.FC<BusinessGoalsStepProps> = ({
       <FormNav
         onBack={onBack}
         onNext={handleNext}
-        nextLabel="Continue to Talent Requirements"
+        nextLabel={isEditingFromReview ? 'Save & Return to Review' : 'Continue to Talent Requirements'}
         nextId="goals-next-btn"
       />
     </StepWrapper>
