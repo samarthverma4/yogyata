@@ -44,6 +44,8 @@ interface FounderProfileStepProps {
   onChange: (d: FounderProfile) => void;
   onNext: () => void;
   onBack: () => void;
+  isEditingFromReview?: boolean;
+  onReturnToReview?: () => void;
 }
 
 interface Errors {
@@ -60,6 +62,8 @@ export const FounderProfileStep: React.FC<FounderProfileStepProps> = ({
   onChange,
   onNext,
   onBack,
+  isEditingFromReview,
+  onReturnToReview,
 }) => {
   const [errors, setErrors] = useState<Errors>({});
   const photoInputRef = useRef<HTMLInputElement>(null);
@@ -124,7 +128,13 @@ export const FounderProfileStep: React.FC<FounderProfileStepProps> = ({
   };
 
   const handleNext = () => {
-    if (validate()) onNext();
+    if (validate()) {
+      if (isEditingFromReview && onReturnToReview) {
+        onReturnToReview();
+      } else {
+        onNext();
+      }
+    }
   };
 
   return (
@@ -312,7 +322,7 @@ export const FounderProfileStep: React.FC<FounderProfileStepProps> = ({
       <FormNav
         onBack={onBack}
         onNext={handleNext}
-        nextLabel="Continue to Startup Details"
+        nextLabel={isEditingFromReview ? 'Save & Return to Review' : 'Continue to Startup Details'}
         nextId="founder-profile-next-btn"
       />
     </StepWrapper>
