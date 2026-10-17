@@ -1,0 +1,108 @@
+{
+  "request": {
+    "profile": {
+      "declared_skills": [
+        "Python",
+        "SQL"
+      ],
+      "target_role": "data_analyst",
+      "weekly_hours": 6,
+      "timeline_weeks": 6,
+      "budget_per_session_inr": 700,
+      "goals": "data analyst internship",
+      "evidence": [
+        {
+          "skill": "Python",
+          "source": "resume_evidence",
+          "strength": 0.65
+        },
+        {
+          "skill": "SQL",
+          "source": "task_review",
+          "strength": 0.3,
+          "ref_id": "t1"
+        }
+      ]
+    },
+    "role_id": "data_analyst"
+  },
+  "response": {
+    "recommendations": [
+      {
+        "task_id": "t_sql_sales",
+        "title": "Sales analysis with SQL",
+        "skills": [
+          "SQL",
+          "Data Analysis"
+        ],
+        "difficulty": "intermediate",
+        "estimated_hours": 4.0,
+        "score": 78.0,
+        "reasons": [
+          "SQL: demonstrated weakness (priority 100)",
+          "Data Analysis: unassessed (priority 70)",
+          "difficulty 'intermediate' is above the suggested level 'beginner'"
+        ],
+        "already_met_skills": []
+      },
+      {
+        "task_id": "t_eda_report",
+        "title": "Exploratory analysis report",
+        "skills": [
+          "Data Analysis",
+          "Statistics",
+          "Data Visualization"
+        ],
+        "difficulty": "intermediate",
+        "estimated_hours": 6.0,
+        "score": 64.3,
+        "reasons": [
+          "Data Analysis: unassessed (priority 70)",
+          "Statistics: unassessed (priority 61.6)",
+          "Data Visualization: unassessed (priority 67.2)",
+          "difficulty 'intermediate' is above the suggested level 'beginner'"
+        ],
+        "already_met_skills": []
+      },
+      {
+        "task_id": "t_dashboard",
+        "title": "Single-page dashboard",
+        "skills": [
+          "Data Visualization",
+          "Tableau",
+          "Power BI"
+        ],
+        "difficulty": "beginner",
+        "estimated_hours": 5.0,
+        "score": 60.4,
+        "reasons": [
+          "Data Visualization: unassessed (priority 67.2)",
+          "Tableau: unassessed (priority 42)",
+          "Power BI: unassessed (priority 42)"
+        ],
+        "already_met_skills": []
+      }
+    ],
+    "not_recommended": [
+      {
+        "task_id": "t_ml_classifier",
+        "reason": "trains no skill required for this role"
+      },
+      {
+        "task_id": "t_git_flow",
+        "reason": "trains no skill required for this role"
+      },
+      {
+        "task_id": "t_rest_api",
+        "reason": "trains no skill required for this role"
+      },
+      {
+        "_truncated": 3
+      }
+    ],
+    "notes": [
+      "Evidence about this student is thin; recommendations favour tasks that will produce reviewable evidence."
+    ],
+    "disclaimer": "Recommending or submitting a task does not show competence. Skill status changes only after a human-reviewed result is recorded."
+  }
+}

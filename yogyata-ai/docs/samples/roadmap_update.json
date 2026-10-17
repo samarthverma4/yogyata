@@ -1,0 +1,800 @@
+{
+  "request": {
+    "payload": {
+      "profile": {
+        "declared_skills": [
+          "Python",
+          "SQL"
+        ],
+        "target_role": "data_analyst",
+        "weekly_hours": 6,
+        "timeline_weeks": 6,
+        "budget_per_session_inr": 700,
+        "goals": "data analyst internship",
+        "evidence": [
+          {
+            "skill": "Python",
+            "source": "resume_evidence",
+            "strength": 0.65
+          },
+          {
+            "skill": "SQL",
+            "source": "task_review",
+            "strength": 0.3,
+            "ref_id": "t1"
+          }
+        ]
+      },
+      "role_id": "data_analyst"
+    },
+    "new_evidence": [
+      {
+        "skill": "SQL",
+        "source": "task_review",
+        "strength": 0.9,
+        "ref_id": "t2"
+      }
+    ]
+  },
+  "response": {
+    "before": {
+      "role_id": "data_analyst",
+      "role_title": "Data Analyst (entry level)",
+      "constraints": {
+        "weekly_hours": 6.0,
+        "timeline_weeks": 6,
+        "hours_budget": 36.0,
+        "assumed": [],
+        "paid_activities_allowed": true,
+        "start_date": null,
+        "target_date": null,
+        "availability_by_week": {},
+        "horizon_weeks": 6
+      },
+      "items": [
+        {
+          "order": 1,
+          "activity_id": "learn_sql",
+          "skill": "SQL",
+          "type": "learn",
+          "title": "Learn SQL fundamentals",
+          "hours": 8.0,
+          "start_week": 1,
+          "end_week": 2,
+          "objective": "Understand SELECT, joins, aggregation, subqueries and window functions.",
+          "reason": "SQL (priority 100, importance 5/5): assessment shows weak performance. This step builds the concepts first.",
+          "expected_evidence": "Self-study only: produces no verified evidence.",
+          "evidence_source": null,
+          "completion_criteria": "You can explain the main ideas of SQL in your own words and have worked through examples.",
+          "depends_on": [],
+          "requires_review": false,
+          "hours_done": 0.0,
+          "hours_remaining": 8.0,
+          "allocations": [
+            {
+              "week": 1,
+              "hours": 6.0
+            },
+            {
+              "week": 2,
+              "hours": 2.0
+            }
+          ]
+        },
+        {
+          "order": 2,
+          "activity_id": "practice_sql",
+          "skill": "SQL",
+          "type": "practice",
+          "title": "Practise SQL",
+          "hours": 6.0,
+          "start_week": 2,
+          "end_week": 3,
+          "objective": "Apply SQL by doing: answer 15 query questions against a practice database.",
+          "reason": "SQL (priority 100, importance 5/5): assessment shows weak performance. This step turns concepts into working skill.",
+          "expected_evidence": "Practice output you can show; not verified until reviewed.",
+          "evidence_source": null,
+          "completion_criteria": "You have completed: answer 15 query questions against a practice database.",
+          "depends_on": [
+            "learn_sql"
+          ],
+          "requires_review": false,
+          "hours_done": 0.0,
+          "hours_remaining": 6.0,
+          "allocations": [
+            {
+              "week": 2,
+              "hours": 4.0
+            },
+            {
+              "week": 3,
+              "hours": 2.0
+            }
+          ]
+        },
+        {
+          "order": 3,
+          "activity_id": "assess_sql",
+          "skill": "SQL",
+          "type": "assessment",
+          "title": "Reviewed task: SQL",
+          "hours": 3.0,
+          "start_week": 3,
+          "end_week": 3,
+          "objective": "Produce evidence of SQL: complete a reviewed SQL query set.",
+          "reason": "SQL (priority 100, importance 5/5): assessment shows weak performance. This step produces reviewed evidence; a submission alone proves nothing.",
+          "expected_evidence": "A human-reviewed result (task_review). Submission alone does not count as competence.",
+          "evidence_source": "task_review",
+          "completion_criteria": "A reviewer has rated the submission; the rating, not the submission, updates your skill evidence.",
+          "depends_on": [
+            "practice_sql"
+          ],
+          "requires_review": true,
+          "hours_done": 0.0,
+          "hours_remaining": 3.0,
+          "allocations": [
+            {
+              "week": 3,
+              "hours": 3.0
+            }
+          ]
+        },
+        {
+          "_truncated": 5
+        }
+      ],
+      "total_hours": 30.0,
+      "weeks_used": 5,
+      "deferred": [
+        {
+          "activity_id": "practice_power_bi",
+          "skill": "Power BI",
+          "title": "Practise Power BI",
+          "hours": 5.0,
+          "reason": "blocked by unscheduled prerequisite(s): learn_power_bi"
+        },
+        {
+          "activity_id": "practice_excel",
+          "skill": "Excel",
+          "title": "Practise Excel",
+          "hours": 4.0,
+          "reason": "blocked by unscheduled prerequisite(s): learn_excel"
+        },
+        {
+          "activity_id": "learn_statistics",
+          "skill": "Statistics",
+          "title": "Learn Statistics fundamentals",
+          "hours": 8.0,
+          "reason": "only 6h of the remaining 8h fit in the available hours within 6 week(s) (36h total)"
+        },
+        {
+          "_truncated": 22
+        }
+      ],
+      "milestones": [
+        {
+          "skill": "SQL",
+          "status_now": "demonstrated_weakness",
+          "evidence_state": "partially_demonstrated",
+          "target": "Assessed or reviewed evidence with strength >= 0.6 (status 'met' needs evidence, not just completion).",
+          "by_week": 3,
+          "activity_ids": [
+            "learn_sql",
+            "practice_sql",
+            "assess_sql"
+          ]
+        },
+        {
+          "skill": "Data Visualization",
+          "status_now": "unassessed",
+          "evidence_state": "not_assessed",
+          "target": "Assessed or reviewed evidence with strength >= 0.6 (status 'met' needs evidence, not just completion).",
+          "by_week": 5,
+          "activity_ids": [
+            "interview_data_visualization",
+            "learn_data_visualization",
+            "practice_data_visualization",
+            "assess_data_visualization"
+          ]
+        },
+        {
+          "skill": "Statistics",
+          "status_now": "unassessed",
+          "evidence_state": "not_assessed",
+          "target": "Assessed or reviewed evidence with strength >= 0.6 (status 'met' needs evidence, not just completion).",
+          "by_week": 5,
+          "activity_ids": [
+            "interview_statistics"
+          ]
+        }
+      ],
+      "weekly_schedule": [
+        {
+          "week": 1,
+          "start_date": null,
+          "end_date": null,
+          "capacity_hours": 6.0,
+          "allocated_hours": 6.0,
+          "free_hours": 0.0,
+          "tasks": [
+            {
+              "activity_id": "learn_sql",
+              "title": "Learn SQL fundamentals",
+              "skill": "SQL",
+              "hours": 6.0,
+              "starts_here": true,
+              "finishes_here": false
+            }
+          ]
+        },
+        {
+          "week": 2,
+          "start_date": null,
+          "end_date": null,
+          "capacity_hours": 6.0,
+          "allocated_hours": 6.0,
+          "free_hours": 0.0,
+          "tasks": [
+            {
+              "activity_id": "learn_sql",
+              "title": "Learn SQL fundamentals",
+              "skill": "SQL",
+              "hours": 2.0,
+              "starts_here": false,
+              "finishes_here": true
+            },
+            {
+              "activity_id": "practice_sql",
+              "title": "Practise SQL",
+              "skill": "SQL",
+              "hours": 4.0,
+              "starts_here": true,
+              "finishes_here": false
+            }
+          ]
+        },
+        {
+          "week": 3,
+          "start_date": null,
+          "end_date": null,
+          "capacity_hours": 6.0,
+          "allocated_hours": 6.0,
+          "free_hours": 0.0,
+          "tasks": [
+            {
+              "activity_id": "practice_sql",
+              "title": "Practise SQL",
+              "skill": "SQL",
+              "hours": 2.0,
+              "starts_here": false,
+              "finishes_here": true
+            },
+            {
+              "activity_id": "assess_sql",
+              "title": "Reviewed task: SQL",
+              "skill": "SQL",
+              "hours": 3.0,
+              "starts_here": true,
+              "finishes_here": true
+            },
+            {
+              "activity_id": "interview_data_visualization",
+              "title": "Mock interview questions: Data Visualization",
+              "skill": "Data Visualization",
+              "hours": 1.0,
+              "starts_here": true,
+              "finishes_here": true
+            }
+          ]
+        },
+        {
+          "_truncated": 3
+        }
+      ],
+      "schedule": {
+        "capacity_respected": true,
+        "peak_week_hours": 6.0,
+        "horizon_weeks": 6,
+        "horizon_source": "timeline_weeks",
+        "scheduled_hours": 30.0,
+        "unscheduled_hours": 109.0,
+        "completed_hours": 0.0,
+        "projected_completion_week": 24,
+        "projected_completion_date": null,
+        "target_date": null,
+        "deadline_met": null
+      },
+      "conflicts": [
+        {
+          "type": "time_budget_conflict",
+          "message": "25 step(s) (109h) cannot be completed within 6 week(s) at the available hours; nothing was squeezed past the weekly limit.",
+          "unscheduled_hours": 109.0,
+          "activity_ids": [
+            "practice_power_bi",
+            "practice_excel",
+            "learn_statistics",
+            {
+              "_truncated": 22
+            }
+          ],
+          "options": [
+            "increase availability by about 18.2h per week to fit everything",
+            "extend the timeline to 24 week(s)",
+            "or accept the lower-priority steps being deferred"
+          ]
+        }
+      ],
+      "issues": [],
+      "mentorship_suggestions": [
+        {
+          "skill": "SQL",
+          "reason": "SQL is your highest-priority gap; a reviewer or mentor can turn practice into verified evidence.",
+          "activity_id": "mentor_sql",
+          "cost_note": "Cost and availability are not known here; see mentor recommendations.",
+          "external_action_required": true,
+          "note": "Suggestion only. Nothing is booked or paid for by this system; booking is a separate, user-confirmed step."
+        }
+      ],
+      "already_completed": [],
+      "gap_summary": {
+        "readiness_score": 9.5,
+        "evidence_sufficiency": "low",
+        "met": [],
+        "demonstrated_weaknesses": [
+          "SQL"
+        ],
+        "unassessed": [
+          "Excel",
+          "Pandas",
+          "Statistics",
+          {
+            "_truncated": 5
+          }
+        ],
+        "missing_evidence": [],
+        "self_reported_use": [
+          "Python"
+        ]
+      },
+      "notes": [
+        "25 activity(ies) did not fit; see conflicts for options.",
+        "Evidence is thin, so this plan starts with diagnostics and reviewed tasks rather than assuming gaps."
+      ],
+      "method": "deterministic rule-based planner over a validated activity catalog (no trained model)",
+      "disclaimer": "A plan is not an outcome. Completing or submitting an activity does not mean a skill is competent; skill status changes only when assessed or human-reviewed evidence arrives."
+    },
+    "after": {
+      "role_id": "data_analyst",
+      "role_title": "Data Analyst (entry level)",
+      "constraints": {
+        "weekly_hours": 6.0,
+        "timeline_weeks": 6,
+        "hours_budget": 36.0,
+        "assumed": [],
+        "paid_activities_allowed": true,
+        "start_date": null,
+        "target_date": null,
+        "availability_by_week": {},
+        "horizon_weeks": 6
+      },
+      "items": [
+        {
+          "order": 1,
+          "activity_id": "interview_data_visualization",
+          "skill": "Data Visualization",
+          "type": "interview_practice",
+          "title": "Mock interview questions: Data Visualization",
+          "hours": 1.0,
+          "start_week": 1,
+          "end_week": 1,
+          "objective": "Answer practice interview questions on Data Visualization to get an automated, unverified read on your current level.",
+          "reason": "Data Visualization (priority 67.2, importance 4/5): nothing is known yet (not a weakness); unlocks 2 other skill(s). This step gives a quick, automated (unverified) read on your current level.",
+          "expected_evidence": "Automated interview evaluation (interview_auto): provisional, not verified.",
+          "evidence_source": "interview_auto",
+          "completion_criteria": "You answered at least three questions and reviewed the feedback.",
+          "depends_on": [],
+          "requires_review": false,
+          "hours_done": 0.0,
+          "hours_remaining": 1.0,
+          "allocations": [
+            {
+              "week": 1,
+              "hours": 1.0
+            }
+          ]
+        },
+        {
+          "order": 2,
+          "activity_id": "learn_data_visualization",
+          "skill": "Data Visualization",
+          "type": "learn",
+          "title": "Learn Data Visualization fundamentals",
+          "hours": 4.0,
+          "start_week": 1,
+          "end_week": 1,
+          "objective": "Understand choosing chart types and avoiding misleading visuals.",
+          "reason": "Data Visualization (priority 67.2, importance 4/5): nothing is known yet (not a weakness); unlocks 2 other skill(s). This step builds the concepts first.",
+          "expected_evidence": "Self-study only: produces no verified evidence.",
+          "evidence_source": null,
+          "completion_criteria": "You can explain the main ideas of Data Visualization in your own words and have worked through examples.",
+          "depends_on": [],
+          "requires_review": false,
+          "hours_done": 0.0,
+          "hours_remaining": 4.0,
+          "allocations": [
+            {
+              "week": 1,
+              "hours": 4.0
+            }
+          ]
+        },
+        {
+          "order": 3,
+          "activity_id": "practice_data_visualization",
+          "skill": "Data Visualization",
+          "type": "practice",
+          "title": "Practise Data Visualization",
+          "hours": 4.0,
+          "start_week": 1,
+          "end_week": 2,
+          "objective": "Apply Data Visualization by doing: produce three charts for a dataset with written takeaways.",
+          "reason": "Data Visualization (priority 67.2, importance 4/5): nothing is known yet (not a weakness); unlocks 2 other skill(s). This step turns concepts into working skill.",
+          "expected_evidence": "Practice output you can show; not verified until reviewed.",
+          "evidence_source": null,
+          "completion_criteria": "You have completed: produce three charts for a dataset with written takeaways.",
+          "depends_on": [
+            "learn_data_visualization"
+          ],
+          "requires_review": false,
+          "hours_done": 0.0,
+          "hours_remaining": 4.0,
+          "allocations": [
+            {
+              "week": 1,
+              "hours": 1.0
+            },
+            {
+              "week": 2,
+              "hours": 3.0
+            }
+          ]
+        },
+        {
+          "_truncated": 7
+        }
+      ],
+      "total_hours": 36.0,
+      "weeks_used": 6,
+      "deferred": [
+        {
+          "activity_id": "practice_power_bi",
+          "skill": "Power BI",
+          "title": "Practise Power BI",
+          "hours": 5.0,
+          "reason": "blocked by unscheduled prerequisite(s): learn_power_bi"
+        },
+        {
+          "activity_id": "practice_excel",
+          "skill": "Excel",
+          "title": "Practise Excel",
+          "hours": 4.0,
+          "reason": "blocked by unscheduled prerequisite(s): learn_excel"
+        },
+        {
+          "activity_id": "learn_pandas",
+          "skill": "Pandas",
+          "title": "Learn Pandas fundamentals",
+          "hours": 6.0,
+          "reason": "blocked by unscheduled prerequisite(s): assess_python"
+        },
+        {
+          "_truncated": 16
+        }
+      ],
+      "milestones": [
+        {
+          "skill": "Data Visualization",
+          "status_now": "unassessed",
+          "evidence_state": "not_assessed",
+          "target": "Assessed or reviewed evidence with strength >= 0.6 (status 'met' needs evidence, not just completion).",
+          "by_week": 2,
+          "activity_ids": [
+            "interview_data_visualization",
+            "learn_data_visualization",
+            "practice_data_visualization",
+            "assess_data_visualization"
+          ]
+        },
+        {
+          "skill": "Statistics",
+          "status_now": "unassessed",
+          "evidence_state": "not_assessed",
+          "target": "Assessed or reviewed evidence with strength >= 0.6 (status 'met' needs evidence, not just completion).",
+          "by_week": 5,
+          "activity_ids": [
+            "interview_statistics",
+            "learn_statistics",
+            "practice_statistics",
+            "assess_statistics"
+          ]
+        },
+        {
+          "skill": "Data Analysis",
+          "status_now": "unassessed",
+          "evidence_state": "not_assessed",
+          "target": "Assessed or reviewed evidence with strength >= 0.6 (status 'met' needs evidence, not just completion).",
+          "by_week": 6,
+          "activity_ids": [
+            "interview_data_analysis",
+            "learn_data_analysis"
+          ]
+        }
+      ],
+      "weekly_schedule": [
+        {
+          "week": 1,
+          "start_date": null,
+          "end_date": null,
+          "capacity_hours": 6.0,
+          "allocated_hours": 6.0,
+          "free_hours": 0.0,
+          "tasks": [
+            {
+              "activity_id": "interview_data_visualization",
+              "title": "Mock interview questions: Data Visualization",
+              "skill": "Data Visualization",
+              "hours": 1.0,
+              "starts_here": true,
+              "finishes_here": true
+            },
+            {
+              "activity_id": "learn_data_visualization",
+              "title": "Learn Data Visualization fundamentals",
+              "skill": "Data Visualization",
+              "hours": 4.0,
+              "starts_here": true,
+              "finishes_here": true
+            },
+            {
+              "activity_id": "practice_data_visualization",
+              "title": "Practise Data Visualization",
+              "skill": "Data Visualization",
+              "hours": 1.0,
+              "starts_here": true,
+              "finishes_here": false
+            }
+          ]
+        },
+        {
+          "week": 2,
+          "start_date": null,
+          "end_date": null,
+          "capacity_hours": 6.0,
+          "allocated_hours": 6.0,
+          "free_hours": 0.0,
+          "tasks": [
+            {
+              "activity_id": "practice_data_visualization",
+              "title": "Practise Data Visualization",
+              "skill": "Data Visualization",
+              "hours": 3.0,
+              "starts_here": false,
+              "finishes_here": true
+            },
+            {
+              "activity_id": "assess_data_visualization",
+              "title": "Reviewed task: Data Visualization",
+              "skill": "Data Visualization",
+              "hours": 3.0,
+              "starts_here": true,
+              "finishes_here": true
+            }
+          ]
+        },
+        {
+          "week": 3,
+          "start_date": null,
+          "end_date": null,
+          "capacity_hours": 6.0,
+          "allocated_hours": 6.0,
+          "free_hours": 0.0,
+          "tasks": [
+            {
+              "activity_id": "interview_statistics",
+              "title": "Mock interview questions: Statistics",
+              "skill": "Statistics",
+              "hours": 1.0,
+              "starts_here": true,
+              "finishes_here": true
+            },
+            {
+              "activity_id": "learn_statistics",
+              "title": "Learn Statistics fundamentals",
+              "skill": "Statistics",
+              "hours": 5.0,
+              "starts_here": true,
+              "finishes_here": false
+            }
+          ]
+        },
+        {
+          "_truncated": 3
+        }
+      ],
+      "schedule": {
+        "capacity_respected": true,
+        "peak_week_hours": 6.0,
+        "horizon_weeks": 6,
+        "horizon_source": "timeline_weeks",
+        "scheduled_hours": 36.0,
+        "unscheduled_hours": 72.0,
+        "completed_hours": 0.0,
+        "projected_completion_week": 18,
+        "projected_completion_date": null,
+        "target_date": null,
+        "deadline_met": null
+      },
+      "conflicts": [
+        {
+          "type": "time_budget_conflict",
+          "message": "19 step(s) (72h) cannot be completed within 6 week(s) at the available hours; nothing was squeezed past the weekly limit.",
+          "unscheduled_hours": 72.0,
+          "activity_ids": [
+            "practice_power_bi",
+            "practice_excel",
+            "learn_pandas",
+            {
+              "_truncated": 16
+            }
+          ],
+          "options": [
+            "increase availability by about 12h per week to fit everything",
+            "extend the timeline to 18 week(s)",
+            "or accept the lower-priority steps being deferred"
+          ]
+        }
+      ],
+      "issues": [],
+      "mentorship_suggestions": [],
+      "already_completed": [],
+      "gap_summary": {
+        "readiness_score": 13.3,
+        "evidence_sufficiency": "low",
+        "met": [
+          "SQL"
+        ],
+        "demonstrated_weaknesses": [],
+        "unassessed": [
+          "Excel",
+          "Pandas",
+          "Statistics",
+          {
+            "_truncated": 5
+          }
+        ],
+        "missing_evidence": [],
+        "self_reported_use": [
+          "Python"
+        ]
+      },
+      "notes": [
+        "19 activity(ies) did not fit; see conflicts for options.",
+        "Evidence is thin, so this plan starts with diagnostics and reviewed tasks rather than assuming gaps."
+      ],
+      "method": "deterministic rule-based planner over a validated activity catalog (no trained model)",
+      "disclaimer": "A plan is not an outcome. Completing or submitting an activity does not mean a skill is competent; skill status changes only when assessed or human-reviewed evidence arrives."
+    },
+    "diff": {
+      "removed": [
+        {
+          "activity_id": "learn_sql",
+          "skill": "SQL",
+          "reason": "SQL is now met on current evidence"
+        },
+        {
+          "activity_id": "practice_sql",
+          "skill": "SQL",
+          "reason": "SQL is now met on current evidence"
+        },
+        {
+          "activity_id": "assess_sql",
+          "skill": "SQL",
+          "reason": "SQL is now met on current evidence"
+        }
+      ],
+      "added": [
+        {
+          "activity_id": "learn_statistics",
+          "skill": "Statistics",
+          "reason": "newly planned (re-prioritised or freed time)"
+        },
+        {
+          "activity_id": "practice_statistics",
+          "skill": "Statistics",
+          "reason": "newly planned (re-prioritised or freed time)"
+        },
+        {
+          "activity_id": "assess_statistics",
+          "skill": "Statistics",
+          "reason": "newly planned (re-prioritised or freed time)"
+        },
+        {
+          "_truncated": 2
+        }
+      ],
+      "kept": [
+        "interview_data_visualization",
+        "learn_data_visualization",
+        "practice_data_visualization",
+        {
+          "_truncated": 2
+        }
+      ],
+      "moved": [
+        {
+          "activity_id": "interview_data_visualization",
+          "weeks_before": [
+            3,
+            3
+          ],
+          "weeks_after": [
+            1,
+            1
+          ]
+        },
+        {
+          "activity_id": "learn_data_visualization",
+          "weeks_before": [
+            4,
+            4
+          ],
+          "weeks_after": [
+            1,
+            1
+          ]
+        },
+        {
+          "activity_id": "practice_data_visualization",
+          "weeks_before": [
+            4,
+            5
+          ],
+          "weeks_after": [
+            1,
+            2
+          ]
+        },
+        {
+          "_truncated": 2
+        }
+      ],
+      "newly_met_skills": [
+        "SQL"
+      ],
+      "readiness_delta": 3.8,
+      "schedule": {
+        "remaining_hours": [
+          30.0,
+          36.0
+        ],
+        "unscheduled_hours": [
+          109.0,
+          72.0
+        ],
+        "projected_completion_week": [
+          24,
+          18
+        ],
+        "deadline_met": [
+          null,
+          null
+        ],
+        "conflicts": [
+          1,
+          1
+        ]
+      },
+      "note": "Completing an activity removes it from the plan but does not change skill status; only evidence does."
+    }
+  }
+}
