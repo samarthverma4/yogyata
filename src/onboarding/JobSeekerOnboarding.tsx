@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import type { OnboardingView, OnboardingState } from './types';
 import { INITIAL_ONBOARDING_STATE } from './types';
 import { OnboardingLayout } from './OnboardingLayout';
@@ -11,15 +11,63 @@ import { JobPrefsStep } from './steps/JobPrefsStep';
 import { ReviewStep } from './steps/ReviewStep';
 import { CompleteStep } from './steps/CompleteStep';
 
+const JOB_SEEKER_DRAFT_KEY = 'yogyata_job_seeker_onboarding_draft';
+
+function loadDraft(): OnboardingState | null {
+  if (typeof window === 'undefined') return null;
+  try {
+    const raw = localStorage.getItem(JOB_SEEKER_DRAFT_KEY);
+    if (!raw) return null;
+    const parsed = JSON.parse(raw);
+    if (!parsed || typeof parsed !== 'object' || !parsed.account) return null;
+    return {
+      ...INITIAL_ONBOARDING_STATE,
+      ...parsed,
+      account: {
+        ...INITIAL_ONBOARDING_STATE.account,
+        ...parsed.account,
+        password: '',
+        confirmPassword: '',
+      },
+    };
+  } catch {
+    return null;
+  }
+}
+
+function saveDraft(state: OnboardingState): void {
+  if (typeof window === 'undefined') return;
+  try {
+    const sanitized = {
+      ...state,
+      account: {
+        ...state.account,
+        password: '',
+        confirmPassword: '',
+      },
+    };
+    localStorage.setItem(JOB_SEEKER_DRAFT_KEY, JSON.stringify(sanitized));
+  } catch {
+    // Ignore storage errors
+  }
+}
+
 interface JobSeekerOnboardingProps {
   onExit: () => void;
+  onEnterWorkspace?: (state: OnboardingState) => void;
 }
 
 export const JobSeekerOnboarding: React.FC<JobSeekerOnboardingProps> = ({
   onExit,
+  onEnterWorkspace,
 }) => {
   const [view, setView] = useState<OnboardingView>('signup');
-  const [state, setState] = useState<OnboardingState>(INITIAL_ONBOARDING_STATE);
+  const [state, setState] = useState<OnboardingState>(() => loadDraft() || INITIAL_ONBOARDING_STATE);
+
+  // Autosave draft on state change
+  useEffect(() => {
+    saveDraft(state);
+  }, [state]);
 
   const updateState = useCallback(
     <K extends keyof OnboardingState>(key: K, value: OnboardingState[K]) => {
@@ -105,6 +153,7 @@ export const JobSeekerOnboarding: React.FC<JobSeekerOnboardingProps> = ({
           <CompleteStep
             name={state.account.fullName}
             onExit={onExit}
+            onEnterWorkspace={onEnterWorkspace ? () => onEnterWorkspace(state) : undefined}
           />
         );
       default:

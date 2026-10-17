@@ -7,11 +7,13 @@ import {
 interface CompleteStepProps {
   name: string;
   onExit: () => void;
+  onEnterWorkspace?: () => void;
 }
 
 export const CompleteStep: React.FC<CompleteStepProps> = ({
   name,
   onExit,
+  onEnterWorkspace,
 }) => {
   const firstName = name.trim().split(' ')[0] || 'there';
 
@@ -99,15 +101,28 @@ export const CompleteStep: React.FC<CompleteStepProps> = ({
         </div>
 
         {/* Exit CTA */}
-        <div className="ob-complete-cta-wrap">
+        <div className="ob-complete-cta-wrap" style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', alignItems: 'center' }}>
+          {onEnterWorkspace && (
+            <button
+              type="button"
+              className="ob-btn-primary ob-complete-btn"
+              onClick={onEnterWorkspace}
+              id="btn-enter-job-seeker-workspace"
+              style={{ width: '100%', maxWidth: '360px' }}
+            >
+              <span>Enter Job Seeker Workspace</span>
+              <ArrowRight size={18} aria-hidden="true" />
+            </button>
+          )}
           <button
             type="button"
-            className="ob-btn-primary ob-complete-btn"
+            className={onEnterWorkspace ? "ob-btn-secondary ob-complete-btn" : "ob-btn-primary ob-complete-btn"}
             onClick={onExit}
             id="complete-return-home-btn"
+            style={{ width: '100%', maxWidth: '360px' }}
           >
             <span>Return to YOGYATA Home</span>
-            <ArrowRight size={18} aria-hidden="true" />
+            {!onEnterWorkspace && <ArrowRight size={18} aria-hidden="true" />}
           </button>
         </div>
       </div>
