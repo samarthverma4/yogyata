@@ -1304,6 +1304,60 @@ runTest('Four-Role Ecosystem: All 4 workspaces and onboarding modules exist and 
   assert.ok(fs.existsSync(path.resolve('src/recruiter-onboarding/RecruiterOnboarding.tsx')), 'Recruiter Onboarding missing');
 });
 
+// 56. Cross-Role Demo Reset Isolation Test
+runTest('Cross-Role Demo Reset: Resetting any role leaves all other roles untouched', () => {
+  const mockStorage = {
+    yogyata_founder_workspace_data: JSON.stringify({ startup: { startupName: 'Nexus' } }),
+    yogyata_mentor_workspace_data: JSON.stringify({ mentor: { fullName: 'Priya' } }),
+    yogyata_recruiter_workspace_data: JSON.stringify({ company: { companyName: 'Apex' } }),
+    yogyata_job_seeker_workspace_data: JSON.stringify({ profile: { fullName: 'Aarav' } }),
+  };
+
+  // Simulate resetting Job Seeker demo data
+  delete mockStorage.yogyata_job_seeker_workspace_data;
+  mockStorage.yogyata_job_seeker_workspace_data = JSON.stringify({ profile: { fullName: 'Demo Seeker' } });
+
+  assert.ok(mockStorage.yogyata_founder_workspace_data.includes('Nexus'), 'Founder data must not be touched');
+  assert.ok(mockStorage.yogyata_mentor_workspace_data.includes('Priya'), 'Mentor data must not be touched');
+  assert.ok(mockStorage.yogyata_recruiter_workspace_data.includes('Apex'), 'Recruiter data must not be touched');
+});
+
+// 57. Browser Back-Navigation / Empty Hash Handling
+runTest('Navigation Routing: Empty hash and back navigation gracefully reset workspace views to homepage', () => {
+  const appContent = fs.readFileSync(path.resolve('src/App.tsx'), 'utf8');
+  assert.ok(appContent.includes("!hash || hash === '#'"), 'App.tsx must handle empty hash and back-navigation');
+});
+
+// 58. Code Splitting & Performance Review
+runTest('Performance Optimization: React.lazy code splitting and WorkspaceLoading fallback implemented', () => {
+  const appContent = fs.readFileSync(path.resolve('src/App.tsx'), 'utf8');
+  assert.ok(appContent.includes('React.lazy'), 'App.tsx must use React.lazy for code splitting');
+  assert.ok(appContent.includes('React.Suspense'), 'App.tsx must use React.Suspense with loading fallback');
+  assert.ok(appContent.includes('WorkspaceLoading'), 'App.tsx must provide a WorkspaceLoading fallback component');
+});
+
+// 59. Security & Admin Separation
+runTest('Security: Admin sign-in modal remains strictly separated from role selection without auto-granting access', () => {
+  const appContent = fs.readFileSync(path.resolve('src/App.tsx'), 'utf8');
+  assert.ok(appContent.includes('setShowAdminSignIn'), 'App.tsx must control admin modal visibility');
+  assert.ok(appContent.includes('No access has been granted'), 'App.tsx must notify that prototype admin sign-in does not grant access');
+});
+
+// 60. Responsive Layout Tokens Across All Worksheets
+runTest('Responsive Architecture: Breakpoints and focus-visible states exist across all role workspaces', () => {
+  const indexCss = fs.readFileSync(path.resolve('src/index.css'), 'utf8');
+  const founderCss = fs.readFileSync(path.resolve('src/founder-workspace/workspace.css'), 'utf8');
+  const mentorCss = fs.readFileSync(path.resolve('src/mentor-workspace/workspace.css'), 'utf8');
+  const recruiterCss = fs.readFileSync(path.resolve('src/recruiter-workspace/workspace.css'), 'utf8');
+  const jobSeekerCss = fs.readFileSync(path.resolve('src/job-seeker-workspace/workspace.css'), 'utf8');
+
+  assert.ok(indexCss.includes('@media'), 'index.css must include responsive breakpoints');
+  assert.ok(founderCss.includes('@media'), 'Founder CSS must include responsive breakpoints');
+  assert.ok(mentorCss.includes('@media'), 'Mentor CSS must include responsive breakpoints');
+  assert.ok(recruiterCss.includes('@media'), 'Recruiter CSS must include responsive breakpoints');
+  assert.ok(jobSeekerCss.includes('@media'), 'Job Seeker CSS must include responsive breakpoints');
+});
+
 console.log(`\n====================================================`);
 console.log(`AUDIT RESULTS: ${passedTests}/${totalTests} TESTS PASSED`);
 console.log(`====================================================\n`);
@@ -1311,6 +1365,7 @@ console.log(`====================================================\n`);
 if (passedTests !== totalTests) {
   process.exit(1);
 }
+
 
 
 

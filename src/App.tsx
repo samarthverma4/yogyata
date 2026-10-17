@@ -5,20 +5,14 @@ import { HeroSection } from './components/HeroSection';
 import { Notification } from './components/Notification';
 import { Modal } from './components/Modal';
 import { AdminSignInModal } from './components/AdminSignInModal';
-import { JobSeekerOnboarding } from './onboarding/JobSeekerOnboarding';
-import { JobSeekerWorkspace } from './job-seeker-workspace/JobSeekerWorkspace';
 import {
   loadJobSeekerWorkspace,
   saveJobSeekerWorkspace,
   initializeJobSeekerWorkspaceFromOnboarding,
 } from './job-seeker-workspace/storage';
 import type { JobSeekerWorkspaceState } from './job-seeker-workspace/types';
-import { FounderOnboarding } from './founder-onboarding/FounderOnboarding';
-import { FounderWorkspace } from './founder-workspace/FounderWorkspace';
 import { loadFounderWorkspace } from './founder-workspace/storage';
 import type { FounderWorkspaceState } from './founder-workspace/types';
-import { MentorOnboarding } from './mentor-onboarding/MentorOnboarding';
-import { MentorWorkspace } from './mentor-workspace/MentorWorkspace';
 import {
   loadMentorWorkspace,
   saveMentorWorkspace,
@@ -27,8 +21,6 @@ import {
 import type { MentorWorkspaceState } from './mentor-workspace/types';
 import type { MentorOnboardingState } from './mentor-onboarding/types';
 import { INITIAL_MENTOR_ONBOARDING_STATE } from './mentor-onboarding/types';
-import { RecruiterOnboarding } from './recruiter-onboarding/RecruiterOnboarding';
-import { RecruiterWorkspace } from './recruiter-workspace/RecruiterWorkspace';
 import {
   loadRecruiterWorkspace,
   saveRecruiterWorkspace,
@@ -38,6 +30,62 @@ import type { RecruiterWorkspaceState } from './recruiter-workspace/types';
 import type { RecruiterOnboardingState } from './recruiter-onboarding/types';
 import { INITIAL_RECRUITER_ONBOARDING_STATE } from './recruiter-onboarding/types';
 import type { NotificationState, RoleId, RoleOption } from './types';
+
+// ─── Code-Split Workspace & Onboarding Components (Lazy Loaded) ──────────────
+const JobSeekerWorkspace = React.lazy(() =>
+  import('./job-seeker-workspace/JobSeekerWorkspace').then((m) => ({ default: m.JobSeekerWorkspace }))
+);
+const JobSeekerOnboarding = React.lazy(() =>
+  import('./onboarding/JobSeekerOnboarding').then((m) => ({ default: m.JobSeekerOnboarding }))
+);
+const FounderWorkspace = React.lazy(() =>
+  import('./founder-workspace/FounderWorkspace').then((m) => ({ default: m.FounderWorkspace }))
+);
+const FounderOnboarding = React.lazy(() =>
+  import('./founder-onboarding/FounderOnboarding').then((m) => ({ default: m.FounderOnboarding }))
+);
+const MentorWorkspace = React.lazy(() =>
+  import('./mentor-workspace/MentorWorkspace').then((m) => ({ default: m.MentorWorkspace }))
+);
+const MentorOnboarding = React.lazy(() =>
+  import('./mentor-onboarding/MentorOnboarding').then((m) => ({ default: m.MentorOnboarding }))
+);
+const RecruiterWorkspace = React.lazy(() =>
+  import('./recruiter-workspace/RecruiterWorkspace').then((m) => ({ default: m.RecruiterWorkspace }))
+);
+const RecruiterOnboarding = React.lazy(() =>
+  import('./recruiter-onboarding/RecruiterOnboarding').then((m) => ({ default: m.RecruiterOnboarding }))
+);
+
+const WorkspaceLoading: React.FC = () => (
+  <div
+    style={{
+      minHeight: '100vh',
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'center',
+      background: '#F8FAFC',
+      gap: '1rem',
+      fontFamily: 'Inter, system-ui, sans-serif',
+    }}
+  >
+    <div
+      style={{
+        width: '40px',
+        height: '40px',
+        border: '3px solid #E2E8F0',
+        borderTopColor: '#2563EB',
+        borderRadius: '50%',
+        animation: 'yogyataSpin 0.75s linear infinite',
+      }}
+    />
+    <p style={{ color: '#64748B', fontSize: '0.875rem', fontWeight: 500, margin: 0 }}>
+      Loading workspace...
+    </p>
+    <style>{`@keyframes yogyataSpin { to { transform: rotate(360deg); } }`}</style>
+  </div>
+);
 
 // ─── Modal Content ────────────────────────────────────────────────────────────
 
@@ -128,11 +176,21 @@ function App() {
     content: React.ReactNode;
   } | null>(null);
   const [showAdminSignIn, setShowAdminSignIn] = useState(false);
-  const [inJobSeekerOnboarding, setInJobSeekerOnboarding] = useState(false);
+  const [inJobSeekerOnboarding, setInJobSeekerOnboarding] = useState(() => {
+    if (typeof window !== 'undefined') {
+      if (
+        (window.location.hash === '#job-seeker-workspace' && !loadJobSeekerWorkspace()) ||
+        sessionStorage.getItem('yogyata_active_view') === 'job-seeker-onboarding'
+      ) {
+        return true;
+      }
+    }
+    return false;
+  });
   const [inJobSeekerWorkspace, setInJobSeekerWorkspace] = useState(() => {
     if (typeof window !== 'undefined') {
       if (
-        window.location.hash === '#job-seeker-workspace' ||
+        (window.location.hash === '#job-seeker-workspace' && loadJobSeekerWorkspace()) ||
         sessionStorage.getItem('yogyata_active_view') === 'job-seeker-workspace'
       ) {
         return true;
@@ -141,12 +199,21 @@ function App() {
     return false;
   });
 
-  const [inFounderOnboarding, setInFounderOnboarding] = useState(false);
+  const [inFounderOnboarding, setInFounderOnboarding] = useState(() => {
+    if (typeof window !== 'undefined') {
+      if (
+        ((window.location.hash === '#founder-workspace' || window.location.hash === '#workspace') && !loadFounderWorkspace()) ||
+        sessionStorage.getItem('yogyata_active_view') === 'founder-onboarding'
+      ) {
+        return true;
+      }
+    }
+    return false;
+  });
   const [inFounderWorkspace, setInFounderWorkspace] = useState(() => {
     if (typeof window !== 'undefined') {
       if (
-        window.location.hash === '#founder-workspace' ||
-        window.location.hash === '#workspace' ||
+        ((window.location.hash === '#founder-workspace' || window.location.hash === '#workspace') && loadFounderWorkspace()) ||
         sessionStorage.getItem('yogyata_active_view') === 'founder-workspace'
       ) {
         return true;
@@ -462,6 +529,18 @@ function App() {
           setInFounderOnboarding(true);
           setInFounderWorkspace(false);
         }
+      } else if (!hash || hash === '#') {
+        setInJobSeekerWorkspace(false);
+        setInJobSeekerOnboarding(false);
+        setInFounderWorkspace(false);
+        setInFounderOnboarding(false);
+        setInMentorWorkspace(false);
+        setInMentorOnboarding(false);
+        setInRecruiterWorkspace(false);
+        setInRecruiterOnboarding(false);
+        if (typeof window !== 'undefined') {
+          sessionStorage.removeItem('yogyata_active_view');
+        }
       }
     };
 
@@ -592,39 +671,47 @@ function App() {
   // Job Seeker Workspace View
   if (inJobSeekerWorkspace && existingJobSeekerWorkspace) {
     return (
-      <JobSeekerWorkspace
-        initialWorkspace={existingJobSeekerWorkspace}
-        onExitToHome={handleExitJobSeekerWorkspace}
-      />
+      <React.Suspense fallback={<WorkspaceLoading />}>
+        <JobSeekerWorkspace
+          initialWorkspace={existingJobSeekerWorkspace}
+          onExitToHome={handleExitJobSeekerWorkspace}
+        />
+      </React.Suspense>
     );
   }
 
   // Founder Workspace View
   if (inFounderWorkspace) {
     return (
-      <FounderWorkspace
-        onExitToHome={handleExitFounderWorkspace}
-      />
+      <React.Suspense fallback={<WorkspaceLoading />}>
+        <FounderWorkspace
+          onExitToHome={handleExitFounderWorkspace}
+        />
+      </React.Suspense>
     );
   }
 
   // Mentor Workspace View
   if (inMentorWorkspace && existingMentorWorkspace) {
     return (
-      <MentorWorkspace
-        initialWorkspace={existingMentorWorkspace}
-        onExitToHome={handleExitMentorWorkspace}
-      />
+      <React.Suspense fallback={<WorkspaceLoading />}>
+        <MentorWorkspace
+          initialWorkspace={existingMentorWorkspace}
+          onExitToHome={handleExitMentorWorkspace}
+        />
+      </React.Suspense>
     );
   }
 
   // Recruiter Workspace View
   if (inRecruiterWorkspace && existingRecruiterWorkspace) {
     return (
-      <RecruiterWorkspace
-        initialWorkspace={existingRecruiterWorkspace}
-        onExitToHome={handleExitRecruiterWorkspace}
-      />
+      <React.Suspense fallback={<WorkspaceLoading />}>
+        <RecruiterWorkspace
+          initialWorkspace={existingRecruiterWorkspace}
+          onExitToHome={handleExitRecruiterWorkspace}
+        />
+      </React.Suspense>
     );
   }
 
@@ -633,10 +720,12 @@ function App() {
     return (
       <div className="yogyata-app">
         <div className="yogyata-bg-pattern" aria-hidden="true" />
-        <JobSeekerOnboarding
-          onExit={() => setInJobSeekerOnboarding(false)}
-          onEnterWorkspace={handleEnterJobSeekerWorkspace}
-        />
+        <React.Suspense fallback={<WorkspaceLoading />}>
+          <JobSeekerOnboarding
+            onExit={() => setInJobSeekerOnboarding(false)}
+            onEnterWorkspace={handleEnterJobSeekerWorkspace}
+          />
+        </React.Suspense>
         <Notification notification={notification} onClose={dismissNotification} />
       </div>
     );
@@ -647,11 +736,13 @@ function App() {
     return (
       <div className="yogyata-app">
         <div className="yogyata-bg-pattern" aria-hidden="true" />
-        <FounderOnboarding
-          onExit={() => setInFounderOnboarding(false)}
-          onSignInClick={handleSignIn}
-          onEnterWorkspace={handleEnterFounderWorkspace}
-        />
+        <React.Suspense fallback={<WorkspaceLoading />}>
+          <FounderOnboarding
+            onExit={() => setInFounderOnboarding(false)}
+            onSignInClick={handleSignIn}
+            onEnterWorkspace={handleEnterFounderWorkspace}
+          />
+        </React.Suspense>
         <Notification notification={notification} onClose={dismissNotification} />
       </div>
     );
@@ -662,11 +753,13 @@ function App() {
     return (
       <div className="yogyata-app">
         <div className="yogyata-bg-pattern" aria-hidden="true" />
-        <MentorOnboarding
-          onExit={() => setInMentorOnboarding(false)}
-          onSignInClick={handleSignIn}
-          onEnterWorkspace={handleEnterMentorWorkspace}
-        />
+        <React.Suspense fallback={<WorkspaceLoading />}>
+          <MentorOnboarding
+            onExit={() => setInMentorOnboarding(false)}
+            onSignInClick={handleSignIn}
+            onEnterWorkspace={handleEnterMentorWorkspace}
+          />
+        </React.Suspense>
         <Notification notification={notification} onClose={dismissNotification} />
       </div>
     );
@@ -677,11 +770,13 @@ function App() {
     return (
       <div className="yogyata-app">
         <div className="yogyata-bg-pattern" aria-hidden="true" />
-        <RecruiterOnboarding
-          onExit={() => setInRecruiterOnboarding(false)}
-          onSignInClick={handleSignIn}
-          onEnterWorkspace={handleEnterRecruiterWorkspace}
-        />
+        <React.Suspense fallback={<WorkspaceLoading />}>
+          <RecruiterOnboarding
+            onExit={() => setInRecruiterOnboarding(false)}
+            onSignInClick={handleSignIn}
+            onEnterWorkspace={handleEnterRecruiterWorkspace}
+          />
+        </React.Suspense>
         <Notification notification={notification} onClose={dismissNotification} />
       </div>
     );
