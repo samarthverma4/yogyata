@@ -27,11 +27,13 @@ import {
 interface RecruiterWorkspaceProps {
   initialWorkspace: RecruiterWorkspaceState;
   onExitToHome: () => void;
+  onLaunchAIArena?: (candidateName: string, role: string) => void;
 }
 
 export const RecruiterWorkspace: React.FC<RecruiterWorkspaceProps> = ({
   initialWorkspace,
   onExitToHome,
+  onLaunchAIArena,
 }) => {
   const [workspace, setWorkspace] = useState<RecruiterWorkspaceState>(initialWorkspace);
   const [activeTab, setActiveTab] = useState<RecruiterWorkspaceTab>('overview');
@@ -275,6 +277,7 @@ export const RecruiterWorkspace: React.FC<RecruiterWorkspaceProps> = ({
               onUpdateInterview={handleUpdateInterview}
               onCancelInterview={handleCancelInterview}
               onTabChange={setActiveTab}
+              onLaunchAIArena={onLaunchAIArena}
             />
           )}
 
