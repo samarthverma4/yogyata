@@ -1,16 +1,18 @@
 import React from 'react';
-import { LogIn } from 'lucide-react';
+import { LogIn, Sparkles } from 'lucide-react';
 
 interface NavbarProps {
   onSignInClick: () => void;
   onHowItWorksClick: () => void;
   onEcosystemClick: () => void;
+  onOpenArena?: () => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
   onSignInClick,
   onHowItWorksClick,
   onEcosystemClick,
+  onOpenArena,
 }) => {
   return (
     <header className="navbar-header" role="banner">
@@ -66,9 +68,34 @@ export const Navbar: React.FC<NavbarProps> = ({
             </button>
           </nav>
 
-          {/* Right Navigation: Already Registered + Sign In */}
-          <div className="navbar-right-actions">
-            <span className="navbar-user-prompt">Already registered?</span>
+          {/* Right Navigation: AI Arena + Already Registered + Sign In */}
+          <div className="navbar-right-actions" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            {onOpenArena && (
+              <button
+                type="button"
+                className="nav-arena-btn"
+                onClick={onOpenArena}
+                style={{
+                  background: 'linear-gradient(135deg, #0073e6 0%, #1c4980 100%)',
+                  color: '#ffffff',
+                  border: 'none',
+                  borderRadius: '9999px',
+                  padding: '8px 16px',
+                  fontSize: '13px',
+                  fontWeight: 700,
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '6px',
+                  cursor: 'pointer',
+                  boxShadow: '0 4px 14px rgba(0, 115, 230, 0.35)',
+                  transition: 'all 0.2s ease',
+                }}
+              >
+                <Sparkles size={14} />
+                <span>AI Interview Arena</span>
+              </button>
+            )}
+
             <button
               type="button"
               className="nav-signin-btn"
