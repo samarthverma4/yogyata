@@ -1,0 +1,90 @@
+/* ==========================================================================
+   YOGYATA Mentor Workspace Specific Styles
+   Calm, professional SaaS workspace following existing YOGYATA design tokens.
+   ========================================================================== */
+
+/* Mentor Specific Accent & Badges */
+.badge-mentor-guide {
+  background: var(--color-blue-tint);
+  color: var(--color-blue);
+  border: 1px solid var(--color-blue-line);
+}
+
+.badge-pending {
+  background: #FFFBEB;
+  color: #B45309;
+  border: 1px solid #FDE68A;
+}
+
+.badge-accepted {
+  background: #ECFDF5;
+  color: #059669;
+  border: 1px solid #A7F3D0;
+}
+
+.badge-declined {
+  background: #FEF2F2;
+  color: #DC2626;
+  border: 1px solid #FECACA;
+}
+
+.badge-scheduled {
+  background: var(--color-blue-tint);
+  color: var(--color-blue-hover);
+  border: 1px solid var(--color-blue-line);
+}
+
+.badge-completed {
+  background: #F0FDF4;
+  color: #166534;
+  border: 1px solid #BBF7D0;
+}
+
+.badge-cancelled {
+  background: var(--color-surface-2);
+  color: var(--color-text-muted);
+  border: 1px solid var(--color-border-hover);
+}
+
+/* Mentee Action Items List */
+.mentee-action-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 0;
+  margin-bottom: 6px;
+  font-size: 0.84rem;
+}
+
+.mentee-action-item.is-done {
+  background: var(--color-surface-2);
+  text-decoration: line-through;
+  color: var(--color-text-faint);
+}
+
+/* Private Reflection Callout */
+.private-reflection-box {
+  background: #FFFDF5;
+  border-left: 3px solid #D97706;
+  padding: 8px 12px;
+  border-radius: 0 6px 6px 0;
+  font-size: 0.8125rem;
+  color: #78350F;
+  margin-top: 8px;
+}
+
+@media (max-width: 900px) {
+  .mentor-workspace-root aside {
+    display: none !important;
+  }
+  .mentor-workspace-root aside[style*="fixed"] {
+    display: flex !important;
+  }
+  .mentor-mobile-toggle-btn {
+    display: flex !important;
+  }
+}
+

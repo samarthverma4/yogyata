@@ -1,4 +1,30 @@
-# React + TypeScript + Vite
+# Yogyata (योग्यता)
+
+A skills marketplace where students prove what they can do. Four roles share one Supabase backend:
+
+- **Entrepreneur**: posts real startup tasks, reviews submissions, endorses skills as Verified.
+- **Seeker**: builds a Skill Passport (Declared, Assessed, Verified), takes server-graded assessments, solves founder tasks, applies to jobs, works with mentors, follows a career roadmap.
+- **Mentor** (approved accounts only): answers mentorship requests, runs sessions, gives feedback, assesses declared skills.
+- **Recruiter** (approved accounts only): searches opted-in talent, publishes job postings, runs a pipeline, interviews and scorecards.
+
+## Run locally
+
+1. `npm install`
+2. Copy `.env.example` to `.env.local` and fill in the Supabase URL and publishable key.
+3. `npm run dev`
+
+Database rules (row-level security, approval gate, one email per role) live in Supabase. Rolled-back test scripts for them are in `supabase/tests/`: paste one into the SQL editor; it ends with a `RESULT:` line.
+
+## AI assistance
+
+Parts of this project were built with AI help, using Claude Code (Anthropic):
+the Yogyata restyle, the Supabase schema, security rules and tests, authentication,
+and the rebuild of the mentor, recruiter and seeker workspaces on Supabase.
+Every change was reviewed and directed by the project owner.
+
+---
+
+## Template notes (React + TypeScript + Vite)
 
 This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
 

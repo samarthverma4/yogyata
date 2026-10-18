@@ -1,4 +1,4 @@
-export type RoleId = 'job-seeker' | 'founder';
+export type RoleId = 'job-seeker' | 'founder' | 'mentor' | 'recruiter';
 
 export interface RoleOption {
   id: RoleId;

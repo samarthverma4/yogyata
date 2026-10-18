@@ -1,5 +1,6 @@
 import React from 'react';
 import type { WorkspaceTab, FounderWorkspaceState } from './types';
+import { BrandMark } from '../brand/BrandMark';
 import {
   LayoutDashboard,
   Building2,
@@ -100,16 +101,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
             aria-label="YOGYATA Home"
             title="Return to YOGYATA Home"
           >
-            <div className="brand-emblem-wrapper" style={{ width: 32, height: 32 }} aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" style={{ width: '100%', height: '100%' }}>
-                <path d="M12 2.5L19 6V11.5C19 16 16 19.3 12 21.5C8 19.3 5 16 5 11.5V6L12 2.5Z" fill="#465FA8" />
-                <path d="M10.8 14.5L8.5 12.2L9.6 11.1L10.8 12.3L14.4 8.7L15.5 9.8L10.8 14.5Z" fill="#FFC936" />
-              </svg>
-            </div>
-            <div>
-              <span className="ws-brand-title">YOGYATA</span>
-              <span className="ws-brand-sub">Founder Workspace</span>
-            </div>
+            <BrandMark sub="Founder workspace" />
           </button>
 
           {/* Close for mobile drawer */}

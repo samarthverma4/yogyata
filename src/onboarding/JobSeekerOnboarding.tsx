@@ -1,4 +1,5 @@
-import React, { useCallback, useState } from 'react';
+import { scopedKey } from '../lib/storageScope';
+import React, { useCallback, useEffect, useState } from 'react';
 import type { OnboardingView, OnboardingState } from './types';
 import { INITIAL_ONBOARDING_STATE } from './types';
 import { OnboardingLayout } from './OnboardingLayout';
@@ -11,15 +12,80 @@ import { JobPrefsStep } from './steps/JobPrefsStep';
 import { ReviewStep } from './steps/ReviewStep';
 import { CompleteStep } from './steps/CompleteStep';
 
+const JOB_SEEKER_DRAFT_KEY = 'yogyata_job_seeker_onboarding_draft';
+
+function loadDraft(): OnboardingState | null {
+  if (typeof window === 'undefined') return null;
+  try {
+    const raw = localStorage.getItem(scopedKey(JOB_SEEKER_DRAFT_KEY));
+    if (!raw) return null;
+    const parsed = JSON.parse(raw);
+    if (!parsed || typeof parsed !== 'object' || !parsed.account) return null;
+    return {
+      ...INITIAL_ONBOARDING_STATE,
+      ...parsed,
+      account: {
+        ...INITIAL_ONBOARDING_STATE.account,
+        ...parsed.account,
+        password: '',
+        confirmPassword: '',
+      },
+    };
+  } catch {
+    return null;
+  }
+}
+
+/** The answers are saved to Supabase on completion, so the draft is no longer needed. */
+function clearDraft(): void {
+  try {
+    localStorage.removeItem(scopedKey(JOB_SEEKER_DRAFT_KEY));
+  } catch {
+    /* nothing to clear */
+  }
+}
+
+function saveDraft(state: OnboardingState): void {
+  if (typeof window === 'undefined') return;
+  try {
+    const sanitized = {
+      ...state,
+      account: {
+        ...state.account,
+        password: '',
+        confirmPassword: '',
+      },
+    };
+    localStorage.setItem(scopedKey(JOB_SEEKER_DRAFT_KEY), JSON.stringify(sanitized));
+  } catch {
+    // Ignore storage errors
+  }
+}
+
 interface JobSeekerOnboardingProps {
   onExit: () => void;
+  /** Signed-in account: skips the prototype sign-up and email steps and prefills name and email. */
+  account?: { fullName: string; email: string };
+  /** Called from the completion screen with everything the seeker entered. */
+  onComplete?: (state: OnboardingState) => void;
 }
 
 export const JobSeekerOnboarding: React.FC<JobSeekerOnboardingProps> = ({
   onExit,
+  account,
+  onComplete,
 }) => {
-  const [view, setView] = useState<OnboardingView>('signup');
-  const [state, setState] = useState<OnboardingState>(INITIAL_ONBOARDING_STATE);
+  const [view, setView] = useState<OnboardingView>(account ? 'profile' : 'signup');
+  const [state, setState] = useState<OnboardingState>(() => {
+    // resume a saved draft; a signed-in account always supplies the name and email
+    const base = loadDraft() || INITIAL_ONBOARDING_STATE;
+    return account ? { ...base, account: { ...base.account, ...account } } : base;
+  });
+
+  // Autosave draft on state change
+  useEffect(() => {
+    saveDraft(state);
+  }, [state]);
 
   const updateState = useCallback(
     <K extends keyof OnboardingState>(key: K, value: OnboardingState[K]) => {
@@ -59,7 +125,7 @@ export const JobSeekerOnboarding: React.FC<JobSeekerOnboardingProps> = ({
             onChangeProfessional={(d) => updateState('professional', d)}
             onChangeEducation={(d) => updateState('education', d)}
             onNext={() => goTo('resume-skills')}
-            onBack={() => goTo('verify-email')}
+            onBack={() => (account ? onExit() : goTo('verify-email'))}
           />
         );
       case 'resume-skills':
@@ -104,7 +170,15 @@ export const JobSeekerOnboarding: React.FC<JobSeekerOnboardingProps> = ({
         return (
           <CompleteStep
             name={state.account.fullName}
-            onExit={onExit}
+            onExit={
+              onComplete
+                ? () => {
+                    clearDraft();
+                    onComplete(state);
+                  }
+                : onExit
+            }
+            actionLabel={onComplete ? 'Open my Skill Passport' : undefined}
           />
         );
       default:

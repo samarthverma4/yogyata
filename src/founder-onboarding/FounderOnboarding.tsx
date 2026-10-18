@@ -28,13 +28,30 @@ interface FounderOnboardingProps {
   onExit: () => void;
   onSignInClick?: () => void;
   onEnterWorkspace?: (workspace: FounderWorkspaceState) => void;
+  /** Signed-in account: skips the prototype sign-up and email steps and prefills name and email. */
+  account?: { fullName: string; email: string };
 }
 
 export const FounderOnboarding: React.FC<FounderOnboardingProps> = ({
   onExit,
   onSignInClick,
   onEnterWorkspace,
+  account,
 }) => {
+  const firstView: FounderOnboardingView = account ? 'profile' : 'signup';
+  const accountName = account?.fullName;
+  const accountEmail = account?.email;
+  const withAccount = useCallback(
+    (s: FounderOnboardingState): FounderOnboardingState =>
+      accountEmail !== undefined
+        ? {
+            ...s,
+            account: { ...s.account, fullName: accountName ?? '', email: accountEmail },
+            profile: { ...s.profile, fullName: s.profile.fullName || accountName || '' },
+          }
+        : s,
+    [accountName, accountEmail]
+  );
   // Initialize state lazily from stored draft if available
   const [initialData] = useState(() => {
     const draft = loadFounderDraft();
@@ -50,16 +67,18 @@ export const FounderOnboarding: React.FC<FounderOnboardingProps> = ({
       );
 
       if (hasMeaningfulData) {
+        const draftView = draft.currentView || firstView;
         return {
-          state: draft.state,
-          view: draft.currentView || 'signup',
+          state: withAccount(draft.state),
+          // a signed-in founder never returns to the prototype account steps
+          view: account && (draftView === 'signup' || draftView === 'verify-email') ? firstView : draftView,
           draftRestoredTime: formatTimeAgo(draft.savedAt),
         };
       }
     }
     return {
-      state: INITIAL_FOUNDER_ONBOARDING_STATE,
-      view: 'signup' as FounderOnboardingView,
+      state: withAccount(INITIAL_FOUNDER_ONBOARDING_STATE),
+      view: firstView,
       draftRestoredTime: null,
     };
   });
@@ -113,12 +132,12 @@ export const FounderOnboarding: React.FC<FounderOnboardingProps> = ({
 
   const handleResetDraft = useCallback(() => {
     clearFounderDraft();
-    setState(INITIAL_FOUNDER_ONBOARDING_STATE);
-    setView('signup');
+    setState(withAccount(INITIAL_FOUNDER_ONBOARDING_STATE));
+    setView(firstView);
     setIsEditingFromReview(false);
     setDraftRestoredTime(null);
     window.scrollTo({ top: 0, behavior: 'smooth' });
-  }, []);
+  }, [withAccount, firstView]);
 
   const renderStep = () => {
     switch (view) {
@@ -151,7 +170,7 @@ export const FounderOnboarding: React.FC<FounderOnboardingProps> = ({
             data={state.profile}
             onChange={(d) => updateState('profile', d)}
             onNext={() => goTo('startup')}
-            onBack={() => goTo('verify-email')}
+            onBack={() => (account ? onExit() : goTo('verify-email'))}
             isEditingFromReview={isEditingFromReview}
             onReturnToReview={handleReturnToReview}
           />

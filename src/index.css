@@ -1,49 +1,59 @@
 @import './founder-workspace/workspace.css';
+@import './mentor-workspace/workspace.css';
+@import './recruiter-workspace/workspace.css';
+@import './recruiter-onboarding/recruiterOnboarding.css';
 
 /* ==========================================================================
-   YOGYATA Design System
-   Visual Identity: Primary Navy (#171B4D), Primary Blue (#465FA8),
-   Accent Yellow (#FFC936), Clean Background (#F7F8FC), Pure White (#FFFFFF),
-   Body Text (#34384A), Muted Text (#777D91), Crisp Borders (#E5E8F0).
+   YOGYATA Design System (Yogyata style)
+   Digital Blue #3559DF on white, deep navy ink, a faint 48px grid,
+   square corners, Anek Devanagari display + Hind body + IBM Plex Mono labels.
    ========================================================================== */
 
 :root {
   /* Core Brand Palette */
-  --color-navy: #171B4D;
-  --color-blue: #465FA8;
-  --color-blue-hover: #384F91;
-  --color-blue-active: #2C3E75;
-  --color-blue-tint: #F3F6FD;
-  --color-blue-subtle: rgba(70, 95, 168, 0.08);
-  
-  --color-yellow: #FFC936;
+  --color-navy: #0F1A44;
+  --color-blue: #3559DF;
+  --color-blue-hover: #2A4BC7;
+  --color-blue-active: #213DA8;
+  --color-blue-tint: #EEF2FD;
+  --color-blue-line: #C9D4F7;
+  --color-blue-subtle: rgba(53, 89, 223, 0.08);
+
+  --color-yellow: #FFC93C;
   --color-yellow-hover: #F2BD2B;
-  --color-yellow-tint: #FFF9E6;
-  --color-yellow-subtle: rgba(255, 201, 54, 0.15);
-  
-  --color-bg: #F7F8FC;
+  --color-yellow-tint: #FFF8E1;
+  --color-yellow-subtle: rgba(255, 201, 60, 0.18);
+
+  --color-bg: #FFFFFF;
+  --color-surface-2: #F5F7FD;
   --color-white: #FFFFFF;
-  --color-text: #34384A;
-  --color-text-muted: #777D91;
-  --color-border: #E5E8F0;
-  --color-border-hover: #CBD2E1;
-  --color-border-selected: #465FA8;
+  --color-text: #0F1A44;
+  --color-text-muted: #4B5578;
+  --color-text-faint: #8A92AE;
+  --color-border: #DCE2F5;
+  --color-border-hover: #B9C4EA;
+  --color-border-selected: #3559DF;
 
   /* Typography */
-  --font-family: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  
-  /* Shadows */
-  --shadow-sm: 0 1px 2px 0 rgba(23, 27, 77, 0.04);
-  --shadow-md: 0 4px 14px -2px rgba(23, 27, 77, 0.06), 0 2px 6px -1px rgba(23, 27, 77, 0.03);
-  --shadow-lg: 0 12px 30px -4px rgba(23, 27, 77, 0.08), 0 4px 12px -2px rgba(23, 27, 77, 0.04);
-  --shadow-selected: 0 0 0 1px var(--color-blue), 0 8px 24px -4px rgba(70, 95, 168, 0.12);
+  --font-family: 'Hind', 'Kohinoor Devanagari', 'Avenir Next', system-ui, sans-serif;
+  --font-display: 'Anek Devanagari', 'Kohinoor Devanagari', 'Avenir Next', system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, Menlo, monospace;
 
-  /* Radii */
-  --radius-sm: 6px;
-  --radius-md: 10px;
-  --radius-lg: 16px;
-  --radius-xl: 20px;
-  --radius-pill: 9999px;
+  /* Shadows: flat, used sparingly */
+  --shadow-sm: 0 1px 2px rgba(15, 26, 68, 0.05);
+  --shadow-md: 0 6px 18px rgba(15, 26, 68, 0.07);
+  --shadow-lg: 0 16px 40px rgba(15, 26, 68, 0.14);
+  --shadow-selected: 0 0 0 2px var(--color-blue);
+
+  /* Radii: square corners everywhere (circles still use 50%) */
+  --radius-sm: 0;
+  --radius-md: 0;
+  --radius-lg: 0;
+  --radius-xl: 0;
+  --radius-pill: 0;
+
+  /* Faint grid behind every page */
+  --grid-line: rgba(15, 26, 68, 0.055);
 
   /* Transitions */
   --transition-fast: 150ms cubic-bezier(0.16, 1, 0.3, 1);
@@ -72,6 +82,11 @@ html {
 body {
   font-family: var(--font-family);
   background-color: var(--color-bg);
+  background-image:
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: 48px 48px;
+  background-position: -1px -1px;
   color: var(--color-text);
   line-height: 1.55;
   min-height: 100vh;
@@ -108,11 +123,15 @@ body {
   flex-direction: column;
   min-height: 100vh;
   position: relative;
-  background-color: var(--color-bg);
+  background-color: transparent;
 }
+
+/* Display type for headings, mono for small labels */
+h1, h2, h3, h4 { font-family: var(--font-display); letter-spacing: 0; }
 
 /* Top Subtle Background Pattern: Clean, non-distracting geometric grid */
 .yogyata-bg-pattern {
+  display: none;
   position: absolute;
   top: 0;
   left: 0;
@@ -188,7 +207,7 @@ body {
   width: 38px;
   height: 38px;
   background: var(--color-navy);
-  border-radius: 9px;
+  border-radius: 0;
   box-shadow: 0 2px 6px rgba(23, 27, 77, 0.16);
   flex-shrink: 0;
 }
@@ -256,7 +275,7 @@ body {
   height: 2px;
   background-color: var(--color-blue);
   transition: width var(--transition-fast);
-  border-radius: 2px;
+  border-radius: 0;
 }
 
 .nav-anchor-btn:hover::after {
@@ -387,7 +406,7 @@ body {
   height: 6px;
   background-color: var(--color-yellow);
   opacity: 0.55;
-  border-radius: 3px;
+  border-radius: 0;
   z-index: -1;
 }
 
@@ -510,16 +529,16 @@ body {
 .role-cards-stack {
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  margin-bottom: 22px;
+  gap: 10px;
+  margin-bottom: 20px;
 }
 
 /* Individual Role Card */
 .role-card {
   display: flex;
   align-items: flex-start;
-  gap: 16px;
-  padding: 16px 18px;
+  gap: 14px;
+  padding: 12px 16px;
   background-color: var(--color-white);
   border: 1.5px solid var(--color-border);
   border-radius: var(--radius-lg);
@@ -634,7 +653,7 @@ body {
   border: 1.5px solid var(--color-border);
   background-color: var(--color-white);
   flex-shrink: 0;
-  margin-top: 12px;
+  margin-top: 8px;
   transition: all var(--transition-fast);
 }
 
@@ -819,7 +838,7 @@ body {
 .admin-access-link:focus-visible {
   outline: 2px solid var(--color-blue);
   outline-offset: 2px;
-  border-radius: 2px;
+  border-radius: 0;
 }
 
 /* ==========================================================================
@@ -1450,7 +1469,7 @@ body {
   width: 28px;
   height: 28px;
   border-radius: 50%;
-  background: #EEF1F6;
+  background: var(--color-border);
   border: 1.5px solid var(--color-border);
   display: flex;
   align-items: center;
@@ -1614,7 +1633,7 @@ body {
   width: 100%;
   height: 44px;
   padding: 0 14px;
-  background: #FCFCFD;
+  background: var(--color-bg);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
   font-size: 0.93rem;
@@ -1679,7 +1698,7 @@ body {
   width: 100%;
   height: 44px;
   padding: 0 36px 0 14px;
-  background: #FCFCFD url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23777D91' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E") no-repeat calc(100% - 14px) center;
+  background: var(--color-bg) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23777D91' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E") no-repeat calc(100% - 14px) center;
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
   font-size: 0.93rem;
@@ -1713,8 +1732,8 @@ body {
 .ob-strength-bar {
   flex: 1;
   height: 4px;
-  background: #E5E8F0;
-  border-radius: 2px;
+  background: var(--color-border);
+  border-radius: 0;
   overflow: hidden;
 }
 
@@ -1735,7 +1754,7 @@ body {
 
 .ob-strength-good .ob-strength-fill {
   width: 75%;
-  background-color: #3B82F6;
+  background-color: var(--color-blue);
 }
 
 .ob-strength-strong .ob-strength-fill {
@@ -1751,7 +1770,7 @@ body {
 
 .ob-strength-label.ob-strength-weak { color: #EF4444; }
 .ob-strength-label.ob-strength-fair { color: #D97706; }
-.ob-strength-label.ob-strength-good { color: #2563EB; }
+.ob-strength-label.ob-strength-good { color: var(--color-blue); }
 .ob-strength-label.ob-strength-strong { color: #059669; }
 
 /* ── Section Divider ─────────────────────────────────────────────────────── */
@@ -1834,7 +1853,7 @@ body {
   margin-top: 2px;
   background: var(--color-white);
   border: 1.5px solid var(--color-border-hover);
-  border-radius: 4px;
+  border-radius: 0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2000,7 +2019,7 @@ body {
   font-size: 1.4rem;
   font-weight: 700;
   font-family: monospace;
-  background: #FCFCFD;
+  background: var(--color-bg);
   border: 1.5px solid var(--color-border);
   border-radius: var(--radius-md);
   color: var(--color-navy);
@@ -2061,7 +2080,7 @@ body {
   padding: 2px 6px;
   background: #EA580C;
   color: #FFFFFF;
-  border-radius: 4px;
+  border-radius: 0;
   letter-spacing: 0.05em;
 }
 
@@ -2087,7 +2106,7 @@ body {
   border-radius: var(--radius-lg);
   padding: 32px 24px;
   text-align: center;
-  background: #FBFBFC;
+  background: var(--color-bg);
   cursor: pointer;
   transition: all var(--transition-normal);
   display: flex;
@@ -2150,7 +2169,7 @@ body {
   align-items: center;
   gap: 14px;
   padding: 14px 18px;
-  background: #FCFCFD;
+  background: var(--color-bg);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
   margin-bottom: 12px;
@@ -2233,7 +2252,7 @@ body {
   padding: 2px 7px;
   background: #FFFBEB;
   border: 1px solid #FCD34D;
-  border-radius: 4px;
+  border-radius: 0;
   font-size: 0.68rem;
   font-weight: 800;
   color: #B45309;
@@ -2297,7 +2316,7 @@ body {
   align-items: center;
   gap: 10px;
   padding: 9px 14px;
-  background: #FBFBFC;
+  background: var(--color-bg);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
   transition: all var(--transition-fast);
@@ -2319,7 +2338,7 @@ body {
 .ob-skill-category-tag {
   font-size: 0.77rem;
   padding: 2px 8px;
-  background: #EEF1F6;
+  background: var(--color-border);
   border-radius: var(--radius-pill);
   color: var(--color-text-muted);
 }
@@ -2389,7 +2408,7 @@ body {
 .ob-suggestion-chip:disabled {
   opacity: 0.45;
   cursor: not-allowed;
-  background: #F3F4F6;
+  background: var(--color-surface-2);
 }
 
 .ob-selected-roles-wrap {
@@ -2500,7 +2519,7 @@ body {
 }
 
 .ob-review-card {
-  background: #FCFCFD;
+  background: var(--color-bg);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
   padding: 20px 22px;
@@ -2785,7 +2804,7 @@ body {
 
 .ob-complete-roadmap {
   text-align: left;
-  background: #FCFCFD;
+  background: var(--color-bg);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-xl);
   padding: 26px 28px;
@@ -2828,8 +2847,8 @@ body {
 }
 
 .ob-icon-assess {
-  background: #EEF2FF;
-  color: #4F46E5;
+  background: var(--color-blue-tint);
+  color: var(--color-blue);
 }
 
 .ob-icon-verify {
@@ -2864,7 +2883,7 @@ body {
   align-items: center;
   gap: 12px;
   padding: 14px 18px;
-  background: #F3F6FD;
+  background: var(--color-blue-tint);
   border: 1px solid rgba(70, 95, 168, 0.25);
   border-radius: var(--radius-md);
   margin-bottom: 28px;
@@ -3056,7 +3075,7 @@ body {
 .ob-textarea {
   width: 100%;
   padding: 12px 14px;
-  background: #FCFCFD;
+  background: var(--color-bg);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
   font-size: 0.93rem;
@@ -3109,7 +3128,7 @@ body {
   width: 60px;
   height: 60px;
   border-radius: 50%;
-  background: #EEF1F6;
+  background: var(--color-border);
   border: 1.5px solid var(--color-border);
   overflow: hidden;
   display: flex;
@@ -3132,7 +3151,7 @@ body {
   width: 60px;
   height: 60px;
   border-radius: var(--radius-md);
-  background: #EEF1F6;
+  background: var(--color-border);
   border: 1.5px solid var(--color-border);
   overflow: hidden;
   display: flex;
@@ -3250,7 +3269,7 @@ body {
   font-size: 0.74rem;
   font-weight: 700;
   padding: 3px 8px;
-  border-radius: 4px;
+  border-radius: 0;
   text-transform: uppercase;
   letter-spacing: 0.03em;
 }
@@ -3268,7 +3287,7 @@ body {
 }
 
 .founder-comp-badge.comp-to-be-discussed {
-  background: #F3F4F6;
+  background: var(--color-surface-2);
   border: 1px solid #E5E7EB;
   color: #4B5563;
 }
@@ -3276,9 +3295,9 @@ body {
 .founder-exp-badge {
   font-size: 0.74rem;
   color: var(--color-text-muted);
-  background: #F3F4F6;
+  background: var(--color-surface-2);
   padding: 3px 8px;
-  border-radius: 4px;
+  border-radius: 0;
 }
 
 .founder-req-skills {
@@ -3333,7 +3352,7 @@ body {
 .founder-task-prompt-card {
   text-align: center;
   padding: 40px 24px;
-  background: #FBFBFC;
+  background: var(--color-bg);
   border: 2px dashed var(--color-border);
   border-radius: var(--radius-xl);
   display: flex;
@@ -3424,8 +3443,8 @@ body {
 }
 
 .founder-icon-tasks {
-  background: #EEF2FF;
-  color: #4F46E5;
+  background: var(--color-blue-tint);
+  color: var(--color-blue);
 }
 
 .founder-icon-talent {
@@ -3484,8 +3503,8 @@ body {
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  background: #EEF2FF;
-  border: 1.5px solid #C7D2FE;
+  background: var(--color-blue-tint);
+  border: 1.5px solid var(--color-blue-line);
   border-radius: var(--radius-lg);
   padding: 12px 18px;
   box-shadow: var(--shadow-sm);
@@ -3500,12 +3519,12 @@ body {
 }
 
 .ob-review-edit-pill {
-  background: #4F46E5;
+  background: var(--color-blue);
   color: #FFFFFF;
   font-size: 0.72rem;
   font-weight: 800;
   padding: 3px 8px;
-  border-radius: 4px;
+  border-radius: 0;
   letter-spacing: 0.05em;
   text-transform: uppercase;
 }
@@ -3517,7 +3536,7 @@ body {
 }
 
 .ob-review-return-btn {
-  background: #4F46E5;
+  background: var(--color-blue);
   color: #FFFFFF;
   border: none;
   border-radius: var(--radius-md);
@@ -3539,8 +3558,8 @@ body {
 
 /* ── Draft Restored Notification Banner ── */
 .ob-draft-banner-wrap {
-  background: #EFF6FF;
-  border-bottom: 1px solid #BFDBFE;
+  background: var(--color-blue-tint);
+  border-bottom: 1px solid var(--color-blue-line);
   padding: 8px 24px;
   animation: fadeInStep 200ms ease;
 }
@@ -3563,7 +3582,7 @@ body {
 .ob-draft-reset-btn {
   background: none;
   border: none;
-  color: #1D4ED8;
+  color: var(--color-blue-hover);
   font-size: 0.8rem;
   font-weight: 700;
   cursor: pointer;
@@ -3653,7 +3672,7 @@ button.ob-progress-step.is-clickable:hover .ob-progress-label {
 button.ob-progress-step.is-clickable:focus-visible {
   outline: 2px solid var(--color-blue);
   outline-offset: 4px;
-  border-radius: 4px;
+  border-radius: 0;
 }
 
 /* ── Footer Link Buttons ── */

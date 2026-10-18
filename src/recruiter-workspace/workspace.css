@@ -1,0 +1,136 @@
+/* ==========================================================================
+   YOGYATA Recruiter Workspace Specific Styles
+   Clean, premium SaaS talent acquisition workspace with high-contrast tokens.
+   ========================================================================== */
+
+/* Recruiter Accent & Stage Badges */
+.badge-recruiter-hiring {
+  background: var(--color-blue-tint);
+  color: var(--color-blue);
+  border: 1px solid var(--color-blue-line);
+}
+
+.badge-sourced {
+  background: var(--color-surface-2);
+  color: var(--color-text-muted);
+  border: 1px solid var(--color-border-hover);
+}
+
+.badge-screening {
+  background: var(--color-blue-tint);
+  color: var(--color-blue-hover);
+  border: 1px solid var(--color-blue-line);
+}
+
+.badge-interview {
+  background: #FFFBEB;
+  color: #B45309;
+  border: 1px solid #FDE68A;
+}
+
+.badge-offer {
+  background: var(--color-blue-tint);
+  color: var(--color-blue-hover);
+  border: 1px solid var(--color-blue-line);
+}
+
+.badge-hired {
+  background: #ECFDF5;
+  color: #047857;
+  border: 1px solid #A7F3D0;
+}
+
+.badge-archived {
+  background: var(--color-bg);
+  color: var(--color-text-faint);
+  border: 1px solid var(--color-border);
+}
+
+/* Skill Passport Tiers */
+.tier-badge-verified {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.2rem 0.5rem;
+  border-radius: 0;
+  font-size: 0.72rem;
+  font-weight: 600;
+  background: #ECFDF5;
+  color: #065F46;
+  border: 1px solid #A7F3D0;
+}
+
+.tier-badge-assessed {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.2rem 0.5rem;
+  border-radius: 0;
+  font-size: 0.72rem;
+  font-weight: 600;
+  background: #FFFBEB;
+  color: #92400E;
+  border: 1px solid #FDE68A;
+}
+
+.tier-badge-declared {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.2rem 0.5rem;
+  border-radius: 0;
+  font-size: 0.72rem;
+  font-weight: 500;
+  background: var(--color-surface-2);
+  color: var(--color-text-muted);
+  border: 1px solid var(--color-border);
+}
+
+/* Pipeline Board Drag & Drop / Column Container */
+.pipeline-board-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+  align-items: flex-start;
+  overflow-x: auto;
+  padding-bottom: 1rem;
+}
+
+.pipeline-stage-column {
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 0;
+  padding: 0.875rem;
+  display: flex;
+  flex-direction: column;
+  min-height: 480px;
+}
+
+.pipeline-candidate-card {
+  background: #FFFFFF;
+  border: 1px solid var(--color-border);
+  border-radius: 0;
+  padding: 0.875rem;
+  margin-bottom: 0.75rem;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+}
+
+.pipeline-candidate-card:hover {
+  transform: translateY(-1px);
+  border-color: var(--color-border-hover);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.08);
+}
+
+/* Responsive Drawer Media Queries */
+@media (max-width: 900px) {
+  .recruiter-workspace-root aside {
+    display: none !important;
+  }
+  .recruiter-workspace-root aside[style*="fixed"] {
+    display: flex !important;
+  }
+  .recruiter-mobile-toggle-btn {
+    display: flex !important;
+  }
+}

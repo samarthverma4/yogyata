@@ -3,6 +3,7 @@ import type {
   FounderWorkspaceState,
   WorkspaceTab,
 } from '../types';
+import { sanitizeUrl } from '../storage';
 import type {
   StartupProfile,
   FounderProfile,
@@ -118,7 +119,7 @@ export const MyStartupTab: React.FC<MyStartupTabProps> = ({
   // Talent requirement helpers
   const handleAddRequirement = () => {
     const newReq: TalentRequirement = {
-      id: `req-${Date.now()}`,
+      id: `req-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`,
       roleTitle: 'Frontend Engineer',
       requiredSkills: ['React', 'TypeScript'],
       contributorsCount: '1',
@@ -207,7 +208,7 @@ export const MyStartupTab: React.FC<MyStartupTabProps> = ({
                 width: '64px',
                 height: '64px',
                 borderRadius: '12px',
-                background: 'linear-gradient(135deg, #1B2A4E 0%, #2D4373 100%)',
+                background: 'linear-gradient(135deg, var(--color-navy) 0%, #2D4373 100%)',
                 color: '#ffffff',
                 display: 'flex',
                 alignItems: 'center',
@@ -221,7 +222,7 @@ export const MyStartupTab: React.FC<MyStartupTabProps> = ({
             </div>
             <div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', flexWrap: 'wrap' }}>
-                <h2 style={{ fontSize: '1.5rem', fontWeight: 700, color: '#1B2A4E', margin: 0 }}>
+                <h2 style={{ fontSize: '1.5rem', fontWeight: 700, color: 'var(--color-navy)', margin: 0 }}>
                   {workspace.startup.startupName || 'Untitled Venture'}
                 </h2>
                 {workspace.startup.stage && (
@@ -231,7 +232,7 @@ export const MyStartupTab: React.FC<MyStartupTabProps> = ({
                   Team: {workspace.startup.teamSize || '1–5 members'}
                 </span>
               </div>
-              <p style={{ margin: '0.25rem 0 0 0', color: '#64748B', fontSize: '0.875rem' }}>
+              <p style={{ margin: '0.25rem 0 0 0', color: 'var(--color-text-muted)', fontSize: '0.875rem' }}>
                 {workspace.startup.industry || 'Technology / Software'} •{' '}
                 {workspace.startup.city
                   ? `${workspace.startup.city}, ${workspace.startup.country}`
@@ -246,13 +247,9 @@ export const MyStartupTab: React.FC<MyStartupTabProps> = ({
               <>
                 {workspace.startup.websiteUrl && (
                   <a
-                    href={
-                      workspace.startup.websiteUrl.startsWith('http')
-                        ? workspace.startup.websiteUrl
-                        : `https://${workspace.startup.websiteUrl}`
-                    }
+                    href={sanitizeUrl(workspace.startup.websiteUrl)}
                     target="_blank"
-                    rel="noreferrer"
+                    rel="noopener noreferrer"
                     className="yw-btn yw-btn-secondary"
                   >
                     <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor">
@@ -303,31 +300,31 @@ export const MyStartupTab: React.FC<MyStartupTabProps> = ({
           {/* Startup Overview */}
           <div className="yw-card">
             <h3 className="yw-card-title">Venture Mission & Bio</h3>
-            <p style={{ color: '#334155', lineHeight: 1.6, fontSize: '0.9375rem', marginTop: '0.5rem' }}>
+            <p style={{ color: 'var(--color-navy)', lineHeight: 1.6, fontSize: '0.9375rem', marginTop: '0.5rem' }}>
               {workspace.startup.description ||
                 'No startup description provided. Click "Edit Profile" to summarize your venture vision.'}
             </p>
 
-            <div style={{ marginTop: '1.25rem', paddingTop: '1rem', borderTop: '1px solid #E2E8F0' }}>
-              <h4 style={{ fontSize: '0.8125rem', textTransform: 'uppercase', color: '#64748B', fontWeight: 600 }}>
+            <div style={{ marginTop: '1.25rem', paddingTop: '1rem', borderTop: '1px solid var(--color-border)' }}>
+              <h4 style={{ fontSize: '0.8125rem', textTransform: 'uppercase', color: 'var(--color-text-muted)', fontWeight: 600 }}>
                 Operational Details
               </h4>
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem', marginTop: '0.5rem', fontSize: '0.875rem' }}>
                 <div>
-                  <span style={{ color: '#64748B' }}>Stage:</span>{' '}
-                  <strong style={{ color: '#1B2A4E' }}>{workspace.startup.stage || 'Not set'}</strong>
+                  <span style={{ color: 'var(--color-text-muted)' }}>Stage:</span>{' '}
+                  <strong style={{ color: 'var(--color-navy)' }}>{workspace.startup.stage || 'Not set'}</strong>
                 </div>
                 <div>
-                  <span style={{ color: '#64748B' }}>Team Size:</span>{' '}
-                  <strong style={{ color: '#1B2A4E' }}>{workspace.startup.teamSize || '1–5'}</strong>
+                  <span style={{ color: 'var(--color-text-muted)' }}>Team Size:</span>{' '}
+                  <strong style={{ color: 'var(--color-navy)' }}>{workspace.startup.teamSize || '1–5'}</strong>
                 </div>
                 <div>
-                  <span style={{ color: '#64748B' }}>Work Mode:</span>{' '}
-                  <strong style={{ color: '#1B2A4E' }}>{workspace.startup.workMode || 'Remote'}</strong>
+                  <span style={{ color: 'var(--color-text-muted)' }}>Work Mode:</span>{' '}
+                  <strong style={{ color: 'var(--color-navy)' }}>{workspace.startup.workMode || 'Remote'}</strong>
                 </div>
                 <div>
-                  <span style={{ color: '#64748B' }}>Industry:</span>{' '}
-                  <strong style={{ color: '#1B2A4E' }}>{workspace.startup.industry || 'Technology'}</strong>
+                  <span style={{ color: 'var(--color-text-muted)' }}>Industry:</span>{' '}
+                  <strong style={{ color: 'var(--color-navy)' }}>{workspace.startup.industry || 'Technology'}</strong>
                 </div>
               </div>
             </div>
@@ -342,8 +339,8 @@ export const MyStartupTab: React.FC<MyStartupTabProps> = ({
                   width: '48px',
                   height: '48px',
                   borderRadius: '50%',
-                  background: '#E2E8F0',
-                  color: '#1B2A4E',
+                  background: 'var(--color-border)',
+                  color: 'var(--color-navy)',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
@@ -354,20 +351,20 @@ export const MyStartupTab: React.FC<MyStartupTabProps> = ({
                 {(workspace.founder.fullName || 'F')[0]?.toUpperCase()}
               </div>
               <div>
-                <h4 style={{ margin: 0, fontSize: '1rem', color: '#1B2A4E', fontWeight: 600 }}>
+                <h4 style={{ margin: 0, fontSize: '1rem', color: 'var(--color-navy)', fontWeight: 600 }}>
                   {workspace.founder.fullName || 'Anonymous Founder'}
                 </h4>
-                <p style={{ margin: 0, color: '#64748B', fontSize: '0.875rem' }}>
+                <p style={{ margin: 0, color: 'var(--color-text-muted)', fontSize: '0.875rem' }}>
                   {workspace.founder.professionalTitle || 'Co-founder / Managing Partner'}
                 </p>
-                <p style={{ margin: 0, color: '#94A3B8', fontSize: '0.8125rem' }}>
+                <p style={{ margin: 0, color: 'var(--color-text-faint)', fontSize: '0.8125rem' }}>
                   {workspace.accountEmail}
                 </p>
               </div>
             </div>
 
             {workspace.founder.bio && (
-              <p style={{ marginTop: '1rem', color: '#475569', fontSize: '0.875rem', lineHeight: 1.5 }}>
+              <p style={{ marginTop: '1rem', color: 'var(--color-text-muted)', fontSize: '0.875rem', lineHeight: 1.5 }}>
                 {workspace.founder.bio}
               </p>
             )}
@@ -375,9 +372,9 @@ export const MyStartupTab: React.FC<MyStartupTabProps> = ({
             {workspace.founder.linkedInUrl && (
               <div style={{ marginTop: '0.75rem' }}>
                 <a
-                  href={workspace.founder.linkedInUrl}
+                  href={sanitizeUrl(workspace.founder.linkedInUrl)}
                   target="_blank"
-                  rel="noreferrer"
+                  rel="noopener noreferrer"
                   style={{ color: '#D97706', fontSize: '0.8125rem', fontWeight: 600, textDecoration: 'none' }}
                 >
                   LinkedIn Profile →
@@ -399,18 +396,18 @@ export const MyStartupTab: React.FC<MyStartupTabProps> = ({
               </button>
             </div>
 
-            <div style={{ background: '#F8FAFC', padding: '1rem', borderRadius: '8px', border: '1px solid #E2E8F0' }}>
+            <div style={{ background: 'var(--color-bg)', padding: '1rem', borderRadius: '8px', border: '1px solid var(--color-border)' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.5rem' }}>
                 <span className="yw-badge yw-badge-amber">Primary Objective</span>
-                <strong style={{ color: '#1B2A4E', fontSize: '1rem' }}>
+                <strong style={{ color: 'var(--color-navy)', fontSize: '1rem' }}>
                   {workspace.goals.primaryGoal || 'MVP Development & Market Validation'}
                 </strong>
               </div>
-              <p style={{ color: '#475569', fontSize: '0.875rem', lineHeight: 1.5, margin: '0.25rem 0' }}>
+              <p style={{ color: 'var(--color-text-muted)', fontSize: '0.875rem', lineHeight: 1.5, margin: '0.25rem 0' }}>
                 {workspace.goals.projectDescription ||
                   'Delivering core features and gathering pilot validation from prospective customers.'}
               </p>
-              <div style={{ display: 'flex', gap: '1.5rem', marginTop: '0.75rem', fontSize: '0.8125rem', color: '#64748B' }}>
+              <div style={{ display: 'flex', gap: '1.5rem', marginTop: '0.75rem', fontSize: '0.8125rem', color: 'var(--color-text-muted)' }}>
                 <span>
                   <strong>Category:</strong> {workspace.goals.projectCategory || 'Software / Web'}
                 </span>
@@ -418,9 +415,9 @@ export const MyStartupTab: React.FC<MyStartupTabProps> = ({
                   <span>
                     <strong>Specification:</strong>{' '}
                     <a
-                      href={workspace.goals.projectLink}
+                      href={sanitizeUrl(workspace.goals.projectLink)}
                       target="_blank"
-                      rel="noreferrer"
+                      rel="noopener noreferrer"
                       style={{ color: '#D97706' }}
                     >
                       {workspace.goals.projectLink}
@@ -470,14 +467,14 @@ export const MyStartupTab: React.FC<MyStartupTabProps> = ({
                     key={req.id}
                     style={{
                       background: '#FFFFFF',
-                      border: '1px solid #E2E8F0',
+                      border: '1px solid var(--color-border)',
                       borderRadius: '8px',
                       padding: '1.25rem',
                       boxShadow: '0 1px 3px rgba(0,0,0,0.04)',
                     }}
                   >
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-                      <h4 style={{ margin: 0, fontSize: '1rem', color: '#1B2A4E', fontWeight: 600 }}>
+                      <h4 style={{ margin: 0, fontSize: '1rem', color: 'var(--color-navy)', fontWeight: 600 }}>
                         {req.roleTitle}
                       </h4>
                       <span className="yw-badge yw-badge-blue">
@@ -493,22 +490,22 @@ export const MyStartupTab: React.FC<MyStartupTabProps> = ({
                       ))}
                     </div>
 
-                    <div style={{ borderTop: '1px solid #F1F5F9', paddingTop: '0.75rem', fontSize: '0.8125rem', color: '#64748B', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.375rem' }}>
+                    <div style={{ borderTop: '1px solid var(--color-surface-2)', paddingTop: '0.75rem', fontSize: '0.8125rem', color: 'var(--color-text-muted)', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.375rem' }}>
                       <div>
                         <span>Type:</span>{' '}
-                        <strong style={{ color: '#334155' }}>{req.engagementType}</strong>
+                        <strong style={{ color: 'var(--color-navy)' }}>{req.engagementType}</strong>
                       </div>
                       <div>
                         <span>Mode:</span>{' '}
-                        <strong style={{ color: '#334155' }}>{req.workArrangement}</strong>
+                        <strong style={{ color: 'var(--color-navy)' }}>{req.workArrangement}</strong>
                       </div>
                       <div>
                         <span>Compensation:</span>{' '}
-                        <strong style={{ color: '#334155' }}>{req.compensation}</strong>
+                        <strong style={{ color: 'var(--color-navy)' }}>{req.compensation}</strong>
                       </div>
                       <div>
                         <span>Experience:</span>{' '}
-                        <strong style={{ color: '#334155' }}>{req.experiencePreference}</strong>
+                        <strong style={{ color: 'var(--color-navy)' }}>{req.experiencePreference}</strong>
                       </div>
                     </div>
                   </div>
@@ -853,14 +850,14 @@ export const MyStartupTab: React.FC<MyStartupTabProps> = ({
                 <div
                   key={req.id}
                   style={{
-                    background: '#F8FAFC',
-                    border: '1px solid #E2E8F0',
+                    background: 'var(--color-bg)',
+                    border: '1px solid var(--color-border)',
                     borderRadius: '8px',
                     padding: '1rem',
                   }}
                 >
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.75rem' }}>
-                    <strong style={{ color: '#1B2A4E' }}>Role #{idx + 1}</strong>
+                    <strong style={{ color: 'var(--color-navy)' }}>Role #{idx + 1}</strong>
                     <button
                       type="button"
                       className="yw-btn yw-btn-danger yw-btn-sm"
@@ -1047,7 +1044,7 @@ export const MyStartupTab: React.FC<MyStartupTabProps> = ({
               padding: '1rem',
               background: '#FFFFFF',
               borderRadius: '8px',
-              border: '1px solid #E2E8F0',
+              border: '1px solid var(--color-border)',
             }}
           >
             <button

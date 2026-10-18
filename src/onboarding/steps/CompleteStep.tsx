@@ -7,11 +7,15 @@ import {
 interface CompleteStepProps {
   name: string;
   onExit: () => void;
+  actionLabel?: string;
+  onEnterWorkspace?: () => void;
 }
 
 export const CompleteStep: React.FC<CompleteStepProps> = ({
   name,
   onExit,
+  actionLabel = 'Return to YOGYATA Home',
+  onEnterWorkspace,
 }) => {
   const firstName = name.trim().split(' ')[0] || 'there';
 
@@ -56,7 +60,7 @@ export const CompleteStep: React.FC<CompleteStepProps> = ({
                 <h3 className="ob-roadmap-card-title">2. Take Skill Assessments</h3>
                 <p className="ob-roadmap-card-text">
                   Complete structured diagnostic evaluations to upgrade skills from DECLARED to{' '}
-                  <strong style={{ color: '#4F46E5' }}>ASSESSED</strong>.
+                  <strong style={{ color: 'var(--color-blue)' }}>ASSESSED</strong>.
                 </p>
               </div>
             </div>
@@ -99,14 +103,27 @@ export const CompleteStep: React.FC<CompleteStepProps> = ({
         </div>
 
         {/* Exit CTA */}
-        <div className="ob-complete-cta-wrap">
+        <div className="ob-complete-cta-wrap" style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', alignItems: 'center' }}>
+          {onEnterWorkspace && (
+            <button
+              type="button"
+              className="ob-btn-primary ob-complete-btn"
+              onClick={onEnterWorkspace}
+              id="btn-enter-job-seeker-workspace"
+              style={{ width: '100%', maxWidth: '360px' }}
+            >
+              <span>Enter Job Seeker Workspace</span>
+              <ArrowRight size={18} aria-hidden="true" />
+            </button>
+          )}
           <button
             type="button"
-            className="ob-btn-primary ob-complete-btn"
+            className={onEnterWorkspace ? "ob-btn-secondary ob-complete-btn" : "ob-btn-primary ob-complete-btn"}
             onClick={onExit}
             id="complete-return-home-btn"
+            style={{ width: '100%', maxWidth: '360px' }}
           >
-            <span>Return to YOGYATA Home</span>
+            <span>{actionLabel}</span>
             <ArrowRight size={18} aria-hidden="true" />
           </button>
         </div>

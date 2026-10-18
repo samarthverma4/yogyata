@@ -2,6 +2,8 @@ import React from 'react';
 import {
   Briefcase,
   Lightbulb,
+  GraduationCap,
+  Building2,
   ArrowRight,
 } from 'lucide-react';
 import { RoleCard } from './RoleCard';
@@ -11,23 +13,42 @@ const ROLES: RoleOption[] = [
   {
     id: 'job-seeker',
     title: 'Job Seeker',
+    badge: 'Talent',
     description:
-      'Showcase your skills, build your Skill Passport, and discover opportunities that match your capabilities.',
+      'Showcase your skills, build your Skill Passport, and explore opportunities that match your capabilities.',
     contextualAction: 'Continue as Job Seeker',
   },
   {
     id: 'founder',
-    title: 'Founder / Entrepreneur',
+    title: 'Entrepreneur',
     badge: 'Startup',
     description:
-      'Share project challenges, discover capable contributors, and build your next venture.',
-    contextualAction: 'Continue as Founder',
+      'Build your venture, manage projects, publish practical challenges, and discover contributors for your startup.',
+    contextualAction: 'Continue as Entrepreneur',
+  },
+  {
+    id: 'mentor',
+    title: 'Mentor',
+    badge: 'Guide',
+    description:
+      'Guide emerging professionals, manage mentorship relationships, and help people develop practical skills.',
+    contextualAction: 'Continue as Mentor',
+  },
+  {
+    id: 'recruiter',
+    title: 'Recruiter',
+    badge: 'Hiring',
+    description:
+      'Discover talent, evaluate Skill Passport evidence, manage interviews, and organize your hiring pipeline.',
+    contextualAction: 'Continue as Recruiter',
   },
 ];
 
 const ROLE_ICONS: Record<RoleId, React.ReactNode> = {
   'job-seeker': <Briefcase size={20} strokeWidth={1.75} />,
   founder: <Lightbulb size={20} strokeWidth={1.75} />,
+  mentor: <GraduationCap size={20} strokeWidth={1.75} />,
+  recruiter: <Building2 size={20} strokeWidth={1.75} />,
 };
 
 interface RoleSelectionPanelProps {
