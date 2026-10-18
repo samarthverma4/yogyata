@@ -217,10 +217,10 @@
 /* ── Step Card ───────────────────────────────────────────────────────────── */
 .founder-step-card {
   background: #FFFFFF;
-  border: 1px solid var(--color-border);
-  border-radius: 0;
-  padding: 2.25rem 2.5rem;
-  box-shadow: 0 4px 16px -2px rgba(15, 23, 42, 0.05), 0 2px 4px -1px rgba(15, 23, 42, 0.03);
+  border: 1px solid rgba(214, 222, 242, 0.85);
+  border-radius: var(--radius-xl, 18px);
+  padding: 2.5rem 2.75rem;
+  box-shadow: 0 4px 6px -1px rgba(15, 26, 68, 0.03), 0 20px 36px -6px rgba(15, 26, 68, 0.07);
   animation: recruiterFadeIn 0.22s ease-out;
 }
 
@@ -313,15 +313,22 @@
 .form-select,
 .form-textarea {
   width: 100%;
-  padding: 0.65rem 0.875rem;
-  background: var(--color-bg);
-  border: 1px solid var(--color-border-hover);
-  border-radius: 0;
-  font-size: 0.9375rem;
+  padding: 0.72rem 1rem;
+  background: #FFFFFF;
+  border: 1.5px solid #CBD5E1;
+  border-radius: var(--radius-md, 10px);
+  font-size: 0.95rem;
   color: var(--color-navy);
   font-family: inherit;
   transition: all 0.18s ease;
   line-height: 1.45;
+}
+
+.form-input:hover,
+.form-select:hover,
+.form-textarea:hover {
+  border-color: #94A3B8;
+  background: #F8FAFD;
 }
 
 .input-with-icon .form-input {
@@ -338,7 +345,7 @@
   outline: none;
   background: #FFFFFF;
   border-color: var(--color-blue);
-  box-shadow: 0 0 0 3px rgba(21, 128, 61, 0.15);
+  box-shadow: 0 0 0 4px rgba(53, 89, 223, 0.14);
 }
 
 .form-input.has-error,
@@ -351,7 +358,7 @@
 .form-input.has-error:focus,
 .form-select.has-error:focus,
 .form-textarea.has-error:focus {
-  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.15);
+  box-shadow: 0 0 0 4px rgba(220, 38, 38, 0.14);
 }
 
 .form-textarea {
@@ -658,12 +665,12 @@
 }
 
 .btn-primary {
-  background: var(--color-blue);
+  background: linear-gradient(180deg, #3559DF 0%, #2A4BC7 100%);
   color: #FFFFFF;
   border: none;
-  border-radius: 0;
-  padding: 0.65rem 1.25rem;
-  font-size: 0.875rem;
+  border-radius: var(--radius-md, 10px);
+  padding: 0.72rem 1.5rem;
+  font-size: 0.92rem;
   font-weight: 600;
   cursor: pointer;
   display: inline-flex;
@@ -671,12 +678,12 @@
   gap: 0.5rem;
   font-family: inherit;
   transition: all 0.18s ease;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2px 8px rgba(53, 89, 223, 0.28);
 }
 
 .btn-primary:hover {
-  background: var(--color-blue-hover);
-  box-shadow: 0 4px 12px -2px rgba(21, 128, 61, 0.25);
+  background: #2544B8;
+  box-shadow: 0 5px 16px rgba(53, 89, 223, 0.38);
   transform: translateY(-1px);
 }
 
@@ -686,11 +693,11 @@
 
 .btn-secondary {
   background: #FFFFFF;
-  color: var(--color-navy);
-  border: 1px solid var(--color-border-hover);
-  border-radius: 0;
-  padding: 0.65rem 1.15rem;
-  font-size: 0.875rem;
+  color: #334155;
+  border: 1.5px solid #E2E8F0;
+  border-radius: var(--radius-md, 10px);
+  padding: 0.72rem 1.25rem;
+  font-size: 0.92rem;
   font-weight: 600;
   cursor: pointer;
   display: inline-flex;
@@ -701,9 +708,9 @@
 }
 
 .btn-secondary:hover {
-  background: var(--color-bg);
-  border-color: var(--color-text-faint);
-  color: var(--color-navy);
+  background: #F8FAFC;
+  border-color: #CBD5E1;
+  color: #0F172A;
 }
 
 .btn-ghost {

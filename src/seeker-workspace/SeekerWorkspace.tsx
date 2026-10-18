@@ -18,6 +18,7 @@ import { RoadmapTab } from './tabs/RoadmapTab';
 import { OpportunitiesTab } from './tabs/OpportunitiesTab';
 import { MentorsTab } from './tabs/MentorsTab';
 import '../founder-workspace/workspace.css';
+import './seeker.css';
 
 const TITLES: Record<SeekerTab, { title: string; sub: string }> = {
   overview: { title: 'Overview', sub: 'Your Skill Passport, open tasks and submissions at a glance.' },

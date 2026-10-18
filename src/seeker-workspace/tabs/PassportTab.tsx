@@ -59,41 +59,53 @@ export function PassportTab({ userId, skills, reviews, onChanged }: Props) {
       <div className="ws-card">
         <h3 className="ws-card-title">How your passport is built</h3>
         <p className="ws-card-subtitle">
-          Every skill shows how it was proven. Founders and recruiters see the level, so reviewed work counts for more than a
-          claim.
+          Every skill shows how it was proven. Founders and recruiters see the level, so reviewed work counts for more than a claim.
         </p>
-        <ol className="yg-levels">
-          {(['declared', 'assessed', 'verified'] as SkillLevel[]).map((l) => (
-            <li key={l}>
-              <span className={`yw-skill-pill yw-skill-${l}`}>{LEVEL_LABEL[l]}</span>
-              <span>{LEVEL_HELP[l]}</span>
-            </li>
-          ))}
-        </ol>
+        <div className="sk-tier-grid">
+          <div className="sk-tier-card tier-declared">
+            <div className="sk-tier-head">
+              <span className="sk-tier-badge">Level 1 · Declared</span>
+            </div>
+            <p className="sk-tier-desc">{LEVEL_HELP.declared}</p>
+          </div>
+          <div className="sk-tier-card tier-assessed">
+            <div className="sk-tier-head">
+              <span className="sk-tier-badge">Level 2 · Assessed</span>
+            </div>
+            <p className="sk-tier-desc">{LEVEL_HELP.assessed}</p>
+          </div>
+          <div className="sk-tier-card tier-verified">
+            <div className="sk-tier-head">
+              <span className="sk-tier-badge">Level 3 · Verified</span>
+            </div>
+            <p className="sk-tier-desc">{LEVEL_HELP.verified}</p>
+          </div>
+        </div>
       </div>
 
-      <form className="ws-card" onSubmit={add} noValidate>
-        <h3 className="ws-card-title">Declare a skill</h3>
-        <div className="yg-inline-form">
-          <div className="yw-form-group">
-            <label className="yw-form-label" htmlFor="declare-name">
-              Skill
+      <form className="ws-card sk-declare-form" onSubmit={add} noValidate>
+        <h3 className="ws-card-title">Declare a new skill</h3>
+        <p className="ws-card-subtitle">Add skills you know to immediately match with live founder tasks.</p>
+        <div className="sk-declare-grid">
+          <div className="sk-input-group">
+            <label className="sk-input-label" htmlFor="declare-name">
+              Skill name
             </label>
             <input
               id="declare-name"
-              className="yw-form-input"
+              className="sk-input-field"
               value={name}
               maxLength={80}
               onChange={(e) => setName(e.target.value)}
-              placeholder="e.g. React, SQL, Figma"
+              placeholder="e.g. React, Next.js, Figma, Python, SQL"
             />
           </div>
-          <div className="yw-form-group">
-            <label className="yw-form-label" htmlFor="declare-category">
+          <div className="sk-input-group">
+            <label className="sk-input-label" htmlFor="declare-category">
               Category
             </label>
-            <select id="declare-category" className="yw-form-select" value={category} onChange={(e) => setCategory(e.target.value)}>
-              <option value="">Choose (optional)</option>
+            <select id="declare-category" className="sk-input-field" value={category} onChange={(e) => setCategory(e.target.value)}>
+              <option value="">Choose category</option>
               {CATEGORIES.map((c) => (
                 <option key={c} value={c}>
                   {c}
@@ -101,13 +113,13 @@ export function PassportTab({ userId, skills, reviews, onChanged }: Props) {
               ))}
             </select>
           </div>
-          <button type="submit" className="ob-btn-primary" disabled={busy || !name.trim()}>
+          <button type="submit" className="sk-hero-cta" disabled={busy || !name.trim()} style={{ height: '46px' }}>
             <Plus size={16} aria-hidden="true" />
-            <span>{busy ? 'Adding…' : 'Add skill'}</span>
+            <span>{busy ? 'Adding…' : 'Add to Passport'}</span>
           </button>
         </div>
         {error && (
-          <p className="yw-form-error" role="alert">
+          <p className="yw-form-error" role="alert" style={{ marginTop: '12px' }}>
             {error}
           </p>
         )}
@@ -117,59 +129,93 @@ export function PassportTab({ userId, skills, reviews, onChanged }: Props) {
         const list = skills.filter((s) => s.level === level);
         return (
           <section className="ws-card" key={level} aria-labelledby={`passport-${level}`}>
-            <div className="ws-card-header">
+            <div className="sk-section-header">
               <h3 className="ws-card-title" id={`passport-${level}`}>
-                {LEVEL_LABEL[level]} <span className="yg-count">{list.length}</span>
+                <span>{LEVEL_LABEL[level]} Skills</span>
+                <span className="sk-match-tag" style={{ marginLeft: '8px' }}>{list.length}</span>
               </h3>
             </div>
             {list.length === 0 ? (
-              <p className="ws-card-subtitle">
-                {level === 'verified'
-                  ? 'Submit work for a founder task. Skills the reviewer confirms move here.'
-                  : level === 'assessed'
-                    ? 'Ask a mentor to assess a declared skill. Skills they confirm move here.'
-                    : 'Add the skills you already have to get matched with tasks.'}
-              </p>
+              <div className="ws-empty-state" style={{ padding: '24px 16px' }}>
+                <p className="ws-empty-desc" style={{ marginBottom: 0 }}>
+                  {level === 'verified'
+                    ? 'Submit work for a founder task. Skills confirmed by reviewers move to Verified.'
+                    : level === 'assessed'
+                      ? 'Pass an interactive assessment or ask a mentor to evaluate a declared skill.'
+                      : 'Add the skills you already know to get matched with active startup problems.'}
+                </p>
+              </div>
             ) : (
-              <ul className="yg-skill-list">
+              <div className="sk-skill-chip-grid">
                 {list.map((s) => {
                   const review = latestReview.get(s.id);
                   const pending = review?.status === 'requested';
                   return (
-                    <li key={s.id} className={asking === s.id ? 'is-expanded' : undefined}>
-                      <span className={`yw-skill-pill yw-skill-${s.level}`}>
-                        {level === 'verified' && <BadgeCheck size={13} aria-hidden="true" />}
-                        {s.skill_name}
-                      </span>
-                      <span className="yg-skill-meta">
-                        {[s.category, s.evidence, formatDate(s.created_at)].filter(Boolean).join(' · ')}
-                        {s.level === 'declared' && review?.status === 'declined' && review.feedback && (
-                          <span className="yg-mentor-note">Mentor feedback: “{review.feedback}”</span>
-                        )}
-                      </span>
-                      {s.level === 'declared' && (
-                        <span className="yg-skill-actions">
-                          {pending ? (
-                            <>
-                              <span className="yw-badge yw-badge-amber">Mentor review requested</span>
-                              <button type="button" className="ob-inline-link-btn" onClick={() => cancel(review)}>
-                                Cancel
-                              </button>
-                            </>
+                    <div key={s.id} className="sk-skill-card-item">
+                      <div className="sk-skill-card-main">
+                        <div className="sk-skill-name-badge">
+                          {level === 'verified' ? (
+                            <BadgeCheck size={18} color="#059669" aria-hidden="true" />
+                          ) : level === 'assessed' ? (
+                            <span style={{ color: '#2545C6', fontWeight: 800 }}>⚡</span>
                           ) : (
-                            asking !== s.id && (
-                              <button type="button" className="ob-inline-link-btn" onClick={() => setAsking(s.id)}>
-                                <GraduationCap size={14} aria-hidden="true" /> {review ? 'Ask again' : 'Ask a mentor'}
-                              </button>
-                            )
+                            <span style={{ color: '#D97706', fontWeight: 800 }}>💡</span>
                           )}
-                          {!pending && (
-                            <button type="button" className="yg-icon-btn" onClick={() => remove(s)} aria-label={`Remove ${s.skill_name}`}>
+                          <span>{s.skill_name}</span>
+                        </div>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                          {s.category && <span className="sk-category-pill">{s.category}</span>}
+                          {s.level === 'declared' && !pending && (
+                            <button
+                              type="button"
+                              className="sk-delete-skill-btn"
+                              onClick={() => remove(s)}
+                              aria-label={`Remove ${s.skill_name}`}
+                              title="Delete skill"
+                            >
                               <X size={15} />
                             </button>
                           )}
-                        </span>
+                        </div>
+                      </div>
+
+                      <div className="sk-skill-meta-tags">
+                        <span>{[s.evidence || 'Self-declared', formatDate(s.created_at)].filter(Boolean).join(' · ')}</span>
+                      </div>
+
+                      {s.level === 'declared' && review?.status === 'declined' && review.feedback && (
+                        <div className="yg-feedback" style={{ fontSize: '0.8rem', borderRadius: '8px', padding: '8px 10px' }}>
+                          Mentor feedback: “{review.feedback}”
+                        </div>
                       )}
+
+                      {s.level === 'declared' && (
+                        <div style={{ marginTop: '4px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '8px' }}>
+                          {pending ? (
+                            <span className="sk-status-badge status-under_review">
+                              <span className="sk-status-dot" aria-hidden="true" />
+                              Mentor review pending
+                            </span>
+                          ) : (
+                            asking !== s.id && (
+                              <button
+                                type="button"
+                                className="ob-inline-link-btn"
+                                onClick={() => setAsking(s.id)}
+                                style={{ display: 'inline-flex', alignItems: 'center', gap: '4px', fontSize: '0.82rem' }}
+                              >
+                                <GraduationCap size={14} aria-hidden="true" /> {review ? 'Re-request mentor' : 'Request mentor review'}
+                              </button>
+                            )
+                          )}
+                          {pending && (
+                            <button type="button" className="ob-inline-link-btn" onClick={() => cancel(review)} style={{ fontSize: '0.8rem' }}>
+                              Cancel request
+                            </button>
+                          )}
+                        </div>
+                      )}
+
                       {asking === s.id && (
                         <AskMentorForm
                           skill={s}
@@ -183,10 +229,10 @@ export function PassportTab({ userId, skills, reviews, onChanged }: Props) {
                           }}
                         />
                       )}
-                    </li>
+                    </div>
                   );
                 })}
-              </ul>
+              </div>
             )}
           </section>
         );

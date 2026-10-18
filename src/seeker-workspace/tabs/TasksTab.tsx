@@ -35,18 +35,22 @@ export function TasksTab({ tasks, submissions, passportNames, onOpen }: Props) {
         <div className="yg-search">
           <Search size={16} aria-hidden="true" />
           <input
-            className="yw-form-input"
             type="search"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search by skill, startup or keyword"
+            placeholder="Search by skill, startup, role or keyword…"
             aria-label="Search tasks"
           />
         </div>
-        <label className="yg-check">
-          <input type="checkbox" checked={matchOnly} onChange={(e) => setMatchOnly(e.target.checked)} />
-          <span>Only tasks that use my skills</span>
-        </label>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '14px', flexWrap: 'wrap' }}>
+          <label className="sk-filter-pill-toggle">
+            <input type="checkbox" checked={matchOnly} onChange={(e) => setMatchOnly(e.target.checked)} />
+            <span>Only tasks matching my skills</span>
+          </label>
+          <span style={{ fontSize: '0.84rem', fontWeight: 700, color: '#64748B' }}>
+            {shown.length} {shown.length === 1 ? 'task' : 'tasks'}
+          </span>
+        </div>
       </div>
 
       {shown.length === 0 ? (
@@ -54,8 +58,8 @@ export function TasksTab({ tasks, submissions, passportNames, onOpen }: Props) {
           <h4 className="ws-empty-title">{tasks.length === 0 ? 'No open tasks yet' : 'No tasks match your search'}</h4>
           <p className="ws-empty-desc">
             {tasks.length === 0
-              ? 'When founders publish problems, they appear here for you to solve.'
-              : 'Try another keyword, or turn off the skills filter.'}
+              ? 'When founders publish problems, they appear here for you to solve and turn into verified proof.'
+              : 'Try another keyword, or turn off the skills filter to see all active startup challenges.'}
           </p>
         </div>
       ) : (
@@ -65,34 +69,47 @@ export function TasksTab({ tasks, submissions, passportNames, onOpen }: Props) {
             const match = skillMatch(t, passportNames);
             return (
               <li key={t.id}>
-                <button type="button" className="ws-card yg-task-card" onClick={() => onOpen(t)}>
-                  <span className="yg-eyebrow">{t.org_name || 'Founder task'}</span>
-                  <span className="yg-task-title">{t.title}</span>
-                  <span className="yg-task-summary">{t.problem_statement}</span>
-                  <span className="yg-pill-row">
-                    {t.required_skills.slice(0, 5).map((s) => (
-                      <span
-                        key={s}
-                        className={`yw-skill-pill ${passportNames.has(normalise(s)) ? 'yw-skill-verified' : 'yw-skill-declared'}`}
-                      >
-                        {s}
-                      </span>
-                    ))}
-                  </span>
-                  <span className="yg-task-foot">
-                    <span>{COMPENSATION_LABEL[t.compensation]}</span>
-                    {t.deadline && (
-                      <span>
-                        <CalendarDays size={14} aria-hidden="true" /> {formatDate(t.deadline)}
+                <button type="button" className="yg-task-card" onClick={() => onOpen(t)}>
+                  <div>
+                    <div className="sk-task-card-head">
+                      <span className="sk-task-org-tag">{t.org_name || 'Founder task'}</span>
+                      {t.deadline && (
+                        <span style={{ fontSize: '0.76rem', color: '#64748B', display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
+                          <CalendarDays size={13} aria-hidden="true" /> Due {formatDate(t.deadline)}
+                        </span>
+                      )}
+                    </div>
+                    <h3 className="yg-task-title">{t.title}</h3>
+                    <p className="yg-task-summary">{t.problem_statement}</p>
+                    <div className="yg-pill-row">
+                      {t.required_skills.slice(0, 5).map((s) => {
+                        const isMatch = passportNames.has(normalise(s));
+                        return (
+                          <span key={s} className={isMatch ? 'sk-skill-chip-match' : 'sk-skill-chip-unmatch'}>
+                            {isMatch ? `✓ ${s}` : s}
+                          </span>
+                        );
+                      })}
+                    </div>
+                  </div>
+
+                  <div className="yg-task-foot">
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
+                      <span className="sk-task-reward-chip">{COMPENSATION_LABEL[t.compensation]}</span>
+                      {t.required_skills.length > 0 && (
+                        <span className="sk-match-tag">
+                          {match}/{t.required_skills.length} match
+                        </span>
+                      )}
+                    </div>
+                    {mine ? (
+                      <StatusBadge status={mine.status} />
+                    ) : (
+                      <span className="yg-go">
+                        Solve task <ArrowRight size={14} aria-hidden="true" />
                       </span>
                     )}
-                    {t.required_skills.length > 0 && (
-                      <span>
-                        {match} of {t.required_skills.length} skills in your passport
-                      </span>
-                    )}
-                    {mine ? <StatusBadge status={mine.status} /> : <span className="yg-go">View task <ArrowRight size={14} aria-hidden="true" /></span>}
-                  </span>
+                  </div>
                 </button>
               </li>
             );

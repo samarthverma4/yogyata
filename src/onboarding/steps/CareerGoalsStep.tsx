@@ -1,26 +1,31 @@
 import React, { useState } from 'react';
 import type { CareerGoalsData } from '../types';
 import {
-  StepWrapper, StepHeader, FieldGroup, TextInput, SelectInput,
-  FormNav, SectionDivider, InfoNotice,
+  StepWrapper, StepHeader, FieldGroup, TextInput,
+  FormNav, InfoNotice,
 } from '../shared';
-import { Plus, X, Target } from 'lucide-react';
+import {
+  Plus, X, Target, Code, Server, Palette,
+  Smartphone, BarChart3, Cloud, Briefcase, Sparkles, Check,
+} from 'lucide-react';
 
-const COMMON_ROLES = [
-  'Frontend Developer',
-  'Backend Developer',
-  'Full-Stack Developer',
-  'Mobile App Developer (iOS / Android)',
-  'UI/UX Designer',
-  'Product Manager',
-  'Data Analyst / Data Scientist',
-  'DevOps & Cloud Engineer',
-  'QA & Test Automation Engineer',
-  'AI / Machine Learning Engineer',
-  'Digital Marketing Specialist',
-  'Business Analyst',
-  'Cybersecurity Analyst',
-  'Other',
+interface RoleOption {
+  value: string;
+  label: string;
+  icon: React.ComponentType<{ size?: number; className?: string }>;
+}
+
+const POPULAR_TARGET_ROLES: RoleOption[] = [
+  { value: 'Full-Stack Developer', label: 'Full-Stack Developer', icon: Code },
+  { value: 'Frontend Developer', label: 'Frontend Developer', icon: Sparkles },
+  { value: 'Backend Developer', label: 'Backend Developer', icon: Server },
+  { value: 'UI/UX Designer', label: 'UI/UX Designer', icon: Palette },
+  { value: 'Mobile App Developer (iOS / Android)', label: 'Mobile App Developer', icon: Smartphone },
+  { value: 'AI / Machine Learning Engineer', label: 'AI / ML Engineer', icon: Sparkles },
+  { value: 'Data Analyst / Data Scientist', label: 'Data Analyst / Scientist', icon: BarChart3 },
+  { value: 'DevOps & Cloud Engineer', label: 'DevOps & Cloud', icon: Cloud },
+  { value: 'Product Manager', label: 'Product Manager', icon: Briefcase },
+  { value: 'other', label: 'Other Specialization', icon: Plus },
 ];
 
 const SUGGESTED_ADDITIONAL_ROLES = [
@@ -128,82 +133,134 @@ export const CareerGoalsStep: React.FC<CareerGoalsStepProps> = ({
   return (
     <StepWrapper>
       <StepHeader
-        eyebrow="Step 4 of 5 — Career Goals"
+        eyebrow="Step 4 of 5 · Career Goals"
         heading="Define your target roles."
-        subheading="Tell us what you are aiming for so YOGYATA can map relevant skill benchmarks and challenges."
+        subheading="Tell us what you are aiming for so YOGYATA can map relevant skill benchmarks, startup tasks, and assessment challenges."
       />
 
       <InfoNotice variant="info">
-        <strong>Skill Benchmarking:</strong> Selecting target roles allows YOGYATA
-        to compare your declared skills against ecosystem benchmarks and suggest
-        targeted assessments.
+        <strong>Skill Benchmarking:</strong> Selecting target roles allows YOGYATA to compare your declared skills against ecosystem benchmarks and suggest targeted assessments.
       </InfoNotice>
 
-      <div className="ob-form">
-        <SectionDivider title="Primary Target Role" />
+      {/* ── CARD 1: Primary Target Role ── */}
+      <div className="ob-section-box">
+        <div className="ob-section-box-header">
+          <div className="ob-section-box-title-group">
+            <div className="ob-icon-badge" aria-hidden="true">
+              <Target size={20} />
+            </div>
+            <div>
+              <h2 className="ob-section-box-title">Primary Target Role</h2>
+              <p className="ob-section-box-sub">Choose your main aspiration for skill benchmark matching</p>
+            </div>
+          </div>
+          <span className="ob-pill-badge">Required</span>
+        </div>
 
-        <FieldGroup
-          label="Primary target role"
-          htmlFor="primary-role-select"
-          required
-          hint="This is the main role you want opportunities and skill assessments tailored for."
-          error={errors.primaryRole}
-        >
-          <SelectInput
-            inputId="primary-role-select"
-            value={data.primaryRole}
-            onChange={(e) => setPrimaryRole(e.target.value)}
-            error={errors.primaryRole}
-          >
-            <option value="">Select your primary target role</option>
-            {COMMON_ROLES.map((r) => (
-              <option key={r} value={r === 'Other' ? 'other' : r}>
-                {r}
-              </option>
-            ))}
-          </SelectInput>
-        </FieldGroup>
+        <div className="ob-field-group">
+          <label className="ob-label">
+            Select your primary role
+            <span className="ob-required-star" aria-hidden="true"> *</span>
+          </label>
+          <div className="ob-status-grid" role="radiogroup" aria-label="Primary target role">
+            {POPULAR_TARGET_ROLES.map((item) => {
+              const Icon = item.icon;
+              const isActive = data.primaryRole === item.value;
+              return (
+                <button
+                  key={item.value}
+                  type="button"
+                  role="radio"
+                  aria-checked={isActive}
+                  className={`ob-status-card ${isActive ? 'is-active' : ''}`}
+                  onClick={() => setPrimaryRole(item.value)}
+                >
+                  <div className="ob-status-card-top">
+                    <div className="ob-status-card-icon" aria-hidden="true">
+                      <Icon size={18} />
+                    </div>
+                    <div className="ob-status-check" aria-hidden="true">
+                      <Check size={12} strokeWidth={3} />
+                    </div>
+                  </div>
+                  <div className="ob-status-card-title">{item.label}</div>
+                  <div className="ob-status-card-desc">
+                    {item.value === 'other' ? 'Custom title' : 'Benchmarked role'}
+                  </div>
+                </button>
+              );
+            })}
+          </div>
+          {errors.primaryRole && (
+            <p className="ob-field-error" role="alert">{errors.primaryRole}</p>
+          )}
+        </div>
 
         {data.primaryRole === 'other' && (
-          <FieldGroup
-            label="Specify your target role"
-            htmlFor="custom-primary-role"
-            required
-            error={errors.customPrimaryRole}
-          >
-            <TextInput
-              inputId="custom-primary-role"
-              type="text"
-              placeholder="e.g. Solutions Architect, Growth Hacker"
-              value={data.customPrimaryRole}
-              onChange={(e) => setCustomPrimaryRole(e.target.value)}
+          <div style={{ marginTop: '16px' }}>
+            <FieldGroup
+              label="Specify your target role title"
+              htmlFor="custom-primary-role"
+              required
               error={errors.customPrimaryRole}
-            />
-          </FieldGroup>
+            >
+              <div className="ob-input-icon-left">
+                <span className="ob-field-left-icon" aria-hidden="true">
+                  <Target size={17} />
+                </span>
+                <TextInput
+                  inputId="custom-primary-role"
+                  type="text"
+                  placeholder="e.g. Solutions Architect, Growth Hacker, Security Engineer"
+                  value={data.customPrimaryRole}
+                  onChange={(e) => setCustomPrimaryRole(e.target.value)}
+                  error={errors.customPrimaryRole}
+                />
+              </div>
+            </FieldGroup>
+          </div>
         )}
+      </div>
 
-        <SectionDivider title="Secondary / Additional Roles (Optional)" />
+      {/* ── CARD 2: Additional Secondary Roles ── */}
+      <div className="ob-section-box">
+        <div className="ob-section-box-header">
+          <div className="ob-section-box-title-group">
+            <div className="ob-icon-badge" aria-hidden="true">
+              <Sparkles size={20} />
+            </div>
+            <div>
+              <h2 className="ob-section-box-title">Secondary / Additional Roles</h2>
+              <p className="ob-section-box-sub">Add up to 3 cross-functional or backup roles you'd consider (Optional)</p>
+            </div>
+          </div>
+        </div>
 
         <FieldGroup
-          label="Additional target roles (up to 3)"
+          label="Add an additional target role"
           htmlFor="additional-role-input"
-          hint="Secondary roles you would also consider or want to prepare for."
+          hint="Press Enter or click Add to append to your target list."
           error={errors.additionalRole}
         >
           <div className="ob-inline-input-action">
-            <TextInput
-              inputId="additional-role-input"
-              type="text"
-              placeholder="e.g. Technical Lead, DevOps Specialist"
-              value={customAddRole}
-              onChange={(e) => setCustomAddRole(e.target.value)}
-              onKeyDown={(e) => {
-                if (e.key === 'Enter') {
-                  e.preventDefault();
-                  addAdditionalRole(customAddRole);
-                }
-              }}
-            />
+            <div className="ob-input-icon-left" style={{ flex: 1 }}>
+              <span className="ob-field-left-icon" aria-hidden="true">
+                <Target size={17} />
+              </span>
+              <TextInput
+                inputId="additional-role-input"
+                type="text"
+                placeholder="e.g. Technical Lead, DevOps Specialist"
+                value={customAddRole}
+                onChange={(e) => setCustomAddRole(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter') {
+                    e.preventDefault();
+                    addAdditionalRole(customAddRole);
+                  }
+                }}
+              />
+            </div>
             <button
               type="button"
               className="ob-btn-primary ob-inline-add-btn"
@@ -217,35 +274,31 @@ export const CareerGoalsStep: React.FC<CareerGoalsStepProps> = ({
           </div>
         </FieldGroup>
 
-        {/* Quick select suggestions */}
-        <div className="ob-suggested-roles">
-          <p className="ob-suggested-title">Quick suggestions:</p>
-          <div className="ob-suggested-chips">
-            {SUGGESTED_ADDITIONAL_ROLES.map((r) => {
-              const isPrimary =
-                (data.primaryRole === 'other' ? data.customPrimaryRole : data.primaryRole).toLowerCase() ===
-                r.toLowerCase();
-              const isSelected = data.additionalRoles.some((ar) => ar.toLowerCase() === r.toLowerCase());
-              return (
-                <button
-                  key={r}
-                  type="button"
-                  className={`ob-suggestion-chip ${isSelected ? 'is-selected' : ''}`}
-                  disabled={isPrimary || isSelected}
-                  onClick={() => addAdditionalRole(r)}
-                  aria-label={`Add suggested role: ${r}`}
-                >
-                  <Plus size={12} aria-hidden="true" />
-                  <span>{r}</span>
-                </button>
-              );
-            })}
-          </div>
+        {/* Quick Suggestions */}
+        <div className="ob-preset-group" style={{ marginTop: '12px' }}>
+          <span className="ob-preset-label">Quick suggestions:</span>
+          {SUGGESTED_ADDITIONAL_ROLES.map((r) => {
+            const isPrimary =
+              (data.primaryRole === 'other' ? data.customPrimaryRole : data.primaryRole).toLowerCase() ===
+              r.toLowerCase();
+            const isSelected = data.additionalRoles.some((ar) => ar.toLowerCase() === r.toLowerCase());
+            return (
+              <button
+                key={r}
+                type="button"
+                className={`ob-preset-pill ${isSelected ? 'is-selected' : ''}`}
+                disabled={isPrimary || isSelected}
+                onClick={() => addAdditionalRole(r)}
+              >
+                + {r}
+              </button>
+            );
+          })}
         </div>
 
-        {/* Selected additional roles list */}
+        {/* Selected Roles List */}
         {data.additionalRoles.length > 0 && (
-          <div className="ob-selected-roles-wrap">
+          <div className="ob-selected-roles-wrap" style={{ marginTop: '16px' }}>
             <p className="ob-selected-roles-label">Selected secondary roles:</p>
             <ul className="ob-selected-roles-list">
               {data.additionalRoles.map((role) => (

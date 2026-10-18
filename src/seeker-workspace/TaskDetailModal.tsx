@@ -72,10 +72,10 @@ export function TaskDetailModal({ userId, task, submission, passportNames, onClo
         aria-labelledby={`${uid}-title`}
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="yw-modal-header">
+        <div className="yw-modal-header" style={{ padding: '22px 28px', borderBottom: '1px solid #E2E8F0' }}>
           <div>
-            <p className="yg-eyebrow">{task.org_name || 'Founder task'}{task.project_title ? ` · ${task.project_title}` : ''}</p>
-            <h2 className="yw-modal-title" id={`${uid}-title`}>
+            <span className="sk-task-org-tag">{task.org_name || 'Founder task'}{task.project_title ? ` · ${task.project_title}` : ''}</span>
+            <h2 className="yw-modal-title" id={`${uid}-title`} style={{ marginTop: '8px' }}>
               {task.title}
             </h2>
           </div>
@@ -84,73 +84,89 @@ export function TaskDetailModal({ userId, task, submission, passportNames, onClo
           </button>
         </div>
 
-        <div className="yw-modal-body yg-task-detail">
-          <div className="yg-task-facts">
-            <span>
-              <Gift size={15} aria-hidden="true" /> {COMPENSATION_LABEL[task.compensation]}
+        <div className="yw-modal-body yg-task-detail" style={{ padding: '24px 28px' }}>
+          <div className="yg-task-facts" style={{ gap: '10px' }}>
+            <span className="sk-task-reward-chip" style={{ background: '#F1F5F9', padding: '6px 12px', borderRadius: '8px' }}>
+              <Gift size={15} aria-hidden="true" color="#3559DF" /> {COMPENSATION_LABEL[task.compensation]}
               {task.reward_details ? `: ${task.reward_details}` : ''}
             </span>
             {task.deadline && (
-              <span>
-                <CalendarDays size={15} aria-hidden="true" /> Due {formatDate(task.deadline)}
+              <span style={{ background: '#F1F5F9', padding: '6px 12px', borderRadius: '8px', color: '#475569', fontWeight: 600 }}>
+                <CalendarDays size={15} aria-hidden="true" color="#64748B" /> Due {formatDate(task.deadline)}
               </span>
             )}
           </div>
 
           {task.required_skills.length > 0 && (
-            <div className="yg-pill-row" aria-label="Required skills">
-              {task.required_skills.map((s) => (
-                <span key={s} className={`yw-skill-pill ${passportNames.has(normalise(s)) ? 'yw-skill-verified' : 'yw-skill-declared'}`}>
-                  {s}
-                </span>
-              ))}
+            <div style={{ marginTop: '4px' }}>
+              <p style={{ fontSize: '0.78rem', fontWeight: 700, textTransform: 'uppercase', color: '#64748B', letterSpacing: '0.05em', marginBottom: '8px' }}>
+                Required skills
+              </p>
+              <div className="yg-pill-row" aria-label="Required skills">
+                {task.required_skills.map((s) => {
+                  const isMatch = passportNames.has(normalise(s));
+                  return (
+                    <span key={s} className={isMatch ? 'sk-skill-chip-match' : 'sk-skill-chip-unmatch'}>
+                      {isMatch ? `✓ ${s} (in your passport)` : s}
+                    </span>
+                  );
+                })}
+              </div>
             </div>
           )}
 
-          <Section title="Problem">{task.problem_statement}</Section>
-          <Section title="What to deliver">{task.expected_deliverable}</Section>
-          <Section title="How it will be judged">{task.evaluation_criteria}</Section>
+          <div style={{ display: 'grid', gap: '14px', margin: '8px 0' }}>
+            <Section title="Problem statement">{task.problem_statement}</Section>
+            <Section title="Expected deliverable">{task.expected_deliverable}</Section>
+            <Section title="Evaluation criteria">{task.evaluation_criteria}</Section>
+          </div>
 
-          <hr className="yg-rule" />
+          <hr className="yg-rule" style={{ margin: '14px 0' }} />
 
           {submission && (
-            <div className="yg-submission-state">
-              <StatusBadge status={submission.status} />
-              <span>Submitted {formatDate(submission.created_at)}</span>
-              {submission.feedback && <p className="yg-feedback">“{submission.feedback}”</p>}
+            <div style={{ background: '#F8FAFD', border: '1px solid #E2E8F0', borderRadius: '12px', padding: '16px 20px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '10px' }}>
+                <StatusBadge status={submission.status} />
+                <span style={{ fontSize: '0.82rem', color: '#64748B' }}>Submitted {formatDate(submission.created_at)}</span>
+              </div>
+              {submission.feedback && (
+                <div style={{ background: '#EFF6FF', border: '1px solid #BFDBFE', borderRadius: '8px', padding: '10px 14px', fontSize: '0.88rem', color: '#1E40AF', marginTop: '6px' }}>
+                  <strong>Reviewer feedback:</strong> “{submission.feedback}”
+                </div>
+              )}
             </div>
           )}
 
           {editable ? (
-            <form className="yg-submit-form" onSubmit={save} noValidate>
-              <h3 className="yg-form-title">{submission ? 'Update your submission' : 'Submit your work'}</h3>
+            <form className="yg-submit-form" onSubmit={save} noValidate style={{ marginTop: '8px' }}>
+              <h3 className="ws-card-title" style={{ fontSize: '1.1rem' }}>{submission ? 'Update your submission' : 'Submit your solution'}</h3>
               <div className="yw-form-group">
-                <label className="yw-form-label" htmlFor={`${uid}-url`}>
-                  Link to your work
+                <label className="sk-input-label" htmlFor={`${uid}-url`}>
+                  Live deliverable URL (GitHub repo or deployed link)
                 </label>
                 <input
                   id={`${uid}-url`}
-                  className="yw-form-input"
+                  className="sk-input-field"
                   type="url"
                   inputMode="url"
                   value={url}
                   onChange={(e) => setUrl(e.target.value)}
-                  placeholder="https://github.com/you/solution"
+                  placeholder="https://github.com/your-username/project-repo"
                   aria-invalid={error ? true : undefined}
                 />
               </div>
               <div className="yw-form-group">
-                <label className="yw-form-label" htmlFor={`${uid}-notes`}>
+                <label className="sk-input-label" htmlFor={`${uid}-notes`}>
                   Notes for the reviewer (optional)
                 </label>
                 <textarea
                   id={`${uid}-notes`}
-                  className="yw-form-textarea"
+                  className="sk-input-field"
                   rows={4}
                   maxLength={4000}
                   value={notes}
                   onChange={(e) => setNotes(e.target.value)}
-                  placeholder="What you built, choices you made, and how to run it."
+                  placeholder="Key decisions, architecture choices, how to run or test the deliverable."
                 />
               </div>
               {error && (
@@ -159,17 +175,17 @@ export function TaskDetailModal({ userId, task, submission, passportNames, onClo
                 </p>
               )}
               {done && (
-                <p className="yg-done" role="status">
-                  {done}
-                </p>
+                <div style={{ background: '#ECFDF5', border: '1px solid #A7F3D0', color: '#047857', padding: '10px 14px', borderRadius: '8px', fontWeight: 600, fontSize: '0.9rem' }} role="status">
+                  ✓ {done}
+                </div>
               )}
-              <div className="yg-form-actions">
+              <div className="yg-form-actions" style={{ marginTop: '10px' }}>
                 {submission?.status === 'submitted' && (
                   <button type="button" className="ob-btn-secondary" onClick={withdraw} disabled={busy}>
-                    Withdraw
+                    Withdraw submission
                   </button>
                 )}
-                <button type="submit" className="ob-btn-primary" disabled={busy}>
+                <button type="submit" className="sk-hero-cta" disabled={busy}>
                   <Send size={15} aria-hidden="true" />
                   <span>{busy ? 'Saving…' : submission ? 'Update submission' : 'Submit work'}</span>
                 </button>

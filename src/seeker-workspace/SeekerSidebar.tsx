@@ -96,14 +96,14 @@ export function SeekerSidebar({
         <div className="ws-sidebar-footer">
           <div className="ws-user-card">
             <div className="ws-user-avatar">
-              <User size={16} />
+              {fullName.trim() ? fullName.trim().charAt(0).toUpperCase() : <User size={16} />}
             </div>
             <div style={{ minWidth: 0 }}>
               <div className="ws-user-name" title={fullName}>
-                {fullName}
+                {fullName || 'Job Seeker'}
               </div>
-              <div className="ws-user-role" title={headline || 'Seeker'}>
-                {headline || 'Seeker'}
+              <div className="ws-user-role" title={headline || 'Active Seeker'}>
+                {headline || 'Active Seeker'}
               </div>
             </div>
           </div>
