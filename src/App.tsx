@@ -2,6 +2,7 @@ import React, { useCallback, useState, useEffect } from 'react';
 import './index.css';
 import { Navbar } from './components/Navbar';
 import { HeroSection } from './components/HeroSection';
+import { InterviewArena } from './components/UnstopInterviewArena/InterviewArena';
 import { Notification } from './components/Notification';
 import { Modal } from './components/Modal';
 import { AdminSignInModal } from './components/AdminSignInModal';
@@ -121,6 +122,9 @@ function App() {
     content: React.ReactNode;
   } | null>(null);
   const [showAdminSignIn, setShowAdminSignIn] = useState(false);
+  const [isArenaOpen, setIsArenaOpen] = useState(false);
+  const [arenaCandidate, setArenaCandidate] = useState('Riddhima Sharma');
+  const [arenaRole, setArenaRole] = useState('Full Stack Engineer');
   const [inJobSeekerOnboarding, setInJobSeekerOnboarding] = useState(false);
   const [inFounderOnboarding, setInFounderOnboarding] = useState(false);
   const [inFounderWorkspace, setInFounderWorkspace] = useState(() => {
@@ -505,10 +509,23 @@ function App() {
   // Recruiter Workspace View
   if (inRecruiterWorkspace && existingRecruiterWorkspace) {
     return (
-      <RecruiterWorkspace
-        initialWorkspace={existingRecruiterWorkspace}
-        onExitToHome={handleExitRecruiterWorkspace}
-      />
+      <>
+        <RecruiterWorkspace
+          initialWorkspace={existingRecruiterWorkspace}
+          onExitToHome={handleExitRecruiterWorkspace}
+          onLaunchAIArena={(candidateName, role) => {
+            setArenaCandidate(candidateName);
+            setArenaRole(role);
+            setIsArenaOpen(true);
+          }}
+        />
+        <InterviewArena
+          isOpen={isArenaOpen}
+          onClose={() => setIsArenaOpen(false)}
+          initialCandidateName={arenaCandidate}
+          initialRole={arenaRole}
+        />
+      </>
     );
   }
 
@@ -759,6 +776,7 @@ function App() {
         onSignInClick={handleSignIn}
         onHowItWorksClick={handleHowItWorks}
         onEcosystemClick={handleEcosystem}
+        onOpenArena={() => setIsArenaOpen(true)}
       />
 
       {/* B. Main Hero Section (Two-column) */}
@@ -814,6 +832,14 @@ function App() {
           onSubmit={handleAdminSignInSubmit}
         />
       )}
+
+      {/* Unstop-styled AI Interview Arena */}
+      <InterviewArena
+        isOpen={isArenaOpen}
+        onClose={() => setIsArenaOpen(false)}
+        initialCandidateName={arenaCandidate}
+        initialRole={arenaRole}
+      />
     </div>
   );
 }
