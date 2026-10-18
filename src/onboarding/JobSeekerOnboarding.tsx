@@ -133,6 +133,21 @@ export const JobSeekerOnboarding: React.FC<JobSeekerOnboardingProps> = ({
           <ResumeSkillsStep
             data={state.resumeSkills}
             onChange={(d) => updateState('resumeSkills', d)}
+            onAutoFetchProfile={(extracted) => {
+              setState((prev) => ({
+                ...prev,
+                professional: {
+                  ...prev.professional,
+                  headline: prev.professional.headline || extracted.headline,
+                  experience: prev.professional.experience || (extracted.experience.includes('3') ? '3-5' : '1-2'),
+                  currentTitle: prev.professional.currentTitle || extracted.roleTitle,
+                },
+                careerGoals: {
+                  ...prev.careerGoals,
+                  primaryRole: prev.careerGoals.primaryRole || extracted.roleTitle,
+                },
+              }));
+            }}
             onNext={() => goTo('career-goals')}
             onBack={() => goTo('profile')}
           />

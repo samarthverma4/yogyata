@@ -2,9 +2,14 @@ import { useRef, useState } from 'react';
 import {
   ChevronLeft, ChevronRight, ArrowRight, Clock,
   Star, Trophy, Calendar, Users, CheckCircle2,
-  Video
+  Video, Sparkles, Check, GraduationCap, Briefcase
 } from 'lucide-react';
-import { SHOWCASE_SECTIONS, type ShowcaseItem, type ShowcaseCategory } from './unstopData';
+import {
+  SHOWCASE_SECTIONS,
+  calculateSkillMatch,
+  type ShowcaseItem,
+  type ShowcaseCategory
+} from './unstopData';
 import { UnstopApplyModal } from './UnstopApplyModal';
 import type { PassportSkill } from '../lib/database.types';
 import type { SeekerTab } from './shared';
@@ -18,6 +23,7 @@ interface Props {
 export function UnstopShowcase({ userFullName, userSkills, onNavigate }: Props) {
   const [selectedItem, setSelectedItem] = useState<ShowcaseItem | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [activeCategoryFilter, setActiveCategoryFilter] = useState<'all' | ShowcaseCategory>('all');
 
   // Reference map for scrolling horizontal lists
   const scrollContainers = useRef<{ [key: string]: HTMLDivElement | null }>({});
@@ -45,309 +51,557 @@ export function UnstopShowcase({ userFullName, userSkills, onNavigate }: Props) 
       case 'mentors':
         return 'mentors';
       case 'jobs':
+      case 'internships':
         return 'opportunities';
       default:
         return 'overview';
     }
   };
 
+  // Filter sections if candidate selected a specific filter
+  const displayedSections = activeCategoryFilter === 'all'
+    ? SHOWCASE_SECTIONS
+    : SHOWCASE_SECTIONS.filter((s) => s.key === activeCategoryFilter);
+
+  // Category counts
+  const countInternships = SHOWCASE_SECTIONS.find((s) => s.key === 'internships')?.items.length || 0;
+  const countJobs = SHOWCASE_SECTIONS.find((s) => s.key === 'jobs')?.items.length || 0;
+  const countCompetitions = SHOWCASE_SECTIONS.find((s) => s.key === 'competitions')?.items.length || 0;
+  const countMentors = SHOWCASE_SECTIONS.find((s) => s.key === 'mentors')?.items.length || 0;
+  const countTotal = countInternships + countJobs + countCompetitions + countMentors;
+
   /* ──────────────────────────────────────────────────────────────────────────
      1. MENTOR CARD RENDERER (Focused on Person, Avatar, Company, Bio, 1:1)
      ────────────────────────────────────────────────────────────────────────── */
-  const renderMentorCard = (item: ShowcaseItem) => (
-    <article
-      key={item.id}
-      className="unstop-card sk-mentor-card"
-      onClick={() => handleOpenApply(item)}
-      role="button"
-      tabIndex={0}
-      onKeyDown={(e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          handleOpenApply(item);
-        }
-      }}
-      aria-label={`Book 1-on-1 session with ${item.mentorName || item.organization}`}
-    >
-      {/* Top Bar: Avatar + Name + Role + Rating */}
-      <div className="sk-mentor-header">
-        <div className="sk-mentor-profile-group">
-          <div
-            className="sk-mentor-avatar"
-            style={{ background: item.mentorAvatarGradient || item.logoBg }}
-            aria-hidden="true"
-          >
-            <span>{item.mentorInitials || (item.mentorName ? item.mentorName.slice(0, 2).toUpperCase() : 'ME')}</span>
-            <span className="sk-mentor-online-badge" title="Available for 1:1 sessions" />
-          </div>
-          <div className="sk-mentor-identity">
-            <h4 className="sk-mentor-name">{item.mentorName || item.organization}</h4>
-            <div className="sk-mentor-role-pill-row">
-              <span className="sk-mentor-role-text">{item.mentorRole || item.roleType}</span>
-              <span
-                className="sk-mentor-company-chip"
-                style={{ background: item.logoBg, color: item.logoColor }}
-              >
-                {item.mentorCompany || item.organization}
-              </span>
+  const renderMentorCard = (item: ShowcaseItem) => {
+    const match = calculateSkillMatch(item.skills, userSkills);
+
+    return (
+      <article
+        key={item.id}
+        className="unstop-card sk-mentor-card"
+        onClick={() => handleOpenApply(item)}
+        role="button"
+        tabIndex={0}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            handleOpenApply(item);
+          }
+        }}
+        aria-label={`Book 1-on-1 session with ${item.mentorName || item.organization}`}
+      >
+        {/* Top Bar: Avatar + Name + Role + Rating */}
+        <div className="sk-mentor-header">
+          <div className="sk-mentor-profile-group">
+            <div
+              className="sk-mentor-avatar"
+              style={{ background: item.mentorAvatarGradient || item.logoBg }}
+              aria-hidden="true"
+            >
+              <span>{item.mentorInitials || (item.mentorName ? item.mentorName.slice(0, 2).toUpperCase() : 'ME')}</span>
+              <span className="sk-mentor-online-badge" title="Available for 1:1 sessions" />
+            </div>
+            <div className="sk-mentor-identity">
+              <h4 className="sk-mentor-name">{item.mentorName || item.organization}</h4>
+              <div className="sk-mentor-role-pill-row">
+                <span className="sk-mentor-role-text">{item.mentorRole || item.roleType}</span>
+                <span
+                  className="sk-mentor-company-chip"
+                  style={{ background: item.logoBg, color: item.logoColor }}
+                >
+                  {item.mentorCompany || item.organization}
+                </span>
+              </div>
             </div>
           </div>
-        </div>
 
-        <div className="sk-mentor-rating-box">
-          <div className="sk-mentor-rating-score">
-            <Star size={13} fill="#F59E0B" color="#F59E0B" />
-            <span>{item.mentorRating || '4.98'}</span>
+          <div className="sk-mentor-rating-box">
+            <div className="sk-mentor-rating-score">
+              <Star size={13} fill="#F59E0B" color="#F59E0B" />
+              <span>{item.mentorRating || '4.98'}</span>
+            </div>
+            <span className="sk-mentor-reviews-count">({item.mentorReviewsCount || 80}+ reviews)</span>
           </div>
-          <span className="sk-mentor-reviews-count">({item.mentorReviewsCount || 80}+ reviews)</span>
         </div>
-      </div>
 
-      {/* Session Title & Bio */}
-      <div className="sk-mentor-body">
-        <div className="sk-mentor-session-title">
-          <span className="sk-mentor-target-icon">🎯</span>
-          <span className="sk-mentor-session-heading">{item.title}</span>
-        </div>
-        <p className="sk-mentor-bio">{item.mentorBio || item.description}</p>
-
-        {/* Mentor Fee / Costing Highlight */}
-        <div className="sk-mentor-price-banner">
-          <div className="sk-mentor-price-left">
-            <span className="sk-mentor-price-val">{item.mentorPrice || '₹1,499'}</span>
-            <span className="sk-mentor-price-orig">{item.mentorOriginalPrice || '₹2,999'}</span>
-            <span className="sk-mentor-discount-pill">{item.mentorDiscount || '50% OFF'}</span>
+        {/* Session Title & Bio */}
+        <div className="sk-mentor-body">
+          <div className="sk-mentor-session-title">
+            <span className="sk-mentor-target-icon">🎯</span>
+            <span className="sk-mentor-session-heading">{item.title}</span>
           </div>
-          <span className="sk-mentor-session-fee-tag">1:1 Call Fee</span>
-        </div>
-      </div>
+          <p className="sk-mentor-bio">{item.mentorBio || item.description}</p>
 
-      {/* Skills / Topics */}
-      <div className="unstop-card-skills">
-        {item.skills.slice(0, 3).map((skill) => (
-          <span key={skill} className="unstop-skill-chip sk-mentor-skill-chip">
-            {skill}
-          </span>
-        ))}
-        {item.skills.length > 3 && (
-          <span className="unstop-skill-chip unstop-chip-more">
-            +{item.skills.length - 3}
-          </span>
-        )}
-      </div>
-
-      {/* Bottom Row: Duration & Action */}
-      <div className="unstop-card-bottom sk-mentor-bottom">
-        <div className="sk-mentor-duration-pill">
-          <Video size={13} className="sk-icon-blue" />
-          <span>{item.sessionDuration || '45 mins · 1:1 Video'}</span>
+          {/* Mentor Fee / Costing Highlight */}
+          <div className="sk-mentor-price-banner">
+            <div className="sk-mentor-price-left">
+              <span className="sk-mentor-price-val">{item.mentorPrice || '₹1,499'}</span>
+              <span className="sk-mentor-price-orig">{item.mentorOriginalPrice || '₹2,999'}</span>
+              <span className="sk-mentor-discount-pill">{item.mentorDiscount || '50% OFF'}</span>
+            </div>
+            <span className="sk-mentor-session-fee-tag">1:1 Video Call</span>
+          </div>
         </div>
-        <button
-          type="button"
-          className="unstop-apply-btn sk-mentor-cta"
-          onClick={(e) => {
-            e.stopPropagation();
-            handleOpenApply(item);
-          }}
-        >
-          <span>Join for {item.mentorPrice || '₹1,499'}</span>
-          <ArrowRight size={14} aria-hidden="true" />
-        </button>
-      </div>
-    </article>
-  );
+
+        {/* Skills / Topics */}
+        <div className="unstop-card-skills">
+          {item.skills.slice(0, 3).map((skill) => {
+            const isMatched = match.matchedSkills.includes(skill);
+            return (
+              <span
+                key={skill}
+                className={`unstop-skill-chip sk-mentor-skill-chip ${isMatched ? 'is-matched' : ''}`}
+              >
+                {isMatched && <Check size={11} className="sk-chip-check-icon" />}
+                {skill}
+              </span>
+            );
+          })}
+          {item.skills.length > 3 && (
+            <span className="unstop-skill-chip unstop-chip-more">
+              +{item.skills.length - 3}
+            </span>
+          )}
+        </div>
+
+        {/* Bottom Row: Duration & Action */}
+        <div className="unstop-card-bottom sk-mentor-bottom">
+          <div className="sk-mentor-duration-pill">
+            <Video size={13} className="sk-icon-blue" />
+            <span>{item.sessionDuration || '45 mins · 1:1 Video'}</span>
+          </div>
+          <button
+            type="button"
+            className="unstop-apply-btn sk-mentor-cta"
+            onClick={(e) => {
+              e.stopPropagation();
+              handleOpenApply(item);
+            }}
+          >
+            <span>Join for {item.mentorPrice || '₹1,499'}</span>
+            <ArrowRight size={14} aria-hidden="true" />
+          </button>
+        </div>
+      </article>
+    );
+  };
 
   /* ──────────────────────────────────────────────────────────────────────────
      2. COMPETITION CARD RENDERER (Hackathons, Prizes, Deadlines)
      ────────────────────────────────────────────────────────────────────────── */
-  const renderCompetitionCard = (item: ShowcaseItem) => (
-    <article
-      key={item.id}
-      className="unstop-card sk-comp-card"
-      onClick={() => handleOpenApply(item)}
-      role="button"
-      tabIndex={0}
-      onKeyDown={(e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          handleOpenApply(item);
-        }
-      }}
-      aria-label={`View competition details for ${item.title}`}
-    >
-      {/* Top row: Brand & Urgency */}
-      <div className="sk-comp-header">
-        <div className="sk-comp-brand">
-          <div
-            className="unstop-card-logo"
-            style={{ background: item.logoBg, color: item.logoColor }}
-            aria-hidden="true"
-          >
-            {item.logoText}
-          </div>
-          <div>
-            <span className="sk-comp-org">{item.organization}</span>
-            <span className="sk-comp-badge-type">{item.roleType}</span>
-          </div>
-        </div>
-        <span className="sk-comp-urgency-pill">
-          ⚡ {item.urgencyDays || item.timeline}
-        </span>
-      </div>
+  const renderCompetitionCard = (item: ShowcaseItem) => {
+    const match = calculateSkillMatch(item.skills, userSkills);
 
-      {/* Title */}
-      <div className="sk-comp-body">
-        <h4 className="unstop-card-title sk-comp-title" title={item.title}>
-          {item.title}
-        </h4>
-
-        {/* Prize Pool Banner Ribbon */}
-        <div className="sk-comp-prize-banner">
-          <Trophy size={14} className="sk-trophy-icon" />
-          <span className="sk-comp-prize-text">{item.prizePool || item.compensation}</span>
-        </div>
-
-        <div className="sk-comp-meta-row">
-          <span className="sk-comp-stat">
-            <Users size={12} /> {item.registeredCount || item.metaInfo}
-          </span>
-          <span className="sk-comp-stat">
-            📍 {item.location}
-          </span>
-        </div>
-      </div>
-
-      {/* Skills tags */}
-      <div className="unstop-card-skills">
-        {item.skills.slice(0, 3).map((skill) => (
-          <span key={skill} className="unstop-skill-chip">
-            {skill}
-          </span>
-        ))}
-        {item.skills.length > 3 && (
-          <span className="unstop-skill-chip unstop-chip-more">
-            +{item.skills.length - 3}
-          </span>
-        )}
-      </div>
-
-      {/* Bottom row: Timeline + Action Button */}
-      <div className="unstop-card-bottom">
-        <div className="unstop-card-timeline">
-          <Calendar size={13} aria-hidden="true" />
-          <span>{item.timeline}</span>
-        </div>
-        <button
-          type="button"
-          className="unstop-apply-btn sk-comp-cta"
-          onClick={(e) => {
-            e.stopPropagation();
+    return (
+      <article
+        key={item.id}
+        className="unstop-card sk-comp-card"
+        onClick={() => handleOpenApply(item)}
+        role="button"
+        tabIndex={0}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
             handleOpenApply(item);
-          }}
-        >
-          <span>Register Now</span>
-          <ArrowRight size={14} aria-hidden="true" />
-        </button>
-      </div>
-    </article>
-  );
+          }
+        }}
+        aria-label={`View competition details for ${item.title}`}
+      >
+        {/* Top row: Brand & Urgency */}
+        <div className="sk-comp-header">
+          <div className="sk-comp-brand">
+            <div
+              className="unstop-card-logo"
+              style={{ background: item.logoBg, color: item.logoColor }}
+              aria-hidden="true"
+            >
+              {item.logoText}
+            </div>
+            <div>
+              <span className="sk-comp-org">{item.organization}</span>
+              <span className="sk-comp-badge-type">{item.roleType}</span>
+            </div>
+          </div>
+          <span className="sk-comp-urgency-pill">
+            ⚡ {item.urgencyDays || item.timeline}
+          </span>
+        </div>
+
+        {/* Title */}
+        <div className="sk-comp-body">
+          <h4 className="unstop-card-title sk-comp-title" title={item.title}>
+            {item.title}
+          </h4>
+
+          {/* Prize Pool Banner Ribbon */}
+          <div className="sk-comp-prize-banner">
+            <Trophy size={14} className="sk-trophy-icon" />
+            <span className="sk-comp-prize-text">{item.prizePool || item.compensation}</span>
+          </div>
+
+          <div className="sk-comp-meta-row">
+            <span className="sk-comp-stat">
+              <Users size={12} /> {item.registeredCount || item.metaInfo}
+            </span>
+            <span className="sk-comp-stat">
+              📍 {item.location}
+            </span>
+          </div>
+        </div>
+
+        {/* Skills tags */}
+        <div className="unstop-card-skills">
+          {item.skills.slice(0, 3).map((skill) => {
+            const isMatched = match.matchedSkills.includes(skill);
+            return (
+              <span
+                key={skill}
+                className={`unstop-skill-chip ${isMatched ? 'is-matched' : ''}`}
+              >
+                {isMatched && <Check size={11} className="sk-chip-check-icon" />}
+                {skill}
+              </span>
+            );
+          })}
+          {item.skills.length > 3 && (
+            <span className="unstop-skill-chip unstop-chip-more">
+              +{item.skills.length - 3}
+            </span>
+          )}
+        </div>
+
+        {/* Bottom row: Timeline + Action Button */}
+        <div className="unstop-card-bottom">
+          <div className="unstop-card-timeline">
+            <Calendar size={13} aria-hidden="true" />
+            <span>{item.timeline}</span>
+          </div>
+          <button
+            type="button"
+            className="unstop-apply-btn sk-comp-cta"
+            onClick={(e) => {
+              e.stopPropagation();
+              handleOpenApply(item);
+            }}
+          >
+            <span>Register Now</span>
+            <ArrowRight size={14} aria-hidden="true" />
+          </button>
+        </div>
+      </article>
+    );
+  };
 
   /* ──────────────────────────────────────────────────────────────────────────
-     3. JOB OPENING CARD RENDERER (Role, Salary, Experience, Verified badge)
+     3. FULL-TIME JOB CARD RENDERER (Role, Salary, Experience, Verified badge)
      ────────────────────────────────────────────────────────────────────────── */
-  const renderJobCard = (item: ShowcaseItem) => (
-    <article
-      key={item.id}
-      className="unstop-card sk-job-card"
-      onClick={() => handleOpenApply(item)}
-      role="button"
-      tabIndex={0}
-      onKeyDown={(e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          handleOpenApply(item);
-        }
-      }}
-      aria-label={`Apply for job ${item.title} at ${item.organization}`}
-    >
-      {/* Top row: Company Logo & Hiring status */}
-      <div className="sk-job-header">
-        <div className="sk-job-brand">
-          <div
-            className="unstop-card-logo"
-            style={{ background: item.logoBg, color: item.logoColor }}
-            aria-hidden="true"
-          >
-            {item.logoText}
-          </div>
-          <div>
-            <div className="sk-job-company-name">
-              <span>{item.organization}</span>
-              <span title="Verified Employer" style={{ display: 'inline-flex' }}>
-                <CheckCircle2 size={13} className="sk-verified-check" aria-hidden="true" />
-              </span>
-            </div>
-            <span className="sk-job-location-text">{item.workMode || item.location}</span>
-          </div>
-        </div>
-        <span className="sk-job-status-pill">
-          {item.hiringStatus || item.metaInfo}
-        </span>
-      </div>
+  const renderJobCard = (item: ShowcaseItem) => {
+    const match = calculateSkillMatch(item.skills, userSkills);
 
-      {/* Title & Salary highlight */}
-      <div className="sk-job-body">
-        <h4 className="unstop-card-title sk-job-title" title={item.title}>
-          {item.title}
-        </h4>
-
-        {/* Salary Banner */}
-        <div className="sk-job-salary-banner">
-          <span className="sk-job-salary-val">💰 {item.salaryRange || item.compensation}</span>
-          <span className="sk-job-exp-pill">{item.experienceLevel || '2-4 yrs exp'}</span>
-        </div>
-
-        <p className="sk-job-desc-preview">{item.description}</p>
-      </div>
-
-      {/* Skills tags */}
-      <div className="unstop-card-skills">
-        {item.skills.slice(0, 3).map((skill) => (
-          <span key={skill} className="unstop-skill-chip">
-            {skill}
-          </span>
-        ))}
-        {item.skills.length > 3 && (
-          <span className="unstop-skill-chip unstop-chip-more">
-            +{item.skills.length - 3}
-          </span>
-        )}
-      </div>
-
-      {/* Bottom row: Direct Founder / 48h SLA & Apply CTA */}
-      <div className="unstop-card-bottom">
-        <div className="unstop-card-timeline">
-          <Clock size={13} aria-hidden="true" />
-          <span>{item.timeline}</span>
-        </div>
-        <button
-          type="button"
-          className="unstop-apply-btn sk-job-cta"
-          onClick={(e) => {
-            e.stopPropagation();
+    return (
+      <article
+        key={item.id}
+        className="unstop-card sk-job-card"
+        onClick={() => handleOpenApply(item)}
+        role="button"
+        tabIndex={0}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
             handleOpenApply(item);
-          }}
-        >
-          <span>Apply Now</span>
-          <ArrowRight size={14} aria-hidden="true" />
-        </button>
-      </div>
-    </article>
-  );
+          }
+        }}
+        aria-label={`Apply for job ${item.title} at ${item.organization}`}
+      >
+        {/* Top row: Company Logo & Hiring status */}
+        <div className="sk-job-header">
+          <div className="sk-job-brand">
+            <div
+              className="unstop-card-logo"
+              style={{ background: item.logoBg, color: item.logoColor }}
+              aria-hidden="true"
+            >
+              {item.logoText}
+            </div>
+            <div>
+              <div className="sk-job-company-name">
+                <span>{item.organization}</span>
+                <span title="Verified Employer" style={{ display: 'inline-flex' }}>
+                  <CheckCircle2 size={13} className="sk-verified-check" aria-hidden="true" />
+                </span>
+              </div>
+              <span className="sk-job-location-text">{item.workMode || item.location}</span>
+            </div>
+          </div>
+          {match.matchedCount > 0 ? (
+            <span className="sk-card-match-pill">
+              <Check size={11} /> {match.score}% Skill Fit
+            </span>
+          ) : (
+            <span className="sk-job-status-pill">
+              {item.hiringStatus || item.metaInfo}
+            </span>
+          )}
+        </div>
+
+        {/* Title & Salary highlight */}
+        <div className="sk-job-body">
+          <h4 className="unstop-card-title sk-job-title" title={item.title}>
+            {item.title}
+          </h4>
+
+          {/* Salary Banner */}
+          <div className="sk-job-salary-banner">
+            <span className="sk-job-salary-val">💰 {item.salaryRange || item.compensation}</span>
+            <span className="sk-job-exp-pill">{item.experienceLevel || '2-4 yrs exp'}</span>
+          </div>
+
+          <p className="sk-job-desc-preview">{item.description}</p>
+        </div>
+
+        {/* Skills tags */}
+        <div className="unstop-card-skills">
+          {item.skills.slice(0, 3).map((skill) => {
+            const isMatched = match.matchedSkills.includes(skill);
+            return (
+              <span
+                key={skill}
+                className={`unstop-skill-chip ${isMatched ? 'is-matched' : ''}`}
+              >
+                {isMatched && <Check size={11} className="sk-chip-check-icon" />}
+                {skill}
+              </span>
+            );
+          })}
+          {item.skills.length > 3 && (
+            <span className="unstop-skill-chip unstop-chip-more">
+              +{item.skills.length - 3}
+            </span>
+          )}
+        </div>
+
+        {/* Bottom row: Direct Founder / 48h SLA & Apply CTA */}
+        <div className="unstop-card-bottom">
+          <div className="unstop-card-timeline">
+            <Clock size={13} aria-hidden="true" />
+            <span>{item.timeline}</span>
+          </div>
+          <button
+            type="button"
+            className="unstop-apply-btn sk-job-cta"
+            onClick={(e) => {
+              e.stopPropagation();
+              handleOpenApply(item);
+            }}
+          >
+            <span>Apply Now</span>
+            <ArrowRight size={14} aria-hidden="true" />
+          </button>
+        </div>
+      </article>
+    );
+  };
+
+  /* ──────────────────────────────────────────────────────────────────────────
+     4. PAID INTERNSHIP CARD RENDERER (Stipend, PPO Track, Batch Eligibility)
+     ────────────────────────────────────────────────────────────────────────── */
+  const renderInternshipCard = (item: ShowcaseItem) => {
+    const match = calculateSkillMatch(item.skills, userSkills);
+
+    return (
+      <article
+        key={item.id}
+        className="unstop-card sk-intern-card"
+        onClick={() => handleOpenApply(item)}
+        role="button"
+        tabIndex={0}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            handleOpenApply(item);
+          }
+        }}
+        aria-label={`Apply for internship ${item.title} at ${item.organization}`}
+      >
+        {/* Top Header */}
+        <div className="sk-job-header">
+          <div className="sk-job-brand">
+            <div
+              className="unstop-card-logo"
+              style={{ background: item.logoBg, color: item.logoColor }}
+              aria-hidden="true"
+            >
+              {item.logoText}
+            </div>
+            <div>
+              <div className="sk-job-company-name">
+                <span>{item.organization}</span>
+                <span title="Verified Startup Internship" style={{ display: 'inline-flex' }}>
+                  <CheckCircle2 size={13} className="sk-verified-check" aria-hidden="true" />
+                </span>
+              </div>
+              <span className="sk-job-location-text">{item.workMode || item.location}</span>
+            </div>
+          </div>
+          {match.matchedCount > 0 ? (
+            <span className="sk-card-match-pill is-intern-pill">
+              <Check size={11} /> {match.score}% Match
+            </span>
+          ) : (
+            <span className="sk-intern-batch-pill">{item.batchEligibility || 'College Intern'}</span>
+          )}
+        </div>
+
+        {/* Title & Stipend Highlights */}
+        <div className="sk-job-body">
+          <h4 className="unstop-card-title sk-job-title" title={item.title}>
+            {item.title}
+          </h4>
+
+          {/* Stipend Banner */}
+          <div className="sk-intern-stipend-banner">
+            <div className="sk-intern-stipend-amount">
+              <span className="sk-stipend-icon">💰</span>
+              <strong>{item.stipendAmount || item.compensation}</strong>
+            </div>
+            <span className="sk-intern-duration-chip">
+              {item.durationMonths || '6 Months'}
+            </span>
+          </div>
+
+          <p className="sk-job-desc-preview">{item.description}</p>
+        </div>
+
+        {/* Skills tags */}
+        <div className="unstop-card-skills">
+          {item.skills.slice(0, 3).map((skill) => {
+            const isMatched = match.matchedSkills.includes(skill);
+            return (
+              <span
+                key={skill}
+                className={`unstop-skill-chip ${isMatched ? 'is-matched' : ''}`}
+              >
+                {isMatched && <Check size={11} className="sk-chip-check-icon" />}
+                {skill}
+              </span>
+            );
+          })}
+          {item.skills.length > 3 && (
+            <span className="unstop-skill-chip unstop-chip-more">
+              +{item.skills.length - 3}
+            </span>
+          )}
+        </div>
+
+        {/* Bottom row: SLA & Apply */}
+        <div className="unstop-card-bottom">
+          <div className="unstop-card-timeline">
+            <Clock size={13} aria-hidden="true" />
+            <span>{item.timeline}</span>
+          </div>
+          <button
+            type="button"
+            className="unstop-apply-btn sk-intern-cta"
+            onClick={(e) => {
+              e.stopPropagation();
+              handleOpenApply(item);
+            }}
+          >
+            <span>Apply for Internship</span>
+            <ArrowRight size={14} aria-hidden="true" />
+          </button>
+        </div>
+      </article>
+    );
+  };
 
   return (
     <div className="unstop-showcase-container">
-      {SHOWCASE_SECTIONS.map((section) => (
+      {/* ── Dynamic Personalization Header Banner ── */}
+      <div className="sk-showcase-personalization-bar">
+        <div className="sk-pers-info-col">
+          <div className="sk-pers-badge-row">
+            <span className="sk-pers-sparkle-pill">
+              <Sparkles size={13} /> Curated for {userFullName || 'You'}
+            </span>
+            <span className="sk-pers-stats-pill">
+              ⚡ {countTotal} matched opportunities
+            </span>
+          </div>
+          <p className="sk-pers-subtext">
+            Opportunities dynamically matched to your declared & resume competencies:
+          </p>
+          <div className="sk-pers-skills-chips">
+            {userSkills.length > 0 ? (
+              userSkills.slice(0, 7).map((s) => (
+                <span key={s.id || s.skill_name} className="sk-pers-skill-tag">
+                  <Check size={11} className="sk-chip-check-icon" />
+                  {s.skill_name}
+                </span>
+              ))
+            ) : (
+              ['React', 'TypeScript', 'Node.js', 'Python', 'PostgreSQL'].map((demo) => (
+                <span key={demo} className="sk-pers-skill-tag">
+                  <Check size={11} className="sk-chip-check-icon" />
+                  {demo}
+                </span>
+              ))
+            )}
+          </div>
+        </div>
+
+        {/* Category Filter Tabs */}
+        <div className="sk-showcase-filter-tabs">
+          <button
+            type="button"
+            className={`sk-filter-tab ${activeCategoryFilter === 'all' ? 'is-active' : ''}`}
+            onClick={() => setActiveCategoryFilter('all')}
+          >
+            <span>⚡ All For You</span>
+            <span className="sk-filter-count">{countTotal}</span>
+          </button>
+          <button
+            type="button"
+            className={`sk-filter-tab ${activeCategoryFilter === 'internships' ? 'is-active' : ''}`}
+            onClick={() => setActiveCategoryFilter('internships')}
+          >
+            <GraduationCap size={14} />
+            <span>Paid Internships</span>
+            <span className="sk-filter-count">{countInternships}</span>
+          </button>
+          <button
+            type="button"
+            className={`sk-filter-tab ${activeCategoryFilter === 'jobs' ? 'is-active' : ''}`}
+            onClick={() => setActiveCategoryFilter('jobs')}
+          >
+            <Briefcase size={14} />
+            <span>Full-Time Jobs</span>
+            <span className="sk-filter-count">{countJobs}</span>
+          </button>
+          <button
+            type="button"
+            className={`sk-filter-tab ${activeCategoryFilter === 'competitions' ? 'is-active' : ''}`}
+            onClick={() => setActiveCategoryFilter('competitions')}
+          >
+            <Trophy size={14} />
+            <span>Hackathons</span>
+            <span className="sk-filter-count">{countCompetitions}</span>
+          </button>
+          <button
+            type="button"
+            className={`sk-filter-tab ${activeCategoryFilter === 'mentors' ? 'is-active' : ''}`}
+            onClick={() => setActiveCategoryFilter('mentors')}
+          >
+            <Users size={14} />
+            <span>1:1 Mentors</span>
+            <span className="sk-filter-count">{countMentors}</span>
+          </button>
+        </div>
+      </div>
+
+      {/* ── Showcase Sections Tracks ── */}
+      {displayedSections.map((section) => (
         <section key={section.key} className="unstop-section">
           {/* Section Header with vertical bar & View All button */}
           <div className="unstop-section-header">
@@ -401,6 +655,9 @@ export function UnstopShowcase({ userFullName, userSkills, onNavigate }: Props) 
               }
               if (item.category === 'competitions') {
                 return renderCompetitionCard(item);
+              }
+              if (item.category === 'internships') {
+                return renderInternshipCard(item);
               }
               return renderJobCard(item);
             })}

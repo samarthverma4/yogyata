@@ -165,12 +165,13 @@ export function UnstopApplyModal({ item, isOpen, onClose, userFullName, userSkil
     onClose();
   };
 
-  // Dynamic Badges & Step Titles
   const categoryBadge =
     item.category === 'mentors'
       ? 'Paid 1:1 Mentorship'
       : item.category === 'competitions'
       ? 'Hackathon Registration'
+      : item.category === 'internships'
+      ? 'Startup Paid Internship'
       : 'Verified Startup Job';
 
   /* ══════════════════════════════════════════════════════════════════════════
@@ -993,10 +994,14 @@ export function UnstopApplyModal({ item, isOpen, onClose, userFullName, userSkil
               <h3 id="showcase-modal-title" className="unstop-modal-title">{item.title}</h3>
               <div className="unstop-modal-meta-pills">
                 <span className="unstop-pill unstop-pill-green">
-                  💰 {item.salaryRange || item.compensation}
+                  {item.category === 'internships'
+                    ? `💰 Stipend: ${item.stipendAmount || item.compensation}`
+                    : `💰 ${item.salaryRange || item.compensation}`}
                 </span>
                 <span className="unstop-pill unstop-pill-blue">
-                  📍 {item.workMode || item.location}
+                  {item.category === 'internships'
+                    ? `🎓 ${item.durationMonths || '6 Months'} (${item.batchEligibility || 'Eligible Batch'})`
+                    : `📍 ${item.workMode || item.location}`}
                 </span>
                 <span className="unstop-pill unstop-pill-purple">
                   ⚡ {item.hiringStatus || 'Actively Hiring'}
@@ -1131,33 +1136,59 @@ export function UnstopApplyModal({ item, isOpen, onClose, userFullName, userSkil
             </div>
           </div>
 
-          {/* Compensation Expectations Row */}
-          <div className="ob-form-row">
-            <div className="ob-field-group" style={{ flex: 1 }}>
-              <label className="ob-label" htmlFor="job-current-ctc">Current CTC (in ₹ LPA)</label>
-              <input
-                id="job-current-ctc"
-                type="number"
-                className="ob-input"
-                placeholder="e.g. 14"
-                value={currentCtc}
-                onChange={(e) => setCurrentCtc(e.target.value)}
-              />
+          {/* Compensation or College Info Row */}
+          {item.category === 'internships' ? (
+            <div className="ob-form-row">
+              <div className="ob-field-group" style={{ flex: 1 }}>
+                <label className="ob-label" htmlFor="intern-college">College / University</label>
+                <input
+                  id="intern-college"
+                  type="text"
+                  className="ob-input"
+                  placeholder="e.g. IIT Delhi, BITS Pilani, NIT Trichy, Delhi University"
+                  defaultValue="National Institute of Technology"
+                />
+              </div>
+              <div className="ob-field-group" style={{ flex: 1 }}>
+                <label className="ob-label" htmlFor="intern-batch">
+                  Graduation Batch <span className="ob-required-star">*</span>
+                </label>
+                <select id="intern-batch" className="ob-select" defaultValue="2025">
+                  <option value="2024">2024 (Immediate Full-Time / PPO)</option>
+                  <option value="2025">2025 (Pre-final / Final Year)</option>
+                  <option value="2026">2026 (Undergrad Internship)</option>
+                  <option value="2027">2027 (Summer Internship)</option>
+                </select>
+              </div>
             </div>
-            <div className="ob-field-group" style={{ flex: 1 }}>
-              <label className="ob-label" htmlFor="job-expected-ctc">
-                Expected CTC (in ₹ LPA) <span className="ob-required-star">*</span>
-              </label>
-              <input
-                id="job-expected-ctc"
-                type="number"
-                className="ob-input"
-                placeholder="e.g. 26"
-                value={expectedCtc}
-                onChange={(e) => setExpectedCtc(e.target.value)}
-              />
+          ) : (
+            <div className="ob-form-row">
+              <div className="ob-field-group" style={{ flex: 1 }}>
+                <label className="ob-label" htmlFor="job-current-ctc">Current CTC (in ₹ LPA)</label>
+                <input
+                  id="job-current-ctc"
+                  type="number"
+                  className="ob-input"
+                  placeholder="e.g. 14"
+                  value={currentCtc}
+                  onChange={(e) => setCurrentCtc(e.target.value)}
+                />
+              </div>
+              <div className="ob-field-group" style={{ flex: 1 }}>
+                <label className="ob-label" htmlFor="job-expected-ctc">
+                  Expected CTC (in ₹ LPA) <span className="ob-required-star">*</span>
+                </label>
+                <input
+                  id="job-expected-ctc"
+                  type="number"
+                  className="ob-input"
+                  placeholder="e.g. 26"
+                  value={expectedCtc}
+                  onChange={(e) => setExpectedCtc(e.target.value)}
+                />
+              </div>
             </div>
-          </div>
+          )}
 
           {/* Portfolio or GitHub URL */}
           <div className="ob-field-group">
@@ -1248,7 +1279,11 @@ export function UnstopApplyModal({ item, isOpen, onClose, userFullName, userSkil
                 <span>Submitting to Hiring Lead…</span>
               ) : (
                 <>
-                  <span>Submit Official Application</span>
+                  <span>
+                    {item.category === 'internships'
+                      ? 'Submit Internship Application'
+                      : 'Submit Official Application'}
+                  </span>
                   <Briefcase size={16} />
                 </>
               )}
@@ -1264,7 +1299,11 @@ export function UnstopApplyModal({ item, isOpen, onClose, userFullName, userSkil
         <div className="unstop-success-icon-wrap">
           <CheckCircle2 size={54} className="unstop-success-icon" />
         </div>
-        <h3 className="unstop-success-title">Application Submitted!</h3>
+        <h3 className="unstop-success-title">
+          {item.category === 'internships'
+            ? 'Internship Application Transmitted!'
+            : 'Application Submitted!'}
+        </h3>
         <p className="unstop-success-sub">
           Your profile and verified Skill Passport have been queued directly for the <strong>{item.organization}</strong> hiring lead.
         </p>
@@ -1286,8 +1325,14 @@ export function UnstopApplyModal({ item, isOpen, onClose, userFullName, userSkil
             </span>
           </div>
           <div className="unstop-receipt-row">
-            <span className="unstop-receipt-label">EXPECTED CTC</span>
-            <span className="unstop-receipt-val">₹{expectedCtc || '26'} LPA</span>
+            <span className="unstop-receipt-label">
+              {item.category === 'internships' ? 'STIPEND' : 'EXPECTED CTC'}
+            </span>
+            <span className="unstop-receipt-val">
+              {item.category === 'internships'
+                ? item.stipendAmount || item.compensation
+                : `₹${expectedCtc || '26'} LPA`}
+            </span>
           </div>
         </div>
 
@@ -1338,7 +1383,7 @@ export function UnstopApplyModal({ item, isOpen, onClose, userFullName, userSkil
   };
 
   return (
-    <div className="yw-modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="showcase-modal-title">
+    <div className="yw-modal-overlay" role="dialog" aria-modal="true" aria-labelledby="showcase-modal-title">
       <div className="yw-modal-box unstop-modal-box">
         {/* Top Header */}
         <div className="unstop-modal-header">
@@ -1366,7 +1411,7 @@ export function UnstopApplyModal({ item, isOpen, onClose, userFullName, userSkil
         <div className="unstop-modal-body">
           {item.category === 'mentors' && renderMentorFlow()}
           {item.category === 'competitions' && renderCompetitionFlow()}
-          {item.category === 'jobs' && renderJobFlow()}
+          {(item.category === 'jobs' || item.category === 'internships') && renderJobFlow()}
         </div>
       </div>
     </div>

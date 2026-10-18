@@ -1,4 +1,4 @@
-export type ShowcaseCategory = 'competitions' | 'mentors' | 'jobs';
+export type ShowcaseCategory = 'competitions' | 'mentors' | 'jobs' | 'internships';
 
 export interface ShowcaseItem {
   id: string;
@@ -49,6 +49,39 @@ export interface ShowcaseItem {
   hiringStatus?: string;
   jobScreeningQuestion?: string;
   matchScorePercent?: number;
+
+  // Dedicated Internship Fields
+  stipendAmount?: string;
+  durationMonths?: string;
+  batchEligibility?: string;
+}
+
+export function calculateSkillMatch(
+  itemSkills: string[],
+  userSkills: { skill_name: string }[]
+): {
+  score: number;
+  matchedCount: number;
+  matchedSkills: string[];
+  isTopMatch: boolean;
+} {
+  const userSkillSet = new Set(
+    userSkills.map((s) => s.skill_name.trim().toLowerCase())
+  );
+  if (userSkillSet.size === 0) {
+    return { score: 85, matchedCount: 0, matchedSkills: [], isTopMatch: false };
+  }
+  const matched = itemSkills.filter((s) => userSkillSet.has(s.trim().toLowerCase()));
+  const percentage = Math.min(
+    99,
+    Math.max(50, Math.round((matched.length / itemSkills.length) * 100))
+  );
+  return {
+    score: matched.length > 0 ? percentage : 60,
+    matchedCount: matched.length,
+    matchedSkills: matched,
+    isTopMatch: matched.length >= 2 || percentage >= 75,
+  };
 }
 
 export const SHOWCASE_SECTIONS: {
@@ -609,6 +642,163 @@ export const SHOWCASE_SECTIONS: {
         timeline: 'Closing soon',
         jobScreeningQuestion: 'How do you solve cold-start recommendation problems when serving 10M+ daily active sessions in real time?',
         matchScorePercent: 84
+      },
+    ],
+  },
+  {
+    key: 'internships',
+    heading: 'Curated Startup Internships (PPO Track)',
+    subheading: 'High-stipend engineering, AI, and design internships at funded startups with pre-placement offer pathways.',
+    items: [
+      {
+        id: 'intern-1',
+        category: 'internships',
+        title: 'Frontend Engineering Intern (Web & Mobile)',
+        organization: 'Swiggy Labs',
+        roleType: 'Paid Internship · 6 Months',
+        logoText: 'SWGY',
+        logoBg: 'linear-gradient(135deg, #7C2D12 0%, #C2410C 100%)',
+        logoColor: '#FFEDD5',
+        compensation: '₹45,000 / month',
+        stipendAmount: '₹45,000 / month',
+        durationMonths: '6 Months · PPO Track',
+        batchEligibility: '2025 / 2026 Batch',
+        workMode: 'Hybrid · Bengaluru',
+        hiringStatus: '4 Openings',
+        location: 'Hybrid | Bengaluru',
+        metaInfo: '4 Openings',
+        skills: ['React', 'TypeScript', 'CSS Mastery', 'Framer Motion'],
+        description: 'Build fast consumer web interfaces, interactive order tracking widgets, and modern responsive components alongside Senior Staff Engineers.',
+        perks: ['Direct SDE-1 Pre-Placement Offer (PPO) evaluation', 'Swiggy One membership & daily meal credits', 'Latest MacBook Pro provided for internship'],
+        eligibility: 'Pre-final and final year students or recent graduates proficient in modern React & TypeScript.',
+        timeline: 'Starts 1st of next month',
+        jobScreeningQuestion: 'Share links to 1-2 interactive web projects or GitHub repos you built showcasing clean component structure.',
+        matchScorePercent: 94
+      },
+      {
+        id: 'intern-2',
+        category: 'internships',
+        title: 'Generative AI & LLM Research Intern',
+        organization: 'Sarvam AI',
+        roleType: 'Paid Internship · 6 Months',
+        logoText: 'SARV',
+        logoBg: 'linear-gradient(135deg, #064E3B 0%, #047857 100%)',
+        logoColor: '#A7F3D0',
+        compensation: '₹50,000 / month',
+        stipendAmount: '₹50,000 / month',
+        durationMonths: '6 Months · Research Track',
+        batchEligibility: '2024 / 2025 / 2026 Batch',
+        workMode: 'Remote (Work from Anywhere)',
+        hiringStatus: 'Actively Hiring',
+        location: 'Remote',
+        metaInfo: 'Actively Hiring',
+        skills: ['Python', 'PyTorch', 'Transformers', 'FastAPI'],
+        description: 'Collaborate with top AI scientists on training and fine-tuning Indic language LLMs, speech models, and low-latency inference pipelines.',
+        perks: ['Direct cloud GPU compute credits (NVIDIA H100 access)', 'Co-authorship on published research papers', 'Full-time AI Engineer offer upon performance'],
+        eligibility: 'Passionate Python & ML developers with hands-on PyTorch or HuggingFace experience.',
+        timeline: 'Interviews rolling weekly',
+        jobScreeningQuestion: 'What open-source LLM or PyTorch model have you fine-tuned or deployed, and what were the key challenges?',
+        matchScorePercent: 96
+      },
+      {
+        id: 'intern-3',
+        category: 'internships',
+        title: 'Product Design & UI/UX Intern',
+        organization: 'CRED Labs',
+        roleType: 'Paid Internship · 4 Months',
+        logoText: 'CRED',
+        logoBg: 'linear-gradient(135deg, #1C1917 0%, #292524 100%)',
+        logoColor: '#F59E0B',
+        compensation: '₹40,000 / month',
+        stipendAmount: '₹40,000 / month',
+        durationMonths: '4 Months · Design Sprint',
+        batchEligibility: 'Open to All Batches',
+        workMode: 'In-Office · Bengaluru',
+        hiringStatus: '2 Openings',
+        location: 'In Office | Bengaluru',
+        metaInfo: '2 Openings',
+        skills: ['Figma', 'UI/UX Design', 'Design Systems', 'Prototyping'],
+        description: 'Craft industry-defining fintech visual interfaces, sound micro-interactions, and high-fidelity prototype flows with CRED design directors.',
+        perks: ['Exclusive CRED design mentorship & studio access', 'Portfolio critique and case study feature on Yogyata', 'Fast-track transition to full-time Product Designer'],
+        eligibility: 'Designers with a strong Figma portfolio demonstrating craft, micro-interactions, and visual polish.',
+        timeline: 'Apply before Sunday',
+        jobScreeningQuestion: 'Provide a link to your Figma portfolio and highlight the single screen you are proudest of.',
+        matchScorePercent: 90
+      },
+      {
+        id: 'intern-4',
+        category: 'internships',
+        title: 'High-Throughput Backend Intern (Go / Distributed Systems)',
+        organization: 'Razorpay',
+        roleType: 'Paid Internship · 6 Months',
+        logoText: 'RAZR',
+        logoBg: 'linear-gradient(135deg, #1E3A8A 0%, #2563EB 100%)',
+        logoColor: '#BFDBFE',
+        compensation: '₹50,000 / month',
+        stipendAmount: '₹50,000 / month',
+        durationMonths: '6 Months · Core Fintech',
+        batchEligibility: '2025 / 2026 Batch',
+        workMode: 'Hybrid · Bengaluru',
+        hiringStatus: '3 Openings',
+        location: 'Hybrid | Bengaluru',
+        metaInfo: '3 Openings',
+        skills: ['Go', 'PostgreSQL', 'Distributed Systems', 'Clean Code'],
+        description: 'Implement distributed locking, transaction queues, and idempotent payment webhooks processing millions in volume daily.',
+        perks: ['Direct SDE-1 PPO offering ₹24 LPA baseline', '1:1 mentorship from Razorpay Principal Architects', 'Full medical coverage during internship'],
+        eligibility: 'Engineering students or self-taught builders proficient in Go, C++, or backend systems.',
+        timeline: 'Batch starts next month',
+        jobScreeningQuestion: 'Explain how you prevent double-spending or race conditions in concurrent database operations.',
+        matchScorePercent: 92
+      },
+      {
+        id: 'intern-5',
+        category: 'internships',
+        title: 'Full-Stack Growth Intern',
+        organization: 'Zepto Quick Commerce',
+        roleType: 'Paid Internship · 6 Months',
+        logoText: 'ZEPTO',
+        logoBg: 'linear-gradient(135deg, #4C1D95 0%, #6D28D9 100%)',
+        logoColor: '#EDE9FE',
+        compensation: '₹40,000 / month',
+        stipendAmount: '₹40,000 / month',
+        durationMonths: '6 Months · Growth Team',
+        batchEligibility: '2024 / 2025 / 2026 Batch',
+        workMode: 'Remote (Work from Home)',
+        hiringStatus: 'Actively Hiring',
+        location: 'Work from Home',
+        metaInfo: 'Actively Hiring',
+        skills: ['React', 'Node.js', 'PostgreSQL', 'TailwindCSS'],
+        description: 'Build fast internal warehouse dashboards, live delivery telemetry maps, and high-conversion landing page experiments.',
+        perks: ['Pre-placement interview for founding team full-time roles', 'High technical autonomy with direct founder mentorship', 'Remote workstation setup budget'],
+        eligibility: 'Builders with full-stack projects on GitHub and strong JavaScript/TypeScript skills.',
+        timeline: 'Fast-track: 48h response',
+        jobScreeningQuestion: 'Have you built a full-stack CRUD application? Share the GitHub link and architecture diagram.',
+        matchScorePercent: 88
+      },
+      {
+        id: 'intern-6',
+        category: 'internships',
+        title: 'Applied Data Science & Analytics Intern',
+        organization: 'Glance / InMobi',
+        roleType: 'Paid Internship · 6 Months',
+        logoText: 'GLNC',
+        logoBg: 'linear-gradient(135deg, #1E1B4B 0%, #4338CA 100%)',
+        logoColor: '#C7D2FE',
+        compensation: '₹45,000 / month',
+        stipendAmount: '₹45,000 / month',
+        durationMonths: '6 Months · Data Track',
+        batchEligibility: '2025 / 2026 Batch',
+        workMode: 'In-Office · Bengaluru',
+        hiringStatus: '2 Openings',
+        location: 'In Office | Bengaluru',
+        metaInfo: '2 Openings',
+        skills: ['Python', 'SQL', 'Recommendation Systems', 'PyTorch'],
+        description: 'Analyze telemetry from 250M active lockscreens, build user cohort clustering models, and evaluate recommendation performance.',
+        perks: ['Full-time Data Scientist PPO fast-track', 'Gourmet cafeteria & wellness facilities in Bengaluru campus', 'Mentorship by senior ML scientists'],
+        eligibility: 'Students with solid foundations in probability, statistics, SQL, and Python ML libraries.',
+        timeline: 'Applications reviewed daily',
+        jobScreeningQuestion: 'How would you measure the engagement lift of a new recommendation algorithm in an A/B test?',
+        matchScorePercent: 86
       },
     ],
   },

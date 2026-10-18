@@ -1165,9 +1165,16 @@
 
 /* ─── Modal Dialog Polish ────────────────────────────────────────────────── */
 .yw-modal-overlay {
-  background: rgba(15, 26, 68, 0.45) !important;
-  backdrop-filter: blur(6px) !important;
-  -webkit-backdrop-filter: blur(6px) !important;
+  position: fixed !important;
+  inset: 0 !important;
+  background: rgba(15, 26, 68, 0.55) !important;
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 20px !important;
+  z-index: 9999 !important;
 }
 
 .yw-modal-box.yg-modal-wide {
@@ -3421,5 +3428,416 @@
   color: #64748B;
   margin: 2px 0 0;
 }
+
+/* ==========================================================================
+   RESUME INTELLIGENCE & AUTO-FETCH EXTRACTION STYLES
+   ========================================================================== */
+.ob-parsing-banner {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 18px 20px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #EEF2FD 0%, #F5F3FF 100%);
+  border: 1.5px solid #C7D2FE;
+  margin-bottom: 16px;
+  animation: fadeIn 0.3s ease;
+}
+
+.ob-parsing-spinner-wrap {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: #3559DF;
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 4px 12px rgba(53, 89, 223, 0.25);
+}
+
+.ob-spin-pulse {
+  animation: spinSlow 3s linear infinite;
+}
+
+@keyframes spinSlow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.ob-parsing-text {
+  flex: 1;
+}
+
+.ob-parsing-title {
+  font-size: 0.92rem;
+  color: #0F1A44;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.ob-parsing-progress-bar {
+  height: 6px;
+  background: #E2E8F0;
+  border-radius: 9999px;
+  overflow: hidden;
+  width: 100%;
+}
+
+.ob-parsing-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #3559DF 0%, #8B5CF6 100%);
+  border-radius: 9999px;
+  transition: width 0.4s ease;
+}
+
+.ob-resume-parsed-card {
+  margin-top: 14px;
+  padding: 18px 20px;
+  background: #FFFFFF;
+  border: 1.5px solid #10B981;
+  border-radius: 14px;
+  box-shadow: 0 4px 16px rgba(16, 185, 129, 0.08);
+  animation: fadeIn 0.35s ease;
+}
+
+.ob-parsed-header {
+  margin-bottom: 14px;
+}
+
+.ob-parsed-title-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 6px;
+}
+
+.ob-parsed-status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #ECFDF5;
+  color: #059669;
+  font-size: 0.78rem;
+  font-weight: 800;
+  padding: 4px 10px;
+  border-radius: 9999px;
+  border: 1px solid #A7F3D0;
+}
+
+.ob-parsed-role-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #EEF2FD;
+  color: #3559DF;
+  font-size: 0.78rem;
+  font-weight: 800;
+  padding: 4px 10px;
+  border-radius: 9999px;
+  border: 1px solid #C7D2FE;
+}
+
+.ob-parsed-sub {
+  font-size: 0.84rem;
+  color: #475569;
+  margin: 0;
+}
+
+.ob-parsed-skills-wrap {
+  margin-top: 10px;
+}
+
+.ob-parsed-skills-label {
+  font-size: 0.76rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: #64748B;
+  letter-spacing: 0.04em;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.ob-parsed-chips-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.ob-parsed-skill-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #F8FAFC;
+  border: 1px solid #CBD5E1;
+  border-radius: 9999px;
+  padding: 4px 12px;
+  font-size: 0.8rem;
+  color: #1E293B;
+  transition: all 0.15s ease;
+}
+
+.ob-parsed-skill-chip:hover {
+  background: #ECFDF5;
+  border-color: #10B981;
+}
+
+.ob-chip-check {
+  color: #10B981;
+  font-weight: 900;
+  font-size: 0.85rem;
+}
+
+.ob-chip-name {
+  font-weight: 700;
+}
+
+.ob-chip-confidence {
+  font-size: 0.7rem;
+  color: #059669;
+  background: #D1FAE5;
+  padding: 1px 6px;
+  border-radius: 9999px;
+  font-weight: 700;
+}
+
+.ob-parsed-note-box {
+  margin-top: 14px;
+  padding: 10px 14px;
+  background: #F0FDF4;
+  border: 1px solid #BBF7D0;
+  border-radius: 10px;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 0.82rem;
+  color: #166534;
+  line-height: 1.45;
+}
+
+.ob-sparkle-blue {
+  color: #10B981;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+/* ==========================================================================
+   PERSONALIZATION BAR & CATEGORY TABS STYLES
+   ========================================================================== */
+.sk-showcase-personalization-bar {
+  background: linear-gradient(135deg, #0F172A 0%, #1E1B4B 100%);
+  border-radius: 18px;
+  padding: 24px 28px;
+  color: #FFFFFF;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  margin-bottom: 8px;
+}
+
+.sk-pers-badge-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 6px;
+}
+
+.sk-pers-sparkle-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(139, 92, 246, 0.25);
+  border: 1px solid rgba(167, 139, 250, 0.4);
+  color: #DDD6FE;
+  font-size: 0.78rem;
+  font-weight: 800;
+  padding: 4px 12px;
+  border-radius: 9999px;
+  letter-spacing: 0.02em;
+}
+
+.sk-pers-stats-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(16, 185, 129, 0.2);
+  border: 1px solid rgba(52, 211, 153, 0.35);
+  color: #A7F3D0;
+  font-size: 0.78rem;
+  font-weight: 800;
+  padding: 4px 12px;
+  border-radius: 9999px;
+}
+
+.sk-pers-subtext {
+  font-size: 0.86rem;
+  color: #94A3B8;
+  margin: 0 0 10px 0;
+}
+
+.sk-pers-skills-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.sk-pers-skill-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: #F8FAFC;
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 9999px;
+  transition: all 0.15s ease;
+}
+
+.sk-pers-skill-tag:hover {
+  background: rgba(255, 255, 255, 0.16);
+  border-color: #A7F3D0;
+  color: #A7F3D0;
+}
+
+.sk-chip-check-icon {
+  color: #10B981;
+}
+
+.sk-showcase-filter-tabs {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  padding-top: 14px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.sk-filter-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: #CBD5E1;
+  font-size: 0.84rem;
+  font-weight: 700;
+  padding: 8px 16px;
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.sk-filter-tab:hover {
+  background: rgba(255, 255, 255, 0.15);
+  color: #FFFFFF;
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.sk-filter-tab.is-active {
+  background: #3559DF;
+  color: #FFFFFF;
+  border-color: #3559DF;
+  box-shadow: 0 4px 16px rgba(53, 89, 223, 0.4);
+}
+
+.sk-filter-count {
+  font-size: 0.72rem;
+  background: rgba(0, 0, 0, 0.25);
+  padding: 2px 7px;
+  border-radius: 9999px;
+  color: #FFFFFF;
+}
+
+/* ==========================================================================
+   PAID INTERNSHIP CARD & SKILL MATCH BADGES
+   ========================================================================== */
+.sk-intern-card {
+  border-top: 4px solid #8B5CF6 !important;
+}
+
+.sk-intern-stipend-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 10px 14px;
+  background: linear-gradient(135deg, #F5F3FF 0%, #EDE9FE 100%);
+  border: 1px solid #DDD6FE;
+  border-radius: 10px;
+  margin: 10px 0 12px 0;
+}
+
+.sk-intern-stipend-amount {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.96rem;
+  font-weight: 800;
+  color: #5B21B6;
+}
+
+.sk-intern-duration-chip {
+  font-size: 0.72rem;
+  font-weight: 800;
+  background: #FFFFFF;
+  color: #6D28D9;
+  border: 1px solid #DDD6FE;
+  padding: 3px 8px;
+  border-radius: 9999px;
+}
+
+.sk-intern-batch-pill {
+  font-size: 0.72rem;
+  font-weight: 800;
+  background: #F1F5F9;
+  color: #475569;
+  padding: 3px 8px;
+  border-radius: 9999px;
+}
+
+.sk-card-match-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: #ECFDF5;
+  color: #059669;
+  border: 1px solid #A7F3D0;
+  font-size: 0.72rem;
+  font-weight: 800;
+  padding: 3px 8px;
+  border-radius: 9999px;
+}
+
+.sk-card-match-pill.is-intern-pill {
+  background: #F5F3FF;
+  color: #6D28D9;
+  border-color: #DDD6FE;
+}
+
+.sk-intern-cta {
+  background: linear-gradient(135deg, #7C3AED 0%, #6D28D9 100%) !important;
+  color: #FFFFFF !important;
+  border: none !important;
+}
+
+.sk-intern-cta:hover {
+  background: linear-gradient(135deg, #6D28D9 0%, #5B21B6 100%) !important;
+  box-shadow: 0 4px 14px rgba(109, 40, 217, 0.35) !important;
+}
+
+.unstop-skill-chip.is-matched {
+  background: #ECFDF5 !important;
+  border-color: #10B981 !important;
+  color: #065F46 !important;
+  font-weight: 700 !important;
+}
+
 
 
