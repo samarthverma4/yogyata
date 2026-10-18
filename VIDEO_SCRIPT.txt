@@ -1,0 +1,103 @@
+================================================================================
+          YOGYATA — FOUNDER / CREATOR DEMO VIDEO SHOOT SCRIPT
+          Target Duration: 1 Minute 35 Seconds – 1 Minute 50 Seconds
+          Format: Real Human Shoot (Face-Cam + Screen Recording)
+================================================================================
+
+[PRE-RECORDING CHECKLIST]
+1. Screen Resolution: 1080p (Full Screen).
+2. Browser Window: Zoom level 100% or 110% (looks crisp on YouTube / LinkedIn).
+3. Open in Browser Tabs:
+   - Tab 1: Onboarding Screen (at Resume Upload step)
+   - Tab 2: Seeker Dashboard (http://localhost:5174/seeker)
+4. Mic Check: Clear audio, friendly & confident founder energy.
+5. Setup: You can start with your face on camera for first 15 seconds, then cut to screen, or use a PIP (picture-in-picture) webcam bubble in the corner.
+
+================================================================================
+PART 1: THE HOOK & THE PROBLEM (0:00 – 0:18)
+================================================================================
+[Visual / Camera]: 
+Start directly on your camera (face) OR full screen on Yogyata landing page with your webcam in corner. Speak with high energy and eye contact with the camera.
+
+[Spoken Dialogue]:
+"Aaj kal kisi bhi standard job portal par jao—kya hota hai?
+Ek job ke liye 5-5 hazar log generic resume upload kar dete hain. 
+Aapka resume uss bheed me gum ho jata hai, aur actual skills ka koi proof nahi hota.
+
+Isi pure broken hiring system ko fix karne ke liye humne build kiya hai—YOGYATA.
+Yaha degree ya generic resume se nahi, aapki REAL verified skills aur proof-of-work se hiring hoti hai.
+Chaliye mai aapko dikhata hu ye live kaise kaam karta hai."
+
+[Pacing Tip]: 
+Pause for 1 second here before switching to screen.
+
+================================================================================
+PART 2: RESUME AUTO-FETCH & SKILL PASSPORT (0:18 – 0:45)
+================================================================================
+[Visual / Screen Recording]:
+Switch to Onboarding Screen (Step 3: Resume & Skills).
+Click on "⚡ Auto-Fetch Sample Tech Resume" (ya apna resume upload karo).
+Show the live animated parsing bar (Reading layout -> Extracting competencies).
+Zoom in on the green "✓ Resume Parsed Successfully" card showing the extracted chips:
+React (99%), TypeScript (98%), Node.js (94%), PostgreSQL (90%).
+
+[Spoken Dialogue]:
+"Sabse pehle, candidate ko koi lambe aur boring forms bharne ki bilkul zaroorat nahi hai.
+Jaise hi jobseeker apna resume upload karta hai, hamara AI parser seconds ke andar uski complete profile extract kar leta hai.
+
+Yaha dekhiye—isne candidate ka role 'Full-Stack Developer' aur uski 6 core technical competencies—React, TypeScript, Node.js, aur PostgreSQL—with confidence match identify kar li.
+
+Aur sabse badiya baat? Ye saari skills seedhe candidate ke 'YOGYATA Skill Passport' me auto-sync ho jati hain."
+
+================================================================================
+PART 3: DYNAMIC PERSONALIZATION (0:45 – 1:12)
+================================================================================
+[Visual / Screen Recording]:
+Switch to the Seeker Workspace Overview (Dashboard).
+Highlight the top dark Personalization Bar ("Curated for you • 24 matched opportunities").
+Move cursor over the skills chips where green checkmarks are visible.
+Scroll down to show the opportunities matching those skills.
+
+[Spoken Dialogue]:
+"Ab aata hai iska sabse powerful feature—Personalization.
+Jaise hi candidate apne dashboard par aata hai, pure platform ka job feed uski skills ke hisaab se curate ho jata hai.
+
+Yaha screen par dekhiye—likha hai 'Curated for you: 24 matched opportunities'.
+Aur niche har ek opportunity par candidate ki skills green tick ke sath highlight ho rahi hain, aur sath me real-time 'Skill Fit Score' dikh raha hai. 
+Matlab irrelevant jobs dekhne me time waste zero!"
+
+================================================================================
+PART 4: PAID INTERNSHIPS & 48-HOUR SLA (1:12 – 1:35)
+================================================================================
+[Visual / Screen Recording]:
+Click on the "🎓 Paid Internships" filter tab.
+Smoothly scroll past the cards: Swiggy Labs, Sarvam AI, CRED, Razorpay.
+Click "Apply for Internship" on Swiggy Labs card.
+Modal Step 1: Point at "₹45,000 / month", "6 Months PPO Track", MacBook perk.
+Click "Apply with Skill Passport" -> Step 2: Show College & Batch inputs.
+Click "Submit Internship Application" -> Step 3: Show Application Ref & 48h SLA Tracker.
+
+[Spoken Dialogue]:
+"Yaha full-time jobs ke sath-sath top startups jaise Swiggy Labs, Sarvam AI aur Razorpay ki high-stipend Paid Internships hain—45 hazar se 50 hazar per month stipend ke sath.
+
+Aur jab candidate apply karta hai—toh application seedhe hiring manager ke dashboard par queue hoti hai, aur candidate ko milta hai transparent '48-Hour Recruiter Review SLA' with direct tracking receipt."
+
+================================================================================
+PART 5: FOUNDER TASKS & OUTRO (1:35 – 1:50)
+================================================================================
+[Visual / Camera / Screen]:
+Quickly show the "Suggested Tasks" widget on overview, then bring camera back to your face for a strong closing finish with a confident smile.
+
+[Spoken Dialogue]:
+"Chahe kisi founder ko React developer chahiye ho, ya recruiter ne koi challenge post kiya ho—YOGYATA automatically right talent ko right opportunity se connect karta hai.
+
+No fake resumes, zero spam, pure proof-of-work.
+This is YOGYATA. Link description me hai, check it out right now!"
+
+================================================================================
+[RECORDING SUMMARY & PACING CHEAT SHEET]
+- Total Word Count: ~245 words
+- Ideal Speaking Speed: Natural conversational (approx 140 words/min)
+- Total Video Length: ~1 minute 40 seconds
+- Secret Tip: Har section ke beech me 0.5-second ka clean pause lena, taaki video edit karte waqt cuts ekdum clean baithein.
+================================================================================
