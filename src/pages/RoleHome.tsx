@@ -8,7 +8,6 @@ import { hasMentorProfile, saveMentorOnboarding } from '../lib/mentorData';
 import { hasRecruiterProfile, saveRecruiterOnboarding } from '../lib/recruiterData';
 import { saveSeekerOnboarding } from '../lib/seekerData';
 import { supabase } from '../lib/supabase';
-import { ROLE_NAME, isGatedRole } from '../lib/authRules';
 import { forgetIntendedRole, peekIntendedRole } from '../lib/intendedRole';
 
 // Each role loads only its own screens (code-splitting, as upstream does with React.lazy).
@@ -56,24 +55,6 @@ export function RoleHome() {
     setExitTo('/');
     await signOut();
   };
-
-  if (isGatedRole(profile.role) && profile.approval !== 'approved') {
-    const pending = profile.approval === 'pending';
-    return (
-      <RoleShell
-        role={profile.role}
-        title={pending ? 'Waiting for approval' : 'Account not approved'}
-        note={
-          pending
-            ? `Thanks, ${profile.full_name.split(' ')[0]}. The Yogyata team checks every ${ROLE_NAME[profile.role]} account before it goes live${
-                profile.organization ? ` (you signed up for ${profile.organization})` : ''
-              }. Log in again once you hear back.`
-            : `This ${ROLE_NAME[profile.role]} account was not approved. If you think this is a mistake, contact the Yogyata team from your work email.`
-        }
-        onSignOut={leave}
-      />
-    );
-  }
 
   switch (profile.role) {
     case 'entrepreneur':

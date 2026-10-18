@@ -197,18 +197,3 @@ export async function listMyInterviews(seekerId: string): Promise<MyInterview[]>
   const of = new Map(names.map((n) => [n.id, n.organization || n.full_name]));
   return data.map((i) => ({ ...i, company: of.get(i.recruiter_id) ?? 'Recruiter' }));
 }
-
-/** Adds AI-planned steps to the end of the seeker's roadmap (only after they click to confirm). */
-export async function importRoadmapSteps(steps: { title: string; description: string; type: string; weeks?: string }[]): Result {
-  const { data } = await supabase.from('roadmap_milestones').select('position').order('position', { ascending: false }).limit(1);
-  const start = (data?.[0]?.position ?? -1) + 1;
-  const category = (t: string) =>
-    /learn/.test(t) ? 'core-skills' : /project|practice|task/.test(t) ? 'practical-project' : /interview|assess/.test(t) ? 'assessment' : 'career';
-  const rows = steps.slice(0, 30).map((s, i) => ({
-    title: s.title.slice(0, 160),
-    description: [s.description, s.weeks].filter(Boolean).join(' · ').slice(0, 1000),
-    category: category(s.type),
-    position: start + i,
-  }));
-  return done((await supabase.from('roadmap_milestones').insert(rows)).error);
-}

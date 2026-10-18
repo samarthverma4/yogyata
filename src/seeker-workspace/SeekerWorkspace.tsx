@@ -17,7 +17,6 @@ import { AssessmentsTab } from './tabs/AssessmentsTab';
 import { RoadmapTab } from './tabs/RoadmapTab';
 import { OpportunitiesTab } from './tabs/OpportunitiesTab';
 import { MentorsTab } from './tabs/MentorsTab';
-import { AiCoachTab } from './tabs/AiCoachTab';
 import '../founder-workspace/workspace.css';
 
 const TITLES: Record<SeekerTab, { title: string; sub: string }> = {
@@ -29,7 +28,6 @@ const TITLES: Record<SeekerTab, { title: string; sub: string }> = {
   opportunities: { title: 'Jobs & Applications', sub: 'Roles recruiters published, your applications and interviews.' },
   mentors: { title: 'Mentors', sub: 'Find a mentor, then follow your sessions, action items and feedback.' },
   roadmap: { title: 'Career Roadmap', sub: 'Milestones from where you are to the role you want.' },
-  'ai-coach': { title: 'AI Coach', sub: 'Readiness, a weekly plan, matches, interview practice and a resume check.' },
   invitations: { title: 'Invitations', sub: 'Roles recruiters invited you to, and whether they can find you.' },
 };
 
@@ -163,7 +161,6 @@ export function SeekerWorkspace({ userId, fullName, headline, primaryRole = '', 
             <MentorsTab userId={userId} mySkills={data.skills.map((s) => s.skill_name)} careerGoal={primaryRole} />
           )}
           {data && tab === 'roadmap' && <RoadmapTab userId={userId} primaryRole={primaryRole} />}
-          {data && tab === 'ai-coach' && <AiCoachTab userId={userId} passportNames={passportNames} onNavigate={go} onChanged={reload} />}
           {data && tab === 'invitations' && (
             <InvitationsTab
               userId={userId}

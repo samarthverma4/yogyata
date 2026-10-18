@@ -5,7 +5,7 @@ import { Header } from './Header';
 import { findStakeholder, type Stakeholder } from '../data/stakeholders';
 import { supabase } from '../lib/supabase';
 import type { UserRole } from '../lib/database.types';
-import { ROLE_NAME, isFreeEmail, isGatedRole } from '../lib/authRules';
+import { ROLE_NAME } from '../lib/authRules';
 import { forgetIntendedRole, rememberIntendedRole } from '../lib/intendedRole';
 
 type Mode = 'login' | 'signup';
@@ -88,7 +88,6 @@ function AuthCard({ stakeholder: s, mode, onMode, wrongRole }: AuthCardProps) {
   const navigate = useNavigate();
   const formRef = useRef<HTMLFormElement>(null);
   const signup = mode === 'signup';
-  const gated = isGatedRole(s.id);
 
   // after a failed submit, move focus to the first field that needs fixing
   useEffect(() => {
@@ -105,8 +104,6 @@ function AuthCard({ stakeholder: s, mode, onMode, wrongRole }: AuthCardProps) {
 
     if (signup && !get('name')) next.name = 'Enter your full name.';
     if (!EMAIL.test(get('email'))) next.email = 'Enter a valid email, like you@college.edu.';
-    else if (signup && gated && isFreeEmail(get('email')))
-      next.email = `${s.name} accounts need a work or institution email, not a personal one like Gmail.`;
     if (signup && !get('org')) next.org = `Enter your ${s.signupField.label.toLowerCase()}.`;
     const password = String(data.get('password') ?? '');
     if (signup && password.length < 8) next.password = 'Use at least 8 characters.';
@@ -139,9 +136,7 @@ function AuthCard({ stakeholder: s, mode, onMode, wrongRole }: AuthCardProps) {
         } else {
           setStatus({
             kind: 'info',
-            text: `Check ${get('email')} for a confirmation link.${
-              gated ? ` After you confirm, a Yogyata admin approves ${s.name} accounts before they go live.` : ''
-            }`,
+            text: `Check ${get('email')} for a confirmation link.`,
             resend: get('email'),
           });
         }
@@ -237,12 +232,6 @@ function AuthCard({ stakeholder: s, mode, onMode, wrongRole }: AuthCardProps) {
           <input {...field('email')} type="email" autoComplete="email" placeholder="you@college.edu" />
           {err('email')}
         </div>
-        {signup && gated && (
-          <p className="auth-note">
-            {s.name} accounts use a work or institution email and are approved by the Yogyata team before they can{' '}
-            {s.id === 'mentor' ? 'assess skills' : 'search talent'}.
-          </p>
-        )}
         {signup && (
           <div className="field">
             <label htmlFor={`${uid}-org`}>{s.signupField.label}</label>
@@ -309,14 +298,24 @@ function AuthCard({ stakeholder: s, mode, onMode, wrongRole }: AuthCardProps) {
 const ONE_ROLE =
   'This email, or a variation of it, already has a Yogyata account. Each email holds one role: log in on the page for the role it was registered with.';
 
+/** Supabase auth errors carry a stable `code`; the message wording is not guaranteed. */
+function authErrorCode(error: unknown): string {
+  if (typeof error !== 'object' || error === null || !('code' in error)) return '';
+  return String((error as { code?: unknown }).code ?? '');
+}
+
 function friendlyAuthError(error: unknown): string {
   const message = error instanceof Error ? error.message : String(error);
+  const code = authErrorCode(error);
   if (/invalid login credentials/i.test(message)) return 'That email and password do not match an account.';
   if (/email not confirmed/i.test(message)) return 'Confirm your email first: open the link we sent you, then log in.';
   if (/already registered/i.test(message) || message === ONE_ROLE) return ONE_ROLE;
+  // the project's own hourly cap on confirmation emails, not anything this person did
+  if (code === 'over_email_send_rate_limit' || /email rate limit/i.test(message))
+    return 'Your account was not created: Yogyata has hit its hourly limit for confirmation emails. Wait an hour and try again, or ask the Yogyata team to set up email delivery.';
   if (/rate limit/i.test(message)) return 'Too many attempts. Wait a few minutes and try again.';
-  // the sign-up trigger's reasons reach the browser only as this generic message. Personal emails for
-  // mentors and recruiters are stopped before sending, so here it is almost always a reused email.
+  // the sign-up trigger's reasons reach the browser only as this generic message; a reused email is the
+  // usual cause, but any rule still enforced in the trigger (such as a work-email check) also lands here
   if (/database error saving new user/i.test(message)) return ONE_ROLE;
   if (/same.*password|different from the old/i.test(message)) return 'Choose a password you have not used here before.';
   if (/weak|pwned|leaked/i.test(message)) return 'That password appears in known data leaks. Choose a different one.';

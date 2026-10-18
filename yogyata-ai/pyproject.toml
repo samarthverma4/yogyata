@@ -25,5 +25,5 @@ where = ["src"]
 yogyata_ai = ["resume_intelligence/data/*.json", "common/data/*.json", "*/data/*.json"]
 
 [tool.pytest.ini_options]
-testpaths = ["tests"]
-pythonpath = ["src"]
+testpaths = ["tests", "service/tests"]
+pythonpath = ["src", "."]
