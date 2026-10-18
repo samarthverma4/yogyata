@@ -1,5 +1,0 @@
-# Web layer only. The core package's own deps are in ../requirements.txt
--r ../requirements.txt
-fastapi>=0.115
-uvicorn[standard]>=0.30
-httpx>=0.27

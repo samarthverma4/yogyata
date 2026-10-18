@@ -7,7 +7,9 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "oxlint",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "ai": "cd yogyata-ai && .venv/bin/uvicorn server.app:app --port 8787 --reload --reload-dir server",
+    "ai:setup": "cd yogyata-ai && uv venv --python 3.12 .venv && uv pip install --python .venv/bin/python -e \".[dev]\" -r server/requirements.txt"
   },
   "dependencies": {
     "@supabase/supabase-js": "2.45.4",

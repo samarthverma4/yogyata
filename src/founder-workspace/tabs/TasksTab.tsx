@@ -1,4 +1,5 @@
 import React, { useState, useMemo } from 'react';
+import { TaskAiCheck } from '../TaskAiCheck';
 import type {
   WorkspaceTask,
   Project,
@@ -681,6 +682,13 @@ export const TasksTab: React.FC<TasksTabProps> = ({
                   />
                 </div>
 
+                <TaskAiCheck
+                  title={formTitle}
+                  text={[formProblem, formDeliverable, formCriteria].filter(Boolean).join('\n\n')}
+                  skills={formSkills}
+                  onAddSkill={(s) => setFormSkills((cur) => (cur.includes(s) ? cur : [...cur, s]))}
+                />
+
                 {/* Skills tags */}
                 <div className="yw-form-group">
                   <label className="yw-form-label">Required Skills</label>
@@ -905,6 +913,13 @@ export const TasksTab: React.FC<TasksTabProps> = ({
                     onChange={(e) => setFormCriteria(e.target.value)}
                   />
                 </div>
+
+                <TaskAiCheck
+                  title={formTitle}
+                  text={[formProblem, formDeliverable, formCriteria].filter(Boolean).join('\n\n')}
+                  skills={formSkills}
+                  onAddSkill={(s) => setFormSkills((cur) => (cur.includes(s) ? cur : [...cur, s]))}
+                />
 
                 {/* Skills tags */}
                 <div className="yw-form-group">

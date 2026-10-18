@@ -49,7 +49,20 @@ Each role also has a matching `*-onboarding/` directory (`onboarding/` for seeke
 
 `src/lib/*Data.ts` (`seekerData.ts`, `mentorData.ts`, `recruiterData.ts`, `talentData.ts`, `postingData.ts`, `reviewData.ts`, `founderSync.ts`, `founderReview.ts`, `seekerGrowth.ts`) are the only places that should call `supabase.from(...)` for their respective domain — workspace/tab components call into these rather than querying Supabase directly. `src/lib/database.types.ts` holds the generated Supabase schema types (`Database`, `Profile`, `UserRole`, etc.) and is the source of truth for table/column shapes; regenerate it from the Supabase schema rather than hand-editing when the schema changes.
 
-### Database rules live in Supabase, not in this repo
+### The AI layer (`yogyata-ai/`)
+
+`yogyata-ai/` is an independent Python package (9 modules: skill gap, roadmap, opportunity and mentor matching, resume and interview analysis, practical tasks, cohort analytics, and an agent). It is deterministic and rule-based — no model is trained — and its `docs/LIMITATIONS.md` is the honest account of what the scores do and do not mean. Run its tests with `pytest` from `yogyata-ai/`.
+
+The React app cannot call it directly, because the models are Python and Supabase Edge Functions run Deno. `yogyata-ai/server/app.py` is the HTTP bridge (`npm run ai`, port 8787; `npm run ai:setup` once first), and `src/lib/aiClient.ts` is the typed client consumed by `AiCoachTab` and `TaskAiCheck`. `npm run dev` proxies `/ai` to the bridge, so `VITE_AI_URL` is only needed when it runs elsewhere.
+
+Two invariants hold the trust model together, and both have tests:
+
+- **The bridge never mints evidence.** Verified skills come only from `endorse_submission_skill` and `mentor_review_skill` in Postgres, where RLS decides who may promote a skill. The agent's `session` is therefore not a trust boundary: `session.profile`, `session.evidence` and `session.review_ledger` are re-derived server-side on every call, because each would otherwise let a caller grant themselves a Verified skill.
+- **The bridge holds no service-role key.** Every read uses the caller's own access token, so it can never see more than that user could.
+
+Translation between the two schemas lives in `server/app.py` and `server/vocab.py`: `passport_skills.level` becomes an evidence source plus a strength, app role labels map onto the three scored role catalogs (unmapped roles return `422 unsupported_role` rather than being scored against the wrong one), and free-text skill names are canonicalised against the 46-skill taxonomy with anything unrecognised returned as `unmapped_skills` so the UI can say which skills the model cannot see.
+
+## Database rules live in Supabase, not in this repo
 
 Row-level security, the mentor/recruiter approval gate, the one-email-per-role rule, skill endorsement/verification logic, and similar invariants are enforced by Postgres policies and functions in the Supabase project itself — there are no migration files in this repo. `supabase/tests/role_rules_test.sql` and `supabase/tests/workspace_rules_test.sql` are rolled-back scripts that exercise those rules: paste one into the Supabase SQL editor and run it; each ends by deliberately raising an error whose message starts with `RESULT:` and lists `ok<n>`/`FAIL<n>` per check, so the transaction rolls back and no test rows are left behind. When changing anything role/permission/verification-related, check these scripts for the behavior they assume and update them if the Supabase-side rules change.
 

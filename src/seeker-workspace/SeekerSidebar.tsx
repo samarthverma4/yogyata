@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import { LayoutDashboard, BadgeCheck, Search, Inbox, Mail, LogOut, User, X, ClipboardCheck, Briefcase, GraduationCap, Map as MapIcon } from 'lucide-react';
+import { LayoutDashboard, BadgeCheck, Search, Inbox, Mail, LogOut, User, X, ClipboardCheck, Briefcase, GraduationCap, Map as MapIcon, Sparkles } from 'lucide-react';
 import { BrandMark } from '../brand/BrandMark';
 import type { SeekerTab } from './shared';
 
@@ -45,6 +45,7 @@ export function SeekerSidebar({
     { id: 'opportunities', label: 'Jobs & Applications', icon: <Briefcase size={18} aria-hidden="true" /> },
     { id: 'mentors', label: 'Mentors', icon: <GraduationCap size={18} aria-hidden="true" /> },
     { id: 'roadmap', label: 'Career Roadmap', icon: <MapIcon size={18} aria-hidden="true" /> },
+    { id: 'ai-coach', label: 'AI Coach', icon: <Sparkles size={18} aria-hidden="true" /> },
     {
       id: 'invitations',
       label: 'Invitations',

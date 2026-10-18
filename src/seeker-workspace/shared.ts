@@ -9,6 +9,7 @@ export type SeekerTab =
   | 'opportunities'
   | 'mentors'
   | 'roadmap'
+  | 'ai-coach'
   | 'invitations';
 
 export const LEVEL_LABEL: Record<SkillLevel, string> = {
