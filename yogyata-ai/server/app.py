@@ -25,6 +25,7 @@ from pydantic import BaseModel, Field, ValidationError
 from yogyata_ai import interview, mentor_recommendation, opportunity_matching, practical_tasks, resume_intelligence, roadmap, skill_gap
 from yogyata_ai.agent import confirm_action, run_agent
 from yogyata_ai.common.taxonomy import get_taxonomy
+from yogyata_ai.practical_tasks.catalog import TaskCatalog
 
 
 # ─── Configuration (public values only: the URL and the publishable key) ──────
@@ -303,3 +304,119 @@ class ConfirmIn(BaseModel):
 def assistant_confirm(body: ConfirmIn, c: Caller = Depends(seeker_only)) -> dict[str, Any]:
     # called only from an explicit click in the UI; the handoff is never executed here
     return _call(confirm_action, body.session, body.action_id, user_confirmed=body.user_confirmed)
+
+
+# ─── Founder: AI first look at a submission ─────────────────────────────────
+# Maps a founder task row onto the package's PracticalTask so practical_tasks.evaluate
+# can run its rubric checks. Only presence checks are automatic; every acceptance
+# criterion the founder wrote stays a human check.
+_DELIVERABLE_TERMS = {"README": ["readme"], "tests": ["test", "unit test"], "report": ["report", "write-up", "writeup"],
+                      "code": ["code", "script", "implementation"], "dashboard": ["dashboard"],
+                      "presentation": ["presentation", "slides"], "documentation": ["documentation", "docs"]}
+
+
+def _task_skills(raw: list[str]) -> list[str]:
+    return list(dict.fromkeys(_canon(s) or s.strip() for s in raw if s and s.strip()))
+
+
+def practical_task(row: dict[str, Any]) -> dict[str, Any]:
+    skills = _task_skills(row.get("required_skills") or [])
+    brief = "\n".join(x for x in (row.get("problem_statement"), row.get("expected_deliverable"), row.get("evaluation_criteria")) if x)
+    draft = practical_tasks.interpret(brief or row["title"], title=row["title"])
+    rubric: list[dict[str, Any]] = []
+    if skills:
+        rubric.append({"id": "skills", "description": "Explains the work in terms of the required skills", "weight": 2.0,
+                       "check": {"type": "concepts", "groups": [[s.lower()] for s in skills], "min_groups": max(1, (len(skills) + 1) // 2)}})
+    for d in draft["deliverables"]:
+        rubric.append({"id": f"deliverable_{d.lower()}", "description": f"Mentions the expected {d}", "weight": 1.0,
+                       "check": {"type": "concepts", "groups": [_DELIVERABLE_TERMS[d]]}})
+    rubric.append({"id": "explained", "description": "Notes explain what was built and how", "weight": 1.0, "check": {"type": "min_words", "n": 80}})
+    rubric += [{**c, "id": f"criterion_{c['id']}"} for c in draft["draft_rubric"]]
+    if not draft["draft_rubric"]:
+        rubric.append({"id": "criterion_quality", "description": "The linked work meets the task brief", "weight": 2.0, "check": {"type": "human"}})
+    return {"id": row["id"], "title": row["title"], "description": (row.get("problem_statement") or row["title"])[:4000],
+            "skills": skills or ["General"], "difficulty": draft["difficulty"],
+            "estimated_hours": min(200.0, draft["estimated_hours"] or 8.0), "deliverables": draft["deliverables"],
+            "rubric": rubric, "source": "startup"}
+
+
+class SubmissionCheckIn(BaseModel):
+    submission_id: str = Field(min_length=1, max_length=64)
+
+
+@app.post("/ai/submission-check")
+async def submission_check(body: SubmissionCheckIn, c: Caller = Depends(founder_only)) -> dict[str, Any]:
+    rows = await _rest(c.token, "submissions", {
+        "id": f"eq.{body.submission_id}", "task.founder_id": f"eq.{c.user_id}",
+        "select": "id,notes,task:tasks!inner(id,title,problem_statement,required_skills,expected_deliverable,evaluation_criteria,founder_id)"})
+    if not rows:
+        raise HTTPException(404, "That submission is not on one of your tasks.")
+    task = practical_task(rows[0]["task"])
+    # emit_evidence stays off: this is a first look for the founder, never evidence on the passport
+    out = _call(practical_tasks.evaluate, task, rows[0]["notes"] or "")
+    out.pop("suggested_evidence", None)
+    return {"task_title": task["title"], "feedback": out,
+            "read_note": "Only the candidate's notes were read. The linked work was not opened, so judge it yourself."}
+
+
+# ─── Seeker: interview summary, roadmap update, resume against a posting, tasks for you ──
+class InterviewSummaryIn(BaseModel):
+    history: list[dict[str, Any]] = Field(default_factory=list, max_length=60)
+    kind: str | None = None
+
+
+@app.post("/ai/interview/summary")
+def interview_summary(body: InterviewSummaryIn, c: Caller = Depends(seeker_only)) -> dict[str, Any]:
+    payload = {"history": body.history, "interview_type": body.kind}
+    return {"topics": _call(interview.topic_performance, payload), "plan": _call(interview.practice_plan, payload)}
+
+
+class RoadmapUpdateIn(RoadmapIn):
+    completed_activity_ids: list[str] = Field(default_factory=list, max_length=100)
+
+
+@app.post("/ai/roadmap/update")
+async def ai_roadmap_update(body: RoadmapUpdateIn, c: Caller = Depends(seeker_only)) -> dict[str, Any]:
+    profile, role_id = await seeker_profile(c, body.role)
+    profile.update(weekly_hours=body.weekly_hours, timeline_weeks=body.timeline_weeks)
+    return _call(roadmap.update_roadmap, {"profile": profile, "role_id": role_id}, completed_activity_ids=body.completed_activity_ids)
+
+
+class ResumeCompareIn(BaseModel):
+    resume_text: str = Field(min_length=40, max_length=60000)
+    posting_id: str = Field(min_length=1, max_length=64)
+
+
+@app.post("/ai/resume/compare")
+async def resume_compare(body: ResumeCompareIn, c: Caller = Depends(seeker_only)) -> dict[str, Any]:
+    posts = await _rest(c.token, "job_postings", {"id": f"eq.{body.posting_id}", "status": "eq.open",
+                                                  "select": "id,title,description,required_skills,experience"})
+    if not posts:
+        raise HTTPException(404, "That posting is not open any more.")
+    p = posts[0]
+    jd = f"{p['title']}\n\n{p['description']}\n\nRequired skills: {', '.join(p['required_skills'])}"
+    if p.get("experience"):
+        jd += f"\nExperience: {p['experience']}"
+    return {"posting_title": p["title"], "comparison": _call(resume_intelligence.compare_job, {"resume_text": body.resume_text, "job_description": jd[:20000]})}
+
+
+@app.get("/ai/tasks-for-you")
+async def tasks_for_you(role: str | None = Query(None), c: Caller = Depends(seeker_only)) -> dict[str, Any]:
+    profile, role_id = await seeker_profile(c, role)
+    rows = await _rest(c.token, "tasks", {"status": "eq.published", "select": "id,title,org_name,problem_statement,required_skills,expected_deliverable,evaluation_criteria"})
+    mine = await _rest(c.token, "submissions", {"seeker_id": f"eq.{c.user_id}", "select": "task_id"})
+    org = {r["id"]: r["org_name"] for r in rows}
+    built = []
+    for r in rows:
+        t = practical_task(r)
+        t["skills"] = [s for s in t["skills"] if _canon(s) == s]  # the catalog accepts taxonomy skills only
+        if t["skills"]:
+            built.append(t)
+    if not built:
+        return {"recommendations": [], "not_recommended": [], "notes": ["No published founder task lists a skill Yogyata AI recognises yet."]}
+    catalog = _call(TaskCatalog.from_dict, {"tasks": built})
+    out = _call(practical_tasks.recommend, {"profile": profile, "role_id": role_id, "limit": 5,
+                                            "completed_task_ids": [m["task_id"] for m in mine]}, catalog=catalog)
+    for rec in out["recommendations"]:
+        rec["organisation"] = org.get(rec["task_id"], "")
+    return out
