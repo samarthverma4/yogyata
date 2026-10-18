@@ -5,12 +5,21 @@ every student builds a **Skill Passport** where each skill carries a level — *
 or *Verified* — and `Verified` can only be granted by a human who reviewed real work.
 
 <p align="center">
-  <img src="docs/screenshots/01-role-picker.png" alt="Yogyata role picker: Entrepreneur, Seeker, Mentor, Recruiter" width="820">
+  <a href="https://youtu.be/_6aWURiga70">
+    <img src="https://i.ytimg.com/vi/_6aWURiga70/maxresdefault.jpg" alt="Watch the Yogyata platform and demo video" width="720">
+  </a>
+</p>
+<p align="center">
+  <strong><a href="https://youtu.be/_6aWURiga70">▶&nbsp; Watch the platform &amp; demo video</a></strong>
 </p>
 
 ## The four roles
 
 One Supabase backend, four workspaces:
+
+<p align="center">
+  <img src="docs/screenshots/01-role-picker.png" alt="Yogyata role picker: Entrepreneur, Seeker, Mentor, Recruiter" width="760">
+</p>
 
 | Role | What they do |
 |---|---|
