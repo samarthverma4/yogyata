@@ -9,6 +9,8 @@ import { InterviewsTab } from './tabs/InterviewsTab';
 import { ScorecardsTab } from './tabs/ScorecardsTab';
 import { CompanyTab } from './tabs/CompanyTab';
 import { SettingsTab } from './tabs/SettingsTab';
+import { PostingsTab } from './ours/PostingsTab';
+import { InvitationsPanel } from './ours/TalentInvites';
 import type {
   RecruiterWorkspaceState,
   RecruiterWorkspaceTab,
@@ -19,198 +21,109 @@ import type {
   RecruiterSettings,
 } from './types';
 import type { CompanyProfile } from '../recruiter-onboarding/types';
-import {
-  saveRecruiterWorkspace,
-  resetRecruiterWorkspaceToDemo,
-} from './storage';
+import * as data from '../lib/recruiterData';
 
 interface RecruiterWorkspaceProps {
-  initialWorkspace: RecruiterWorkspaceState;
-  onExitToHome: () => void;
+  userId: string;
+  onSignOut: () => void;
 }
 
-export const RecruiterWorkspace: React.FC<RecruiterWorkspaceProps> = ({
-  initialWorkspace,
-  onExitToHome,
-}) => {
-  const [workspace, setWorkspace] = useState<RecruiterWorkspaceState>(initialWorkspace);
+/** Recruiter workspace (screens from upstream), backed by Supabase. */
+export const RecruiterWorkspace: React.FC<RecruiterWorkspaceProps> = ({ userId, onSignOut }) => {
+  const onExitToHome = onSignOut;
+  const [workspace, setWorkspace] = useState<RecruiterWorkspaceState | null>(null);
+  const [loadError, setLoadError] = useState('');
+  const [saveError, setSaveError] = useState('');
   const [activeTab, setActiveTab] = useState<RecruiterWorkspaceTab>('overview');
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  // Autosave workspace on every state change
+  const reload = useCallback(async () => {
+    try {
+      setWorkspace(await data.loadRecruiterWorkspace(userId));
+      setLoadError('');
+    } catch (e) {
+      setLoadError(e instanceof Error ? e.message : 'Could not load your workspace.');
+    }
+  }, [userId]);
+
   useEffect(() => {
-    saveRecruiterWorkspace(workspace);
-  }, [workspace]);
+    let live = true;
+    data
+      .loadRecruiterWorkspace(userId)
+      .then((w) => live && setWorkspace(w))
+      .catch((e: unknown) => live && setLoadError(e instanceof Error ? e.message : 'Could not load your workspace.'));
+    return () => {
+      live = false;
+    };
+  }, [userId]);
 
-  // Available roles for hiring filters and target openings
-  const availableRoles = workspace.hiring.rolesCommonlyHired.length > 0
-    ? workspace.hiring.rolesCommonlyHired
-    : ['Senior Technical Contributor', 'Frontend Engineer', 'Backend Specialist'];
-
-  // 1. Candidate Bookmark Toggle
-  const handleToggleSaveCandidate = useCallback((candidateId: string) => {
-    setWorkspace((prev) => ({
-      ...prev,
-      candidates: prev.candidates.map((c) =>
-        c.id === candidateId ? { ...c, isSaved: !c.isSaved } : c
-      ),
-    }));
-  }, []);
-
-  // 2. Add Candidate to Pipeline
-  const handleAddToPipeline = useCallback((candidateId: string, role: string, stage: PipelineStage) => {
-    setWorkspace((prev) => {
-      // Check if already in active pipeline
-      const existing = prev.pipeline.find((p) => p.candidateId === candidateId && p.stage !== 'archived');
-      if (existing) {
-        return prev;
-      }
-
-      const candidate = prev.candidates.find((c) => c.id === candidateId);
-      const todayStr = new Date().toISOString().split('T')[0];
-
-      const newPipelineEntry = {
-        id: `pipe-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`,
-        candidateId,
-        candidateName: candidate?.name || 'Candidate',
-        targetRole: role,
-        stage,
-        priority: 'medium' as PipelinePriority,
-        dateAdded: todayStr,
-        lastUpdated: todayStr,
-        recruiterNotes: 'Added to pipeline from Talent Search.',
-        nextAction: 'Review profile and schedule initial round',
-        tags: candidate?.verifiedSkills || [],
-      };
-
-      return {
-        ...prev,
-        pipeline: [newPipelineEntry, ...prev.pipeline],
-      };
-    });
-  }, []);
-
-  // 3. Pipeline Stage Update
-  const handleUpdateStage = useCallback((pipelineId: string, nextStage: PipelineStage) => {
-    const todayStr = new Date().toISOString().split('T')[0];
-    setWorkspace((prev) => ({
-      ...prev,
-      pipeline: prev.pipeline.map((p) =>
-        p.id === pipelineId ? { ...p, stage: nextStage, lastUpdated: todayStr } : p
-      ),
-    }));
-  }, []);
-
-  // 4. Pipeline Details Update (notes, action, priority, tags)
-  const handleUpdatePipelineDetails = useCallback(
-    (
-      pipelineId: string,
-      data: { recruiterNotes?: string; nextAction?: string; priority?: PipelinePriority; tags?: string[] }
-    ) => {
-      const todayStr = new Date().toISOString().split('T')[0];
-      setWorkspace((prev) => ({
-        ...prev,
-        pipeline: prev.pipeline.map((p) =>
-          p.id === pipelineId ? { ...p, ...data, lastUpdated: todayStr } : p
-        ),
-      }));
+  // every action writes to Supabase, then reloads so the screens show what was saved
+  const run = useCallback(
+    (action: Promise<{ error?: string }>) => {
+      void action.then(async (res) => {
+        setSaveError(res.error ?? '');
+        await reload();
+      });
     },
-    []
+    [reload],
   );
 
-  // 5. Remove Candidate from Pipeline
-  const handleRemoveFromPipeline = useCallback((pipelineId: string) => {
-    setWorkspace((prev) => ({
-      ...prev,
-      pipeline: prev.pipeline.filter((p) => p.id !== pipelineId),
-    }));
-  }, []);
+  const handleToggleSaveCandidate = useCallback(
+    (candidateId: string) => {
+      data.toggleSavedCandidate(candidateId);
+      void reload();
+    },
+    [reload],
+  );
+  const handleAddToPipeline = useCallback(
+    (candidateId: string, role: string, stage: PipelineStage) => {
+      const c = workspace?.candidates.find((x) => x.id === candidateId);
+      run(data.addToPipeline(candidateId, role, stage, c?.verifiedSkills ?? []));
+    },
+    [run, workspace],
+  );
+  const handleUpdateStage = useCallback((id: string, stage: PipelineStage) => run(data.updatePipeline(id, { stage })), [run]);
+  const handleUpdatePipelineDetails = useCallback(
+    (id: string, d: { recruiterNotes?: string; nextAction?: string; priority?: PipelinePriority; tags?: string[] }) =>
+      run(data.updatePipeline(id, d)),
+    [run],
+  );
+  const handleRemoveFromPipeline = useCallback((id: string) => run(data.removeFromPipeline(id)), [run]);
+  const handleScheduleInterview = useCallback((i: Omit<Interview, 'id'>) => run(data.scheduleInterview(i)), [run]);
+  const handleUpdateInterview = useCallback((id: string, u: Partial<Interview>) => run(data.updateInterview(id, u)), [run]);
+  const handleCancelInterview = useCallback(
+    (id: string, reason: string) => run(data.updateInterview(id, { status: 'cancelled', cancellationReason: reason })),
+    [run],
+  );
+  const handleCreateScorecard = useCallback((s: Omit<Scorecard, 'id' | 'submittedAt'>) => run(data.createScorecard(s)), [run]);
+  const handleUpdateScorecard = useCallback((id: string, u: Partial<Scorecard>) => run(data.updateScorecard(id, u)), [run]);
+  const handleDeleteScorecard = useCallback((id: string) => run(data.deleteScorecard(id)), [run]);
+  const handleSaveCompany = useCallback((c: CompanyProfile) => run(data.saveCompany(userId, c)), [run, userId]);
+  const handleSaveSettings = useCallback((s: RecruiterSettings) => run(data.saveSettings(userId, s)), [run, userId]);
 
-  // 6. Schedule Interview
-  const handleScheduleInterview = useCallback((interviewData: Omit<Interview, 'id'>) => {
-    const newInterview: Interview = {
-      ...interviewData,
-      id: `int-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`,
-    };
-    setWorkspace((prev) => ({
-      ...prev,
-      interviews: [newInterview, ...prev.interviews],
-    }));
-  }, []);
+  if (!workspace) {
+    return loadError ? (
+      <p className="yg-sync-error" role="alert">
+        {loadError}{' '}
+        <button type="button" className="ob-inline-link-btn" onClick={reload}>
+          Try again
+        </button>
+      </p>
+    ) : (
+      <p className="yg-loading">Loading your workspace…</p>
+    );
+  }
 
-  // 7. Update Interview
-  const handleUpdateInterview = useCallback((id: string, updates: Partial<Interview>) => {
-    setWorkspace((prev) => ({
-      ...prev,
-      interviews: prev.interviews.map((i) => (i.id === id ? { ...i, ...updates } : i)),
-    }));
-  }, []);
-
-  // 8. Cancel Interview
-  const handleCancelInterview = useCallback((id: string, reason: string) => {
-    setWorkspace((prev) => ({
-      ...prev,
-      interviews: prev.interviews.map((i) =>
-        i.id === id ? { ...i, status: 'cancelled', cancellationReason: reason } : i
-      ),
-    }));
-  }, []);
-
-  // 9. Scorecards: Create
-  const handleCreateScorecard = useCallback((scorecardData: Omit<Scorecard, 'id' | 'submittedAt'>) => {
-    const newScorecard: Scorecard = {
-      ...scorecardData,
-      id: `sc-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`,
-      submittedAt: new Date().toISOString(),
-    };
-    setWorkspace((prev) => ({
-      ...prev,
-      scorecards: [newScorecard, ...prev.scorecards],
-    }));
-  }, []);
-
-  // 10. Scorecards: Update
-  const handleUpdateScorecard = useCallback((id: string, updates: Partial<Scorecard>) => {
-    setWorkspace((prev) => ({
-      ...prev,
-      scorecards: prev.scorecards.map((sc) => (sc.id === id ? { ...sc, ...updates } : sc)),
-    }));
-  }, []);
-
-  // 11. Scorecards: Delete
-  const handleDeleteScorecard = useCallback((id: string) => {
-    setWorkspace((prev) => ({
-      ...prev,
-      scorecards: prev.scorecards.filter((sc) => sc.id !== id),
-    }));
-  }, []);
-
-  // 12. Save Company Profile
-  const handleSaveCompany = useCallback((company: CompanyProfile) => {
-    setWorkspace((prev) => ({
-      ...prev,
-      company,
-    }));
-  }, []);
-
-  // 13. Save Settings
-  const handleSaveSettings = useCallback((settings: RecruiterSettings) => {
-    setWorkspace((prev) => ({
-      ...prev,
-      settings,
-    }));
-  }, []);
-
-  // 14. Reset to Demo Data
-  const handleResetDemoData = useCallback(() => {
-    const fresh = resetRecruiterWorkspaceToDemo();
-    setWorkspace(fresh);
-  }, []);
+  // Available roles for hiring filters and target openings
+  const availableRoles =
+    workspace.hiring.rolesCommonlyHired.length > 0
+      ? workspace.hiring.rolesCommonlyHired
+      : ['Frontend Engineer', 'Backend Engineer', 'Full-Stack Developer'];
 
   const upcomingInterviewCount = workspace.interviews.filter((i) => i.status === 'scheduled').length;
 
   return (
-    <div className="recruiter-workspace-root" style={{ minHeight: '100vh', background: '#F8FAFC', display: 'flex', flexDirection: 'column' }}>
+    <div className="recruiter-workspace-root" style={{ minHeight: '100vh', background: 'var(--color-bg)', display: 'flex', flexDirection: 'column' }}>
       {/* Header */}
       <RecruiterHeader
         recruiter={workspace.recruiter}
@@ -220,6 +133,12 @@ export const RecruiterWorkspace: React.FC<RecruiterWorkspaceProps> = ({
         onExitToHome={onExitToHome}
         onToggleMobileMenu={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
       />
+
+      {saveError && (
+        <p className="yg-sync-error" role="alert">
+          That change was not saved: {saveError}
+        </p>
+      )}
 
       {/* Main Workspace Body with Sidebar & Content */}
       <div style={{ display: 'flex', flex: 1, position: 'relative' }}>
@@ -252,6 +171,10 @@ export const RecruiterWorkspace: React.FC<RecruiterWorkspaceProps> = ({
               onAddToPipeline={handleAddToPipeline}
             />
           )}
+
+          {activeTab === 'postings' && <PostingsTab userId={userId} onChanged={reload} />}
+
+          {activeTab === 'invitations' && <InvitationsPanel userId={userId} />}
 
           {activeTab === 'pipeline' && (
             <PipelineTab
@@ -302,8 +225,7 @@ export const RecruiterWorkspace: React.FC<RecruiterWorkspaceProps> = ({
               recruiter={workspace.recruiter}
               availableRoles={availableRoles}
               onSaveSettings={handleSaveSettings}
-              onResetDemoData={handleResetDemoData}
-              onExitToHome={onExitToHome}
+                            onExitToHome={onExitToHome}
             />
           )}
         </main>

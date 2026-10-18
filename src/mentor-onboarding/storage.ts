@@ -1,3 +1,4 @@
+import { scopedKey } from '../lib/storageScope';
 import type { MentorOnboardingState, MentorOnboardingView } from './types';
 import { INITIAL_MENTOR_ONBOARDING_STATE } from './types';
 
@@ -59,7 +60,7 @@ export function saveMentorOnboardingDraft(
       currentView,
       state: sanitizeStateForStorage(state),
     };
-    window.localStorage.setItem(MENTOR_STORAGE_DRAFT_KEY, JSON.stringify(payload));
+    window.localStorage.setItem(scopedKey(MENTOR_STORAGE_DRAFT_KEY), JSON.stringify(payload));
     return true;
   } catch (err) {
     console.warn('Failed to save mentor onboarding draft:', err);
@@ -73,7 +74,7 @@ export function saveMentorOnboardingDraft(
 export function loadMentorOnboardingDraft(): StoredMentorDraft | null {
   if (typeof window === 'undefined' || !window.localStorage) return null;
   try {
-    const raw = window.localStorage.getItem(MENTOR_STORAGE_DRAFT_KEY);
+    const raw = window.localStorage.getItem(scopedKey(MENTOR_STORAGE_DRAFT_KEY));
     if (!raw) return null;
 
     const parsed = JSON.parse(raw);
@@ -137,7 +138,7 @@ export function loadMentorOnboardingDraft(): StoredMentorDraft | null {
 export function clearMentorOnboardingDraft(): void {
   if (typeof window === 'undefined' || !window.localStorage) return;
   try {
-    window.localStorage.removeItem(MENTOR_STORAGE_DRAFT_KEY);
+    window.localStorage.removeItem(scopedKey(MENTOR_STORAGE_DRAFT_KEY));
   } catch (err) {
     console.warn('Failed to clear mentor onboarding draft:', err);
   }

@@ -46,8 +46,8 @@ export const OverviewTab: React.FC<OverviewTabProps> = ({
       {/* Welcome Banner */}
       <div
         style={{
-          background: 'linear-gradient(135deg, #171B4D 0%, #1E3A8A 100%)',
-          borderRadius: '10px',
+          background: 'linear-gradient(135deg, var(--color-navy) 0%, #1E3A8A 100%)',
+          borderRadius: 0,
           padding: '1.5rem 1.75rem',
           color: '#FFFFFF',
           display: 'flex',
@@ -63,7 +63,7 @@ export const OverviewTab: React.FC<OverviewTabProps> = ({
               style={{
                 background: 'rgba(255, 255, 255, 0.15)',
                 padding: '0.15rem 0.5rem',
-                borderRadius: '9999px',
+                borderRadius: 0,
                 fontSize: '0.72rem',
                 fontWeight: 600,
                 textTransform: 'uppercase',
@@ -113,70 +113,70 @@ export const OverviewTab: React.FC<OverviewTabProps> = ({
           gap: '1rem',
         }}
       >
-        <div className="stat-card" style={{ background: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: '8px', padding: '1.125rem' }}>
+        <div className="stat-card" style={{ background: '#FFFFFF', border: '1px solid var(--color-border)', borderRadius: 0, padding: '1.125rem' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-            <span style={{ fontSize: '0.8125rem', color: '#64748B', fontWeight: 500 }}>
+            <span style={{ fontSize: '0.8125rem', color: 'var(--color-text-muted)', fontWeight: 500 }}>
               Total in Pipeline
             </span>
-            <div style={{ width: '32px', height: '32px', borderRadius: '6px', background: '#F0FDF4', color: '#15803D', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <div style={{ width: '32px', height: '32px', borderRadius: 0, background: '#F0FDF4', color: '#15803D', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <Users size={16} />
             </div>
           </div>
-          <div style={{ fontSize: '1.75rem', fontWeight: 700, color: '#0F172A', marginTop: '0.35rem' }}>
+          <div style={{ fontSize: '1.75rem', fontWeight: 700, color: 'var(--color-navy)', marginTop: '0.35rem' }}>
             {totalPipeline}
           </div>
-          <div style={{ fontSize: '0.75rem', color: '#64748B', marginTop: '0.2rem' }}>
+          <div style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)', marginTop: '0.2rem' }}>
             Active hiring candidates
           </div>
         </div>
 
-        <div className="stat-card" style={{ background: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: '8px', padding: '1.125rem' }}>
+        <div className="stat-card" style={{ background: '#FFFFFF', border: '1px solid var(--color-border)', borderRadius: 0, padding: '1.125rem' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-            <span style={{ fontSize: '0.8125rem', color: '#64748B', fontWeight: 500 }}>
+            <span style={{ fontSize: '0.8125rem', color: 'var(--color-text-muted)', fontWeight: 500 }}>
               Under Screening
             </span>
-            <div style={{ width: '32px', height: '32px', borderRadius: '6px', background: '#EFF6FF', color: '#1D4ED8', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <div style={{ width: '32px', height: '32px', borderRadius: 0, background: 'var(--color-blue-tint)', color: 'var(--color-blue-hover)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <Layers size={16} />
             </div>
           </div>
-          <div style={{ fontSize: '1.75rem', fontWeight: 700, color: '#0F172A', marginTop: '0.35rem' }}>
+          <div style={{ fontSize: '1.75rem', fontWeight: 700, color: 'var(--color-navy)', marginTop: '0.35rem' }}>
             {screeningCount}
           </div>
-          <div style={{ fontSize: '0.75rem', color: '#64748B', marginTop: '0.2rem' }}>
+          <div style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)', marginTop: '0.2rem' }}>
             Profiles in initial review
           </div>
         </div>
 
-        <div className="stat-card" style={{ background: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: '8px', padding: '1.125rem' }}>
+        <div className="stat-card" style={{ background: '#FFFFFF', border: '1px solid var(--color-border)', borderRadius: 0, padding: '1.125rem' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-            <span style={{ fontSize: '0.8125rem', color: '#64748B', fontWeight: 500 }}>
+            <span style={{ fontSize: '0.8125rem', color: 'var(--color-text-muted)', fontWeight: 500 }}>
               Upcoming Interviews
             </span>
-            <div style={{ width: '32px', height: '32px', borderRadius: '6px', background: '#FFFBEB', color: '#D97706', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <div style={{ width: '32px', height: '32px', borderRadius: 0, background: '#FFFBEB', color: '#D97706', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <Calendar size={16} />
             </div>
           </div>
-          <div style={{ fontSize: '1.75rem', fontWeight: 700, color: '#0F172A', marginTop: '0.35rem' }}>
+          <div style={{ fontSize: '1.75rem', fontWeight: 700, color: 'var(--color-navy)', marginTop: '0.35rem' }}>
             {upcomingInterviews.length}
           </div>
-          <div style={{ fontSize: '0.75rem', color: '#64748B', marginTop: '0.2rem' }}>
+          <div style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)', marginTop: '0.2rem' }}>
             Scheduled technical rounds
           </div>
         </div>
 
-        <div className="stat-card" style={{ background: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: '8px', padding: '1.125rem' }}>
+        <div className="stat-card" style={{ background: '#FFFFFF', border: '1px solid var(--color-border)', borderRadius: 0, padding: '1.125rem' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-            <span style={{ fontSize: '0.8125rem', color: '#64748B', fontWeight: 500 }}>
+            <span style={{ fontSize: '0.8125rem', color: 'var(--color-text-muted)', fontWeight: 500 }}>
               Offers in Progress
             </span>
-            <div style={{ width: '32px', height: '32px', borderRadius: '6px', background: '#FAF5FF', color: '#7E22CE', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <div style={{ width: '32px', height: '32px', borderRadius: 0, background: 'var(--color-blue-tint)', color: 'var(--color-blue-hover)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <Award size={16} />
             </div>
           </div>
-          <div style={{ fontSize: '1.75rem', fontWeight: 700, color: '#0F172A', marginTop: '0.35rem' }}>
+          <div style={{ fontSize: '1.75rem', fontWeight: 700, color: 'var(--color-navy)', marginTop: '0.35rem' }}>
             {offerCount}
           </div>
-          <div style={{ fontSize: '0.75rem', color: '#64748B', marginTop: '0.2rem' }}>
+          <div style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)', marginTop: '0.2rem' }}>
             {hiredCount} candidate{hiredCount === 1 ? '' : 's'} hired
           </div>
         </div>
@@ -186,17 +186,17 @@ export const OverviewTab: React.FC<OverviewTabProps> = ({
       <div
         style={{
           background: '#FFFFFF',
-          border: '1px solid #E2E8F0',
-          borderRadius: '8px',
+          border: '1px solid var(--color-border)',
+          borderRadius: 0,
           padding: '1.25rem',
         }}
       >
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.75rem' }}>
           <div>
-            <h3 style={{ margin: 0, fontSize: '0.9375rem', fontWeight: 600, color: '#0F172A' }}>
+            <h3 style={{ margin: 0, fontSize: '0.9375rem', fontWeight: 600, color: 'var(--color-navy)' }}>
               Pipeline Stage Breakdown
             </h3>
-            <span style={{ fontSize: '0.75rem', color: '#64748B' }}>
+            <span style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)' }}>
               Active progression across technical hiring funnel
             </span>
           </div>
@@ -204,7 +204,7 @@ export const OverviewTab: React.FC<OverviewTabProps> = ({
             type="button"
             className="btn-ghost"
             onClick={() => onTabChange('pipeline')}
-            style={{ fontSize: '0.75rem', display: 'inline-flex', alignItems: 'center', gap: '0.25rem', color: '#2563EB' }}
+            style={{ fontSize: '0.75rem', display: 'inline-flex', alignItems: 'center', gap: '0.25rem', color: 'var(--color-blue)' }}
           >
             <span>Open Pipeline Board</span>
             <ArrowRight size={13} />
@@ -212,7 +212,7 @@ export const OverviewTab: React.FC<OverviewTabProps> = ({
         </div>
 
         {totalPipeline === 0 ? (
-          <p style={{ fontSize: '0.8125rem', color: '#94A3B8', fontStyle: 'italic', margin: 0 }}>
+          <p style={{ fontSize: '0.8125rem', color: 'var(--color-text-faint)', fontStyle: 'italic', margin: 0 }}>
             No candidates added to the pipeline yet. Search talent to begin sourcing.
           </p>
         ) : (
@@ -224,20 +224,20 @@ export const OverviewTab: React.FC<OverviewTabProps> = ({
                 <div
                   key={stage}
                   style={{
-                    background: '#F8FAFC',
-                    border: '1px solid #E2E8F0',
-                    borderRadius: '6px',
+                    background: 'var(--color-bg)',
+                    border: '1px solid var(--color-border)',
+                    borderRadius: 0,
                     padding: '0.625rem 0.75rem',
                   }}
                 >
-                  <div style={{ fontSize: '0.72rem', color: '#64748B', textTransform: 'capitalize' }}>
+                  <div style={{ fontSize: '0.72rem', color: 'var(--color-text-muted)', textTransform: 'capitalize' }}>
                     {STAGE_LABELS[stage]}
                   </div>
-                  <div style={{ fontSize: '1.125rem', fontWeight: 700, color: '#0F172A', marginTop: '0.15rem' }}>
+                  <div style={{ fontSize: '1.125rem', fontWeight: 700, color: 'var(--color-navy)', marginTop: '0.15rem' }}>
                     {count}
                   </div>
-                  <div style={{ width: '100%', height: '4px', background: '#E2E8F0', borderRadius: '2px', marginTop: '0.35rem', overflow: 'hidden' }}>
-                    <div style={{ width: `${pct}%`, height: '100%', background: '#2563EB', borderRadius: '2px' }} />
+                  <div style={{ width: '100%', height: '4px', background: 'var(--color-border)', borderRadius: 0, marginTop: '0.35rem', overflow: 'hidden' }}>
+                    <div style={{ width: `${pct}%`, height: '100%', background: 'var(--color-blue)', borderRadius: 0 }} />
                   </div>
                 </div>
               );
@@ -258,8 +258,8 @@ export const OverviewTab: React.FC<OverviewTabProps> = ({
         <div
           style={{
             background: '#FFFFFF',
-            border: '1px solid #E2E8F0',
-            borderRadius: '8px',
+            border: '1px solid var(--color-border)',
+            borderRadius: 0,
             padding: '1.25rem',
             display: 'flex',
             flexDirection: 'column',
@@ -268,7 +268,7 @@ export const OverviewTab: React.FC<OverviewTabProps> = ({
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
               <Calendar size={16} style={{ color: '#D97706' }} />
-              <h3 style={{ margin: 0, fontSize: '0.9375rem', fontWeight: 600, color: '#0F172A' }}>
+              <h3 style={{ margin: 0, fontSize: '0.9375rem', fontWeight: 600, color: 'var(--color-navy)' }}>
                 Upcoming Technical Interviews
               </h3>
             </div>
@@ -276,14 +276,14 @@ export const OverviewTab: React.FC<OverviewTabProps> = ({
               type="button"
               className="btn-ghost"
               onClick={() => onTabChange('interviews')}
-              style={{ fontSize: '0.75rem', color: '#2563EB', padding: 0 }}
+              style={{ fontSize: '0.75rem', color: 'var(--color-blue)', padding: 0 }}
             >
               View All ({upcomingInterviews.length})
             </button>
           </div>
 
           {upcomingInterviews.length === 0 ? (
-            <div style={{ textAlign: 'center', padding: '1.5rem 0', color: '#94A3B8', fontSize: '0.8125rem' }}>
+            <div style={{ textAlign: 'center', padding: '1.5rem 0', color: 'var(--color-text-faint)', fontSize: '0.8125rem' }}>
               No upcoming interviews scheduled.
             </div>
           ) : (
@@ -293,28 +293,28 @@ export const OverviewTab: React.FC<OverviewTabProps> = ({
                   key={interview.id}
                   style={{
                     background: '#FAFAFA',
-                    border: '1px solid #E2E8F0',
-                    borderLeft: '3px solid #3B82F6',
+                    border: '1px solid var(--color-border)',
+                    borderLeft: '3px solid var(--color-blue)',
                     borderRadius: '0 6px 6px 0',
                     padding: '0.75rem',
                   }}
                 >
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
                     <div>
-                      <strong style={{ fontSize: '0.875rem', color: '#0F172A' }}>
+                      <strong style={{ fontSize: '0.875rem', color: 'var(--color-navy)' }}>
                         {interview.candidateName}
                       </strong>
-                      <div style={{ fontSize: '0.75rem', color: '#64748B' }}>
+                      <div style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)' }}>
                         {interview.targetRole} • {ROUND_LABELS[interview.round]}
                       </div>
                     </div>
                     <span
                       style={{
                         fontSize: '0.72rem',
-                        background: '#EFF6FF',
-                        color: '#1D4ED8',
+                        background: 'var(--color-blue-tint)',
+                        color: 'var(--color-blue-hover)',
                         padding: '0.15rem 0.45rem',
-                        borderRadius: '4px',
+                        borderRadius: 0,
                         fontWeight: 600,
                       }}
                     >
@@ -322,7 +322,7 @@ export const OverviewTab: React.FC<OverviewTabProps> = ({
                     </span>
                   </div>
 
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginTop: '0.5rem', fontSize: '0.75rem', color: '#64748B' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginTop: '0.5rem', fontSize: '0.75rem', color: 'var(--color-text-muted)' }}>
                     <span>Date: {interview.date}</span>
                     <span>•</span>
                     <span>{interview.durationMinutes} mins</span>
@@ -339,14 +339,14 @@ export const OverviewTab: React.FC<OverviewTabProps> = ({
         <div
           style={{
             background: '#FFFFFF',
-            border: '1px solid #E2E8F0',
-            borderRadius: '8px',
+            border: '1px solid var(--color-border)',
+            borderRadius: 0,
             padding: '1.25rem',
             display: 'flex',
             flexDirection: 'column',
           }}
         >
-          <h3 style={{ margin: '0 0 1rem', fontSize: '0.9375rem', fontWeight: 600, color: '#0F172A' }}>
+          <h3 style={{ margin: '0 0 1rem', fontSize: '0.9375rem', fontWeight: 600, color: 'var(--color-navy)' }}>
             Recruiter Quick Actions
           </h3>
 
@@ -362,12 +362,12 @@ export const OverviewTab: React.FC<OverviewTabProps> = ({
                 padding: '0.75rem',
                 height: 'auto',
                 textAlign: 'left',
-                borderRadius: '6px',
+                borderRadius: 0,
               }}
             >
-              <Search size={16} style={{ color: '#2563EB', marginBottom: '0.25rem' }} />
-              <strong style={{ fontSize: '0.8125rem', color: '#0F172A' }}>Talent Discovery</strong>
-              <span style={{ fontSize: '0.7rem', color: '#64748B' }}>Search Skill Passports</span>
+              <Search size={16} style={{ color: 'var(--color-blue)', marginBottom: '0.25rem' }} />
+              <strong style={{ fontSize: '0.8125rem', color: 'var(--color-navy)' }}>Talent Discovery</strong>
+              <span style={{ fontSize: '0.7rem', color: 'var(--color-text-muted)' }}>Search Skill Passports</span>
             </button>
 
             <button
@@ -381,12 +381,12 @@ export const OverviewTab: React.FC<OverviewTabProps> = ({
                 padding: '0.75rem',
                 height: 'auto',
                 textAlign: 'left',
-                borderRadius: '6px',
+                borderRadius: 0,
               }}
             >
               <Layers size={16} style={{ color: '#15803D', marginBottom: '0.25rem' }} />
-              <strong style={{ fontSize: '0.8125rem', color: '#0F172A' }}>Pipeline Board</strong>
-              <span style={{ fontSize: '0.7rem', color: '#64748B' }}>Manage candidate stages</span>
+              <strong style={{ fontSize: '0.8125rem', color: 'var(--color-navy)' }}>Pipeline Board</strong>
+              <span style={{ fontSize: '0.7rem', color: 'var(--color-text-muted)' }}>Manage candidate stages</span>
             </button>
 
             <button
@@ -400,12 +400,12 @@ export const OverviewTab: React.FC<OverviewTabProps> = ({
                 padding: '0.75rem',
                 height: 'auto',
                 textAlign: 'left',
-                borderRadius: '6px',
+                borderRadius: 0,
               }}
             >
               <Calendar size={16} style={{ color: '#D97706', marginBottom: '0.25rem' }} />
-              <strong style={{ fontSize: '0.8125rem', color: '#0F172A' }}>Schedule Round</strong>
-              <span style={{ fontSize: '0.7rem', color: '#64748B' }}>Book interview timeslot</span>
+              <strong style={{ fontSize: '0.8125rem', color: 'var(--color-navy)' }}>Schedule Round</strong>
+              <span style={{ fontSize: '0.7rem', color: 'var(--color-text-muted)' }}>Book interview timeslot</span>
             </button>
 
             <button
@@ -419,27 +419,27 @@ export const OverviewTab: React.FC<OverviewTabProps> = ({
                 padding: '0.75rem',
                 height: 'auto',
                 textAlign: 'left',
-                borderRadius: '6px',
+                borderRadius: 0,
               }}
             >
-              <FileText size={16} style={{ color: '#7C3AED', marginBottom: '0.25rem' }} />
-              <strong style={{ fontSize: '0.8125rem', color: '#0F172A' }}>Scorecards</strong>
-              <span style={{ fontSize: '0.7rem', color: '#64748B' }}>Evaluate candidates</span>
+              <FileText size={16} style={{ color: 'var(--color-blue)', marginBottom: '0.25rem' }} />
+              <strong style={{ fontSize: '0.8125rem', color: 'var(--color-navy)' }}>Scorecards</strong>
+              <span style={{ fontSize: '0.7rem', color: 'var(--color-text-muted)' }}>Evaluate candidates</span>
             </button>
           </div>
 
           {/* Recent Candidate Snippet */}
-          <div style={{ marginTop: 'auto', borderTop: '1px solid #E2E8F0', paddingTop: '0.875rem' }}>
-            <span style={{ fontSize: '0.75rem', color: '#64748B', display: 'block', marginBottom: '0.5rem' }}>
+          <div style={{ marginTop: 'auto', borderTop: '1px solid var(--color-border)', paddingTop: '0.875rem' }}>
+            <span style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)', display: 'block', marginBottom: '0.5rem' }}>
               Recently Updated Candidate
             </span>
             {state.pipeline.length > 0 ? (
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <div>
-                  <strong style={{ fontSize: '0.84rem', color: '#0F172A' }}>
+                  <strong style={{ fontSize: '0.84rem', color: 'var(--color-navy)' }}>
                     {state.pipeline[0].candidateName}
                   </strong>
-                  <div style={{ fontSize: '0.75rem', color: '#64748B' }}>
+                  <div style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)' }}>
                     {state.pipeline[0].targetRole} ({state.pipeline[0].stage})
                   </div>
                 </div>
@@ -447,13 +447,13 @@ export const OverviewTab: React.FC<OverviewTabProps> = ({
                   type="button"
                   className="btn-ghost"
                   onClick={() => onTabChange('pipeline')}
-                  style={{ fontSize: '0.75rem', color: '#2563EB', padding: '0.2rem 0.5rem' }}
+                  style={{ fontSize: '0.75rem', color: 'var(--color-blue)', padding: '0.2rem 0.5rem' }}
                 >
                   View Notes
                 </button>
               </div>
             ) : (
-              <span style={{ fontSize: '0.75rem', color: '#94A3B8' }}>No candidates yet</span>
+              <span style={{ fontSize: '0.75rem', color: 'var(--color-text-faint)' }}>No candidates yet</span>
             )}
           </div>
         </div>

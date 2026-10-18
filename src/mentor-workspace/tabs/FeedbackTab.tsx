@@ -190,10 +190,10 @@ export const FeedbackTab: React.FC<FeedbackTabProps> = ({
       {/* Header */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '18px' }}>
         <div>
-          <h1 style={{ fontSize: '1.5rem', fontWeight: 800, color: '#1B2A4E', margin: '0 0 6px 0' }}>
+          <h1 style={{ fontSize: '1.5rem', fontWeight: 800, color: 'var(--color-navy)', margin: '0 0 6px 0' }}>
             Learning Feedback & Guidance
           </h1>
-          <p style={{ margin: 0, color: '#64748B', fontSize: '0.88rem' }}>
+          <p style={{ margin: 0, color: 'var(--color-text-muted)', fontSize: '0.88rem' }}>
             Provide actionable mentorship reflections, highlight core strengths, and steer technical progression.
           </p>
         </div>
@@ -204,10 +204,10 @@ export const FeedbackTab: React.FC<FeedbackTabProps> = ({
           disabled={mentees.length === 0}
           style={{
             padding: '9px 18px',
-            background: mentees.length === 0 ? '#94A3B8' : '#2563EB',
+            background: mentees.length === 0 ? 'var(--color-text-faint)' : 'var(--color-blue)',
             color: '#FFFFFF',
             border: 'none',
-            borderRadius: '6px',
+            borderRadius: 0,
             fontSize: '0.85rem',
             fontWeight: 600,
             cursor: mentees.length === 0 ? 'not-allowed' : 'pointer',
@@ -225,7 +225,7 @@ export const FeedbackTab: React.FC<FeedbackTabProps> = ({
         style={{
           background: '#FFFBEB',
           border: '1px solid #FDE68A',
-          borderRadius: '8px',
+          borderRadius: 0,
           padding: '12px 16px',
           marginBottom: '20px',
           display: 'flex',
@@ -250,7 +250,7 @@ export const FeedbackTab: React.FC<FeedbackTabProps> = ({
             border: '1px solid #A7F3D0',
             color: '#065F46',
             padding: '10px 16px',
-            borderRadius: '8px',
+            borderRadius: 0,
             marginBottom: '16px',
             display: 'flex',
             alignItems: 'center',
@@ -273,8 +273,8 @@ export const FeedbackTab: React.FC<FeedbackTabProps> = ({
           justifyContent: 'space-between',
           alignItems: 'center',
           background: '#FFFFFF',
-          border: '1px solid #E2E8F0',
-          borderRadius: '10px',
+          border: '1px solid var(--color-border)',
+          borderRadius: 0,
           padding: '12px 16px',
           marginBottom: '20px',
         }}
@@ -285,10 +285,10 @@ export const FeedbackTab: React.FC<FeedbackTabProps> = ({
             onClick={() => setVisibilityFilter('all')}
             style={{
               padding: '6px 12px',
-              borderRadius: '6px',
-              border: visibilityFilter === 'all' ? '1px solid #2563EB' : '1px solid #E2E8F0',
-              background: visibilityFilter === 'all' ? '#EFF6FF' : '#FFFFFF',
-              color: visibilityFilter === 'all' ? '#1D4ED8' : '#64748B',
+              borderRadius: 0,
+              border: visibilityFilter === 'all' ? '1px solid var(--color-blue)' : '1px solid var(--color-border)',
+              background: visibilityFilter === 'all' ? 'var(--color-blue-tint)' : '#FFFFFF',
+              color: visibilityFilter === 'all' ? 'var(--color-blue-hover)' : 'var(--color-text-muted)',
               fontWeight: 600,
               fontSize: '0.82rem',
               cursor: 'pointer',
@@ -301,10 +301,10 @@ export const FeedbackTab: React.FC<FeedbackTabProps> = ({
             onClick={() => setVisibilityFilter('shared-with-mentee')}
             style={{
               padding: '6px 12px',
-              borderRadius: '6px',
-              border: visibilityFilter === 'shared-with-mentee' ? '1px solid #059669' : '1px solid #E2E8F0',
+              borderRadius: 0,
+              border: visibilityFilter === 'shared-with-mentee' ? '1px solid #059669' : '1px solid var(--color-border)',
               background: visibilityFilter === 'shared-with-mentee' ? '#ECFDF5' : '#FFFFFF',
-              color: visibilityFilter === 'shared-with-mentee' ? '#065F46' : '#64748B',
+              color: visibilityFilter === 'shared-with-mentee' ? '#065F46' : 'var(--color-text-muted)',
               fontWeight: 600,
               fontSize: '0.82rem',
               cursor: 'pointer',
@@ -317,10 +317,10 @@ export const FeedbackTab: React.FC<FeedbackTabProps> = ({
             onClick={() => setVisibilityFilter('private-mentor-note')}
             style={{
               padding: '6px 12px',
-              borderRadius: '6px',
-              border: visibilityFilter === 'private-mentor-note' ? '1px solid #D97706' : '1px solid #E2E8F0',
+              borderRadius: 0,
+              border: visibilityFilter === 'private-mentor-note' ? '1px solid #D97706' : '1px solid var(--color-border)',
               background: visibilityFilter === 'private-mentor-note' ? '#FFFBEB' : '#FFFFFF',
-              color: visibilityFilter === 'private-mentor-note' ? '#92400E' : '#64748B',
+              color: visibilityFilter === 'private-mentor-note' ? '#92400E' : 'var(--color-text-muted)',
               fontWeight: 600,
               fontSize: '0.82rem',
               cursor: 'pointer',
@@ -331,16 +331,16 @@ export const FeedbackTab: React.FC<FeedbackTabProps> = ({
         </div>
 
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-          <span style={{ fontSize: '0.8rem', color: '#64748B', fontWeight: 600 }}>Filter Mentee:</span>
+          <span style={{ fontSize: '0.8rem', color: 'var(--color-text-muted)', fontWeight: 600 }}>Filter Mentee:</span>
           <select
             value={menteeFilter}
             onChange={(e) => setMenteeFilter(e.target.value)}
             style={{
               padding: '6px 10px',
-              borderRadius: '6px',
-              border: '1px solid #CBD5E1',
+              borderRadius: 0,
+              border: '1px solid var(--color-border-hover)',
               fontSize: '0.82rem',
-              color: '#334155',
+              color: 'var(--color-navy)',
               outline: 'none',
               background: '#FFFFFF',
               cursor: 'pointer',
@@ -361,17 +361,17 @@ export const FeedbackTab: React.FC<FeedbackTabProps> = ({
         <div
           style={{
             background: '#FFFFFF',
-            border: '1px dashed #CBD5E1',
-            borderRadius: '12px',
+            border: '1px dashed var(--color-border-hover)',
+            borderRadius: 0,
             padding: '48px 24px',
             textAlign: 'center',
           }}
         >
-          <MessageSquare size={36} style={{ color: '#94A3B8', marginBottom: '10px' }} />
-          <h3 style={{ fontSize: '1rem', fontWeight: 700, color: '#334155', margin: '0 0 6px 0' }}>
+          <MessageSquare size={36} style={{ color: 'var(--color-text-faint)', marginBottom: '10px' }} />
+          <h3 style={{ fontSize: '1rem', fontWeight: 700, color: 'var(--color-navy)', margin: '0 0 6px 0' }}>
             No feedback entries found
           </h3>
-          <p style={{ color: '#64748B', fontSize: '0.84rem', maxWidth: '400px', margin: '0 auto 16px auto' }}>
+          <p style={{ color: 'var(--color-text-muted)', fontSize: '0.84rem', maxWidth: '400px', margin: '0 auto 16px auto' }}>
             Record structured coaching feedback after sessions or during code pairing reviews.
           </p>
           {mentees.length > 0 && (
@@ -380,10 +380,10 @@ export const FeedbackTab: React.FC<FeedbackTabProps> = ({
               onClick={handleOpenNewModal}
               style={{
                 padding: '8px 16px',
-                background: '#2563EB',
+                background: 'var(--color-blue)',
                 color: '#FFFFFF',
                 border: 'none',
-                borderRadius: '6px',
+                borderRadius: 0,
                 fontSize: '0.82rem',
                 fontWeight: 600,
                 cursor: 'pointer',
@@ -403,8 +403,8 @@ export const FeedbackTab: React.FC<FeedbackTabProps> = ({
                 key={fb.id}
                 style={{
                   background: '#FFFFFF',
-                  border: '1px solid #E2E8F0',
-                  borderRadius: '10px',
+                  border: '1px solid var(--color-border)',
+                  borderRadius: 0,
                   padding: '20px 24px',
                   boxShadow: '0 1px 3px rgba(0,0,0,0.02)',
                   display: 'flex',
@@ -420,14 +420,14 @@ export const FeedbackTab: React.FC<FeedbackTabProps> = ({
                         width: '38px',
                         height: '38px',
                         borderRadius: '50%',
-                        background: '#EEF2FF',
-                        color: '#4F46E5',
+                        background: 'var(--color-blue-tint)',
+                        color: 'var(--color-blue)',
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
                         fontWeight: 700,
                         fontSize: '0.9rem',
-                        border: '1px solid #E0E7FF',
+                        border: '1px solid var(--color-blue-tint)',
                       }}
                     >
                       {fb.menteeName
@@ -439,7 +439,7 @@ export const FeedbackTab: React.FC<FeedbackTabProps> = ({
                     </div>
                     <div>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                        <h3 style={{ fontSize: '1rem', fontWeight: 700, color: '#1E293B', margin: 0 }}>
+                        <h3 style={{ fontSize: '1rem', fontWeight: 700, color: 'var(--color-navy)', margin: 0 }}>
                           Feedback for {fb.menteeName}
                         </h3>
                         {fb.isDemoRecord && (
@@ -447,9 +447,9 @@ export const FeedbackTab: React.FC<FeedbackTabProps> = ({
                             style={{
                               fontSize: '0.65rem',
                               padding: '1px 5px',
-                              background: '#F1F5F9',
-                              color: '#64748B',
-                              borderRadius: '4px',
+                              background: 'var(--color-surface-2)',
+                              color: 'var(--color-text-muted)',
+                              borderRadius: 0,
                               fontWeight: 600,
                             }}
                           >
@@ -457,7 +457,7 @@ export const FeedbackTab: React.FC<FeedbackTabProps> = ({
                           </span>
                         )}
                       </div>
-                      <span style={{ fontSize: '0.78rem', color: '#64748B' }}>
+                      <span style={{ fontSize: '0.78rem', color: 'var(--color-text-muted)' }}>
                         Logged on {new Date(fb.feedbackDate).toLocaleDateString()}
                       </span>
                     </div>
@@ -471,7 +471,7 @@ export const FeedbackTab: React.FC<FeedbackTabProps> = ({
                           fontSize: '0.74rem',
                           fontWeight: 700,
                           padding: '3px 9px',
-                          borderRadius: '12px',
+                          borderRadius: 0,
                           background: '#ECFDF5',
                           color: '#065F46',
                           border: '1px solid #A7F3D0',
@@ -488,7 +488,7 @@ export const FeedbackTab: React.FC<FeedbackTabProps> = ({
                           fontSize: '0.74rem',
                           fontWeight: 700,
                           padding: '3px 9px',
-                          borderRadius: '12px',
+                          borderRadius: 0,
                           background: '#FFFBEB',
                           color: '#92400E',
                           border: '1px solid #FDE68A',
@@ -507,7 +507,7 @@ export const FeedbackTab: React.FC<FeedbackTabProps> = ({
                       style={{
                         background: 'none',
                         border: 'none',
-                        color: '#64748B',
+                        color: 'var(--color-text-muted)',
                         cursor: 'pointer',
                         padding: '4px',
                       }}
@@ -521,7 +521,7 @@ export const FeedbackTab: React.FC<FeedbackTabProps> = ({
                       style={{
                         background: 'none',
                         border: 'none',
-                        color: '#94A3B8',
+                        color: 'var(--color-text-faint)',
                         cursor: 'pointer',
                         padding: '4px',
                       }}
@@ -544,7 +544,7 @@ export const FeedbackTab: React.FC<FeedbackTabProps> = ({
                     style={{
                       background: '#F0FDF4',
                       border: '1px solid #BBF7D0',
-                      borderRadius: '8px',
+                      borderRadius: 0,
                       padding: '12px 14px',
                     }}
                   >
@@ -569,7 +569,7 @@ export const FeedbackTab: React.FC<FeedbackTabProps> = ({
                     style={{
                       background: '#FFFBEB',
                       border: '1px solid #FDE68A',
-                      borderRadius: '8px',
+                      borderRadius: 0,
                       padding: '12px 14px',
                     }}
                   >
@@ -592,9 +592,9 @@ export const FeedbackTab: React.FC<FeedbackTabProps> = ({
 
                   <div
                     style={{
-                      background: '#EFF6FF',
-                      border: '1px solid #BFDBFE',
-                      borderRadius: '8px',
+                      background: 'var(--color-blue-tint)',
+                      border: '1px solid var(--color-blue-line)',
+                      borderRadius: 0,
                       padding: '12px 14px',
                     }}
                   >
@@ -603,14 +603,14 @@ export const FeedbackTab: React.FC<FeedbackTabProps> = ({
                         fontSize: '0.74rem',
                         fontWeight: 700,
                         textTransform: 'uppercase',
-                        color: '#1D4ED8',
+                        color: 'var(--color-blue-hover)',
                         display: 'block',
                         marginBottom: '4px',
                       }}
                     >
                       Recommended Next Steps
                     </span>
-                    <p style={{ margin: 0, fontSize: '0.84rem', color: '#1E40AF', lineHeight: 1.45 }}>
+                    <p style={{ margin: 0, fontSize: '0.84rem', color: 'var(--color-blue-hover)', lineHeight: 1.45 }}>
                       {fb.recommendedNextSteps}
                     </p>
                   </div>
@@ -655,7 +655,7 @@ export const FeedbackTab: React.FC<FeedbackTabProps> = ({
           <div
             style={{
               background: '#FFFFFF',
-              borderRadius: '12px',
+              borderRadius: 0,
               maxWidth: '600px',
               width: '100%',
               maxHeight: '90vh',
@@ -669,13 +669,13 @@ export const FeedbackTab: React.FC<FeedbackTabProps> = ({
             <div
               style={{
                 padding: '18px 24px',
-                borderBottom: '1px solid #E2E8F0',
+                borderBottom: '1px solid var(--color-border)',
                 display: 'flex',
                 justifyContent: 'space-between',
                 alignItems: 'center',
               }}
             >
-              <h2 style={{ fontSize: '1.15rem', fontWeight: 800, color: '#1B2A4E', margin: 0 }}>
+              <h2 style={{ fontSize: '1.15rem', fontWeight: 800, color: 'var(--color-navy)', margin: 0 }}>
                 {editingFeedback ? 'Edit Learning Feedback' : 'Record Mentee Feedback'}
               </h2>
               <button
@@ -684,7 +684,7 @@ export const FeedbackTab: React.FC<FeedbackTabProps> = ({
                 style={{
                   background: 'none',
                   border: 'none',
-                  color: '#94A3B8',
+                  color: 'var(--color-text-faint)',
                   fontSize: '1.25rem',
                   cursor: 'pointer',
                 }}
@@ -702,7 +702,7 @@ export const FeedbackTab: React.FC<FeedbackTabProps> = ({
                       border: '1px solid #FECACA',
                       color: '#B91C1C',
                       padding: '8px 12px',
-                      borderRadius: '6px',
+                      borderRadius: 0,
                       fontSize: '0.82rem',
                       display: 'flex',
                       alignItems: 'center',
@@ -717,7 +717,7 @@ export const FeedbackTab: React.FC<FeedbackTabProps> = ({
                 {/* Mentee & Date */}
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
                   <div>
-                    <label style={{ display: 'block', fontSize: '0.78rem', fontWeight: 700, color: '#475569', marginBottom: '4px' }}>
+                    <label style={{ display: 'block', fontSize: '0.78rem', fontWeight: 700, color: 'var(--color-text-muted)', marginBottom: '4px' }}>
                       Mentee *
                     </label>
                     <select
@@ -729,8 +729,8 @@ export const FeedbackTab: React.FC<FeedbackTabProps> = ({
                       style={{
                         width: '100%',
                         padding: '8px',
-                        borderRadius: '6px',
-                        border: '1px solid #CBD5E1',
+                        borderRadius: 0,
+                        border: '1px solid var(--color-border-hover)',
                         fontSize: '0.82rem',
                       }}
                     >
@@ -743,7 +743,7 @@ export const FeedbackTab: React.FC<FeedbackTabProps> = ({
                   </div>
 
                   <div>
-                    <label style={{ display: 'block', fontSize: '0.78rem', fontWeight: 700, color: '#475569', marginBottom: '4px' }}>
+                    <label style={{ display: 'block', fontSize: '0.78rem', fontWeight: 700, color: 'var(--color-text-muted)', marginBottom: '4px' }}>
                       Feedback Date *
                     </label>
                     <input
@@ -753,8 +753,8 @@ export const FeedbackTab: React.FC<FeedbackTabProps> = ({
                       style={{
                         width: '100%',
                         padding: '8px',
-                        borderRadius: '6px',
-                        border: '1px solid #CBD5E1',
+                        borderRadius: 0,
+                        border: '1px solid var(--color-border-hover)',
                         fontSize: '0.82rem',
                         boxSizing: 'border-box',
                       }}
@@ -765,7 +765,7 @@ export const FeedbackTab: React.FC<FeedbackTabProps> = ({
                 {/* Related session */}
                 {completedSessionsForMentee.length > 0 && (
                   <div>
-                    <label style={{ display: 'block', fontSize: '0.78rem', fontWeight: 700, color: '#475569', marginBottom: '4px' }}>
+                    <label style={{ display: 'block', fontSize: '0.78rem', fontWeight: 700, color: 'var(--color-text-muted)', marginBottom: '4px' }}>
                       Link to Concluded Session (Optional)
                     </label>
                     <select
@@ -774,8 +774,8 @@ export const FeedbackTab: React.FC<FeedbackTabProps> = ({
                       style={{
                         width: '100%',
                         padding: '8px',
-                        borderRadius: '6px',
-                        border: '1px solid #CBD5E1',
+                        borderRadius: 0,
+                        border: '1px solid var(--color-border-hover)',
                         fontSize: '0.82rem',
                       }}
                     >
@@ -791,7 +791,7 @@ export const FeedbackTab: React.FC<FeedbackTabProps> = ({
 
                 {/* Strengths */}
                 <div>
-                  <label style={{ display: 'block', fontSize: '0.78rem', fontWeight: 700, color: '#475569', marginBottom: '4px' }}>
+                  <label style={{ display: 'block', fontSize: '0.78rem', fontWeight: 700, color: 'var(--color-text-muted)', marginBottom: '4px' }}>
                     Strengths Observed *
                   </label>
                   <textarea
@@ -802,8 +802,8 @@ export const FeedbackTab: React.FC<FeedbackTabProps> = ({
                     style={{
                       width: '100%',
                       padding: '8px 10px',
-                      borderRadius: '6px',
-                      border: '1px solid #CBD5E1',
+                      borderRadius: 0,
+                      border: '1px solid var(--color-border-hover)',
                       fontSize: '0.84rem',
                       fontFamily: 'inherit',
                       boxSizing: 'border-box',
@@ -813,7 +813,7 @@ export const FeedbackTab: React.FC<FeedbackTabProps> = ({
 
                 {/* Improvement Areas */}
                 <div>
-                  <label style={{ display: 'block', fontSize: '0.78rem', fontWeight: 700, color: '#475569', marginBottom: '4px' }}>
+                  <label style={{ display: 'block', fontSize: '0.78rem', fontWeight: 700, color: 'var(--color-text-muted)', marginBottom: '4px' }}>
                     Improvement Areas *
                   </label>
                   <textarea
@@ -824,8 +824,8 @@ export const FeedbackTab: React.FC<FeedbackTabProps> = ({
                     style={{
                       width: '100%',
                       padding: '8px 10px',
-                      borderRadius: '6px',
-                      border: '1px solid #CBD5E1',
+                      borderRadius: 0,
+                      border: '1px solid var(--color-border-hover)',
                       fontSize: '0.84rem',
                       fontFamily: 'inherit',
                       boxSizing: 'border-box',
@@ -835,7 +835,7 @@ export const FeedbackTab: React.FC<FeedbackTabProps> = ({
 
                 {/* Recommended Next Steps */}
                 <div>
-                  <label style={{ display: 'block', fontSize: '0.78rem', fontWeight: 700, color: '#475569', marginBottom: '4px' }}>
+                  <label style={{ display: 'block', fontSize: '0.78rem', fontWeight: 700, color: 'var(--color-text-muted)', marginBottom: '4px' }}>
                     Recommended Next Steps & Exercises *
                   </label>
                   <textarea
@@ -846,8 +846,8 @@ export const FeedbackTab: React.FC<FeedbackTabProps> = ({
                     style={{
                       width: '100%',
                       padding: '8px 10px',
-                      borderRadius: '6px',
-                      border: '1px solid #CBD5E1',
+                      borderRadius: 0,
+                      border: '1px solid var(--color-border-hover)',
                       fontSize: '0.84rem',
                       fontFamily: 'inherit',
                       boxSizing: 'border-box',
@@ -868,7 +868,7 @@ export const FeedbackTab: React.FC<FeedbackTabProps> = ({
                     style={{
                       width: '100%',
                       padding: '8px 10px',
-                      borderRadius: '6px',
+                      borderRadius: 0,
                       border: '1px solid #FDE68A',
                       background: '#FFFDF5',
                       fontSize: '0.84rem',
@@ -879,7 +879,7 @@ export const FeedbackTab: React.FC<FeedbackTabProps> = ({
 
                 {/* Visibility Setting */}
                 <div>
-                  <label style={{ display: 'block', fontSize: '0.78rem', fontWeight: 700, color: '#475569', marginBottom: '6px' }}>
+                  <label style={{ display: 'block', fontSize: '0.78rem', fontWeight: 700, color: 'var(--color-text-muted)', marginBottom: '6px' }}>
                     Visibility Preference
                   </label>
                   <div style={{ display: 'flex', gap: '12px' }}>
@@ -914,7 +914,7 @@ export const FeedbackTab: React.FC<FeedbackTabProps> = ({
                     style={{
                       background: 'none',
                       border: 'none',
-                      color: '#2563EB',
+                      color: 'var(--color-blue)',
                       fontSize: '0.8rem',
                       fontWeight: 600,
                       cursor: 'pointer',
@@ -931,14 +931,14 @@ export const FeedbackTab: React.FC<FeedbackTabProps> = ({
                     <div
                       style={{
                         marginTop: '10px',
-                        background: '#F8FAFC',
-                        border: '1px solid #E2E8F0',
-                        borderRadius: '8px',
+                        background: 'var(--color-bg)',
+                        border: '1px solid var(--color-border)',
+                        borderRadius: 0,
                         padding: '12px',
                         fontSize: '0.82rem',
                       }}
                     >
-                      <div style={{ fontWeight: 700, color: '#1E293B', marginBottom: '6px' }}>
+                      <div style={{ fontWeight: 700, color: 'var(--color-navy)', marginBottom: '6px' }}>
                         Preview: Feedback Card
                       </div>
                       <p style={{ margin: '0 0 4px 0', color: '#166534' }}>
@@ -947,7 +947,7 @@ export const FeedbackTab: React.FC<FeedbackTabProps> = ({
                       <p style={{ margin: '0 0 4px 0', color: '#92400E' }}>
                         <strong>Improvement Areas: </strong> {formImprovements || '(No improvement areas specified yet)'}
                       </p>
-                      <p style={{ margin: 0, color: '#1E40AF' }}>
+                      <p style={{ margin: 0, color: 'var(--color-blue-hover)' }}>
                         <strong>Next Steps: </strong> {formNextSteps || '(No next steps specified yet)'}
                       </p>
                     </div>
@@ -959,8 +959,8 @@ export const FeedbackTab: React.FC<FeedbackTabProps> = ({
               <div
                 style={{
                   padding: '14px 24px',
-                  borderTop: '1px solid #E2E8F0',
-                  background: '#F8FAFC',
+                  borderTop: '1px solid var(--color-border)',
+                  background: 'var(--color-bg)',
                   display: 'flex',
                   justifyContent: 'flex-end',
                   gap: '10px',
@@ -971,10 +971,10 @@ export const FeedbackTab: React.FC<FeedbackTabProps> = ({
                   onClick={() => setIsEditorModalOpen(false)}
                   style={{
                     padding: '8px 16px',
-                    borderRadius: '6px',
+                    borderRadius: 0,
                     background: '#FFFFFF',
-                    border: '1px solid #CBD5E1',
-                    color: '#475569',
+                    border: '1px solid var(--color-border-hover)',
+                    color: 'var(--color-text-muted)',
                     fontSize: '0.84rem',
                     fontWeight: 600,
                     cursor: 'pointer',
@@ -986,8 +986,8 @@ export const FeedbackTab: React.FC<FeedbackTabProps> = ({
                   type="submit"
                   style={{
                     padding: '8px 18px',
-                    borderRadius: '6px',
-                    background: '#2563EB',
+                    borderRadius: 0,
+                    background: 'var(--color-blue)',
                     border: 'none',
                     color: '#FFFFFF',
                     fontSize: '0.84rem',
@@ -1020,7 +1020,7 @@ export const FeedbackTab: React.FC<FeedbackTabProps> = ({
           <div
             style={{
               background: '#FFFFFF',
-              borderRadius: '12px',
+              borderRadius: 0,
               maxWidth: '420px',
               width: '100%',
               boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1)',
@@ -1030,11 +1030,11 @@ export const FeedbackTab: React.FC<FeedbackTabProps> = ({
           >
             <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '12px' }}>
               <AlertCircle size={22} color="#DC2626" />
-              <h2 style={{ fontSize: '1.15rem', fontWeight: 800, color: '#1B2A4E', margin: 0 }}>
+              <h2 style={{ fontSize: '1.15rem', fontWeight: 800, color: 'var(--color-navy)', margin: 0 }}>
                 Delete Feedback Record?
               </h2>
             </div>
-            <p style={{ margin: '0 0 20px 0', fontSize: '0.85rem', color: '#64748B', lineHeight: 1.5 }}>
+            <p style={{ margin: '0 0 20px 0', fontSize: '0.85rem', color: 'var(--color-text-muted)', lineHeight: 1.5 }}>
               Are you sure you want to permanently delete this feedback entry for{' '}
               <strong>{deletingFeedback.menteeName}</strong>?
             </p>
@@ -1045,10 +1045,10 @@ export const FeedbackTab: React.FC<FeedbackTabProps> = ({
                 onClick={() => setDeletingFeedback(null)}
                 style={{
                   padding: '8px 14px',
-                  borderRadius: '6px',
+                  borderRadius: 0,
                   background: '#FFFFFF',
-                  border: '1px solid #CBD5E1',
-                  color: '#475569',
+                  border: '1px solid var(--color-border-hover)',
+                  color: 'var(--color-text-muted)',
                   fontSize: '0.84rem',
                   fontWeight: 600,
                   cursor: 'pointer',
@@ -1061,7 +1061,7 @@ export const FeedbackTab: React.FC<FeedbackTabProps> = ({
                 onClick={handleConfirmDelete}
                 style={{
                   padding: '8px 18px',
-                  borderRadius: '6px',
+                  borderRadius: 0,
                   background: '#DC2626',
                   border: 'none',
                   color: '#FFFFFF',

@@ -108,10 +108,10 @@ export const TalentSearchTab: React.FC<TalentSearchTabProps> = ({
       <div>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '0.75rem' }}>
           <div>
-            <h2 style={{ margin: 0, fontSize: '1.25rem', fontWeight: 700, color: '#0F172A' }}>
+            <h2 style={{ margin: 0, fontSize: '1.25rem', fontWeight: 700, color: 'var(--color-navy)' }}>
               Talent Discovery &amp; Skill Passports
             </h2>
-            <p style={{ margin: '0.25rem 0 0', fontSize: '0.8125rem', color: '#64748B' }}>
+            <p style={{ margin: '0.25rem 0 0', fontSize: '0.8125rem', color: 'var(--color-text-muted)' }}>
               Filter by verified challenge artifacts, assessed technical benchmarks, and declared domains.
             </p>
           </div>
@@ -122,7 +122,7 @@ export const TalentSearchTab: React.FC<TalentSearchTabProps> = ({
               color: '#065F46',
               background: '#ECFDF5',
               padding: '0.35rem 0.75rem',
-              borderRadius: '9999px',
+              borderRadius: 0,
               border: '1px solid #A7F3D0',
               display: 'inline-flex',
               alignItems: 'center',
@@ -140,8 +140,8 @@ export const TalentSearchTab: React.FC<TalentSearchTabProps> = ({
       <div
         style={{
           background: '#FFFFFF',
-          border: '1px solid #E2E8F0',
-          borderRadius: '8px',
+          border: '1px solid var(--color-border)',
+          borderRadius: 0,
           padding: '1rem',
           display: 'flex',
           flexDirection: 'column',
@@ -158,7 +158,7 @@ export const TalentSearchTab: React.FC<TalentSearchTabProps> = ({
                 left: '0.75rem',
                 top: '50%',
                 transform: 'translateY(-50%)',
-                color: '#94A3B8',
+                color: 'var(--color-text-faint)',
               }}
             />
             <input
@@ -214,7 +214,7 @@ export const TalentSearchTab: React.FC<TalentSearchTabProps> = ({
 
         {/* Toggle & Filter Actions */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '0.75rem' }}>
-          <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer', fontSize: '0.8125rem', color: '#1E293B' }}>
+          <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer', fontSize: '0.8125rem', color: 'var(--color-navy)' }}>
             <input
               type="checkbox"
               checked={onlyVerified}
@@ -243,7 +243,7 @@ export const TalentSearchTab: React.FC<TalentSearchTabProps> = ({
       {/* Candidate List Results */}
       <div>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.75rem' }}>
-          <span style={{ fontSize: '0.8125rem', color: '#64748B' }}>
+          <span style={{ fontSize: '0.8125rem', color: 'var(--color-text-muted)' }}>
             Showing <strong>{filteredCandidates.length}</strong> candidate{filteredCandidates.length === 1 ? '' : 's'}
           </span>
         </div>
@@ -252,8 +252,8 @@ export const TalentSearchTab: React.FC<TalentSearchTabProps> = ({
           <div
             style={{
               background: '#FFFFFF',
-              border: '1px solid #E2E8F0',
-              borderRadius: '8px',
+              border: '1px solid var(--color-border)',
+              borderRadius: 0,
               padding: '3rem 1.5rem',
               textAlign: 'center',
             }}
@@ -263,8 +263,8 @@ export const TalentSearchTab: React.FC<TalentSearchTabProps> = ({
                 width: '48px',
                 height: '48px',
                 borderRadius: '50%',
-                background: '#F1F5F9',
-                color: '#64748B',
+                background: 'var(--color-surface-2)',
+                color: 'var(--color-text-muted)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
@@ -273,10 +273,10 @@ export const TalentSearchTab: React.FC<TalentSearchTabProps> = ({
             >
               <Search size={22} />
             </div>
-            <h3 style={{ margin: '0 0 0.35rem', fontSize: '1rem', color: '#0F172A' }}>
+            <h3 style={{ margin: '0 0 0.35rem', fontSize: '1rem', color: 'var(--color-navy)' }}>
               No candidates match your criteria
             </h3>
-            <p style={{ margin: '0 0 1rem', fontSize: '0.8125rem', color: '#64748B', maxWidth: '400px', marginInline: 'auto' }}>
+            <p style={{ margin: '0 0 1rem', fontSize: '0.8125rem', color: 'var(--color-text-muted)', maxWidth: '400px', marginInline: 'auto' }}>
               Try loosening your skill or seniority filters, or disable the verified-only checkbox.
             </p>
             <button type="button" className="btn-secondary" onClick={handleClearFilters} style={{ fontSize: '0.8125rem' }}>
@@ -294,8 +294,8 @@ export const TalentSearchTab: React.FC<TalentSearchTabProps> = ({
                   key={candidate.id}
                   style={{
                     background: '#FFFFFF',
-                    border: '1px solid #E2E8F0',
-                    borderRadius: '8px',
+                    border: '1px solid var(--color-border)',
+                    borderRadius: 0,
                     padding: '1.25rem',
                     transition: 'border-color 0.15s ease, box-shadow 0.15s ease',
                   }}
@@ -308,7 +308,7 @@ export const TalentSearchTab: React.FC<TalentSearchTabProps> = ({
                           width: '48px',
                           height: '48px',
                           borderRadius: '50%',
-                          background: 'linear-gradient(135deg, #1E293B 0%, #2563EB 100%)',
+                          background: 'linear-gradient(135deg, var(--color-navy) 0%, var(--color-blue) 100%)',
                           color: '#FFFFFF',
                           display: 'flex',
                           alignItems: 'center',
@@ -323,7 +323,7 @@ export const TalentSearchTab: React.FC<TalentSearchTabProps> = ({
 
                       <div style={{ flex: 1 }}>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
-                          <h3 style={{ margin: 0, fontSize: '1.05rem', fontWeight: 700, color: '#0F172A' }}>
+                          <h3 style={{ margin: 0, fontSize: '1.05rem', fontWeight: 700, color: 'var(--color-navy)' }}>
                             {candidate.name}
                           </h3>
                           {inPipe && (
@@ -331,10 +331,10 @@ export const TalentSearchTab: React.FC<TalentSearchTabProps> = ({
                               style={{
                                 fontSize: '0.72rem',
                                 padding: '0.15rem 0.45rem',
-                                borderRadius: '9999px',
-                                background: '#EFF6FF',
-                                color: '#1D4ED8',
-                                border: '1px solid #BFDBFE',
+                                borderRadius: 0,
+                                background: 'var(--color-blue-tint)',
+                                color: 'var(--color-blue-hover)',
+                                border: '1px solid var(--color-blue-line)',
                                 fontWeight: 600,
                               }}
                             >
@@ -343,11 +343,11 @@ export const TalentSearchTab: React.FC<TalentSearchTabProps> = ({
                           )}
                         </div>
 
-                        <p style={{ margin: '0.2rem 0 0.35rem', fontSize: '0.84rem', color: '#334155', fontWeight: 500 }}>
+                        <p style={{ margin: '0.2rem 0 0.35rem', fontSize: '0.84rem', color: 'var(--color-navy)', fontWeight: 500 }}>
                           {candidate.headline}
                         </p>
 
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.875rem', fontSize: '0.75rem', color: '#64748B', flexWrap: 'wrap' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.875rem', fontSize: '0.75rem', color: 'var(--color-text-muted)', flexWrap: 'wrap' }}>
                           <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.25rem' }}>
                             <MapPin size={12} /> {candidate.location}
                           </span>
@@ -390,7 +390,7 @@ export const TalentSearchTab: React.FC<TalentSearchTabProps> = ({
                         className="btn-ghost"
                         onClick={() => onToggleSaveCandidate(candidate.id)}
                         title={candidate.isSaved ? 'Bookmarked' : 'Bookmark candidate'}
-                        style={{ padding: '0.45rem', color: candidate.isSaved ? '#2563EB' : '#94A3B8' }}
+                        style={{ padding: '0.45rem', color: candidate.isSaved ? 'var(--color-blue)' : 'var(--color-text-faint)' }}
                       >
                         {candidate.isSaved ? <BookmarkCheck size={18} /> : <Bookmark size={18} />}
                       </button>

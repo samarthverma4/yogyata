@@ -13,6 +13,8 @@ export type {
 export type RecruiterWorkspaceTab =
   | 'overview'
   | 'talent-search'
+  | 'postings'
+  | 'invitations'
   | 'pipeline'
   | 'interviews'
   | 'scorecards'

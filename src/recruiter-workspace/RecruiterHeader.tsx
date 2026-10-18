@@ -1,3 +1,4 @@
+import { BrandMark } from '../brand/BrandMark';
 import React, { useState } from 'react';
 import {
   Building2,
@@ -34,7 +35,7 @@ export const RecruiterHeader: React.FC<RecruiterHeaderProps> = ({
     <header
       style={{
         background: '#FFFFFF',
-        borderBottom: '1px solid #E2E8F0',
+        borderBottom: '1px solid var(--color-border)',
         padding: '0.75rem 1.5rem',
         position: 'sticky',
         top: 0,
@@ -61,36 +62,27 @@ export const RecruiterHeader: React.FC<RecruiterHeaderProps> = ({
             style={{
               display: 'none',
               padding: '0.35rem',
-              color: '#475569',
+              color: 'var(--color-text-muted)',
             }}
           >
             <Menu size={20} />
           </button>
 
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.625rem' }}>
-            <span
-              style={{
-                fontWeight: 800,
-                fontSize: '1.125rem',
-                color: '#171B4D',
-                letterSpacing: '-0.02em',
-              }}
-            >
-              YOGYATA
-            </span>
+            <BrandMark />
             <span
               className="badge"
               style={{
-                background: '#F0FDF4',
-                color: '#15803D',
-                border: '1px solid #BBF7D0',
+                background: 'var(--color-blue-tint)',
+                color: 'var(--color-blue)',
+                border: '1px solid var(--color-blue-line)',
                 display: 'inline-flex',
                 alignItems: 'center',
                 gap: '0.25rem',
                 fontSize: '0.75rem',
                 fontWeight: 600,
                 padding: '0.15rem 0.5rem',
-                borderRadius: '9999px',
+                borderRadius: 0,
               }}
             >
               <Building2 size={12} />
@@ -105,15 +97,15 @@ export const RecruiterHeader: React.FC<RecruiterHeaderProps> = ({
               gap: '0.5rem',
               marginLeft: '0.5rem',
               paddingLeft: '0.875rem',
-              borderLeft: '1px solid #E2E8F0',
+              borderLeft: '1px solid var(--color-border)',
               fontSize: '0.8125rem',
             }}
           >
-            <strong style={{ color: '#0F172A' }}>{companyDisplayName}</strong>
+            <strong style={{ color: 'var(--color-navy)' }}>{companyDisplayName}</strong>
             {company.location && (
               <span
                 style={{
-                  color: '#64748B',
+                  color: 'var(--color-text-muted)',
                   fontSize: '0.75rem',
                   display: 'inline-flex',
                   alignItems: 'center',
@@ -138,9 +130,9 @@ export const RecruiterHeader: React.FC<RecruiterHeaderProps> = ({
               alignItems: 'center',
               gap: '0.375rem',
               padding: '0.35rem 0.75rem',
-              background: activeTab === 'talent-search' ? '#EFF6FF' : undefined,
-              borderColor: activeTab === 'talent-search' ? '#BFDBFE' : undefined,
-              color: activeTab === 'talent-search' ? '#1D4ED8' : undefined,
+              background: activeTab === 'talent-search' ? 'var(--color-blue-tint)' : undefined,
+              borderColor: activeTab === 'talent-search' ? 'var(--color-blue-line)' : undefined,
+              color: activeTab === 'talent-search' ? 'var(--color-blue-hover)' : undefined,
             }}
           >
             <Search size={14} />
@@ -154,9 +146,9 @@ export const RecruiterHeader: React.FC<RecruiterHeaderProps> = ({
               alignItems: 'center',
               gap: '0.5rem',
               padding: '0.25rem 0.5rem',
-              borderRadius: '6px',
-              background: '#F8FAFC',
-              border: '1px solid #E2E8F0',
+              borderRadius: 0,
+              background: 'var(--color-bg)',
+              border: '1px solid var(--color-border)',
             }}
           >
             <div
@@ -164,7 +156,7 @@ export const RecruiterHeader: React.FC<RecruiterHeaderProps> = ({
                 width: '28px',
                 height: '28px',
                 borderRadius: '50%',
-                background: 'linear-gradient(135deg, #0F172A 0%, #15803D 100%)',
+                background: 'linear-gradient(135deg, var(--color-navy) 0%, #15803D 100%)',
                 color: '#FFFFFF',
                 display: 'flex',
                 alignItems: 'center',
@@ -176,10 +168,10 @@ export const RecruiterHeader: React.FC<RecruiterHeaderProps> = ({
               {recruiterDisplayName.charAt(0).toUpperCase()}
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', lineHeight: 1.2 }}>
-              <span style={{ fontSize: '0.78rem', fontWeight: 600, color: '#0F172A' }}>
+              <span style={{ fontSize: '0.78rem', fontWeight: 600, color: 'var(--color-navy)' }}>
                 {recruiterDisplayName}
               </span>
-              <span style={{ fontSize: '0.7rem', color: '#64748B' }}>
+              <span style={{ fontSize: '0.7rem', color: 'var(--color-text-muted)' }}>
                 {recruiter.jobTitle}
               </span>
             </div>
@@ -192,7 +184,7 @@ export const RecruiterHeader: React.FC<RecruiterHeaderProps> = ({
             onClick={() => setShowExitConfirm(true)}
             style={{
               fontSize: '0.8125rem',
-              color: '#64748B',
+              color: 'var(--color-text-muted)',
               display: 'inline-flex',
               alignItems: 'center',
               gap: '0.35rem',
@@ -217,14 +209,14 @@ export const RecruiterHeader: React.FC<RecruiterHeaderProps> = ({
           <div className="modal-dialog" style={{ maxWidth: '420px' }}>
             <h3
               id="recruiter-exit-title"
-              style={{ margin: '0 0 0.5rem', fontSize: '1.125rem', color: '#0F172A' }}
+              style={{ margin: '0 0 0.5rem', fontSize: '1.125rem', color: 'var(--color-navy)' }}
             >
               Leave Recruiter Workspace?
             </h3>
             <p
               style={{
                 fontSize: '0.875rem',
-                color: '#64748B',
+                color: 'var(--color-text-muted)',
                 lineHeight: 1.5,
                 margin: '0 0 1.25rem',
               }}

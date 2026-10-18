@@ -123,7 +123,7 @@ export const MentorExpertiseStep: React.FC<MentorExpertiseStepProps> = ({
         <div style={{ marginBottom: '1.75rem' }}>
           <label className="yw-form-label" style={{ display: 'block', marginBottom: '0.5rem' }}>
             Core Mentorship Domains <span style={{ color: '#DC2626' }}>*</span>{' '}
-            <span style={{ color: '#64748B', fontWeight: 400 }}>(Select all that apply)</span>
+            <span style={{ color: 'var(--color-text-muted)', fontWeight: 400 }}>(Select all that apply)</span>
           </label>
           <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', marginBottom: '0.75rem' }}>
             {POPULAR_EXPERTISE_AREAS.map((area) => {
@@ -135,10 +135,10 @@ export const MentorExpertiseStep: React.FC<MentorExpertiseStepProps> = ({
                   onClick={() => toggleItem('expertiseAreas', area)}
                   className={`yw-btn yw-btn-sm ${isSelected ? 'yw-btn-primary' : 'yw-btn-secondary'}`}
                   style={{
-                    borderRadius: '20px',
-                    borderColor: isSelected ? '#1B2A4E' : '#CBD5E1',
-                    background: isSelected ? '#1B2A4E' : '#FFFFFF',
-                    color: isSelected ? '#FFFFFF' : '#334155',
+                    borderRadius: 0,
+                    borderColor: isSelected ? 'var(--color-navy)' : 'var(--color-border-hover)',
+                    background: isSelected ? 'var(--color-navy)' : '#FFFFFF',
+                    color: isSelected ? '#FFFFFF' : 'var(--color-navy)',
                   }}
                 >
                   {isSelected ? '✓ ' : '+ '}
@@ -186,10 +186,10 @@ export const MentorExpertiseStep: React.FC<MentorExpertiseStepProps> = ({
                   onClick={() => toggleItem('technicalSkills', skill)}
                   className={`yw-btn yw-btn-sm ${isSelected ? 'yw-btn-primary' : 'yw-btn-secondary'}`}
                   style={{
-                    borderRadius: '20px',
-                    borderColor: isSelected ? '#2563EB' : '#CBD5E1',
-                    background: isSelected ? '#EFF6FF' : '#FFFFFF',
-                    color: isSelected ? '#1D4ED8' : '#334155',
+                    borderRadius: 0,
+                    borderColor: isSelected ? 'var(--color-blue)' : 'var(--color-border-hover)',
+                    background: isSelected ? 'var(--color-blue-tint)' : '#FFFFFF',
+                    color: isSelected ? 'var(--color-blue-hover)' : 'var(--color-navy)',
                     fontWeight: isSelected ? 700 : 500,
                   }}
                 >
@@ -238,10 +238,10 @@ export const MentorExpertiseStep: React.FC<MentorExpertiseStepProps> = ({
                   onClick={() => toggleItem('industries', ind)}
                   className={`yw-btn yw-btn-sm ${isSelected ? 'yw-btn-primary' : 'yw-btn-secondary'}`}
                   style={{
-                    borderRadius: '20px',
-                    borderColor: isSelected ? '#D97706' : '#CBD5E1',
+                    borderRadius: 0,
+                    borderColor: isSelected ? '#D97706' : 'var(--color-border-hover)',
                     background: isSelected ? '#FFFBEB' : '#FFFFFF',
-                    color: isSelected ? '#B45309' : '#334155',
+                    color: isSelected ? '#B45309' : 'var(--color-navy)',
                   }}
                 >
                   {isSelected ? '✓ ' : '+ '}
@@ -286,7 +286,7 @@ export const MentorExpertiseStep: React.FC<MentorExpertiseStepProps> = ({
                 className="yw-badge yw-badge-blue"
                 style={{
                   padding: '6px 12px',
-                  borderRadius: '20px',
+                  borderRadius: 0,
                   display: 'inline-flex',
                   alignItems: 'center',
                   gap: '0.375rem',
@@ -297,7 +297,7 @@ export const MentorExpertiseStep: React.FC<MentorExpertiseStepProps> = ({
                 <button
                   type="button"
                   onClick={() => onChange({ ...data, languages: data.languages.filter((l) => l !== lang) })}
-                  style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#1D4ED8', padding: 0 }}
+                  style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--color-blue-hover)', padding: 0 }}
                   aria-label={`Remove ${lang}`}
                 >
                   <X size={14} />

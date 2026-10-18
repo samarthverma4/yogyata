@@ -183,10 +183,10 @@ export const RequestsTab: React.FC<RequestsTabProps> = ({
       {/* Header */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '24px' }}>
         <div>
-          <h1 style={{ fontSize: '1.5rem', fontWeight: 800, color: '#1B2A4E', margin: '0 0 6px 0' }}>
+          <h1 style={{ fontSize: '1.5rem', fontWeight: 800, color: 'var(--color-navy)', margin: '0 0 6px 0' }}>
             Mentorship Requests
           </h1>
-          <p style={{ margin: 0, color: '#64748B', fontSize: '0.88rem' }}>
+          <p style={{ margin: 0, color: 'var(--color-text-muted)', fontSize: '0.88rem' }}>
             Review incoming mentorship applications, evaluate compatibility, and accept learners into your roster.
           </p>
         </div>
@@ -196,7 +196,7 @@ export const RequestsTab: React.FC<RequestsTabProps> = ({
           style={{
             background: isAtCapacity ? '#FFFBEB' : '#F0FDF4',
             border: `1px solid ${isAtCapacity ? '#FDE68A' : '#BBF7D0'}`,
-            borderRadius: '8px',
+            borderRadius: 0,
             padding: '8px 14px',
             display: 'flex',
             alignItems: 'center',
@@ -226,7 +226,7 @@ export const RequestsTab: React.FC<RequestsTabProps> = ({
             border: '1px solid #A7F3D0',
             color: '#065F46',
             padding: '12px 16px',
-            borderRadius: '8px',
+            borderRadius: 0,
             marginBottom: '20px',
             display: 'flex',
             alignItems: 'center',
@@ -249,8 +249,8 @@ export const RequestsTab: React.FC<RequestsTabProps> = ({
           justifyContent: 'space-between',
           alignItems: 'center',
           background: '#FFFFFF',
-          border: '1px solid #E2E8F0',
-          borderRadius: '10px',
+          border: '1px solid var(--color-border)',
+          borderRadius: 0,
           padding: '12px 16px',
           marginBottom: '24px',
         }}
@@ -262,10 +262,10 @@ export const RequestsTab: React.FC<RequestsTabProps> = ({
             onClick={() => setStatusFilter('all')}
             style={{
               padding: '6px 14px',
-              borderRadius: '6px',
-              border: statusFilter === 'all' ? '1px solid #2563EB' : '1px solid #E2E8F0',
-              background: statusFilter === 'all' ? '#EFF6FF' : '#FFFFFF',
-              color: statusFilter === 'all' ? '#1D4ED8' : '#64748B',
+              borderRadius: 0,
+              border: statusFilter === 'all' ? '1px solid var(--color-blue)' : '1px solid var(--color-border)',
+              background: statusFilter === 'all' ? 'var(--color-blue-tint)' : '#FFFFFF',
+              color: statusFilter === 'all' ? 'var(--color-blue-hover)' : 'var(--color-text-muted)',
               fontWeight: 600,
               fontSize: '0.84rem',
               cursor: 'pointer',
@@ -278,10 +278,10 @@ export const RequestsTab: React.FC<RequestsTabProps> = ({
             onClick={() => setStatusFilter('pending')}
             style={{
               padding: '6px 14px',
-              borderRadius: '6px',
-              border: statusFilter === 'pending' ? '1px solid #D97706' : '1px solid #E2E8F0',
+              borderRadius: 0,
+              border: statusFilter === 'pending' ? '1px solid #D97706' : '1px solid var(--color-border)',
               background: statusFilter === 'pending' ? '#FFFBEB' : '#FFFFFF',
-              color: statusFilter === 'pending' ? '#B45309' : '#64748B',
+              color: statusFilter === 'pending' ? '#B45309' : 'var(--color-text-muted)',
               fontWeight: 600,
               fontSize: '0.84rem',
               cursor: 'pointer',
@@ -294,10 +294,10 @@ export const RequestsTab: React.FC<RequestsTabProps> = ({
             onClick={() => setStatusFilter('accepted')}
             style={{
               padding: '6px 14px',
-              borderRadius: '6px',
-              border: statusFilter === 'accepted' ? '1px solid #059669' : '1px solid #E2E8F0',
+              borderRadius: 0,
+              border: statusFilter === 'accepted' ? '1px solid #059669' : '1px solid var(--color-border)',
               background: statusFilter === 'accepted' ? '#ECFDF5' : '#FFFFFF',
-              color: statusFilter === 'accepted' ? '#047857' : '#64748B',
+              color: statusFilter === 'accepted' ? '#047857' : 'var(--color-text-muted)',
               fontWeight: 600,
               fontSize: '0.84rem',
               cursor: 'pointer',
@@ -310,10 +310,10 @@ export const RequestsTab: React.FC<RequestsTabProps> = ({
             onClick={() => setStatusFilter('declined')}
             style={{
               padding: '6px 14px',
-              borderRadius: '6px',
-              border: statusFilter === 'declined' ? '1px solid #DC2626' : '1px solid #E2E8F0',
+              borderRadius: 0,
+              border: statusFilter === 'declined' ? '1px solid #DC2626' : '1px solid var(--color-border)',
               background: statusFilter === 'declined' ? '#FEF2F2' : '#FFFFFF',
-              color: statusFilter === 'declined' ? '#B91C1C' : '#64748B',
+              color: statusFilter === 'declined' ? '#B91C1C' : 'var(--color-text-muted)',
               fontWeight: 600,
               fontSize: '0.84rem',
               cursor: 'pointer',
@@ -327,7 +327,7 @@ export const RequestsTab: React.FC<RequestsTabProps> = ({
         <div style={{ position: 'relative', width: '280px' }}>
           <Search
             size={16}
-            style={{ position: 'absolute', left: '10px', top: '50%', transform: 'translateY(-50%)', color: '#94A3B8' }}
+            style={{ position: 'absolute', left: '10px', top: '50%', transform: 'translateY(-50%)', color: 'var(--color-text-faint)' }}
           />
           <input
             type="text"
@@ -337,11 +337,11 @@ export const RequestsTab: React.FC<RequestsTabProps> = ({
             style={{
               width: '100%',
               padding: '8px 12px 8px 34px',
-              borderRadius: '6px',
-              border: '1px solid #E2E8F0',
+              borderRadius: 0,
+              border: '1px solid var(--color-border)',
               fontSize: '0.85rem',
               outline: 'none',
-              color: '#1E293B',
+              color: 'var(--color-navy)',
               boxSizing: 'border-box',
             }}
           />
@@ -353,17 +353,17 @@ export const RequestsTab: React.FC<RequestsTabProps> = ({
         <div
           style={{
             background: '#FFFFFF',
-            border: '1px dashed #CBD5E1',
-            borderRadius: '12px',
+            border: '1px dashed var(--color-border-hover)',
+            borderRadius: 0,
             padding: '48px 24px',
             textAlign: 'center',
           }}
         >
-          <Inbox size={42} style={{ color: '#94A3B8', marginBottom: '12px' }} />
-          <h3 style={{ fontSize: '1.05rem', fontWeight: 700, color: '#334155', margin: '0 0 6px 0' }}>
+          <Inbox size={42} style={{ color: 'var(--color-text-faint)', marginBottom: '12px' }} />
+          <h3 style={{ fontSize: '1.05rem', fontWeight: 700, color: 'var(--color-navy)', margin: '0 0 6px 0' }}>
             No mentorship requests found
           </h3>
-          <p style={{ color: '#64748B', fontSize: '0.85rem', maxWidth: '420px', margin: '0 auto 16px auto' }}>
+          <p style={{ color: 'var(--color-text-muted)', fontSize: '0.85rem', maxWidth: '420px', margin: '0 auto 16px auto' }}>
             {searchQuery || statusFilter !== 'all'
               ? 'Try resetting your search query or selecting a different status filter.'
               : 'You do not have any mentorship requests at this time. When learners apply to your tracks, their submissions will appear here.'}
@@ -376,13 +376,13 @@ export const RequestsTab: React.FC<RequestsTabProps> = ({
                 setStatusFilter('all');
               }}
               style={{
-                background: '#F1F5F9',
-                border: '1px solid #E2E8F0',
+                background: 'var(--color-surface-2)',
+                border: '1px solid var(--color-border)',
                 padding: '6px 14px',
-                borderRadius: '6px',
+                borderRadius: 0,
                 fontSize: '0.82rem',
                 fontWeight: 600,
-                color: '#475569',
+                color: 'var(--color-text-muted)',
                 cursor: 'pointer',
               }}
             >
@@ -402,8 +402,8 @@ export const RequestsTab: React.FC<RequestsTabProps> = ({
                 key={req.id}
                 style={{
                   background: '#FFFFFF',
-                  border: '1px solid #E2E8F0',
-                  borderRadius: '10px',
+                  border: '1px solid var(--color-border)',
+                  borderRadius: 0,
                   padding: '20px 24px',
                   boxShadow: '0 1px 3px rgba(0,0,0,0.02)',
                   display: 'flex',
@@ -419,14 +419,14 @@ export const RequestsTab: React.FC<RequestsTabProps> = ({
                         width: '42px',
                         height: '42px',
                         borderRadius: '50%',
-                        background: '#EEF2FF',
-                        color: '#4F46E5',
+                        background: 'var(--color-blue-tint)',
+                        color: 'var(--color-blue)',
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
                         fontWeight: 700,
                         fontSize: '1rem',
-                        border: '1px solid #E0E7FF',
+                        border: '1px solid var(--color-blue-tint)',
                       }}
                     >
                       {req.menteeName
@@ -438,7 +438,7 @@ export const RequestsTab: React.FC<RequestsTabProps> = ({
                     </div>
                     <div>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                        <h3 style={{ fontSize: '1rem', fontWeight: 700, color: '#1E293B', margin: 0 }}>
+                        <h3 style={{ fontSize: '1rem', fontWeight: 700, color: 'var(--color-navy)', margin: 0 }}>
                           {req.menteeName}
                         </h3>
                         {req.isDemoRecord && (
@@ -446,9 +446,9 @@ export const RequestsTab: React.FC<RequestsTabProps> = ({
                             style={{
                               fontSize: '0.68rem',
                               padding: '2px 6px',
-                              background: '#F1F5F9',
-                              color: '#64748B',
-                              borderRadius: '4px',
+                              background: 'var(--color-surface-2)',
+                              color: 'var(--color-text-muted)',
+                              borderRadius: 0,
                               fontWeight: 600,
                             }}
                           >
@@ -456,7 +456,7 @@ export const RequestsTab: React.FC<RequestsTabProps> = ({
                           </span>
                         )}
                       </div>
-                      <span style={{ fontSize: '0.8rem', color: '#64748B' }}>{req.menteeEmail}</span>
+                      <span style={{ fontSize: '0.8rem', color: 'var(--color-text-muted)' }}>{req.menteeEmail}</span>
                     </div>
                   </div>
 
@@ -468,7 +468,7 @@ export const RequestsTab: React.FC<RequestsTabProps> = ({
                           fontSize: '0.78rem',
                           fontWeight: 700,
                           padding: '4px 10px',
-                          borderRadius: '20px',
+                          borderRadius: 0,
                           background: '#FFFBEB',
                           color: '#B45309',
                           border: '1px solid #FDE68A',
@@ -486,7 +486,7 @@ export const RequestsTab: React.FC<RequestsTabProps> = ({
                           fontSize: '0.78rem',
                           fontWeight: 700,
                           padding: '4px 10px',
-                          borderRadius: '20px',
+                          borderRadius: 0,
                           background: '#ECFDF5',
                           color: '#059669',
                           border: '1px solid #A7F3D0',
@@ -504,7 +504,7 @@ export const RequestsTab: React.FC<RequestsTabProps> = ({
                           fontSize: '0.78rem',
                           fontWeight: 700,
                           padding: '4px 10px',
-                          borderRadius: '20px',
+                          borderRadius: 0,
                           background: '#FEF2F2',
                           color: '#DC2626',
                           border: '1px solid #FECACA',
@@ -522,33 +522,33 @@ export const RequestsTab: React.FC<RequestsTabProps> = ({
                 {/* Body Details */}
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '12px' }}>
                   <div>
-                    <span style={{ fontSize: '0.74rem', textTransform: 'uppercase', color: '#94A3B8', fontWeight: 700 }}>
+                    <span style={{ fontSize: '0.74rem', textTransform: 'uppercase', color: 'var(--color-text-faint)', fontWeight: 700 }}>
                       Career Goal
                     </span>
-                    <p style={{ margin: '3px 0 0 0', fontSize: '0.86rem', fontWeight: 600, color: '#334155' }}>
+                    <p style={{ margin: '3px 0 0 0', fontSize: '0.86rem', fontWeight: 600, color: 'var(--color-navy)' }}>
                       {req.careerGoal}
                     </p>
                   </div>
                   <div>
-                    <span style={{ fontSize: '0.74rem', textTransform: 'uppercase', color: '#94A3B8', fontWeight: 700 }}>
+                    <span style={{ fontSize: '0.74rem', textTransform: 'uppercase', color: 'var(--color-text-faint)', fontWeight: 700 }}>
                       Requested Track
                     </span>
-                    <p style={{ margin: '3px 0 0 0', fontSize: '0.86rem', fontWeight: 600, color: '#2563EB' }}>
+                    <p style={{ margin: '3px 0 0 0', fontSize: '0.86rem', fontWeight: 600, color: 'var(--color-blue)' }}>
                       {req.requestedTrack}
                     </p>
                   </div>
                   <div>
-                    <span style={{ fontSize: '0.74rem', textTransform: 'uppercase', color: '#94A3B8', fontWeight: 700 }}>
+                    <span style={{ fontSize: '0.74rem', textTransform: 'uppercase', color: 'var(--color-text-faint)', fontWeight: 700 }}>
                       Preferred Timing
                     </span>
-                    <p style={{ margin: '3px 0 0 0', fontSize: '0.84rem', color: '#475569' }}>{req.preferredTime}</p>
+                    <p style={{ margin: '3px 0 0 0', fontSize: '0.84rem', color: 'var(--color-text-muted)' }}>{req.preferredTime}</p>
                   </div>
                 </div>
 
                 {/* Skills Chips */}
                 {req.relevantSkills && req.relevantSkills.length > 0 && (
                   <div style={{ display: 'flex', alignItems: 'center', gap: '6px', flexWrap: 'wrap' }}>
-                    <span style={{ fontSize: '0.75rem', color: '#64748B', fontWeight: 600, marginRight: '4px' }}>
+                    <span style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)', fontWeight: 600, marginRight: '4px' }}>
                       Learner Skills:
                     </span>
                     {req.relevantSkills.map((skill, idx) => (
@@ -557,10 +557,10 @@ export const RequestsTab: React.FC<RequestsTabProps> = ({
                         style={{
                           fontSize: '0.75rem',
                           padding: '2px 8px',
-                          borderRadius: '12px',
-                          background: '#F1F5F9',
-                          color: '#334155',
-                          border: '1px solid #E2E8F0',
+                          borderRadius: 0,
+                          background: 'var(--color-surface-2)',
+                          color: 'var(--color-navy)',
+                          border: '1px solid var(--color-border)',
                         }}
                       >
                         {skill}
@@ -572,12 +572,12 @@ export const RequestsTab: React.FC<RequestsTabProps> = ({
                 {/* Intro message quote */}
                 <div
                   style={{
-                    background: '#F8FAFC',
-                    borderLeft: '3px solid #CBD5E1',
+                    background: 'var(--color-bg)',
+                    borderLeft: '3px solid var(--color-border-hover)',
                     padding: '8px 12px',
                     borderRadius: '0 6px 6px 0',
                     fontSize: '0.84rem',
-                    color: '#475569',
+                    color: 'var(--color-text-muted)',
                     fontStyle: 'italic',
                   }}
                 >
@@ -606,12 +606,12 @@ export const RequestsTab: React.FC<RequestsTabProps> = ({
                     display: 'flex',
                     justifyContent: 'space-between',
                     alignItems: 'center',
-                    borderTop: '1px solid #F1F5F9',
+                    borderTop: '1px solid var(--color-surface-2)',
                     paddingTop: '12px',
                     marginTop: '4px',
                   }}
                 >
-                  <span style={{ fontSize: '0.75rem', color: '#94A3B8' }}>
+                  <span style={{ fontSize: '0.75rem', color: 'var(--color-text-faint)' }}>
                     Submitted on {new Date(req.submittedAt).toLocaleDateString()}
                   </span>
 
@@ -622,11 +622,11 @@ export const RequestsTab: React.FC<RequestsTabProps> = ({
                       style={{
                         padding: '6px 12px',
                         background: '#FFFFFF',
-                        border: '1px solid #CBD5E1',
-                        borderRadius: '6px',
+                        border: '1px solid var(--color-border-hover)',
+                        borderRadius: 0,
                         fontSize: '0.82rem',
                         fontWeight: 600,
-                        color: '#475569',
+                        color: 'var(--color-text-muted)',
                         cursor: 'pointer',
                       }}
                     >
@@ -642,7 +642,7 @@ export const RequestsTab: React.FC<RequestsTabProps> = ({
                             padding: '6px 12px',
                             background: '#FFFFFF',
                             border: '1px solid #FECACA',
-                            borderRadius: '6px',
+                            borderRadius: 0,
                             fontSize: '0.82rem',
                             fontWeight: 600,
                             color: '#DC2626',
@@ -656,9 +656,9 @@ export const RequestsTab: React.FC<RequestsTabProps> = ({
                           onClick={() => handleOpenAction(req, 'accept')}
                           style={{
                             padding: '6px 16px',
-                            background: isAtCapacity ? '#94A3B8' : '#2563EB',
+                            background: isAtCapacity ? 'var(--color-text-faint)' : 'var(--color-blue)',
                             border: 'none',
-                            borderRadius: '6px',
+                            borderRadius: 0,
                             fontSize: '0.82rem',
                             fontWeight: 600,
                             color: '#FFFFFF',
@@ -678,7 +678,7 @@ export const RequestsTab: React.FC<RequestsTabProps> = ({
                           padding: '6px 14px',
                           background: '#ECFDF5',
                           border: '1px solid #A7F3D0',
-                          borderRadius: '6px',
+                          borderRadius: 0,
                           fontSize: '0.82rem',
                           fontWeight: 600,
                           color: '#065F46',
@@ -716,7 +716,7 @@ export const RequestsTab: React.FC<RequestsTabProps> = ({
           <div
             style={{
               background: '#FFFFFF',
-              borderRadius: '12px',
+              borderRadius: 0,
               maxWidth: '540px',
               width: '100%',
               boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1)',
@@ -729,13 +729,13 @@ export const RequestsTab: React.FC<RequestsTabProps> = ({
             <div
               style={{
                 padding: '20px 24px',
-                borderBottom: '1px solid #E2E8F0',
+                borderBottom: '1px solid var(--color-border)',
                 display: 'flex',
                 justifyContent: 'space-between',
                 alignItems: 'center',
               }}
             >
-              <h2 style={{ fontSize: '1.15rem', fontWeight: 800, color: '#1B2A4E', margin: 0 }}>
+              <h2 style={{ fontSize: '1.15rem', fontWeight: 800, color: 'var(--color-navy)', margin: 0 }}>
                 {modalMode === 'view' && 'Mentorship Application Details'}
                 {modalMode === 'accept' && `Accept ${selectedRequest.menteeName}?`}
                 {modalMode === 'decline' && `Decline ${selectedRequest.menteeName}?`}
@@ -746,7 +746,7 @@ export const RequestsTab: React.FC<RequestsTabProps> = ({
                 style={{
                   background: 'none',
                   border: 'none',
-                  color: '#94A3B8',
+                  color: 'var(--color-text-faint)',
                   fontSize: '1.25rem',
                   cursor: 'pointer',
                   padding: '4px',
@@ -765,7 +765,7 @@ export const RequestsTab: React.FC<RequestsTabProps> = ({
                     border: '1px solid #FECACA',
                     color: '#B91C1C',
                     padding: '10px 14px',
-                    borderRadius: '6px',
+                    borderRadius: 0,
                     fontSize: '0.84rem',
                     display: 'flex',
                     alignItems: 'center',
@@ -784,7 +784,7 @@ export const RequestsTab: React.FC<RequestsTabProps> = ({
                     border: '1px solid #FDE68A',
                     color: '#92400E',
                     padding: '10px 14px',
-                    borderRadius: '6px',
+                    borderRadius: 0,
                     fontSize: '0.84rem',
                   }}
                 >
@@ -794,36 +794,36 @@ export const RequestsTab: React.FC<RequestsTabProps> = ({
               )}
 
               {/* Mentee summary */}
-              <div style={{ background: '#F8FAFC', padding: '14px', borderRadius: '8px', border: '1px solid #E2E8F0' }}>
+              <div style={{ background: 'var(--color-bg)', padding: '14px', borderRadius: 0, border: '1px solid var(--color-border)' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
-                  <span style={{ fontWeight: 700, color: '#1E293B', fontSize: '0.92rem' }}>
+                  <span style={{ fontWeight: 700, color: 'var(--color-navy)', fontSize: '0.92rem' }}>
                     {selectedRequest.menteeName}
                   </span>
-                  <span style={{ color: '#2563EB', fontWeight: 600, fontSize: '0.82rem' }}>
+                  <span style={{ color: 'var(--color-blue)', fontWeight: 600, fontSize: '0.82rem' }}>
                     {selectedRequest.requestedTrack}
                   </span>
                 </div>
-                <p style={{ margin: '0 0 8px 0', fontSize: '0.84rem', color: '#475569' }}>
+                <p style={{ margin: '0 0 8px 0', fontSize: '0.84rem', color: 'var(--color-text-muted)' }}>
                   <strong>Goal:</strong> {selectedRequest.careerGoal}
                 </p>
-                <p style={{ margin: 0, fontSize: '0.84rem', color: '#475569' }}>
+                <p style={{ margin: 0, fontSize: '0.84rem', color: 'var(--color-text-muted)' }}>
                   <strong>Availability:</strong> {selectedRequest.preferredTime}
                 </p>
               </div>
 
               {/* Intro message */}
               <div>
-                <label style={{ display: 'block', fontSize: '0.78rem', fontWeight: 700, color: '#64748B', marginBottom: '4px' }}>
+                <label style={{ display: 'block', fontSize: '0.78rem', fontWeight: 700, color: 'var(--color-text-muted)', marginBottom: '4px' }}>
                   Learner Statement
                 </label>
                 <div
                   style={{
                     background: '#FFFFFF',
-                    border: '1px solid #CBD5E1',
-                    borderRadius: '6px',
+                    border: '1px solid var(--color-border-hover)',
+                    borderRadius: 0,
                     padding: '10px 12px',
                     fontSize: '0.85rem',
-                    color: '#334155',
+                    color: 'var(--color-navy)',
                     lineHeight: 1.5,
                   }}
                 >
@@ -834,7 +834,7 @@ export const RequestsTab: React.FC<RequestsTabProps> = ({
               {/* Response note input if accepting or declining */}
               {(modalMode === 'accept' || modalMode === 'decline') && (
                 <div>
-                  <label style={{ display: 'block', fontSize: '0.78rem', fontWeight: 700, color: '#64748B', marginBottom: '4px' }}>
+                  <label style={{ display: 'block', fontSize: '0.78rem', fontWeight: 700, color: 'var(--color-text-muted)', marginBottom: '4px' }}>
                     {modalMode === 'accept' ? 'Welcome Note (Optional)' : 'Decline Reason / Note'}
                   </label>
                   <textarea
@@ -849,8 +849,8 @@ export const RequestsTab: React.FC<RequestsTabProps> = ({
                     style={{
                       width: '100%',
                       padding: '8px 12px',
-                      borderRadius: '6px',
-                      border: '1px solid #CBD5E1',
+                      borderRadius: 0,
+                      border: '1px solid var(--color-border-hover)',
                       fontSize: '0.85rem',
                       fontFamily: 'inherit',
                       boxSizing: 'border-box',
@@ -864,8 +864,8 @@ export const RequestsTab: React.FC<RequestsTabProps> = ({
             <div
               style={{
                 padding: '16px 24px',
-                borderTop: '1px solid #E2E8F0',
-                background: '#F8FAFC',
+                borderTop: '1px solid var(--color-border)',
+                background: 'var(--color-bg)',
                 display: 'flex',
                 justifyContent: 'flex-end',
                 gap: '10px',
@@ -876,10 +876,10 @@ export const RequestsTab: React.FC<RequestsTabProps> = ({
                 onClick={handleCloseModal}
                 style={{
                   padding: '8px 16px',
-                  borderRadius: '6px',
+                  borderRadius: 0,
                   background: '#FFFFFF',
-                  border: '1px solid #CBD5E1',
-                  color: '#475569',
+                  border: '1px solid var(--color-border-hover)',
+                  color: 'var(--color-text-muted)',
                   fontSize: '0.84rem',
                   fontWeight: 600,
                   cursor: 'pointer',
@@ -894,8 +894,8 @@ export const RequestsTab: React.FC<RequestsTabProps> = ({
                   onClick={handleConfirmAccept}
                   style={{
                     padding: '8px 18px',
-                    borderRadius: '6px',
-                    background: '#2563EB',
+                    borderRadius: 0,
+                    background: 'var(--color-blue)',
                     border: 'none',
                     color: '#FFFFFF',
                     fontSize: '0.84rem',
@@ -916,7 +916,7 @@ export const RequestsTab: React.FC<RequestsTabProps> = ({
                   onClick={handleConfirmDecline}
                   style={{
                     padding: '8px 18px',
-                    borderRadius: '6px',
+                    borderRadius: 0,
                     background: '#DC2626',
                     border: 'none',
                     color: '#FFFFFF',

@@ -1,4 +1,6 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
+import { syncFounderTasks } from '../lib/founderSync';
+import { listFounderSubmissions, saveFounderReview } from '../lib/founderReview';
 import type {
   FounderWorkspaceState,
   WorkspaceTab,
@@ -31,11 +33,14 @@ import { SettingsTab } from './tabs/SettingsTab';
 interface FounderWorkspaceProps {
   initialState?: FounderWorkspaceState;
   onExitToHome: () => void;
+  /** Mirror tasks to Supabase so seekers can browse the published ones (signed-in founders). */
+  cloudSync?: boolean;
 }
 
 export const FounderWorkspace: React.FC<FounderWorkspaceProps> = ({
   initialState,
   onExitToHome,
+  cloudSync = false,
 }) => {
   // Initialize state from prop, localStorage, or onboarding draft
   const [workspace, setWorkspace] = useState<FounderWorkspaceState>(() => {
@@ -191,9 +196,36 @@ export const FounderWorkspace: React.FC<FounderWorkspaceProps> = ({
     [workspace, updateAndPersist]
   );
 
+  // Signed-in founders review real submissions from Supabase; the offline prototype keeps its demo rows
+  const [cloudSubs, setCloudSubs] = useState<TaskSubmission[] | null>(null);
+  const [subsError, setSubsError] = useState('');
+  const [subsVersion, setSubsVersion] = useState(0);
+  useEffect(() => {
+    if (!cloudSync) return;
+    let live = true;
+    listFounderSubmissions()
+      .then((subs) => {
+        if (!live) return;
+        setCloudSubs(subs);
+        setSubsError('');
+      })
+      .catch((e: unknown) => live && setSubsError(e instanceof Error ? e.message : 'Could not load submissions.'));
+    return () => {
+      live = false;
+    };
+    // refetch when the founder opens the tab, so new work shows up without a reload
+  }, [cloudSync, subsVersion, activeTab]);
+
+  const view: FounderWorkspaceState = cloudSync ? { ...workspace, submissions: cloudSubs ?? [] } : workspace;
+
   // Handlers for Submission Evaluation
   const handleReviewSubmission = useCallback(
-    (submission: TaskSubmission) => {
+    async (submission: TaskSubmission): Promise<{ error?: string }> => {
+      if (cloudSync) {
+        const res = await saveFounderReview(submission);
+        setSubsVersion((v) => v + 1);
+        return res;
+      }
       const updatedSubs = workspace.submissions.map((s) =>
         s.id === submission.id ? submission : s
       );
@@ -203,8 +235,9 @@ export const FounderWorkspace: React.FC<FounderWorkspaceProps> = ({
         lastUpdatedAt: new Date().toISOString(),
       };
       updateAndPersist(updated);
+      return {};
     },
-    [workspace, updateAndPersist]
+    [cloudSync, workspace, updateAndPersist]
   );
 
   // Settings and Reset
@@ -256,12 +289,31 @@ export const FounderWorkspace: React.FC<FounderWorkspaceProps> = ({
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, []);
 
+  // Mirror tasks to Supabase shortly after they change (only the fields seekers see trigger a sync)
+  const latestWorkspace = useRef(workspace);
+  useEffect(() => {
+    latestWorkspace.current = workspace;
+  }, [workspace]);
+  const [syncError, setSyncError] = useState('');
+  const syncKey = JSON.stringify([
+    workspace.tasks,
+    workspace.projects.map((p) => [p.id, p.title]),
+    workspace.startup.startupName,
+  ]);
+  useEffect(() => {
+    if (!cloudSync) return;
+    const timer = window.setTimeout(() => {
+      syncFounderTasks(latestWorkspace.current).then((res) => setSyncError(res.error ?? ''));
+    }, 600);
+    return () => window.clearTimeout(timer);
+  }, [cloudSync, syncKey]);
+
   return (
     <div className="yw-app ws-root">
       {/* Sidebar Navigation */}
       <Sidebar
         currentTab={activeTab}
-        workspace={workspace}
+        workspace={view}
         onTabChange={(tab: WorkspaceTab) => {
           setActiveTab(tab);
           setIsMobileNavOpen(false);
@@ -273,6 +325,11 @@ export const FounderWorkspace: React.FC<FounderWorkspaceProps> = ({
       />
 
       {/* Main Workspace Area */}
+      {syncError && (
+        <p className="yg-sync-error" role="alert">
+          Tasks could not be shared with seekers: {syncError}
+        </p>
+      )}
       <div className="yw-main ws-main-wrapper">
         {/* Header */}
         <WorkspaceHeader
@@ -287,7 +344,7 @@ export const FounderWorkspace: React.FC<FounderWorkspaceProps> = ({
         <main id="workspace-main-content">
           {activeTab === 'overview' && (
             <OverviewTab
-              workspace={workspace}
+              workspace={view}
               onNavigateTab={handleNavigateTab}
               onNewProject={() => handleNavigateTab('projects')}
               onNewTask={() => handleNavigateTab('tasks')}
@@ -317,7 +374,7 @@ export const FounderWorkspace: React.FC<FounderWorkspaceProps> = ({
             <TasksTab
               tasks={workspace.tasks}
               projects={workspace.projects}
-              submissions={workspace.submissions}
+              submissions={view.submissions}
               selectedProjectId={contextualProjectId}
               onAddTask={handleAddTask}
               onEditTask={handleEditTask}
@@ -332,7 +389,9 @@ export const FounderWorkspace: React.FC<FounderWorkspaceProps> = ({
 
           {activeTab === 'submissions' && (
             <SubmissionsTab
-              submissions={workspace.submissions}
+              submissions={view.submissions}
+              cloud={cloudSync}
+              loadError={subsError}
               tasks={workspace.tasks}
               selectedTaskId={contextualTaskId}
               onReviewSubmission={handleReviewSubmission}

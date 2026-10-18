@@ -10,7 +10,10 @@ interface SubmissionsTabProps {
   submissions: TaskSubmission[];
   tasks: WorkspaceTask[];
   selectedTaskId?: string;
-  onReviewSubmission: (submission: TaskSubmission) => void;
+  onReviewSubmission: (submission: TaskSubmission) => Promise<{ error?: string }>;
+  /** Submissions come from Supabase rather than the local demo. */
+  cloud?: boolean;
+  loadError?: string;
 }
 
 export const SubmissionsTab: React.FC<SubmissionsTabProps> = ({
@@ -18,6 +21,8 @@ export const SubmissionsTab: React.FC<SubmissionsTabProps> = ({
   tasks,
   selectedTaskId,
   onReviewSubmission,
+  cloud = false,
+  loadError = '',
 }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [statusFilter, setStatusFilter] = useState<'all' | SubmissionStatus>('all');
@@ -34,6 +39,8 @@ export const SubmissionsTab: React.FC<SubmissionsTabProps> = ({
   const [isVerifiedEndorsed, setIsVerifiedEndorsed] = useState(false);
   const [endorsedSkill, setEndorsedSkill] = useState('');
   const [saveSuccessNotice, setSaveSuccessNotice] = useState<string | null>(null);
+  const [saving, setSaving] = useState(false);
+  const [saveError, setSaveError] = useState('');
 
   // Task map
   const taskMap = useMemo(() => {
@@ -64,17 +71,18 @@ export const SubmissionsTab: React.FC<SubmissionsTabProps> = ({
     setFeedback(sub.feedback || '');
     setRating(sub.rating || 4);
     setIsVerifiedEndorsed(!!sub.isVerifiedEndorsed);
+    setSaveError('');
 
     const relatedTask = taskMap.get(sub.taskId);
     setEndorsedSkill(sub.endorsedSkill || relatedTask?.requiredSkills[0] || 'Technical Skill');
   };
 
-  const handleSaveReview = (e: React.FormEvent) => {
+  // a skill is endorsed only for accepted work (the database enforces the same rule)
+  const canEndorse = reviewStatus === 'accepted';
+
+  const handleSaveReview = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!reviewingSubmission) return;
-
-    // Strict Skill Passport Rule: Only accepted / approved submissions can endorse a verified skill
-    const canEndorse = reviewStatus === 'accepted' && isVerifiedEndorsed;
 
     const updated: TaskSubmission = {
       ...reviewingSubmission,
@@ -82,17 +90,23 @@ export const SubmissionsTab: React.FC<SubmissionsTabProps> = ({
       reviewNotes: reviewNotes.trim(),
       feedback: feedback.trim(),
       rating,
-      isVerifiedEndorsed: canEndorse,
-      endorsedSkill: canEndorse ? endorsedSkill : undefined,
+      isVerifiedEndorsed: canEndorse && isVerifiedEndorsed,
+      endorsedSkill: canEndorse && isVerifiedEndorsed ? endorsedSkill : undefined,
       reviewedAt: new Date().toISOString(),
     };
 
-    onReviewSubmission(updated);
+    setSaving(true);
+    const res = await onReviewSubmission(updated);
+    setSaving(false);
+    if (res.error) {
+      setSaveError(res.error);
+      return;
+    }
     setReviewingSubmission(null);
     setSaveSuccessNotice(
-      canEndorse
-        ? `Evaluation saved for ${updated.candidateName}. Practical skill "${endorsedSkill}" verified in local prototype.`
-        : `Evaluation saved for ${updated.candidateName} (Status: ${reviewStatus}).`
+      updated.isVerifiedEndorsed
+        ? `Evaluation saved. ${updated.endorsedSkill} is now Verified on ${updated.candidateName}'s Skill Passport.`
+        : `Evaluation saved for ${updated.candidateName}.`
     );
     setTimeout(() => setSaveSuccessNotice(null), 4000);
   };
@@ -116,6 +130,11 @@ export const SubmissionsTab: React.FC<SubmissionsTabProps> = ({
 
   return (
     <div className="yw-content">
+      {loadError && (
+        <div className="yw-alert yw-alert-danger" role="alert" style={{ marginBottom: '1.25rem' }}>
+          <div>Submissions could not be loaded: {loadError}</div>
+        </div>
+      )}
       {saveSuccessNotice && (
         <div className="yw-alert yw-alert-success" role="status" style={{ marginBottom: '1.25rem' }}>
           <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
@@ -277,8 +296,8 @@ export const SubmissionsTab: React.FC<SubmissionsTabProps> = ({
                               width: '32px',
                               height: '32px',
                               borderRadius: '50%',
-                              background: '#E2E8F0',
-                              color: '#1B2A4E',
+                              background: 'var(--color-border)',
+                              color: 'var(--color-navy)',
                               display: 'flex',
                               alignItems: 'center',
                               justifyContent: 'center',
@@ -289,7 +308,7 @@ export const SubmissionsTab: React.FC<SubmissionsTabProps> = ({
                             {sub.candidateName[0]}
                           </div>
                           <div>
-                            <div style={{ fontWeight: 600, color: '#1B2A4E', display: 'flex', alignItems: 'center', gap: '0.375rem' }}>
+                            <div style={{ fontWeight: 600, color: 'var(--color-navy)', display: 'flex', alignItems: 'center', gap: '0.375rem' }}>
                               {sub.candidateName}
                               {sub.isDemoRecord && (
                                 <span className="yw-badge yw-badge-neutral" style={{ fontSize: '0.65rem' }}>
@@ -297,15 +316,17 @@ export const SubmissionsTab: React.FC<SubmissionsTabProps> = ({
                                 </span>
                               )}
                             </div>
-                            <span style={{ fontSize: '0.75rem', color: '#64748B' }}>
-                              {sub.candidateEmail}
-                            </span>
+                            {sub.candidateEmail && (
+                              <span style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)' }}>
+                                {sub.candidateEmail}
+                              </span>
+                            )}
                           </div>
                         </div>
                       </td>
                       <td>
-                        <div style={{ fontWeight: 500, color: '#1B2A4E' }}>{sub.taskTitle}</div>
-                        <span style={{ fontSize: '0.75rem', color: '#94A3B8' }}>
+                        <div style={{ fontWeight: 500, color: 'var(--color-navy)' }}>{sub.taskTitle}</div>
+                        <span style={{ fontSize: '0.75rem', color: 'var(--color-text-faint)' }}>
                           Submitted: {new Date(sub.submittedAt).toLocaleDateString()}
                         </span>
                       </td>
@@ -326,7 +347,7 @@ export const SubmissionsTab: React.FC<SubmissionsTabProps> = ({
                         >
                           View Work ↗
                         </a>
-                        <p style={{ margin: '0.125rem 0 0 0', color: '#64748B', fontSize: '0.75rem', maxWidth: '240px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                        <p style={{ margin: '0.125rem 0 0 0', color: 'var(--color-text-muted)', fontSize: '0.75rem', maxWidth: '240px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                           {sub.deliverableNotes}
                         </p>
                       </td>
@@ -338,7 +359,7 @@ export const SubmissionsTab: React.FC<SubmissionsTabProps> = ({
                             {'☆'.repeat(5 - sub.rating)}
                           </div>
                         ) : (
-                          <span style={{ color: '#94A3B8', fontSize: '0.75rem' }}>Not rated</span>
+                          <span style={{ color: 'var(--color-text-faint)', fontSize: '0.75rem' }}>Not rated</span>
                         )}
                         {sub.isVerifiedEndorsed && (
                           <div style={{ marginTop: '0.25rem' }}>
@@ -393,9 +414,9 @@ export const SubmissionsTab: React.FC<SubmissionsTabProps> = ({
             <form onSubmit={handleSaveReview}>
               <div className="yw-modal-body" style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
                 {/* Deliverable Details Box */}
-                <div style={{ background: '#F8FAFC', border: '1px solid #E2E8F0', borderRadius: '8px', padding: '1rem' }}>
+                <div style={{ background: 'var(--color-bg)', border: '1px solid var(--color-border)', borderRadius: '8px', padding: '1rem' }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <strong style={{ color: '#1B2A4E', fontSize: '0.9375rem' }}>
+                    <strong style={{ color: 'var(--color-navy)', fontSize: '0.9375rem' }}>
                       Task: {reviewingSubmission.taskTitle}
                     </strong>
                     <a
@@ -408,12 +429,12 @@ export const SubmissionsTab: React.FC<SubmissionsTabProps> = ({
                     </a>
                   </div>
 
-                  <p style={{ margin: '0.75rem 0 0.25rem 0', color: '#475569', fontSize: '0.875rem', lineHeight: 1.5 }}>
+                  <p style={{ margin: '0.75rem 0 0.25rem 0', color: 'var(--color-text-muted)', fontSize: '0.875rem', lineHeight: 1.5 }}>
                     <strong>Candidate Deliverable Notes:</strong> {reviewingSubmission.deliverableNotes}
                   </p>
 
                   {activeTask?.evaluationCriteria && (
-                    <div style={{ marginTop: '0.5rem', paddingTop: '0.5rem', borderTop: '1px solid #E2E8F0', fontSize: '0.8125rem', color: '#64748B' }}>
+                    <div style={{ marginTop: '0.5rem', paddingTop: '0.5rem', borderTop: '1px solid var(--color-border)', fontSize: '0.8125rem', color: 'var(--color-text-muted)' }}>
                       <strong>Evaluation Criteria:</strong> {activeTask.evaluationCriteria}
                     </div>
                   )}
@@ -457,7 +478,7 @@ export const SubmissionsTab: React.FC<SubmissionsTabProps> = ({
                             border: 'none',
                             cursor: 'pointer',
                             fontSize: '1.5rem',
-                            color: star <= rating ? '#D97706' : '#CBD5E1',
+                            color: star <= rating ? '#D97706' : 'var(--color-border-hover)',
                             padding: '0 2px',
                           }}
                           title={`Rate ${star} stars`}
@@ -500,8 +521,8 @@ export const SubmissionsTab: React.FC<SubmissionsTabProps> = ({
                 {/* Explicit Skill Passport Verification Box */}
                 <div
                   style={{
-                    background: reviewStatus === 'accepted' ? '#F0FDF4' : '#F8FAFC',
-                    border: `1px solid ${reviewStatus === 'accepted' ? '#BBF7D0' : '#E2E8F0'}`,
+                    background: reviewStatus === 'accepted' ? '#F0FDF4' : 'var(--color-bg)',
+                    border: `1px solid ${reviewStatus === 'accepted' ? '#BBF7D0' : 'var(--color-border)'}`,
                     borderRadius: '8px',
                     padding: '1rem',
                     opacity: reviewStatus === 'accepted' ? 1 : 0.75,
@@ -511,8 +532,8 @@ export const SubmissionsTab: React.FC<SubmissionsTabProps> = ({
                     <input
                       id="check-endorse-skill"
                       type="checkbox"
-                      disabled={reviewStatus !== 'accepted'}
-                      checked={reviewStatus === 'accepted' && isVerifiedEndorsed}
+                      checked={canEndorse && isVerifiedEndorsed}
+                      disabled={!canEndorse}
                       onChange={(e) => setIsVerifiedEndorsed(e.target.checked)}
                       style={{
                         marginTop: '0.25rem',
@@ -526,20 +547,26 @@ export const SubmissionsTab: React.FC<SubmissionsTabProps> = ({
                         htmlFor="check-endorse-skill"
                         style={{
                           fontWeight: 600,
-                          color: reviewStatus === 'accepted' ? '#166534' : '#64748B',
+                          color: reviewStatus === 'accepted' ? '#166534' : 'var(--color-text-muted)',
                           fontSize: '0.9375rem',
                           cursor: reviewStatus === 'accepted' ? 'pointer' : 'not-allowed',
                         }}
                       >
                         Endorse Practical Skill Verification for Candidate's Skill Passport
                       </label>
-                      <p style={{ margin: '0.25rem 0 0 0', color: reviewStatus === 'accepted' ? '#15803D' : '#64748B', fontSize: '0.8125rem', lineHeight: 1.4 }}>
+                      <p style={{ margin: '0.25rem 0 0 0', color: reviewStatus === 'accepted' ? '#15803D' : 'var(--color-text-muted)', fontSize: '0.8125rem', lineHeight: 1.4 }}>
                         {reviewStatus === 'accepted'
                           ? 'By checking this box, you confirm that you reviewed the submitted practical work and that it directly demonstrates proficiency in the selected competency.'
                           : 'Practical skill verification endorsement is only enabled when the submission status is Accepted / Approved.'}
                       </p>
 
-                      {isVerifiedEndorsed && (
+                      {!canEndorse && (
+                        <p style={{ margin: '0.5rem 0 0 0', color: 'var(--color-text-muted)', fontSize: '0.8125rem' }}>
+                          Set the decision to Accepted to endorse a skill.
+                        </p>
+                      )}
+
+                      {canEndorse && isVerifiedEndorsed && (
                         <div style={{ marginTop: '0.75rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                           <label htmlFor="select-endorsed-skill" style={{ fontSize: '0.8125rem', color: '#166534', fontWeight: 600 }}>
                             Select Skill to Verify:
@@ -561,8 +588,9 @@ export const SubmissionsTab: React.FC<SubmissionsTabProps> = ({
                       )}
 
                       <div style={{ marginTop: '0.5rem', fontSize: '0.75rem', color: '#65A30D' }}>
-                        * Local prototype evaluation. Official blockchain or cryptographically signed
-                        credentials will be issued in production backend phases.
+                        {cloud
+                          ? '* The skill becomes Verified on the candidate’s Skill Passport, linked to this submission as evidence.'
+                          : '* Local prototype evaluation. Nothing leaves this browser.'}
                       </div>
                     </div>
                   </div>
@@ -570,6 +598,11 @@ export const SubmissionsTab: React.FC<SubmissionsTabProps> = ({
               </div>
 
               <div className="yw-modal-footer">
+                {saveError && (
+                  <p className="yw-alert yw-alert-danger" role="alert" style={{ margin: '0 auto 0 0' }}>
+                    {saveError}
+                  </p>
+                )}
                 <button
                   type="button"
                   className="yw-btn yw-btn-secondary"
@@ -577,8 +610,8 @@ export const SubmissionsTab: React.FC<SubmissionsTabProps> = ({
                 >
                   Cancel
                 </button>
-                <button type="submit" className="yw-btn yw-btn-primary" id="btn-save-evaluation">
-                  Save Evaluation
+                <button type="submit" className="yw-btn yw-btn-primary" id="btn-save-evaluation" disabled={saving}>
+                  {saving ? 'Saving…' : 'Save Evaluation'}
                 </button>
               </div>
             </form>

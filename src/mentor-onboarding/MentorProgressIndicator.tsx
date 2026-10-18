@@ -34,7 +34,7 @@ export const MentorProgressIndicator: React.FC<MentorProgressIndicatorProps> = (
             left: '24px',
             right: '24px',
             height: '2px',
-            background: '#E2E8F0',
+            background: 'var(--color-border)',
             zIndex: 0,
           }}
         />
@@ -46,7 +46,7 @@ export const MentorProgressIndicator: React.FC<MentorProgressIndicatorProps> = (
             left: '24px',
             width: `${(currentIndex / (STEPS.length - 1)) * 92}%`,
             height: '2px',
-            background: '#2563EB',
+            background: 'var(--color-blue)',
             transition: 'width 0.3s ease',
             zIndex: 1,
           }}
@@ -76,9 +76,9 @@ export const MentorProgressIndicator: React.FC<MentorProgressIndicatorProps> = (
                   width: '32px',
                   height: '32px',
                   borderRadius: '50%',
-                  background: isCurrent ? '#2563EB' : isDone ? '#10B981' : '#FFFFFF',
-                  color: isCurrent || isDone ? '#FFFFFF' : '#64748B',
-                  border: `2px solid ${isCurrent ? '#2563EB' : isDone ? '#10B981' : '#CBD5E1'}`,
+                  background: isCurrent ? 'var(--color-blue)' : isDone ? '#10B981' : '#FFFFFF',
+                  color: isCurrent || isDone ? '#FFFFFF' : 'var(--color-text-muted)',
+                  border: `2px solid ${isCurrent ? 'var(--color-blue)' : isDone ? '#10B981' : 'var(--color-border-hover)'}`,
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
@@ -94,7 +94,7 @@ export const MentorProgressIndicator: React.FC<MentorProgressIndicatorProps> = (
                 style={{
                   fontSize: '0.72rem',
                   fontWeight: isCurrent ? 700 : 500,
-                  color: isCurrent ? '#1B2A4E' : isDone ? '#10B981' : '#64748B',
+                  color: isCurrent ? 'var(--color-navy)' : isDone ? '#10B981' : 'var(--color-text-muted)',
                   textTransform: 'uppercase',
                   letterSpacing: '0.04em',
                 }}

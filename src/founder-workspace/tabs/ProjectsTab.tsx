@@ -251,7 +251,7 @@ export const ProjectsTab: React.FC<ProjectsTabProps> = ({
             return (
               <div key={project.id} className="yw-card" style={{ display: 'flex', flexDirection: 'column' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '0.75rem', marginBottom: '0.5rem' }}>
-                  <h3 style={{ margin: 0, fontSize: '1.125rem', color: '#1B2A4E', fontWeight: 600 }}>
+                  <h3 style={{ margin: 0, fontSize: '1.125rem', color: 'var(--color-navy)', fontWeight: 600 }}>
                     {project.title}
                   </h3>
                   {renderStatusBadge(project.status)}
@@ -271,7 +271,7 @@ export const ProjectsTab: React.FC<ProjectsTabProps> = ({
                   )}
                 </div>
 
-                <p style={{ color: '#475569', fontSize: '0.875rem', lineHeight: 1.5, flex: 1, margin: 0 }}>
+                <p style={{ color: 'var(--color-text-muted)', fontSize: '0.875rem', lineHeight: 1.5, flex: 1, margin: 0 }}>
                   {project.description}
                 </p>
 
@@ -282,9 +282,9 @@ export const ProjectsTab: React.FC<ProjectsTabProps> = ({
                     justifyContent: 'space-between',
                     marginTop: '1.25rem',
                     paddingTop: '0.875rem',
-                    borderTop: '1px solid #F1F5F9',
+                    borderTop: '1px solid var(--color-surface-2)',
                     fontSize: '0.8125rem',
-                    color: '#64748B',
+                    color: 'var(--color-text-muted)',
                   }}
                 >
                   <button
@@ -294,7 +294,7 @@ export const ProjectsTab: React.FC<ProjectsTabProps> = ({
                       background: 'none',
                       border: 'none',
                       padding: 0,
-                      color: '#1B2A4E',
+                      color: 'var(--color-navy)',
                       fontWeight: 600,
                       cursor: 'pointer',
                       display: 'flex',
@@ -584,7 +584,7 @@ export const ProjectsTab: React.FC<ProjectsTabProps> = ({
             </div>
 
             <div className="yw-modal-body">
-              <p style={{ color: '#334155', fontSize: '0.9375rem', lineHeight: 1.5 }}>
+              <p style={{ color: 'var(--color-navy)', fontSize: '0.9375rem', lineHeight: 1.5 }}>
                 Are you sure you want to permanently delete this project?
               </p>
               <div

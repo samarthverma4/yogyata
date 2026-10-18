@@ -1,3 +1,4 @@
+import { scopedKey } from '../lib/storageScope';
 import type { RecruiterOnboardingState } from './types';
 import { INITIAL_RECRUITER_ONBOARDING_STATE } from './types';
 
@@ -59,7 +60,7 @@ export function loadRecruiterDraft(): RecruiterOnboardingState {
   }
 
   try {
-    const raw = localStorage.getItem(RECRUITER_DRAFT_KEY);
+    const raw = localStorage.getItem(scopedKey(RECRUITER_DRAFT_KEY));
     if (!raw) {
       return INITIAL_RECRUITER_ONBOARDING_STATE;
     }
@@ -124,7 +125,7 @@ export function saveRecruiterDraft(state: RecruiterOnboardingState): void {
   if (typeof window === 'undefined') return;
   try {
     const sanitized = sanitizeRecruiterDraftForStorage(state);
-    localStorage.setItem(RECRUITER_DRAFT_KEY, JSON.stringify(sanitized));
+    localStorage.setItem(scopedKey(RECRUITER_DRAFT_KEY), JSON.stringify(sanitized));
   } catch (err) {
     console.error('[RecruiterOnboarding] Error saving draft to localStorage:', err);
   }
@@ -136,7 +137,7 @@ export function saveRecruiterDraft(state: RecruiterOnboardingState): void {
 export function clearRecruiterDraft(): void {
   if (typeof window === 'undefined') return;
   try {
-    localStorage.removeItem(RECRUITER_DRAFT_KEY);
+    localStorage.removeItem(scopedKey(RECRUITER_DRAFT_KEY));
   } catch (err) {
     console.error('[RecruiterOnboarding] Error clearing draft:', err);
   }

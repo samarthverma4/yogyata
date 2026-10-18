@@ -2,6 +2,7 @@ import React from 'react';
 import type { OnboardingView } from './types';
 import { ProgressIndicator } from './ProgressIndicator';
 import { ShieldCheck } from 'lucide-react';
+import { BrandMark } from '../brand/BrandMark';
 
 interface OnboardingLayoutProps {
   currentView: OnboardingView;
@@ -28,27 +29,7 @@ export const OnboardingLayout: React.FC<OnboardingLayoutProps> = ({
             onClick={onExit}
             aria-label="YOGYATA – go back to home"
           >
-            <div className="brand-emblem-wrapper ob-emblem" aria-hidden="true">
-              <svg
-                className="brand-emblem-svg"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M12 2.5L19 6V11.5C19 16 16 19.3 12 21.5C8 19.3 5 16 5 11.5V6L12 2.5Z"
-                  fill="#465FA8"
-                />
-                <path
-                  d="M10.8 14.5L8.5 12.2L9.6 11.1L10.8 12.3L14.4 8.7L15.5 9.8L10.8 14.5Z"
-                  fill="#FFC936"
-                />
-              </svg>
-            </div>
-            <div className="brand-text-group">
-              <span className="brand-title">YOGYATA</span>
-              <span className="brand-tagline-sub">Skills You Can Prove</span>
-            </div>
+            <BrandMark sub="Job seeker onboarding" />
           </button>
 
           {/* Centre: Role Badge */}

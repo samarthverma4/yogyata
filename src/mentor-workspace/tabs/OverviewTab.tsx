@@ -38,20 +38,20 @@ export const OverviewTab: React.FC<OverviewTabProps> = ({
   return (
     <div className="yw-content">
       {/* ── Welcome Hero Banner ── */}
-      <div className="ws-welcome-card" style={{ background: 'linear-gradient(135deg, #FAF5FF 0%, #FFFFFF 100%)', borderColor: '#E9D5FF' }}>
+      <div className="ws-welcome-card" style={{ background: 'linear-gradient(135deg, var(--color-blue-tint) 0%, #FFFFFF 100%)', borderColor: 'var(--color-blue-line)' }}>
         <div style={{ flex: 1, minWidth: '260px' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.375rem' }}>
             <span className="badge-mentor-guide yw-badge">
               <Compass size={13} />
               Mentor Workspace
             </span>
-            <span style={{ fontSize: '0.78rem', color: '#64748B' }}>
+            <span style={{ fontSize: '0.78rem', color: 'var(--color-text-muted)' }}>
               {mentor.currentRole} {mentor.organization ? `@ ${mentor.organization}` : ''}
             </span>
           </div>
           <h2 className="ws-welcome-title">Welcome back, {mentor.fullName}</h2>
           <p className="ws-welcome-desc">
-            You are currently mentoring <strong style={{ color: '#1B2A4E' }}>{activeMentees.length} active builder(s)</strong> across {preferences.selectedTracks.length} coaching tracks.
+            You are currently mentoring <strong style={{ color: 'var(--color-navy)' }}>{activeMentees.length} active builder(s)</strong> across {preferences.selectedTracks.length} coaching tracks.
           </p>
         </div>
 
@@ -70,7 +70,7 @@ export const OverviewTab: React.FC<OverviewTabProps> = ({
             className="yw-btn yw-btn-primary yw-btn-sm"
             onClick={onOpenScheduleModal}
             id="overview-quick-schedule-btn"
-            style={{ background: '#2563EB', borderColor: '#2563EB' }}
+            style={{ background: 'var(--color-blue)', borderColor: 'var(--color-blue)' }}
           >
             <Plus size={15} />
             <span>Schedule Session</span>
@@ -94,7 +94,7 @@ export const OverviewTab: React.FC<OverviewTabProps> = ({
         <div className="ws-stat-card" onClick={() => onNavigateTab('requests')} style={{ cursor: 'pointer' }}>
           <div>
             <div className="ws-stat-label">Pending Requests</div>
-            <div className="ws-stat-num" style={{ color: pendingRequests.length > 0 ? '#D97706' : '#1B2A4E' }}>
+            <div className="ws-stat-num" style={{ color: pendingRequests.length > 0 ? '#D97706' : 'var(--color-navy)' }}>
               {pendingRequests.length}
             </div>
             <div className="ws-stat-subtext">Awaiting evaluation</div>
@@ -131,12 +131,12 @@ export const OverviewTab: React.FC<OverviewTabProps> = ({
       <div className="yw-card" style={{ padding: '1.25rem 1.5rem', marginBottom: '1.5rem' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '0.75rem', marginBottom: '0.5rem' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-            <Clock size={16} color="#2563EB" />
-            <strong style={{ fontSize: '0.875rem', color: '#1B2A4E' }}>
+            <Clock size={16} color="var(--color-blue)" />
+            <strong style={{ fontSize: '0.875rem', color: 'var(--color-navy)' }}>
               Mentee Cohort Capacity & Schedule Allocation
             </strong>
           </div>
-          <span style={{ fontSize: '0.8125rem', fontWeight: 600, color: '#475569' }}>
+          <span style={{ fontSize: '0.8125rem', fontWeight: 600, color: 'var(--color-text-muted)' }}>
             {activeMentees.length} / {preferences.maxActiveMentees} Mentees ({preferences.weeklyAvailabilityHours} hrs/week committed)
           </span>
         </div>
@@ -145,7 +145,7 @@ export const OverviewTab: React.FC<OverviewTabProps> = ({
             className="ws-progress-fill"
             style={{
               width: `${capacityPercent}%`,
-              background: capacityPercent >= 100 ? '#EF4444' : 'linear-gradient(90deg, #2563EB, #10B981)',
+              background: capacityPercent >= 100 ? '#EF4444' : 'linear-gradient(90deg, var(--color-blue), #10B981)',
             }}
           />
         </div>
@@ -154,8 +154,8 @@ export const OverviewTab: React.FC<OverviewTabProps> = ({
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '1.5rem' }}>
         {/* ── Upcoming Sessions Column ── */}
         <div className="yw-card" style={{ padding: 0, overflow: 'hidden' }}>
-          <div style={{ padding: '16px 20px', borderBottom: '1px solid #E2E8F0', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <h3 style={{ margin: 0, fontSize: '0.9375rem', fontWeight: 700, color: '#1B2A4E' }}>
+          <div style={{ padding: '16px 20px', borderBottom: '1px solid var(--color-border)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <h3 style={{ margin: 0, fontSize: '0.9375rem', fontWeight: 700, color: 'var(--color-navy)' }}>
               Upcoming Sessions
             </h3>
             <button
@@ -189,25 +189,25 @@ export const OverviewTab: React.FC<OverviewTabProps> = ({
                     key={s.id}
                     style={{
                       padding: '12px',
-                      background: '#F8FAFC',
-                      border: '1px solid #E2E8F0',
-                      borderRadius: '8px',
+                      background: 'var(--color-bg)',
+                      border: '1px solid var(--color-border)',
+                      borderRadius: 0,
                       display: 'flex',
                       justifyContent: 'space-between',
                       alignItems: 'center',
                     }}
                   >
                     <div>
-                      <div style={{ fontWeight: 700, fontSize: '0.875rem', color: '#1B2A4E' }}>
+                      <div style={{ fontWeight: 700, fontSize: '0.875rem', color: 'var(--color-navy)' }}>
                         {s.title}
                       </div>
-                      <div style={{ fontSize: '0.78rem', color: '#64748B', marginTop: '2px' }}>
+                      <div style={{ fontSize: '0.78rem', color: 'var(--color-text-muted)', marginTop: '2px' }}>
                         Mentee: <strong>{s.menteeName}</strong> · {s.durationMinutes} min
                       </div>
                     </div>
                     <div style={{ textAlign: 'right' }}>
                       <span className="badge-scheduled yw-badge">{s.date}</span>
-                      <div style={{ fontSize: '0.75rem', color: '#64748B', marginTop: '2px' }}>{s.startTime}</div>
+                      <div style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)', marginTop: '2px' }}>{s.startTime}</div>
                     </div>
                   </div>
                 ))}
@@ -218,8 +218,8 @@ export const OverviewTab: React.FC<OverviewTabProps> = ({
 
         {/* ── Pending Requests Preview Column ── */}
         <div className="yw-card" style={{ padding: 0, overflow: 'hidden' }}>
-          <div style={{ padding: '16px 20px', borderBottom: '1px solid #E2E8F0', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <h3 style={{ margin: 0, fontSize: '0.9375rem', fontWeight: 700, color: '#1B2A4E' }}>
+          <div style={{ padding: '16px 20px', borderBottom: '1px solid var(--color-border)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <h3 style={{ margin: 0, fontSize: '0.9375rem', fontWeight: 700, color: 'var(--color-navy)' }}>
               Pending Mentorship Requests
             </h3>
             <button
@@ -248,11 +248,11 @@ export const OverviewTab: React.FC<OverviewTabProps> = ({
                       padding: '12px',
                       background: '#FFFDF7',
                       border: '1px solid #FDE68A',
-                      borderRadius: '8px',
+                      borderRadius: 0,
                     }}
                   >
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-                      <div style={{ fontWeight: 700, fontSize: '0.875rem', color: '#1B2A4E' }}>
+                      <div style={{ fontWeight: 700, fontSize: '0.875rem', color: 'var(--color-navy)' }}>
                         {r.menteeName}
                       </div>
                       <span className="badge-pending yw-badge" style={{ fontSize: '0.65rem' }}>Pending</span>
@@ -260,7 +260,7 @@ export const OverviewTab: React.FC<OverviewTabProps> = ({
                     <p style={{ margin: '3px 0 6px 0', fontSize: '0.78rem', color: '#92400E', fontWeight: 600 }}>
                       Track: {r.requestedTrack}
                     </p>
-                    <p style={{ margin: 0, fontSize: '0.78rem', color: '#475569', lineHeight: 1.4, display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
+                    <p style={{ margin: 0, fontSize: '0.78rem', color: 'var(--color-text-muted)', lineHeight: 1.4, display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
                       "{r.introMessage}"
                     </p>
                   </div>

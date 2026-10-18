@@ -7,12 +7,14 @@ import {
 interface CompleteStepProps {
   name: string;
   onExit: () => void;
+  actionLabel?: string;
   onEnterWorkspace?: () => void;
 }
 
 export const CompleteStep: React.FC<CompleteStepProps> = ({
   name,
   onExit,
+  actionLabel = 'Return to YOGYATA Home',
   onEnterWorkspace,
 }) => {
   const firstName = name.trim().split(' ')[0] || 'there';
@@ -58,7 +60,7 @@ export const CompleteStep: React.FC<CompleteStepProps> = ({
                 <h3 className="ob-roadmap-card-title">2. Take Skill Assessments</h3>
                 <p className="ob-roadmap-card-text">
                   Complete structured diagnostic evaluations to upgrade skills from DECLARED to{' '}
-                  <strong style={{ color: '#4F46E5' }}>ASSESSED</strong>.
+                  <strong style={{ color: 'var(--color-blue)' }}>ASSESSED</strong>.
                 </p>
               </div>
             </div>
@@ -121,8 +123,8 @@ export const CompleteStep: React.FC<CompleteStepProps> = ({
             id="complete-return-home-btn"
             style={{ width: '100%', maxWidth: '360px' }}
           >
-            <span>Return to YOGYATA Home</span>
-            {!onEnterWorkspace && <ArrowRight size={18} aria-hidden="true" />}
+            <span>{actionLabel}</span>
+            <ArrowRight size={18} aria-hidden="true" />
           </button>
         </div>
       </div>

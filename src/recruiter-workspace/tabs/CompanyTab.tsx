@@ -94,10 +94,10 @@ export const CompanyTab: React.FC<CompanyTabProps> = ({
     <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
       {/* Header */}
       <div>
-        <h2 style={{ margin: 0, fontSize: '1.25rem', fontWeight: 700, color: '#0F172A' }}>
+        <h2 style={{ margin: 0, fontSize: '1.25rem', fontWeight: 700, color: 'var(--color-navy)' }}>
           Company &amp; Organization Profile
         </h2>
-        <p style={{ margin: '0.25rem 0 0', fontSize: '0.8125rem', color: '#64748B' }}>
+        <p style={{ margin: '0.25rem 0 0', fontSize: '0.8125rem', color: 'var(--color-text-muted)' }}>
           Manage your company information, hiring domains, and team culture visible to candidates.
         </p>
       </div>
@@ -109,7 +109,7 @@ export const CompanyTab: React.FC<CompanyTabProps> = ({
             border: '1px solid #BBF7D0',
             color: '#15803D',
             padding: '0.625rem 1rem',
-            borderRadius: '6px',
+            borderRadius: 0,
             fontSize: '0.8125rem',
             display: 'flex',
             alignItems: 'center',
@@ -126,8 +126,8 @@ export const CompanyTab: React.FC<CompanyTabProps> = ({
         <div
           style={{
             background: '#FFFFFF',
-            border: '1px solid #E2E8F0',
-            borderRadius: '8px',
+            border: '1px solid var(--color-border)',
+            borderRadius: 0,
             padding: '1.5rem',
           }}
         >
@@ -270,11 +270,11 @@ export const CompanyTab: React.FC<CompanyTabProps> = ({
                       onClick={() => toggleDomain(domain)}
                       style={{
                         padding: '0.25rem 0.6rem',
-                        borderRadius: '16px',
+                        borderRadius: 0,
                         fontSize: '0.75rem',
-                        border: selected ? '1px solid #16A34A' : '1px solid #CBD5E1',
+                        border: selected ? '1px solid #16A34A' : '1px solid var(--color-border-hover)',
                         background: selected ? '#F0FDF4' : '#FFFFFF',
-                        color: selected ? '#15803D' : '#475569',
+                        color: selected ? '#15803D' : 'var(--color-text-muted)',
                         fontWeight: selected ? 600 : 400,
                         cursor: 'pointer',
                         display: 'inline-flex',
@@ -332,22 +332,22 @@ export const CompanyTab: React.FC<CompanyTabProps> = ({
         {/* Live Preview Card */}
         <div
           style={{
-            background: '#F8FAFC',
-            border: '1px solid #E2E8F0',
-            borderRadius: '8px',
+            background: 'var(--color-bg)',
+            border: '1px solid var(--color-border)',
+            borderRadius: 0,
             padding: '1.5rem',
           }}
         >
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '1rem', color: '#0F172A', fontWeight: 600, fontSize: '0.84rem' }}>
-            <Sparkles size={16} style={{ color: '#2563EB' }} />
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '1rem', color: 'var(--color-navy)', fontWeight: 600, fontSize: '0.84rem' }}>
+            <Sparkles size={16} style={{ color: 'var(--color-blue)' }} />
             <span>Candidate-Facing Company Preview</span>
           </div>
 
           <div
             style={{
               background: '#FFFFFF',
-              border: '1px solid #E2E8F0',
-              borderRadius: '8px',
+              border: '1px solid var(--color-border)',
+              borderRadius: 0,
               padding: '1.25rem',
             }}
           >
@@ -356,7 +356,7 @@ export const CompanyTab: React.FC<CompanyTabProps> = ({
                 style={{
                   width: '40px',
                   height: '40px',
-                  borderRadius: '8px',
+                  borderRadius: 0,
                   background: '#F0FDF4',
                   color: '#15803D',
                   display: 'flex',
@@ -367,16 +367,16 @@ export const CompanyTab: React.FC<CompanyTabProps> = ({
                 <Building2 size={22} />
               </div>
               <div>
-                <strong style={{ fontSize: '1.05rem', color: '#0F172A' }}>
+                <strong style={{ fontSize: '1.05rem', color: 'var(--color-navy)' }}>
                   {formData.companyName || 'Your Company'}
                 </strong>
-                <div style={{ fontSize: '0.75rem', color: '#64748B' }}>
+                <div style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)' }}>
                   {formData.industry} • {formData.companySize}
                 </div>
               </div>
             </div>
 
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', fontSize: '0.75rem', color: '#64748B', marginBottom: '0.75rem' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', fontSize: '0.75rem', color: 'var(--color-text-muted)', marginBottom: '0.75rem' }}>
               <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.2rem' }}>
                 <MapPin size={12} /> {formData.location || 'Location'}
               </span>
@@ -386,19 +386,19 @@ export const CompanyTab: React.FC<CompanyTabProps> = ({
               </span>
             </div>
 
-            <p style={{ margin: '0 0 0.75rem', fontSize: '0.8125rem', color: '#334155', lineHeight: 1.45 }}>
+            <p style={{ margin: '0 0 0.75rem', fontSize: '0.8125rem', color: 'var(--color-navy)', lineHeight: 1.45 }}>
               {formData.description || 'Company description will appear here...'}
             </p>
 
             {formData.workCultureSummary && (
               <div
                 style={{
-                  background: '#F8FAFC',
-                  borderLeft: '3px solid #2563EB',
+                  background: 'var(--color-bg)',
+                  borderLeft: '3px solid var(--color-blue)',
                   padding: '0.5rem 0.75rem',
                   borderRadius: '0 4px 4px 0',
                   fontSize: '0.75rem',
-                  color: '#475569',
+                  color: 'var(--color-text-muted)',
                   marginBottom: '0.75rem',
                   lineHeight: 1.4,
                 }}
@@ -408,7 +408,7 @@ export const CompanyTab: React.FC<CompanyTabProps> = ({
             )}
 
             <div>
-              <span style={{ fontSize: '0.72rem', color: '#64748B', display: 'block', marginBottom: '0.35rem' }}>
+              <span style={{ fontSize: '0.72rem', color: 'var(--color-text-muted)', display: 'block', marginBottom: '0.35rem' }}>
                 Hiring For:
               </span>
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.35rem' }}>
@@ -420,7 +420,7 @@ export const CompanyTab: React.FC<CompanyTabProps> = ({
                       color: '#15803D',
                       border: '1px solid #BBF7D0',
                       padding: '0.15rem 0.5rem',
-                      borderRadius: '12px',
+                      borderRadius: 0,
                       fontSize: '0.72rem',
                       fontWeight: 500,
                     }}
@@ -432,14 +432,14 @@ export const CompanyTab: React.FC<CompanyTabProps> = ({
             </div>
 
             {formData.website && (
-              <div style={{ marginTop: '1rem', borderTop: '1px solid #F1F5F9', paddingTop: '0.75rem' }}>
+              <div style={{ marginTop: '1rem', borderTop: '1px solid var(--color-surface-2)', paddingTop: '0.75rem' }}>
                 <a
                   href={formData.website}
                   target="_blank"
                   rel="noopener noreferrer"
                   style={{
                     fontSize: '0.75rem',
-                    color: '#2563EB',
+                    color: 'var(--color-blue)',
                     display: 'inline-flex',
                     alignItems: 'center',
                     gap: '0.25rem',

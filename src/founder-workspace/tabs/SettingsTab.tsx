@@ -79,8 +79,8 @@ export const SettingsTab: React.FC<SettingsTabProps> = ({
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginTop: '1rem' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
               <div>
-                <strong style={{ color: '#1B2A4E', fontSize: '0.9375rem' }}>Stealth Mode</strong>
-                <p style={{ margin: '0.25rem 0 0 0', color: '#64748B', fontSize: '0.8125rem' }}>
+                <strong style={{ color: 'var(--color-navy)', fontSize: '0.9375rem' }}>Stealth Mode</strong>
+                <p style={{ margin: '0.25rem 0 0 0', color: 'var(--color-text-muted)', fontSize: '0.8125rem' }}>
                   Hide startup name and direct URLs from general directory searches.
                 </p>
               </div>
@@ -89,18 +89,18 @@ export const SettingsTab: React.FC<SettingsTabProps> = ({
                   type="checkbox"
                   checked={settings.stealthMode}
                   onChange={() => handleToggle('stealthMode')}
-                  style={{ width: '20px', height: '20px', accentColor: '#1B2A4E', cursor: 'pointer' }}
+                  style={{ width: '20px', height: '20px', accentColor: 'var(--color-navy)', cursor: 'pointer' }}
                   id="toggle-stealth-mode"
                 />
               </label>
             </div>
 
-            <div style={{ borderTop: '1px solid #F1F5F9', paddingTop: '1rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <div style={{ borderTop: '1px solid var(--color-surface-2)', paddingTop: '1rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
               <div>
-                <strong style={{ color: '#1B2A4E', fontSize: '0.9375rem' }}>
+                <strong style={{ color: 'var(--color-navy)', fontSize: '0.9375rem' }}>
                   Allow Contributor Expressions of Interest
                 </strong>
-                <p style={{ margin: '0.25rem 0 0 0', color: '#64748B', fontSize: '0.8125rem' }}>
+                <p style={{ margin: '0.25rem 0 0 0', color: 'var(--color-text-muted)', fontSize: '0.8125rem' }}>
                   Permit prospective job seekers and talent to submit direct proposals.
                 </p>
               </div>
@@ -109,7 +109,7 @@ export const SettingsTab: React.FC<SettingsTabProps> = ({
                   type="checkbox"
                   checked={settings.allowPublicApplications}
                   onChange={() => handleToggle('allowPublicApplications')}
-                  style={{ width: '20px', height: '20px', accentColor: '#1B2A4E', cursor: 'pointer' }}
+                  style={{ width: '20px', height: '20px', accentColor: 'var(--color-navy)', cursor: 'pointer' }}
                   id="toggle-public-apps"
                 />
               </label>
@@ -127,8 +127,8 @@ export const SettingsTab: React.FC<SettingsTabProps> = ({
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginTop: '1rem' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
               <div>
-                <strong style={{ color: '#1B2A4E', fontSize: '0.9375rem' }}>Email Notifications</strong>
-                <p style={{ margin: '0.25rem 0 0 0', color: '#64748B', fontSize: '0.8125rem' }}>
+                <strong style={{ color: 'var(--color-navy)', fontSize: '0.9375rem' }}>Email Notifications</strong>
+                <p style={{ margin: '0.25rem 0 0 0', color: 'var(--color-text-muted)', fontSize: '0.8125rem' }}>
                   Receive summary updates at {workspace.accountEmail}.
                 </p>
               </div>
@@ -136,16 +136,16 @@ export const SettingsTab: React.FC<SettingsTabProps> = ({
                 type="checkbox"
                 checked={settings.emailNotifications}
                 onChange={() => handleToggle('emailNotifications')}
-                style={{ width: '20px', height: '20px', accentColor: '#1B2A4E', cursor: 'pointer' }}
+                style={{ width: '20px', height: '20px', accentColor: 'var(--color-navy)', cursor: 'pointer' }}
               />
             </div>
 
-            <div style={{ borderTop: '1px solid #F1F5F9', paddingTop: '1rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <div style={{ borderTop: '1px solid var(--color-surface-2)', paddingTop: '1rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
               <div>
-                <strong style={{ color: '#1B2A4E', fontSize: '0.9375rem' }}>
+                <strong style={{ color: 'var(--color-navy)', fontSize: '0.9375rem' }}>
                   Task Submission Alerts
                 </strong>
-                <p style={{ margin: '0.25rem 0 0 0', color: '#64748B', fontSize: '0.8125rem' }}>
+                <p style={{ margin: '0.25rem 0 0 0', color: 'var(--color-text-muted)', fontSize: '0.8125rem' }}>
                   Notify immediately when a candidate submits work for evaluation.
                 </p>
               </div>
@@ -153,16 +153,16 @@ export const SettingsTab: React.FC<SettingsTabProps> = ({
                 type="checkbox"
                 checked={settings.contributorAlerts}
                 onChange={() => handleToggle('contributorAlerts')}
-                style={{ width: '20px', height: '20px', accentColor: '#1B2A4E', cursor: 'pointer' }}
+                style={{ width: '20px', height: '20px', accentColor: 'var(--color-navy)', cursor: 'pointer' }}
               />
             </div>
 
-            <div style={{ borderTop: '1px solid #F1F5F9', paddingTop: '1rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <div style={{ borderTop: '1px solid var(--color-surface-2)', paddingTop: '1rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
               <div>
-                <strong style={{ color: '#1B2A4E', fontSize: '0.9375rem' }}>
+                <strong style={{ color: 'var(--color-navy)', fontSize: '0.9375rem' }}>
                   Weekly Venture Digest
                 </strong>
-                <p style={{ margin: '0.25rem 0 0 0', color: '#64748B', fontSize: '0.8125rem' }}>
+                <p style={{ margin: '0.25rem 0 0 0', color: 'var(--color-text-muted)', fontSize: '0.8125rem' }}>
                   A weekly executive summary of challenge progress, applicant pipelines, and milestones.
                 </p>
               </div>
@@ -170,7 +170,7 @@ export const SettingsTab: React.FC<SettingsTabProps> = ({
                 type="checkbox"
                 checked={settings.weeklyDigest}
                 onChange={() => handleToggle('weeklyDigest')}
-                style={{ width: '20px', height: '20px', accentColor: '#1B2A4E', cursor: 'pointer' }}
+                style={{ width: '20px', height: '20px', accentColor: 'var(--color-navy)', cursor: 'pointer' }}
               />
             </div>
           </div>
@@ -199,7 +199,7 @@ export const SettingsTab: React.FC<SettingsTabProps> = ({
               <strong style={{ color: '#991B1B', fontSize: '0.9375rem' }}>
                 Reset Founder Workspace Data
               </strong>
-              <p style={{ margin: '0.25rem 0 0 0', color: '#64748B', fontSize: '0.8125rem', maxWidth: '520px' }}>
+              <p style={{ margin: '0.25rem 0 0 0', color: 'var(--color-text-muted)', fontSize: '0.8125rem', maxWidth: '520px' }}>
                 Clears all projects, custom task challenges, evaluation records, and profile edits
                 saved in this browser. Onboarding drafts will remain untouched.
               </p>
@@ -236,7 +236,7 @@ export const SettingsTab: React.FC<SettingsTabProps> = ({
             </div>
 
             <div className="yw-modal-body">
-              <p style={{ color: '#334155', fontSize: '0.9375rem', lineHeight: 1.5 }}>
+              <p style={{ color: 'var(--color-navy)', fontSize: '0.9375rem', lineHeight: 1.5 }}>
                 Are you sure you want to reset your Founder Workspace?
               </p>
               <div

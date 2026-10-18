@@ -122,7 +122,7 @@ export const MentorProfileStep: React.FC<MentorProfileStepProps> = ({
 
             <div className="yw-form-group">
               <label className="yw-form-label" htmlFor="mentor-org">
-                Organization / Company <span style={{ color: '#64748B', fontWeight: 400 }}>(Optional)</span>
+                Organization / Company <span style={{ color: 'var(--color-text-muted)', fontWeight: 400 }}>(Optional)</span>
               </label>
               <input
                 id="mentor-org"
@@ -161,7 +161,7 @@ export const MentorProfileStep: React.FC<MentorProfileStepProps> = ({
               <label className="yw-form-label" htmlFor="mentor-bio">
                 Professional Bio & Mentorship Philosophy <span style={{ color: '#DC2626' }}>*</span>
               </label>
-              <span style={{ fontSize: '0.75rem', color: '#64748B' }}>
+              <span style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)' }}>
                 {data.bio.length}/500
               </span>
             </div>
@@ -232,17 +232,17 @@ export const MentorProfileStep: React.FC<MentorProfileStepProps> = ({
 
         {/* Live Preview Column */}
         <div>
-          <div style={{ fontSize: '0.78rem', fontWeight: 700, color: '#64748B', textTransform: 'uppercase', letterSpacing: '0.04em', marginBottom: '0.5rem' }}>
+          <div style={{ fontSize: '0.78rem', fontWeight: 700, color: 'var(--color-text-muted)', textTransform: 'uppercase', letterSpacing: '0.04em', marginBottom: '0.5rem' }}>
             Live Mentee Preview
           </div>
-          <div className="yw-card" style={{ padding: '1.5rem', background: '#FFFFFF', borderColor: '#E2E8F0' }}>
+          <div className="yw-card" style={{ padding: '1.5rem', background: '#FFFFFF', borderColor: 'var(--color-border)' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1rem' }}>
               <div
                 style={{
                   width: '56px',
                   height: '56px',
                   borderRadius: '50%',
-                  background: 'linear-gradient(135deg, #2563EB 0%, #1B2A4E 100%)',
+                  background: 'linear-gradient(135deg, var(--color-blue) 0%, var(--color-navy) 100%)',
                   color: '#FFFFFF',
                   display: 'flex',
                   alignItems: 'center',
@@ -255,18 +255,18 @@ export const MentorProfileStep: React.FC<MentorProfileStepProps> = ({
                 {initials}
               </div>
               <div style={{ minWidth: 0 }}>
-                <h3 style={{ margin: 0, fontSize: '1.1rem', fontWeight: 700, color: '#1B2A4E' }}>
+                <h3 style={{ margin: 0, fontSize: '1.1rem', fontWeight: 700, color: 'var(--color-navy)' }}>
                   {fullName || 'Your Name'}
                 </h3>
-                <p style={{ margin: '2px 0 0 0', fontSize: '0.8125rem', color: '#2563EB', fontWeight: 600 }}>
+                <p style={{ margin: '2px 0 0 0', fontSize: '0.8125rem', color: 'var(--color-blue)', fontWeight: 600 }}>
                   {data.headline || 'Your Headline Will Appear Here'}
                 </p>
               </div>
             </div>
 
-            <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', marginBottom: '1rem', fontSize: '0.78rem', color: '#475569' }}>
+            <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', marginBottom: '1rem', fontSize: '0.78rem', color: 'var(--color-text-muted)' }}>
               <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.25rem' }}>
-                <Briefcase size={14} color="#64748B" />
+                <Briefcase size={14} color="var(--color-text-muted)" />
                 {data.currentRole || 'Role'} {data.organization ? `@ ${data.organization}` : ''}
               </span>
               <span>·</span>
@@ -276,19 +276,19 @@ export const MentorProfileStep: React.FC<MentorProfileStepProps> = ({
               </span>
             </div>
 
-            <p style={{ fontSize: '0.84rem', color: '#475569', lineHeight: 1.5, margin: 0, fontStyle: data.bio ? 'normal' : 'italic' }}>
+            <p style={{ fontSize: '0.84rem', color: 'var(--color-text-muted)', lineHeight: 1.5, margin: 0, fontStyle: data.bio ? 'normal' : 'italic' }}>
               {data.bio || 'Your mentoring philosophy and bio preview will appear here.'}
             </p>
 
             {(data.linkedInUrl || data.portfolioUrl) && (
-              <div style={{ marginTop: '1rem', paddingTop: '0.75rem', borderTop: '1px solid #F1F5F9', display: 'flex', gap: '0.75rem', fontSize: '0.78rem' }}>
+              <div style={{ marginTop: '1rem', paddingTop: '0.75rem', borderTop: '1px solid var(--color-surface-2)', display: 'flex', gap: '0.75rem', fontSize: '0.78rem' }}>
                 {data.linkedInUrl && (
-                  <span style={{ color: '#2563EB', display: 'inline-flex', alignItems: 'center', gap: '0.25rem' }}>
+                  <span style={{ color: 'var(--color-blue)', display: 'inline-flex', alignItems: 'center', gap: '0.25rem' }}>
                     <Link2 size={13} /> LinkedIn
                   </span>
                 )}
                 {data.portfolioUrl && (
-                  <span style={{ color: '#2563EB', display: 'inline-flex', alignItems: 'center', gap: '0.25rem' }}>
+                  <span style={{ color: 'var(--color-blue)', display: 'inline-flex', alignItems: 'center', gap: '0.25rem' }}>
                     <Link2 size={13} /> Portfolio
                   </span>
                 )}

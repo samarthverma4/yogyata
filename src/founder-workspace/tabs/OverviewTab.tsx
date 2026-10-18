@@ -53,7 +53,7 @@ export const OverviewTab: React.FC<OverviewTabProps> = ({
   return (
     <div className="ws-overview-layout">
       {/* ── Welcome Banner ── */}
-      <div className="ws-card ws-welcome-card" style={{ background: 'linear-gradient(135deg, #FAFBFD 0%, #EEF2FF 100%)', borderColor: '#E0E7FF' }}>
+      <div className="ws-card ws-welcome-card" style={{ background: 'linear-gradient(135deg, #FAFBFD 0%, var(--color-blue-tint) 100%)', borderColor: '#E0E7FF' }}>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '20px', flexWrap: 'wrap' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '18px' }}>
             <div className="ws-startup-logo-avatar" style={{ width: 56, height: 56, fontSize: '1.4rem' }}>
@@ -64,7 +64,7 @@ export const OverviewTab: React.FC<OverviewTabProps> = ({
               )}
             </div>
             <div>
-              <span className="ob-dev-badge" style={{ background: '#465FA8', marginBottom: '6px' }}>
+              <span className="ob-dev-badge" style={{ background: 'var(--color-blue)', marginBottom: '6px' }}>
                 FOUNDER WORKSPACE
               </span>
               <h2 style={{ fontSize: '1.45rem', fontWeight: 800, color: 'var(--color-navy)', letterSpacing: '-0.02em', marginTop: '2px' }}>
@@ -115,7 +115,7 @@ export const OverviewTab: React.FC<OverviewTabProps> = ({
           <div>
             <div className="ws-stat-label">Active Projects</div>
             <div className="ws-stat-num">{activeProjects.length}</div>
-            <span style={{ fontSize: '0.74rem', color: '#64748B' }}>{projects.length} total projects</span>
+            <span style={{ fontSize: '0.74rem', color: 'var(--color-text-muted)' }}>{projects.length} total projects</span>
           </div>
           <div className="ws-stat-icon-wrap icon-blue">
             <Briefcase size={20} />
@@ -134,7 +134,7 @@ export const OverviewTab: React.FC<OverviewTabProps> = ({
           <div>
             <div className="ws-stat-label">Published Tasks</div>
             <div className="ws-stat-num">{publishedTasks.length}</div>
-            <span style={{ fontSize: '0.74rem', color: '#64748B' }}>{tasks.length} challenges total</span>
+            <span style={{ fontSize: '0.74rem', color: 'var(--color-text-muted)' }}>{tasks.length} challenges total</span>
           </div>
           <div className="ws-stat-icon-wrap icon-emerald">
             <FileCode2 size={20} />
@@ -153,7 +153,7 @@ export const OverviewTab: React.FC<OverviewTabProps> = ({
           <div>
             <div className="ws-stat-label">Open Talent Slots</div>
             <div className="ws-stat-num">{talentRequirements.length}</div>
-            <span style={{ fontSize: '0.74rem', color: '#64748B' }}>Configured requirements</span>
+            <span style={{ fontSize: '0.74rem', color: 'var(--color-text-muted)' }}>Configured requirements</span>
           </div>
           <div className="ws-stat-icon-wrap icon-purple">
             <Users size={20} />
@@ -172,7 +172,7 @@ export const OverviewTab: React.FC<OverviewTabProps> = ({
           <div>
             <div className="ws-stat-label">Pending Reviews</div>
             <div className="ws-stat-num">{pendingSubmissions.length}</div>
-            <span style={{ fontSize: '0.74rem', color: pendingSubmissions.length > 0 ? '#B45309' : '#64748B' }}>
+            <span style={{ fontSize: '0.74rem', color: pendingSubmissions.length > 0 ? '#B45309' : 'var(--color-text-muted)' }}>
               {pendingSubmissions.length > 0 ? 'Requires attention' : 'All reviews clear'}
             </span>
           </div>
@@ -232,7 +232,7 @@ export const OverviewTab: React.FC<OverviewTabProps> = ({
                       <div>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                           <span className={`ws-badge badge-${task.status}`}>{task.status}</span>
-                          <span style={{ fontSize: '0.78rem', color: '#64748B' }}>
+                          <span style={{ fontSize: '0.78rem', color: 'var(--color-text-muted)' }}>
                             {task.compensationType === 'paid' ? 'Paid Challenge' : 'Practical Proof'}
                           </span>
                         </div>
@@ -240,7 +240,7 @@ export const OverviewTab: React.FC<OverviewTabProps> = ({
                           {task.title}
                         </h4>
                       </div>
-                      <ArrowRight size={16} style={{ color: '#94A3B8' }} />
+                      <ArrowRight size={16} style={{ color: 'var(--color-text-faint)' }} />
                     </div>
                     <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap', marginTop: '10px' }}>
                       {task.requiredSkills.slice(0, 4).map((skill) => (
@@ -292,7 +292,7 @@ export const OverviewTab: React.FC<OverviewTabProps> = ({
                         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                           <span className={`ws-badge badge-${sub.status}`}>{sub.status.replace('-', ' ')}</span>
                           {sub.isDemoRecord && (
-                            <span className="ob-dev-badge" style={{ background: '#64748B', fontSize: '0.65rem' }}>
+                            <span className="ob-dev-badge" style={{ background: 'var(--color-text-muted)', fontSize: '0.65rem' }}>
                               DEMO RECORD
                             </span>
                           )}
@@ -329,7 +329,7 @@ export const OverviewTab: React.FC<OverviewTabProps> = ({
               <span style={{ fontSize: '0.84rem', fontWeight: 800, color: 'var(--color-blue)' }}>{completionPercentage}%</span>
             </div>
 
-            <div style={{ height: 6, background: '#E2E8F0', borderRadius: 3, overflow: 'hidden', marginBottom: '18px' }}>
+            <div style={{ height: 6, background: 'var(--color-border)', borderRadius: 3, overflow: 'hidden', marginBottom: '18px' }}>
               <div
                 style={{
                   height: '100%',
@@ -346,7 +346,7 @@ export const OverviewTab: React.FC<OverviewTabProps> = ({
                   {item.done ? (
                     <CheckCircle2 size={16} style={{ color: '#10B981', flexShrink: 0 }} />
                   ) : (
-                    <div style={{ width: 16, height: 16, borderRadius: '50%', border: '1.5px solid #CBD5E1', flexShrink: 0 }} />
+                    <div style={{ width: 16, height: 16, borderRadius: '50%', border: '1.5px solid var(--color-border-hover)', flexShrink: 0 }} />
                   )}
                   <span style={{ color: item.done ? 'var(--color-navy)' : 'var(--color-text-muted)', fontWeight: item.done ? 600 : 400 }}>
                     {item.label}
@@ -404,7 +404,7 @@ export const OverviewTab: React.FC<OverviewTabProps> = ({
           </div>
 
           {/* Startup Summary Box */}
-          <div className="ws-card" style={{ background: '#FCFCFD' }}>
+          <div className="ws-card" style={{ background: 'var(--color-bg)' }}>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '8px' }}>
               <span className="ob-review-label">About Venture</span>
               {startup.websiteUrl && (

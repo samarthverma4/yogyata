@@ -196,8 +196,8 @@ export const TalentDiscoveryTab: React.FC<TalentDiscoveryTabProps> = ({ tasks })
           </div>
 
           {/* Quick Skill Filters */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap', borderTop: '1px solid #F1F5F9', paddingTop: '0.75rem' }}>
-            <span style={{ fontSize: '0.8125rem', color: '#64748B', fontWeight: 600 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap', borderTop: '1px solid var(--color-surface-2)', paddingTop: '0.75rem' }}>
+            <span style={{ fontSize: '0.8125rem', color: 'var(--color-text-muted)', fontWeight: 600 }}>
               Filter by Skill:
             </span>
             <button
@@ -261,7 +261,7 @@ export const TalentDiscoveryTab: React.FC<TalentDiscoveryTabProps> = ({ tasks })
                         height: '46px',
                         borderRadius: '50%',
                         background: '#EEF2F6',
-                        color: '#1B2A4E',
+                        color: 'var(--color-navy)',
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
@@ -273,33 +273,33 @@ export const TalentDiscoveryTab: React.FC<TalentDiscoveryTabProps> = ({ tasks })
                     </div>
                     <div>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
-                        <h4 style={{ margin: 0, fontSize: '1rem', color: '#1B2A4E', fontWeight: 600 }}>
+                        <h4 style={{ margin: 0, fontSize: '1rem', color: 'var(--color-navy)', fontWeight: 600 }}>
                           {cand.fullName}
                         </h4>
                         <span className="yw-badge yw-badge-neutral" style={{ fontSize: '0.7rem' }}>
                           DEMO PROFILE
                         </span>
                       </div>
-                      <p style={{ margin: '0.125rem 0 0 0', color: '#64748B', fontSize: '0.8125rem' }}>
+                      <p style={{ margin: '0.125rem 0 0 0', color: 'var(--color-text-muted)', fontSize: '0.8125rem' }}>
                         {cand.headline}
                       </p>
                     </div>
                   </div>
                 </div>
 
-                <p style={{ margin: '0.75rem 0', color: '#475569', fontSize: '0.875rem', lineHeight: 1.5, flex: 1 }}>
+                <p style={{ margin: '0.75rem 0', color: 'var(--color-text-muted)', fontSize: '0.875rem', lineHeight: 1.5, flex: 1 }}>
                   {cand.bio}
                 </p>
 
-                <div style={{ display: 'flex', gap: '1rem', fontSize: '0.8125rem', color: '#64748B', margin: '0.25rem 0 0.75rem 0' }}>
+                <div style={{ display: 'flex', gap: '1rem', fontSize: '0.8125rem', color: 'var(--color-text-muted)', margin: '0.25rem 0 0.75rem 0' }}>
                   <span>📍 {cand.location}</span>
                   <span>⏱ {cand.availability}</span>
                   <span>🏢 {cand.preferredWorkMode}</span>
                 </div>
 
                 {/* Skill Passport Evidence Pills */}
-                <div style={{ borderTop: '1px solid #F1F5F9', paddingTop: '0.75rem' }}>
-                  <span style={{ fontSize: '0.75rem', textTransform: 'uppercase', color: '#64748B', fontWeight: 600 }}>
+                <div style={{ borderTop: '1px solid var(--color-surface-2)', paddingTop: '0.75rem' }}>
+                  <span style={{ fontSize: '0.75rem', textTransform: 'uppercase', color: 'var(--color-text-muted)', fontWeight: 600 }}>
                     Skill Passport Evidence:
                   </span>
                   <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.375rem', marginTop: '0.375rem' }}>
@@ -315,7 +315,7 @@ export const TalentDiscoveryTab: React.FC<TalentDiscoveryTabProps> = ({ tasks })
                     justifyContent: 'space-between',
                     marginTop: '1rem',
                     paddingTop: '0.75rem',
-                    borderTop: '1px solid #F1F5F9',
+                    borderTop: '1px solid var(--color-surface-2)',
                   }}
                 >
                   <button
@@ -351,7 +351,7 @@ export const TalentDiscoveryTab: React.FC<TalentDiscoveryTabProps> = ({ tasks })
                     width: '44px',
                     height: '44px',
                     borderRadius: '50%',
-                    background: '#1B2A4E',
+                    background: 'var(--color-navy)',
                     color: '#ffffff',
                     display: 'flex',
                     alignItems: 'center',
@@ -365,7 +365,7 @@ export const TalentDiscoveryTab: React.FC<TalentDiscoveryTabProps> = ({ tasks })
                   <h3 id="modal-candidate-title" className="yw-modal-title">
                     {inspectedCandidate.fullName}
                   </h3>
-                  <p style={{ margin: 0, fontSize: '0.8125rem', color: '#64748B' }}>
+                  <p style={{ margin: 0, fontSize: '0.8125rem', color: 'var(--color-text-muted)' }}>
                     {inspectedCandidate.headline} • {inspectedCandidate.location}
                   </p>
                 </div>
@@ -382,26 +382,26 @@ export const TalentDiscoveryTab: React.FC<TalentDiscoveryTabProps> = ({ tasks })
 
             <div className="yw-modal-body" style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
               <div>
-                <h4 style={{ margin: '0 0 0.375rem 0', fontSize: '0.8125rem', textTransform: 'uppercase', color: '#64748B' }}>
+                <h4 style={{ margin: '0 0 0.375rem 0', fontSize: '0.8125rem', textTransform: 'uppercase', color: 'var(--color-text-muted)' }}>
                   Candidate Summary
                 </h4>
-                <p style={{ margin: 0, color: '#334155', fontSize: '0.9375rem', lineHeight: 1.5 }}>
+                <p style={{ margin: 0, color: 'var(--color-navy)', fontSize: '0.9375rem', lineHeight: 1.5 }}>
                   {inspectedCandidate.bio}
                 </p>
               </div>
 
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '0.75rem', background: '#F8FAFC', padding: '0.875rem', borderRadius: '8px' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '0.75rem', background: 'var(--color-bg)', padding: '0.875rem', borderRadius: '8px' }}>
                 <div>
-                  <span style={{ fontSize: '0.75rem', color: '#64748B' }}>Experience Level</span>
-                  <div style={{ fontWeight: 600, color: '#1B2A4E' }}>{inspectedCandidate.experienceLevel}</div>
+                  <span style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)' }}>Experience Level</span>
+                  <div style={{ fontWeight: 600, color: 'var(--color-navy)' }}>{inspectedCandidate.experienceLevel}</div>
                 </div>
                 <div>
-                  <span style={{ fontSize: '0.75rem', color: '#64748B' }}>Availability</span>
-                  <div style={{ fontWeight: 600, color: '#1B2A4E' }}>{inspectedCandidate.availability}</div>
+                  <span style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)' }}>Availability</span>
+                  <div style={{ fontWeight: 600, color: 'var(--color-navy)' }}>{inspectedCandidate.availability}</div>
                 </div>
                 <div>
-                  <span style={{ fontSize: '0.75rem', color: '#64748B' }}>Completed Challenges</span>
-                  <div style={{ fontWeight: 600, color: '#1B2A4E' }}>
+                  <span style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)' }}>Completed Challenges</span>
+                  <div style={{ fontWeight: 600, color: 'var(--color-navy)' }}>
                     {inspectedCandidate.completedChallengesCount} reviewed tasks
                   </div>
                 </div>
@@ -410,13 +410,13 @@ export const TalentDiscoveryTab: React.FC<TalentDiscoveryTabProps> = ({ tasks })
               {/* YOGYATA Skill Passport Breakdown */}
               <div>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
-                  <h4 style={{ margin: 0, fontSize: '0.875rem', textTransform: 'uppercase', color: '#1B2A4E', fontWeight: 700 }}>
+                  <h4 style={{ margin: 0, fontSize: '0.875rem', textTransform: 'uppercase', color: 'var(--color-navy)', fontWeight: 700 }}>
                     Official YOGYATA Skill Passport
                   </h4>
-                  <span style={{ fontSize: '0.75rem', color: '#64748B' }}>3 Evidence Tiers</span>
+                  <span style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)' }}>3 Evidence Tiers</span>
                 </div>
 
-                <div style={{ border: '1px solid #E2E8F0', borderRadius: '8px', overflow: 'hidden' }}>
+                <div style={{ border: '1px solid var(--color-border)', borderRadius: '8px', overflow: 'hidden' }}>
                   <table className="yw-table" style={{ margin: 0 }}>
                     <thead>
                       <tr>
@@ -428,7 +428,7 @@ export const TalentDiscoveryTab: React.FC<TalentDiscoveryTabProps> = ({ tasks })
                     <tbody>
                       {inspectedCandidate.skills.map((s) => (
                         <tr key={s.skillName}>
-                          <td style={{ fontWeight: 600, color: '#1B2A4E' }}>{s.skillName}</td>
+                          <td style={{ fontWeight: 600, color: 'var(--color-navy)' }}>{s.skillName}</td>
                           <td>
                             {s.level === 'verified' && (
                               <span className="yw-skill-pill yw-skill-verified">✓ Verified</span>
@@ -440,10 +440,10 @@ export const TalentDiscoveryTab: React.FC<TalentDiscoveryTabProps> = ({ tasks })
                               <span className="yw-skill-pill yw-skill-declared">Declared</span>
                             )}
                           </td>
-                          <td style={{ fontSize: '0.8125rem', color: '#475569' }}>
+                          <td style={{ fontSize: '0.8125rem', color: 'var(--color-text-muted)' }}>
                             {s.evidenceSource}
                             {s.verifiedAt && (
-                              <span style={{ display: 'block', fontSize: '0.75rem', color: '#64748B', marginTop: '2px' }}>
+                              <span style={{ display: 'block', fontSize: '0.75rem', color: 'var(--color-text-muted)', marginTop: '2px' }}>
                                 Verified on {s.verifiedAt}
                               </span>
                             )}
@@ -458,11 +458,11 @@ export const TalentDiscoveryTab: React.FC<TalentDiscoveryTabProps> = ({ tasks })
                   style={{
                     marginTop: '0.75rem',
                     padding: '0.625rem 0.75rem',
-                    background: '#F8FAFC',
+                    background: 'var(--color-bg)',
                     borderRadius: '6px',
-                    border: '1px solid #E2E8F0',
+                    border: '1px solid var(--color-border)',
                     fontSize: '0.75rem',
-                    color: '#64748B',
+                    color: 'var(--color-text-muted)',
                     lineHeight: 1.45,
                   }}
                 >

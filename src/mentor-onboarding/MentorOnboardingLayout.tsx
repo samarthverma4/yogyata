@@ -1,3 +1,4 @@
+import { BrandMark } from '../brand/BrandMark';
 import React, { useState } from 'react';
 import type { MentorOnboardingView } from './types';
 import { MentorProgressIndicator } from './MentorProgressIndicator';
@@ -22,12 +23,12 @@ export const MentorOnboardingLayout: React.FC<MentorOnboardingLayoutProps> = ({
   const [showRestartConfirm, setShowRestartConfirm] = useState(false);
 
   return (
-    <div className="ob-root" style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', background: '#F8FAFC' }}>
+    <div className="ob-root" style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', background: 'var(--color-bg)' }}>
       {/* ── Top Header ── */}
       <header
         style={{
           background: '#FFFFFF',
-          borderBottom: '1px solid #E2E8F0',
+          borderBottom: '1px solid var(--color-border)',
           padding: '12px 24px',
           position: 'sticky',
           top: 0,
@@ -36,15 +37,13 @@ export const MentorOnboardingLayout: React.FC<MentorOnboardingLayoutProps> = ({
       >
         <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.875rem' }}>
-            <span style={{ fontSize: '1.2rem', fontWeight: 800, color: '#1B2A4E', letterSpacing: '-0.02em' }}>
-              YOGYATA
-            </span>
+            <BrandMark />
             <span
               className="yw-badge"
               style={{
-                background: '#FAF5FF',
-                color: '#9333EA',
-                border: '1px solid #E9D5FF',
+                background: 'var(--color-blue-tint)',
+                color: 'var(--color-blue)',
+                border: '1px solid var(--color-blue-line)',
                 display: 'inline-flex',
                 alignItems: 'center',
                 gap: '4px',
@@ -88,7 +87,7 @@ export const MentorOnboardingLayout: React.FC<MentorOnboardingLayoutProps> = ({
           <MentorProgressIndicator currentView={currentView} onStepClick={onStepClick} />
         )}
 
-        <div style={{ background: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: '14px', padding: '32px', boxShadow: '0 1px 4px rgba(0,0,0,0.04)' }}>
+        <div style={{ background: '#FFFFFF', border: '1px solid var(--color-border)', borderRadius: 0, padding: '32px', boxShadow: '0 1px 4px rgba(0,0,0,0.04)' }}>
           {children}
         </div>
       </main>
@@ -111,7 +110,7 @@ export const MentorOnboardingLayout: React.FC<MentorOnboardingLayoutProps> = ({
               </button>
             </div>
             <div className="yw-modal-body">
-              <p style={{ margin: 0, color: '#475569', fontSize: '0.9rem', lineHeight: 1.5 }}>
+              <p style={{ margin: 0, color: 'var(--color-text-muted)', fontSize: '0.9rem', lineHeight: 1.5 }}>
                 Your progress has been saved as a local draft. You can return to continue your mentor registration at any time.
               </p>
             </div>
@@ -156,7 +155,7 @@ export const MentorOnboardingLayout: React.FC<MentorOnboardingLayoutProps> = ({
               </button>
             </div>
             <div className="yw-modal-body">
-              <p style={{ margin: 0, color: '#475569', fontSize: '0.9rem', lineHeight: 1.5 }}>
+              <p style={{ margin: 0, color: 'var(--color-text-muted)', fontSize: '0.9rem', lineHeight: 1.5 }}>
                 Are you sure you want to reset your entered details? All draft data in this onboarding session will be cleared.
               </p>
             </div>

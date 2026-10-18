@@ -191,10 +191,10 @@ export const ScorecardsTab: React.FC<ScorecardsTabProps> = ({
             key={star}
             size={13}
             fill={star <= rating ? '#F59E0B' : 'transparent'}
-            stroke={star <= rating ? '#F59E0B' : '#CBD5E1'}
+            stroke={star <= rating ? '#F59E0B' : 'var(--color-border-hover)'}
           />
         ))}
-        <span style={{ fontSize: '0.75rem', fontWeight: 600, color: '#0F172A', marginLeft: '4px' }}>
+        <span style={{ fontSize: '0.75rem', fontWeight: 600, color: 'var(--color-navy)', marginLeft: '4px' }}>
           {rating}/5
         </span>
       </div>
@@ -207,10 +207,10 @@ export const ScorecardsTab: React.FC<ScorecardsTabProps> = ({
       <div>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '0.75rem' }}>
           <div>
-            <h2 style={{ margin: 0, fontSize: '1.25rem', fontWeight: 700, color: '#0F172A' }}>
+            <h2 style={{ margin: 0, fontSize: '1.25rem', fontWeight: 700, color: 'var(--color-navy)' }}>
               Candidate Interview Scorecards
             </h2>
-            <p style={{ margin: '0.25rem 0 0', fontSize: '0.8125rem', color: '#64748B' }}>
+            <p style={{ margin: '0.25rem 0 0', fontSize: '0.8125rem', color: 'var(--color-text-muted)' }}>
               Standardize technical interview evaluations across technical competency, problem-solving, and culture fit.
             </p>
           </div>
@@ -224,8 +224,8 @@ export const ScorecardsTab: React.FC<ScorecardsTabProps> = ({
               alignItems: 'center',
               gap: '0.35rem',
               fontSize: '0.8125rem',
-              background: '#7C3AED',
-              borderColor: '#7C3AED',
+              background: 'var(--color-blue)',
+              borderColor: 'var(--color-blue)',
             }}
           >
             <Plus size={15} />
@@ -238,8 +238,8 @@ export const ScorecardsTab: React.FC<ScorecardsTabProps> = ({
       <div
         className="alert-banner alert-banner-info"
         style={{
-          background: '#FAF5FF',
-          borderColor: '#E9D5FF',
+          background: 'var(--color-blue-tint)',
+          borderColor: 'var(--color-blue-line)',
           color: '#6B21A8',
         }}
       >
@@ -255,8 +255,8 @@ export const ScorecardsTab: React.FC<ScorecardsTabProps> = ({
       <div
         style={{
           background: '#FFFFFF',
-          border: '1px solid #E2E8F0',
-          borderRadius: '8px',
+          border: '1px solid var(--color-border)',
+          borderRadius: 0,
           padding: '0.875rem 1rem',
           display: 'flex',
           justifyContent: 'space-between',
@@ -283,7 +283,7 @@ export const ScorecardsTab: React.FC<ScorecardsTabProps> = ({
         <div style={{ position: 'relative', minWidth: '220px' }}>
           <Search
             size={14}
-            style={{ position: 'absolute', left: '0.75rem', top: '50%', transform: 'translateY(-50%)', color: '#94A3B8' }}
+            style={{ position: 'absolute', left: '0.75rem', top: '50%', transform: 'translateY(-50%)', color: 'var(--color-text-faint)' }}
           />
           <input
             type="text"
@@ -302,8 +302,8 @@ export const ScorecardsTab: React.FC<ScorecardsTabProps> = ({
           <div
             style={{
               background: '#FFFFFF',
-              border: '1px solid #E2E8F0',
-              borderRadius: '8px',
+              border: '1px solid var(--color-border)',
+              borderRadius: 0,
               padding: '3rem 1.5rem',
               textAlign: 'center',
             }}
@@ -313,8 +313,8 @@ export const ScorecardsTab: React.FC<ScorecardsTabProps> = ({
                 width: '48px',
                 height: '48px',
                 borderRadius: '50%',
-                background: '#F1F5F9',
-                color: '#64748B',
+                background: 'var(--color-surface-2)',
+                color: 'var(--color-text-muted)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
@@ -323,10 +323,10 @@ export const ScorecardsTab: React.FC<ScorecardsTabProps> = ({
             >
               <FileCheck size={22} />
             </div>
-            <h3 style={{ margin: '0 0 0.35rem', fontSize: '1rem', color: '#0F172A' }}>
+            <h3 style={{ margin: '0 0 0.35rem', fontSize: '1rem', color: 'var(--color-navy)' }}>
               No scorecards recorded
             </h3>
-            <p style={{ margin: '0 0 1rem', fontSize: '0.8125rem', color: '#64748B' }}>
+            <p style={{ margin: '0 0 1rem', fontSize: '0.8125rem', color: 'var(--color-text-muted)' }}>
               Log an interview evaluation with technical, problem-solving, and role alignment scores.
             </p>
             <button type="button" className="btn-secondary" onClick={openCreateModal} style={{ fontSize: '0.8125rem' }}>
@@ -347,22 +347,22 @@ export const ScorecardsTab: React.FC<ScorecardsTabProps> = ({
                   key={sc.id}
                   style={{
                     background: '#FFFFFF',
-                    border: '1px solid #E2E8F0',
-                    borderRadius: '8px',
+                    border: '1px solid var(--color-border)',
+                    borderRadius: 0,
                     padding: '1.25rem',
                   }}
                 >
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '0.75rem', marginBottom: '0.75rem' }}>
                     <div>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
-                        <strong style={{ fontSize: '1rem', color: '#0F172A' }}>
+                        <strong style={{ fontSize: '1rem', color: 'var(--color-navy)' }}>
                           {sc.candidateName}
                         </strong>
                         <span
                           style={{
                             fontSize: '0.72rem',
                             padding: '0.15rem 0.5rem',
-                            borderRadius: '9999px',
+                            borderRadius: 0,
                             background: recMeta.bg,
                             color: recMeta.color,
                             fontWeight: 700,
@@ -370,12 +370,12 @@ export const ScorecardsTab: React.FC<ScorecardsTabProps> = ({
                         >
                           {recMeta.label}
                         </span>
-                        <span style={{ fontSize: '0.75rem', color: '#64748B' }}>
+                        <span style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)' }}>
                           (Avg {avgScore}/5)
                         </span>
                       </div>
 
-                      <div style={{ fontSize: '0.78rem', color: '#64748B', marginTop: '0.2rem' }}>
+                      <div style={{ fontSize: '0.78rem', color: 'var(--color-text-muted)', marginTop: '0.2rem' }}>
                         {sc.targetRole} • {ROUND_LABELS[sc.round]} • Interviewer: {sc.interviewerName}
                       </div>
                     </div>
@@ -386,7 +386,7 @@ export const ScorecardsTab: React.FC<ScorecardsTabProps> = ({
                         className="btn-ghost"
                         onClick={() => openEditModal(sc)}
                         title="Edit Scorecard"
-                        style={{ padding: '0.3rem', color: '#64748B' }}
+                        style={{ padding: '0.3rem', color: 'var(--color-text-muted)' }}
                       >
                         <Edit2 size={14} />
                       </button>
@@ -408,34 +408,34 @@ export const ScorecardsTab: React.FC<ScorecardsTabProps> = ({
                       display: 'grid',
                       gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))',
                       gap: '0.625rem',
-                      background: '#F8FAFC',
+                      background: 'var(--color-bg)',
                       padding: '0.75rem',
-                      borderRadius: '6px',
+                      borderRadius: 0,
                       marginBottom: '0.875rem',
                       fontSize: '0.78rem',
                     }}
                   >
                     <div>
-                      <span style={{ color: '#64748B', display: 'block', marginBottom: '2px' }}>Technical Competency:</span>
+                      <span style={{ color: 'var(--color-text-muted)', display: 'block', marginBottom: '2px' }}>Technical Competency:</span>
                       {renderStars(sc.technicalRating)}
                     </div>
                     <div>
-                      <span style={{ color: '#64748B', display: 'block', marginBottom: '2px' }}>Problem Solving:</span>
+                      <span style={{ color: 'var(--color-text-muted)', display: 'block', marginBottom: '2px' }}>Problem Solving:</span>
                       {renderStars(sc.problemSolvingRating)}
                     </div>
                     <div>
-                      <span style={{ color: '#64748B', display: 'block', marginBottom: '2px' }}>Communication:</span>
+                      <span style={{ color: 'var(--color-text-muted)', display: 'block', marginBottom: '2px' }}>Communication:</span>
                       {renderStars(sc.communicationRating)}
                     </div>
                     <div>
-                      <span style={{ color: '#64748B', display: 'block', marginBottom: '2px' }}>Role Alignment:</span>
+                      <span style={{ color: 'var(--color-text-muted)', display: 'block', marginBottom: '2px' }}>Role Alignment:</span>
                       {renderStars(sc.roleAlignmentRating)}
                     </div>
                   </div>
 
                   {/* Strengths & Areas of Concern */}
                   <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '0.75rem', fontSize: '0.8125rem' }}>
-                    <div style={{ background: '#F0FDF4', padding: '0.625rem 0.75rem', borderRadius: '6px', border: '1px solid #DCFCE7' }}>
+                    <div style={{ background: '#F0FDF4', padding: '0.625rem 0.75rem', borderRadius: 0, border: '1px solid #DCFCE7' }}>
                       <strong style={{ color: '#15803D', fontSize: '0.75rem', display: 'block', marginBottom: '2px' }}>
                         Observed Strengths:
                       </strong>
@@ -443,7 +443,7 @@ export const ScorecardsTab: React.FC<ScorecardsTabProps> = ({
                     </div>
 
                     {sc.areasOfConcern && (
-                      <div style={{ background: '#FFFBEB', padding: '0.625rem 0.75rem', borderRadius: '6px', border: '1px solid #FDE68A' }}>
+                      <div style={{ background: '#FFFBEB', padding: '0.625rem 0.75rem', borderRadius: 0, border: '1px solid #FDE68A' }}>
                         <strong style={{ color: '#B45309', fontSize: '0.75rem', display: 'block', marginBottom: '2px' }}>
                           Areas of Concern / Follow-up:
                         </strong>
@@ -453,7 +453,7 @@ export const ScorecardsTab: React.FC<ScorecardsTabProps> = ({
                   </div>
 
                   {/* Interview Notes */}
-                  <div style={{ marginTop: '0.75rem', fontSize: '0.8125rem', color: '#475569', lineHeight: 1.45 }}>
+                  <div style={{ marginTop: '0.75rem', fontSize: '0.8125rem', color: 'var(--color-text-muted)', lineHeight: 1.45 }}>
                     <strong>Interviewer Summary:</strong> {sc.interviewNotes}
                   </div>
                 </div>
@@ -472,7 +472,7 @@ export const ScorecardsTab: React.FC<ScorecardsTabProps> = ({
           aria-labelledby="scorecard-modal-title"
         >
           <div className="modal-dialog" style={{ maxWidth: '580px', maxHeight: '90vh', overflowY: 'auto' }}>
-            <h3 id="scorecard-modal-title" style={{ margin: '0 0 1rem', fontSize: '1.125rem', color: '#0F172A' }}>
+            <h3 id="scorecard-modal-title" style={{ margin: '0 0 1rem', fontSize: '1.125rem', color: 'var(--color-navy)' }}>
               {editingScorecard ? 'Edit Interview Scorecard' : 'Record Interview Scorecard'}
             </h3>
 
@@ -483,7 +483,7 @@ export const ScorecardsTab: React.FC<ScorecardsTabProps> = ({
                   border: '1px solid #FECACA',
                   color: '#B91C1C',
                   padding: '0.625rem 0.875rem',
-                  borderRadius: '6px',
+                  borderRadius: 0,
                   fontSize: '0.8125rem',
                   marginBottom: '1rem',
                   display: 'flex',
@@ -562,7 +562,7 @@ export const ScorecardsTab: React.FC<ScorecardsTabProps> = ({
               </div>
 
               {/* 4 Ratings Selectors */}
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem', background: '#F8FAFC', padding: '0.875rem', borderRadius: '6px', marginBottom: '1rem' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem', background: 'var(--color-bg)', padding: '0.875rem', borderRadius: 0, marginBottom: '1rem' }}>
                 <div className="form-group" style={{ margin: 0 }}>
                   <label className="form-label" style={{ fontSize: '0.78rem' }}>
                     Technical Competency (1-5)
@@ -705,7 +705,7 @@ export const ScorecardsTab: React.FC<ScorecardsTabProps> = ({
                 >
                   Cancel
                 </button>
-                <button type="submit" className="btn-primary" style={{ background: '#7C3AED', borderColor: '#7C3AED' }}>
+                <button type="submit" className="btn-primary" style={{ background: 'var(--color-blue)', borderColor: 'var(--color-blue)' }}>
                   {editingScorecard ? 'Save Changes' : 'Submit Scorecard'}
                 </button>
               </div>
@@ -723,10 +723,10 @@ export const ScorecardsTab: React.FC<ScorecardsTabProps> = ({
           aria-labelledby="delete-scorecard-title"
         >
           <div className="modal-dialog" style={{ maxWidth: '420px' }}>
-            <h3 id="delete-scorecard-title" style={{ margin: '0 0 0.5rem', fontSize: '1.125rem', color: '#0F172A' }}>
+            <h3 id="delete-scorecard-title" style={{ margin: '0 0 0.5rem', fontSize: '1.125rem', color: 'var(--color-navy)' }}>
               Delete Interview Scorecard?
             </h3>
-            <p style={{ margin: '0 0 1.25rem', fontSize: '0.84rem', color: '#64748B', lineHeight: 1.45 }}>
+            <p style={{ margin: '0 0 1.25rem', fontSize: '0.84rem', color: 'var(--color-text-muted)', lineHeight: 1.45 }}>
               Are you sure you want to permanently delete the scorecard for{' '}
               <strong>{deletingScorecard.candidateName}</strong> ({ROUND_LABELS[deletingScorecard.round]}) by{' '}
               {deletingScorecard.interviewerName}?

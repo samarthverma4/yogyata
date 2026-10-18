@@ -137,7 +137,7 @@ export const MentorAccountStep: React.FC<MentorAccountStepProps> = ({
                   background: 'none',
                   border: 'none',
                   cursor: 'pointer',
-                  color: '#64748B',
+                  color: 'var(--color-text-muted)',
                 }}
                 aria-label={showPassword ? 'Hide password' : 'Show password'}
               >
@@ -175,7 +175,7 @@ export const MentorAccountStep: React.FC<MentorAccountStepProps> = ({
                   background: 'none',
                   border: 'none',
                   cursor: 'pointer',
-                  color: '#64748B',
+                  color: 'var(--color-text-muted)',
                 }}
                 aria-label={showConfirmPassword ? 'Hide password' : 'Show password'}
               >
@@ -198,7 +198,7 @@ export const MentorAccountStep: React.FC<MentorAccountStepProps> = ({
               }}
               style={{ marginTop: '3px', width: '16px', height: '16px', cursor: 'pointer' }}
             />
-            <span style={{ fontSize: '0.84rem', color: '#475569', lineHeight: 1.45 }}>
+            <span style={{ fontSize: '0.84rem', color: 'var(--color-text-muted)', lineHeight: 1.45 }}>
               I agree to the YOGYATA Mentorship Code of Conduct, committing to constructive, respectful,
               and evidence-based professional guidance.
             </span>

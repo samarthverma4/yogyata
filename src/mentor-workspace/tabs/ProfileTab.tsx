@@ -189,10 +189,10 @@ export const ProfileTab: React.FC<ProfileTabProps> = ({ workspace, onUpdateWorks
       {/* Header */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '20px' }}>
         <div>
-          <h1 style={{ fontSize: '1.5rem', fontWeight: 800, color: '#1B2A4E', margin: '0 0 6px 0' }}>
+          <h1 style={{ fontSize: '1.5rem', fontWeight: 800, color: 'var(--color-navy)', margin: '0 0 6px 0' }}>
             Mentor Profile & Public Persona
           </h1>
-          <p style={{ margin: 0, color: '#64748B', fontSize: '0.88rem' }}>
+          <p style={{ margin: 0, color: 'var(--color-text-muted)', fontSize: '0.88rem' }}>
             Update your professional biography, mentorship tracks, and how learners view your guidance offerings.
           </p>
         </div>
@@ -202,10 +202,10 @@ export const ProfileTab: React.FC<ProfileTabProps> = ({ workspace, onUpdateWorks
           onClick={() => setIsPreviewMode(!isPreviewMode)}
           style={{
             padding: '8px 16px',
-            background: isPreviewMode ? '#EFF6FF' : '#FFFFFF',
-            border: isPreviewMode ? '1.5px solid #2563EB' : '1px solid #CBD5E1',
-            color: isPreviewMode ? '#1D4ED8' : '#475569',
-            borderRadius: '6px',
+            background: isPreviewMode ? 'var(--color-blue-tint)' : '#FFFFFF',
+            border: isPreviewMode ? '1.5px solid var(--color-blue)' : '1px solid var(--color-border-hover)',
+            color: isPreviewMode ? 'var(--color-blue-hover)' : 'var(--color-text-muted)',
+            borderRadius: 0,
             fontSize: '0.82rem',
             fontWeight: 600,
             cursor: 'pointer',
@@ -226,7 +226,7 @@ export const ProfileTab: React.FC<ProfileTabProps> = ({ workspace, onUpdateWorks
             border: '1px solid #A7F3D0',
             color: '#065F46',
             padding: '10px 16px',
-            borderRadius: '8px',
+            borderRadius: 0,
             marginBottom: '16px',
             display: 'flex',
             alignItems: 'center',
@@ -248,7 +248,7 @@ export const ProfileTab: React.FC<ProfileTabProps> = ({ workspace, onUpdateWorks
             border: '1px solid #FECACA',
             color: '#B91C1C',
             padding: '10px 16px',
-            borderRadius: '8px',
+            borderRadius: 0,
             marginBottom: '16px',
             display: 'flex',
             alignItems: 'center',
@@ -268,8 +268,8 @@ export const ProfileTab: React.FC<ProfileTabProps> = ({ workspace, onUpdateWorks
         <div
           style={{
             background: '#FFFFFF',
-            border: '1px solid #E2E8F0',
-            borderRadius: '12px',
+            border: '1px solid var(--color-border)',
+            borderRadius: 0,
             padding: '32px',
             maxWidth: '720px',
             boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.05)',
@@ -278,11 +278,11 @@ export const ProfileTab: React.FC<ProfileTabProps> = ({ workspace, onUpdateWorks
           <div
             style={{
               padding: '6px 12px',
-              background: '#F1F5F9',
-              borderRadius: '6px',
+              background: 'var(--color-surface-2)',
+              borderRadius: 0,
               fontSize: '0.74rem',
               fontWeight: 700,
-              color: '#64748B',
+              color: 'var(--color-text-muted)',
               textTransform: 'uppercase',
               letterSpacing: '0.05em',
               display: 'inline-block',
@@ -298,14 +298,14 @@ export const ProfileTab: React.FC<ProfileTabProps> = ({ workspace, onUpdateWorks
                 width: '64px',
                 height: '64px',
                 borderRadius: '50%',
-                background: '#EEF2FF',
-                color: '#4F46E5',
+                background: 'var(--color-blue-tint)',
+                color: 'var(--color-blue)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 fontWeight: 800,
                 fontSize: '1.4rem',
-                border: '2px solid #E0E7FF',
+                border: '2px solid var(--color-blue-tint)',
               }}
             >
               {fullName
@@ -316,13 +316,13 @@ export const ProfileTab: React.FC<ProfileTabProps> = ({ workspace, onUpdateWorks
                 .toUpperCase() || 'M'}
             </div>
             <div>
-              <h2 style={{ fontSize: '1.35rem', fontWeight: 800, color: '#1B2A4E', margin: '0 0 4px 0' }}>
+              <h2 style={{ fontSize: '1.35rem', fontWeight: 800, color: 'var(--color-navy)', margin: '0 0 4px 0' }}>
                 {fullName || 'Mentor Name'}
               </h2>
-              <p style={{ margin: '0 0 4px 0', fontSize: '0.9rem', color: '#2563EB', fontWeight: 600 }}>
+              <p style={{ margin: '0 0 4px 0', fontSize: '0.9rem', color: 'var(--color-blue)', fontWeight: 600 }}>
                 {headline || 'Professional Headline'}
               </p>
-              <span style={{ fontSize: '0.82rem', color: '#64748B' }}>
+              <span style={{ fontSize: '0.82rem', color: 'var(--color-text-muted)' }}>
                 {currentRole} {organization ? `@ ${organization}` : ''} • {yearsOfExperience} Years Experience
               </span>
             </div>
@@ -330,15 +330,15 @@ export const ProfileTab: React.FC<ProfileTabProps> = ({ workspace, onUpdateWorks
 
           {/* Bio */}
           <div style={{ marginBottom: '20px' }}>
-            <h4 style={{ fontSize: '0.82rem', textTransform: 'uppercase', color: '#94A3B8', margin: '0 0 6px 0' }}>
+            <h4 style={{ fontSize: '0.82rem', textTransform: 'uppercase', color: 'var(--color-text-faint)', margin: '0 0 6px 0' }}>
               About Mentor
             </h4>
-            <p style={{ margin: 0, fontSize: '0.88rem', color: '#334155', lineHeight: 1.6 }}>{bio}</p>
+            <p style={{ margin: 0, fontSize: '0.88rem', color: 'var(--color-navy)', lineHeight: 1.6 }}>{bio}</p>
           </div>
 
           {/* Tracks Offered */}
           <div style={{ marginBottom: '20px' }}>
-            <h4 style={{ fontSize: '0.82rem', textTransform: 'uppercase', color: '#94A3B8', margin: '0 0 8px 0' }}>
+            <h4 style={{ fontSize: '0.82rem', textTransform: 'uppercase', color: 'var(--color-text-faint)', margin: '0 0 8px 0' }}>
               Mentorship Tracks Offered
             </h4>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
@@ -347,10 +347,10 @@ export const ProfileTab: React.FC<ProfileTabProps> = ({ workspace, onUpdateWorks
                   key={trk}
                   style={{
                     padding: '4px 10px',
-                    borderRadius: '6px',
-                    background: '#EFF6FF',
-                    color: '#1D4ED8',
-                    border: '1px solid #BFDBFE',
+                    borderRadius: 0,
+                    background: 'var(--color-blue-tint)',
+                    color: 'var(--color-blue-hover)',
+                    border: '1px solid var(--color-blue-line)',
                     fontSize: '0.8rem',
                     fontWeight: 600,
                   }}
@@ -363,7 +363,7 @@ export const ProfileTab: React.FC<ProfileTabProps> = ({ workspace, onUpdateWorks
 
           {/* Skills */}
           <div style={{ marginBottom: '20px' }}>
-            <h4 style={{ fontSize: '0.82rem', textTransform: 'uppercase', color: '#94A3B8', margin: '0 0 8px 0' }}>
+            <h4 style={{ fontSize: '0.82rem', textTransform: 'uppercase', color: 'var(--color-text-faint)', margin: '0 0 8px 0' }}>
               Skills & Expertise
             </h4>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
@@ -372,9 +372,9 @@ export const ProfileTab: React.FC<ProfileTabProps> = ({ workspace, onUpdateWorks
                   key={sk}
                   style={{
                     padding: '3px 8px',
-                    borderRadius: '12px',
-                    background: '#F1F5F9',
-                    color: '#334155',
+                    borderRadius: 0,
+                    background: 'var(--color-surface-2)',
+                    color: 'var(--color-navy)',
                     fontSize: '0.78rem',
                   }}
                 >
@@ -388,13 +388,13 @@ export const ProfileTab: React.FC<ProfileTabProps> = ({ workspace, onUpdateWorks
           <div
             style={{
               padding: '12px 16px',
-              background: '#F8FAFC',
-              borderRadius: '8px',
-              border: '1px solid #E2E8F0',
+              background: 'var(--color-bg)',
+              borderRadius: 0,
+              border: '1px solid var(--color-border)',
               display: 'flex',
               justifyContent: 'space-between',
               fontSize: '0.82rem',
-              color: '#475569',
+              color: 'var(--color-text-muted)',
             }}
           >
             <span>
@@ -416,7 +416,7 @@ export const ProfileTab: React.FC<ProfileTabProps> = ({ workspace, onUpdateWorks
                 rel="noreferrer"
                 style={{
                   fontSize: '0.82rem',
-                  color: '#2563EB',
+                  color: 'var(--color-blue)',
                   fontWeight: 600,
                   textDecoration: 'none',
                 }}
@@ -432,8 +432,8 @@ export const ProfileTab: React.FC<ProfileTabProps> = ({ workspace, onUpdateWorks
           <div
             style={{
               background: '#FFFFFF',
-              border: '1px solid #E2E8F0',
-              borderRadius: '12px',
+              border: '1px solid var(--color-border)',
+              borderRadius: 0,
               padding: '28px',
               display: 'flex',
               flexDirection: 'column',
@@ -442,13 +442,13 @@ export const ProfileTab: React.FC<ProfileTabProps> = ({ workspace, onUpdateWorks
             }}
           >
             {/* Basic Info */}
-            <h3 style={{ fontSize: '1.05rem', fontWeight: 700, color: '#1B2A4E', margin: '0 0 -6px 0' }}>
+            <h3 style={{ fontSize: '1.05rem', fontWeight: 700, color: 'var(--color-navy)', margin: '0 0 -6px 0' }}>
               1. Professional Identity
             </h3>
 
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '14px' }}>
               <div>
-                <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 700, color: '#475569', marginBottom: '4px' }}>
+                <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 700, color: 'var(--color-text-muted)', marginBottom: '4px' }}>
                   Full Name *
                 </label>
                 <input
@@ -458,8 +458,8 @@ export const ProfileTab: React.FC<ProfileTabProps> = ({ workspace, onUpdateWorks
                   style={{
                     width: '100%',
                     padding: '8px 12px',
-                    borderRadius: '6px',
-                    border: '1px solid #CBD5E1',
+                    borderRadius: 0,
+                    border: '1px solid var(--color-border-hover)',
                     fontSize: '0.85rem',
                     boxSizing: 'border-box',
                   }}
@@ -467,7 +467,7 @@ export const ProfileTab: React.FC<ProfileTabProps> = ({ workspace, onUpdateWorks
               </div>
 
               <div>
-                <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 700, color: '#475569', marginBottom: '4px' }}>
+                <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 700, color: 'var(--color-text-muted)', marginBottom: '4px' }}>
                   Years of Experience *
                 </label>
                 <input
@@ -479,8 +479,8 @@ export const ProfileTab: React.FC<ProfileTabProps> = ({ workspace, onUpdateWorks
                   style={{
                     width: '100%',
                     padding: '8px 12px',
-                    borderRadius: '6px',
-                    border: '1px solid #CBD5E1',
+                    borderRadius: 0,
+                    border: '1px solid var(--color-border-hover)',
                     fontSize: '0.85rem',
                     boxSizing: 'border-box',
                   }}
@@ -489,7 +489,7 @@ export const ProfileTab: React.FC<ProfileTabProps> = ({ workspace, onUpdateWorks
             </div>
 
             <div>
-              <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 700, color: '#475569', marginBottom: '4px' }}>
+              <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 700, color: 'var(--color-text-muted)', marginBottom: '4px' }}>
                 Professional Headline *
               </label>
               <input
@@ -500,8 +500,8 @@ export const ProfileTab: React.FC<ProfileTabProps> = ({ workspace, onUpdateWorks
                 style={{
                   width: '100%',
                   padding: '8px 12px',
-                  borderRadius: '6px',
-                  border: '1px solid #CBD5E1',
+                  borderRadius: 0,
+                  border: '1px solid var(--color-border-hover)',
                   fontSize: '0.85rem',
                   boxSizing: 'border-box',
                 }}
@@ -510,7 +510,7 @@ export const ProfileTab: React.FC<ProfileTabProps> = ({ workspace, onUpdateWorks
 
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '14px' }}>
               <div>
-                <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 700, color: '#475569', marginBottom: '4px' }}>
+                <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 700, color: 'var(--color-text-muted)', marginBottom: '4px' }}>
                   Current Role *
                 </label>
                 <input
@@ -520,8 +520,8 @@ export const ProfileTab: React.FC<ProfileTabProps> = ({ workspace, onUpdateWorks
                   style={{
                     width: '100%',
                     padding: '8px 12px',
-                    borderRadius: '6px',
-                    border: '1px solid #CBD5E1',
+                    borderRadius: 0,
+                    border: '1px solid var(--color-border-hover)',
                     fontSize: '0.85rem',
                     boxSizing: 'border-box',
                   }}
@@ -529,7 +529,7 @@ export const ProfileTab: React.FC<ProfileTabProps> = ({ workspace, onUpdateWorks
               </div>
 
               <div>
-                <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 700, color: '#475569', marginBottom: '4px' }}>
+                <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 700, color: 'var(--color-text-muted)', marginBottom: '4px' }}>
                   Organization (Optional)
                 </label>
                 <input
@@ -539,8 +539,8 @@ export const ProfileTab: React.FC<ProfileTabProps> = ({ workspace, onUpdateWorks
                   style={{
                     width: '100%',
                     padding: '8px 12px',
-                    borderRadius: '6px',
-                    border: '1px solid #CBD5E1',
+                    borderRadius: 0,
+                    border: '1px solid var(--color-border-hover)',
                     fontSize: '0.85rem',
                     boxSizing: 'border-box',
                   }}
@@ -549,7 +549,7 @@ export const ProfileTab: React.FC<ProfileTabProps> = ({ workspace, onUpdateWorks
             </div>
 
             <div>
-              <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 700, color: '#475569', marginBottom: '4px' }}>
+              <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 700, color: 'var(--color-text-muted)', marginBottom: '4px' }}>
                 Biography * ({bio.length}/500 chars)
               </label>
               <textarea
@@ -560,8 +560,8 @@ export const ProfileTab: React.FC<ProfileTabProps> = ({ workspace, onUpdateWorks
                 style={{
                   width: '100%',
                   padding: '8px 12px',
-                  borderRadius: '6px',
-                  border: '1px solid #CBD5E1',
+                  borderRadius: 0,
+                  border: '1px solid var(--color-border-hover)',
                   fontSize: '0.85rem',
                   fontFamily: 'inherit',
                   boxSizing: 'border-box',
@@ -570,7 +570,7 @@ export const ProfileTab: React.FC<ProfileTabProps> = ({ workspace, onUpdateWorks
             </div>
 
             <div>
-              <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 700, color: '#475569', marginBottom: '4px' }}>
+              <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 700, color: 'var(--color-text-muted)', marginBottom: '4px' }}>
                 LinkedIn or Portfolio URL
               </label>
               <input
@@ -581,8 +581,8 @@ export const ProfileTab: React.FC<ProfileTabProps> = ({ workspace, onUpdateWorks
                 style={{
                   width: '100%',
                   padding: '8px 12px',
-                  borderRadius: '6px',
-                  border: '1px solid #CBD5E1',
+                  borderRadius: 0,
+                  border: '1px solid var(--color-border-hover)',
                   fontSize: '0.85rem',
                   boxSizing: 'border-box',
                 }}
@@ -590,13 +590,13 @@ export const ProfileTab: React.FC<ProfileTabProps> = ({ workspace, onUpdateWorks
             </div>
 
             {/* Expertise & Skills */}
-            <h3 style={{ fontSize: '1.05rem', fontWeight: 700, color: '#1B2A4E', margin: '14px 0 -6px 0' }}>
+            <h3 style={{ fontSize: '1.05rem', fontWeight: 700, color: 'var(--color-navy)', margin: '14px 0 -6px 0' }}>
               2. Skills & Domain Expertise
             </h3>
 
             {/* Areas of Expertise */}
             <div>
-              <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 700, color: '#475569', marginBottom: '6px' }}>
+              <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 700, color: 'var(--color-text-muted)', marginBottom: '6px' }}>
                 Areas of Expertise
               </label>
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', marginBottom: '8px' }}>
@@ -608,9 +608,9 @@ export const ProfileTab: React.FC<ProfileTabProps> = ({ workspace, onUpdateWorks
                       alignItems: 'center',
                       gap: '4px',
                       padding: '3px 8px',
-                      background: '#EFF6FF',
-                      color: '#1D4ED8',
-                      borderRadius: '12px',
+                      background: 'var(--color-blue-tint)',
+                      color: 'var(--color-blue-hover)',
+                      borderRadius: 0,
                       fontSize: '0.78rem',
                       fontWeight: 600,
                     }}
@@ -619,7 +619,7 @@ export const ProfileTab: React.FC<ProfileTabProps> = ({ workspace, onUpdateWorks
                     <button
                       type="button"
                       onClick={() => handleRemoveChip(item, expertiseAreas, setExpertiseAreas)}
-                      style={{ background: 'none', border: 'none', color: '#2563EB', cursor: 'pointer', padding: 0 }}
+                      style={{ background: 'none', border: 'none', color: 'var(--color-blue)', cursor: 'pointer', padding: 0 }}
                     >
                       <X size={12} />
                     </button>
@@ -635,8 +635,8 @@ export const ProfileTab: React.FC<ProfileTabProps> = ({ workspace, onUpdateWorks
                   style={{
                     flex: 1,
                     padding: '6px 10px',
-                    borderRadius: '6px',
-                    border: '1px solid #CBD5E1',
+                    borderRadius: 0,
+                    border: '1px solid var(--color-border-hover)',
                     fontSize: '0.82rem',
                   }}
                 />
@@ -647,9 +647,9 @@ export const ProfileTab: React.FC<ProfileTabProps> = ({ workspace, onUpdateWorks
                   }
                   style={{
                     padding: '6px 12px',
-                    background: '#F1F5F9',
-                    border: '1px solid #CBD5E1',
-                    borderRadius: '6px',
+                    background: 'var(--color-surface-2)',
+                    border: '1px solid var(--color-border-hover)',
+                    borderRadius: 0,
                     fontSize: '0.8rem',
                     fontWeight: 600,
                     cursor: 'pointer',
@@ -662,7 +662,7 @@ export const ProfileTab: React.FC<ProfileTabProps> = ({ workspace, onUpdateWorks
 
             {/* Technical skills */}
             <div>
-              <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 700, color: '#475569', marginBottom: '6px' }}>
+              <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 700, color: 'var(--color-text-muted)', marginBottom: '6px' }}>
                 Technical Skills
               </label>
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', marginBottom: '8px' }}>
@@ -674,9 +674,9 @@ export const ProfileTab: React.FC<ProfileTabProps> = ({ workspace, onUpdateWorks
                       alignItems: 'center',
                       gap: '4px',
                       padding: '3px 8px',
-                      background: '#F1F5F9',
-                      color: '#334155',
-                      borderRadius: '12px',
+                      background: 'var(--color-surface-2)',
+                      color: 'var(--color-navy)',
+                      borderRadius: 0,
                       fontSize: '0.78rem',
                     }}
                   >
@@ -684,7 +684,7 @@ export const ProfileTab: React.FC<ProfileTabProps> = ({ workspace, onUpdateWorks
                     <button
                       type="button"
                       onClick={() => handleRemoveChip(item, technicalSkills, setTechnicalSkills)}
-                      style={{ background: 'none', border: 'none', color: '#64748B', cursor: 'pointer', padding: 0 }}
+                      style={{ background: 'none', border: 'none', color: 'var(--color-text-muted)', cursor: 'pointer', padding: 0 }}
                     >
                       <X size={12} />
                     </button>
@@ -700,8 +700,8 @@ export const ProfileTab: React.FC<ProfileTabProps> = ({ workspace, onUpdateWorks
                   style={{
                     flex: 1,
                     padding: '6px 10px',
-                    borderRadius: '6px',
-                    border: '1px solid #CBD5E1',
+                    borderRadius: 0,
+                    border: '1px solid var(--color-border-hover)',
                     fontSize: '0.82rem',
                   }}
                 />
@@ -712,9 +712,9 @@ export const ProfileTab: React.FC<ProfileTabProps> = ({ workspace, onUpdateWorks
                   }
                   style={{
                     padding: '6px 12px',
-                    background: '#F1F5F9',
-                    border: '1px solid #CBD5E1',
-                    borderRadius: '6px',
+                    background: 'var(--color-surface-2)',
+                    border: '1px solid var(--color-border-hover)',
+                    borderRadius: 0,
                     fontSize: '0.8rem',
                     fontWeight: 600,
                     cursor: 'pointer',
@@ -726,7 +726,7 @@ export const ProfileTab: React.FC<ProfileTabProps> = ({ workspace, onUpdateWorks
             </div>
 
             {/* Mentorship Tracks */}
-            <h3 style={{ fontSize: '1.05rem', fontWeight: 700, color: '#1B2A4E', margin: '14px 0 -6px 0' }}>
+            <h3 style={{ fontSize: '1.05rem', fontWeight: 700, color: 'var(--color-navy)', margin: '14px 0 -6px 0' }}>
               3. Active Mentorship Tracks
             </h3>
 
@@ -739,9 +739,9 @@ export const ProfileTab: React.FC<ProfileTabProps> = ({ workspace, onUpdateWorks
                     onClick={() => handleToggleTrack(track.title)}
                     style={{
                       padding: '12px',
-                      borderRadius: '8px',
-                      border: isSelected ? '1.5px solid #2563EB' : '1px solid #E2E8F0',
-                      background: isSelected ? '#EFF6FF' : '#FFFFFF',
+                      borderRadius: 0,
+                      border: isSelected ? '1.5px solid var(--color-blue)' : '1px solid var(--color-border)',
+                      background: isSelected ? 'var(--color-blue-tint)' : '#FFFFFF',
                       cursor: 'pointer',
                       display: 'flex',
                       flexDirection: 'column',
@@ -749,7 +749,7 @@ export const ProfileTab: React.FC<ProfileTabProps> = ({ workspace, onUpdateWorks
                     }}
                   >
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                      <span style={{ fontWeight: 700, fontSize: '0.85rem', color: '#1E293B' }}>
+                      <span style={{ fontWeight: 700, fontSize: '0.85rem', color: 'var(--color-navy)' }}>
                         {track.title}
                       </span>
                       <input
@@ -759,7 +759,7 @@ export const ProfileTab: React.FC<ProfileTabProps> = ({ workspace, onUpdateWorks
                         style={{ cursor: 'pointer' }}
                       />
                     </div>
-                    <span style={{ fontSize: '0.76rem', color: '#64748B' }}>{track.description}</span>
+                    <span style={{ fontSize: '0.76rem', color: 'var(--color-text-muted)' }}>{track.description}</span>
                   </div>
                 );
               })}
@@ -771,7 +771,7 @@ export const ProfileTab: React.FC<ProfileTabProps> = ({ workspace, onUpdateWorks
                 display: 'flex',
                 justifyContent: 'flex-end',
                 gap: '12px',
-                borderTop: '1px solid #E2E8F0',
+                borderTop: '1px solid var(--color-border)',
                 paddingTop: '18px',
                 marginTop: '10px',
               }}
@@ -781,10 +781,10 @@ export const ProfileTab: React.FC<ProfileTabProps> = ({ workspace, onUpdateWorks
                 onClick={handleResetForm}
                 style={{
                   padding: '9px 16px',
-                  borderRadius: '6px',
+                  borderRadius: 0,
                   background: '#FFFFFF',
-                  border: '1px solid #CBD5E1',
-                  color: '#475569',
+                  border: '1px solid var(--color-border-hover)',
+                  color: 'var(--color-text-muted)',
                   fontSize: '0.84rem',
                   fontWeight: 600,
                   cursor: 'pointer',
@@ -799,8 +799,8 @@ export const ProfileTab: React.FC<ProfileTabProps> = ({ workspace, onUpdateWorks
                 type="submit"
                 style={{
                   padding: '9px 22px',
-                  borderRadius: '6px',
-                  background: '#2563EB',
+                  borderRadius: 0,
+                  background: 'var(--color-blue)',
                   border: 'none',
                   color: '#FFFFFF',
                   fontSize: '0.84rem',

@@ -12,6 +12,7 @@ export type MentorWorkspaceTab =
   | 'mentees'
   | 'sessions'
   | 'feedback'
+  | 'skill-reviews'
   | 'profile'
   | 'settings';
 

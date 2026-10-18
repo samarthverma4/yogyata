@@ -104,10 +104,10 @@ export const PipelineTab: React.FC<PipelineTabProps> = ({
       <div>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '0.75rem' }}>
           <div>
-            <h2 style={{ margin: 0, fontSize: '1.25rem', fontWeight: 700, color: '#0F172A' }}>
+            <h2 style={{ margin: 0, fontSize: '1.25rem', fontWeight: 700, color: 'var(--color-navy)' }}>
               Candidate Hiring Pipeline
             </h2>
-            <p style={{ margin: '0.25rem 0 0', fontSize: '0.8125rem', color: '#64748B' }}>
+            <p style={{ margin: '0.25rem 0 0', fontSize: '0.8125rem', color: 'var(--color-text-muted)' }}>
               Track active candidates through Sourced, Screening, Interview, Offer, and Hired milestones.
             </p>
           </div>
@@ -116,10 +116,10 @@ export const PipelineTab: React.FC<PipelineTabProps> = ({
             <div
               style={{
                 display: 'flex',
-                background: '#F1F5F9',
+                background: 'var(--color-surface-2)',
                 padding: '0.2rem',
-                borderRadius: '6px',
-                border: '1px solid #E2E8F0',
+                borderRadius: 0,
+                border: '1px solid var(--color-border)',
               }}
             >
               <button
@@ -129,9 +129,9 @@ export const PipelineTab: React.FC<PipelineTabProps> = ({
                 style={{
                   padding: '0.35rem 0.6rem',
                   fontSize: '0.75rem',
-                  borderRadius: '4px',
+                  borderRadius: 0,
                   background: viewMode === 'board' ? '#FFFFFF' : 'transparent',
-                  color: viewMode === 'board' ? '#0F172A' : '#64748B',
+                  color: viewMode === 'board' ? 'var(--color-navy)' : 'var(--color-text-muted)',
                   fontWeight: viewMode === 'board' ? 600 : 400,
                   boxShadow: viewMode === 'board' ? '0 1px 2px rgba(0,0,0,0.05)' : 'none',
                   display: 'inline-flex',
@@ -148,9 +148,9 @@ export const PipelineTab: React.FC<PipelineTabProps> = ({
                 style={{
                   padding: '0.35rem 0.6rem',
                   fontSize: '0.75rem',
-                  borderRadius: '4px',
+                  borderRadius: 0,
                   background: viewMode === 'list' ? '#FFFFFF' : 'transparent',
-                  color: viewMode === 'list' ? '#0F172A' : '#64748B',
+                  color: viewMode === 'list' ? 'var(--color-navy)' : 'var(--color-text-muted)',
                   fontWeight: viewMode === 'list' ? 600 : 400,
                   boxShadow: viewMode === 'list' ? '0 1px 2px rgba(0,0,0,0.05)' : 'none',
                   display: 'inline-flex',
@@ -170,7 +170,7 @@ export const PipelineTab: React.FC<PipelineTabProps> = ({
         style={{
           background: '#FFFBEB',
           border: '1px solid #FDE68A',
-          borderRadius: '8px',
+          borderRadius: 0,
           padding: '0.75rem 1rem',
           fontSize: '0.75rem',
           color: '#92400E',
@@ -191,8 +191,8 @@ export const PipelineTab: React.FC<PipelineTabProps> = ({
       <div
         style={{
           background: '#FFFFFF',
-          border: '1px solid #E2E8F0',
-          borderRadius: '8px',
+          border: '1px solid var(--color-border)',
+          borderRadius: 0,
           padding: '0.875rem 1rem',
           display: 'flex',
           gap: '0.75rem',
@@ -203,7 +203,7 @@ export const PipelineTab: React.FC<PipelineTabProps> = ({
         <div style={{ flex: 1, minWidth: '220px', position: 'relative' }}>
           <Search
             size={15}
-            style={{ position: 'absolute', left: '0.75rem', top: '50%', transform: 'translateY(-50%)', color: '#94A3B8' }}
+            style={{ position: 'absolute', left: '0.75rem', top: '50%', transform: 'translateY(-50%)', color: 'var(--color-text-faint)' }}
           />
           <input
             type="text"
@@ -249,8 +249,8 @@ export const PipelineTab: React.FC<PipelineTabProps> = ({
         <div
           style={{
             background: '#FFFFFF',
-            border: '1px solid #E2E8F0',
-            borderRadius: '8px',
+            border: '1px solid var(--color-border)',
+            borderRadius: 0,
             padding: '3rem 1.5rem',
             textAlign: 'center',
           }}
@@ -260,8 +260,8 @@ export const PipelineTab: React.FC<PipelineTabProps> = ({
               width: '48px',
               height: '48px',
               borderRadius: '50%',
-              background: '#F1F5F9',
-              color: '#64748B',
+              background: 'var(--color-surface-2)',
+              color: 'var(--color-text-muted)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
@@ -270,10 +270,10 @@ export const PipelineTab: React.FC<PipelineTabProps> = ({
           >
             <Layers size={22} />
           </div>
-          <h3 style={{ margin: '0 0 0.35rem', fontSize: '1rem', color: '#0F172A' }}>
+          <h3 style={{ margin: '0 0 0.35rem', fontSize: '1rem', color: 'var(--color-navy)' }}>
             No candidates in this pipeline view
           </h3>
-          <p style={{ margin: '0 0 1rem', fontSize: '0.8125rem', color: '#64748B' }}>
+          <p style={{ margin: '0 0 1rem', fontSize: '0.8125rem', color: 'var(--color-text-muted)' }}>
             Add candidates from the Talent Search tab to begin tracking their hiring stages.
           </p>
         </div>
@@ -291,19 +291,19 @@ export const PipelineTab: React.FC<PipelineTabProps> = ({
                     alignItems: 'center',
                     marginBottom: '0.75rem',
                     paddingBottom: '0.5rem',
-                    borderBottom: '2px solid #E2E8F0',
+                    borderBottom: '2px solid var(--color-border)',
                   }}
                 >
-                  <strong style={{ fontSize: '0.84rem', color: '#0F172A' }}>
+                  <strong style={{ fontSize: '0.84rem', color: 'var(--color-navy)' }}>
                     {STAGE_LABELS[stage]}
                   </strong>
                   <span
                     style={{
                       fontSize: '0.72rem',
-                      background: inStage.length > 0 ? '#DCFCE7' : '#F1F5F9',
-                      color: inStage.length > 0 ? '#15803D' : '#64748B',
+                      background: inStage.length > 0 ? '#DCFCE7' : 'var(--color-surface-2)',
+                      color: inStage.length > 0 ? '#15803D' : 'var(--color-text-muted)',
                       padding: '0.1rem 0.45rem',
-                      borderRadius: '9999px',
+                      borderRadius: 0,
                       fontWeight: 700,
                     }}
                   >
@@ -313,7 +313,7 @@ export const PipelineTab: React.FC<PipelineTabProps> = ({
 
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', flex: 1 }}>
                   {inStage.length === 0 ? (
-                    <div style={{ padding: '2rem 0.5rem', textAlign: 'center', color: '#94A3B8', fontSize: '0.75rem', fontStyle: 'italic' }}>
+                    <div style={{ padding: '2rem 0.5rem', textAlign: 'center', color: 'var(--color-text-faint)', fontSize: '0.75rem', fontStyle: 'italic' }}>
                       No candidates in {STAGE_LABELS[stage].toLowerCase()}
                     </div>
                   ) : (
@@ -322,27 +322,27 @@ export const PipelineTab: React.FC<PipelineTabProps> = ({
                       return (
                         <div key={cand.id} className="pipeline-candidate-card">
                           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '0.35rem' }}>
-                            <strong style={{ fontSize: '0.875rem', color: '#0F172A' }}>
+                            <strong style={{ fontSize: '0.875rem', color: 'var(--color-navy)' }}>
                               {cand.candidateName}
                             </strong>
                             <span
                               style={{
                                 fontSize: '0.68rem',
                                 padding: '0.1rem 0.35rem',
-                                borderRadius: '4px',
+                                borderRadius: 0,
                                 textTransform: 'uppercase',
                                 fontWeight: 700,
                                 background:
-                                  cand.priority === 'high' ? '#FEE2E2' : cand.priority === 'medium' ? '#FEF3C7' : '#F1F5F9',
+                                  cand.priority === 'high' ? '#FEE2E2' : cand.priority === 'medium' ? '#FEF3C7' : 'var(--color-surface-2)',
                                 color:
-                                  cand.priority === 'high' ? '#B91C1C' : cand.priority === 'medium' ? '#B45309' : '#475569',
+                                  cand.priority === 'high' ? '#B91C1C' : cand.priority === 'medium' ? '#B45309' : 'var(--color-text-muted)',
                               }}
                             >
                               {cand.priority}
                             </span>
                           </div>
 
-                          <div style={{ fontSize: '0.75rem', color: '#475569', fontWeight: 500, marginBottom: '0.35rem' }}>
+                          <div style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)', fontWeight: 500, marginBottom: '0.35rem' }}>
                             {cand.targetRole}
                           </div>
 
@@ -350,10 +350,10 @@ export const PipelineTab: React.FC<PipelineTabProps> = ({
                             <div
                               style={{
                                 fontSize: '0.72rem',
-                                color: '#1E40AF',
-                                background: '#EFF6FF',
+                                color: 'var(--color-blue-hover)',
+                                background: 'var(--color-blue-tint)',
                                 padding: '0.25rem 0.45rem',
-                                borderRadius: '4px',
+                                borderRadius: 0,
                                 marginBottom: '0.5rem',
                                 lineHeight: 1.3,
                               }}
@@ -363,23 +363,23 @@ export const PipelineTab: React.FC<PipelineTabProps> = ({
                           )}
 
                           {cand.recruiterNotes && (
-                            <p style={{ margin: '0 0 0.5rem', fontSize: '0.72rem', color: '#64748B', lineHeight: 1.35, fontStyle: 'italic' }}>
+                            <p style={{ margin: '0 0 0.5rem', fontSize: '0.72rem', color: 'var(--color-text-muted)', lineHeight: 1.35, fontStyle: 'italic' }}>
                               "{cand.recruiterNotes}"
                             </p>
                           )}
 
                           {/* Stage Transition Selector */}
-                          <div style={{ borderTop: '1px solid #F1F5F9', paddingTop: '0.5rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                          <div style={{ borderTop: '1px solid var(--color-surface-2)', paddingTop: '0.5rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                             <select
                               value={cand.stage}
                               onChange={(e) => onUpdateStage(cand.id, e.target.value as PipelineStage)}
                               style={{
                                 fontSize: '0.72rem',
                                 padding: '0.2rem 0.35rem',
-                                borderRadius: '4px',
-                                border: '1px solid #CBD5E1',
+                                borderRadius: 0,
+                                border: '1px solid var(--color-border-hover)',
                                 background: '#FFFFFF',
-                                color: '#0F172A',
+                                color: 'var(--color-navy)',
                                 cursor: 'pointer',
                               }}
                             >
@@ -397,7 +397,7 @@ export const PipelineTab: React.FC<PipelineTabProps> = ({
                                   className="btn-ghost"
                                   onClick={() => setCandidateToInspect(matchedProfile)}
                                   title="View Skill Passport"
-                                  style={{ padding: '0.25rem', color: '#2563EB' }}
+                                  style={{ padding: '0.25rem', color: 'var(--color-blue)' }}
                                 >
                                   <Eye size={13} />
                                 </button>
@@ -407,7 +407,7 @@ export const PipelineTab: React.FC<PipelineTabProps> = ({
                                 className="btn-ghost"
                                 onClick={() => startEditing(cand)}
                                 title="Edit Recruiter Notes & Action"
-                                style={{ padding: '0.25rem', color: '#64748B' }}
+                                style={{ padding: '0.25rem', color: 'var(--color-text-muted)' }}
                               >
                                 <Edit2 size={13} />
                               </button>
@@ -436,13 +436,13 @@ export const PipelineTab: React.FC<PipelineTabProps> = ({
         <div
           style={{
             background: '#FFFFFF',
-            border: '1px solid #E2E8F0',
-            borderRadius: '8px',
+            border: '1px solid var(--color-border)',
+            borderRadius: 0,
             overflow: 'hidden',
           }}
         >
           <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '0.8125rem' }}>
-            <thead style={{ background: '#F8FAFC', borderBottom: '1px solid #E2E8F0', color: '#475569' }}>
+            <thead style={{ background: 'var(--color-bg)', borderBottom: '1px solid var(--color-border)', color: 'var(--color-text-muted)' }}>
               <tr>
                 <th style={{ padding: '0.75rem 1rem' }}>Candidate</th>
                 <th style={{ padding: '0.75rem 1rem' }}>Target Role</th>
@@ -456,12 +456,12 @@ export const PipelineTab: React.FC<PipelineTabProps> = ({
               {filteredPipeline.map((item) => {
                 const matchedProfile = candidates.find((c) => c.id === item.candidateId);
                 return (
-                  <tr key={item.id} style={{ borderBottom: '1px solid #F1F5F9' }}>
+                  <tr key={item.id} style={{ borderBottom: '1px solid var(--color-surface-2)' }}>
                     <td style={{ padding: '0.75rem 1rem' }}>
-                      <strong style={{ color: '#0F172A' }}>{item.candidateName}</strong>
-                      <div style={{ fontSize: '0.72rem', color: '#64748B' }}>Added: {item.dateAdded}</div>
+                      <strong style={{ color: 'var(--color-navy)' }}>{item.candidateName}</strong>
+                      <div style={{ fontSize: '0.72rem', color: 'var(--color-text-muted)' }}>Added: {item.dateAdded}</div>
                     </td>
-                    <td style={{ padding: '0.75rem 1rem', color: '#334155' }}>
+                    <td style={{ padding: '0.75rem 1rem', color: 'var(--color-navy)' }}>
                       {item.targetRole}
                     </td>
                     <td style={{ padding: '0.75rem 1rem' }}>
@@ -471,8 +471,8 @@ export const PipelineTab: React.FC<PipelineTabProps> = ({
                         style={{
                           fontSize: '0.75rem',
                           padding: '0.25rem 0.5rem',
-                          borderRadius: '4px',
-                          border: '1px solid #CBD5E1',
+                          borderRadius: 0,
+                          border: '1px solid var(--color-border-hover)',
                         }}
                       >
                         {stages.map((st) => (
@@ -487,19 +487,19 @@ export const PipelineTab: React.FC<PipelineTabProps> = ({
                         style={{
                           fontSize: '0.72rem',
                           padding: '0.15rem 0.45rem',
-                          borderRadius: '4px',
+                          borderRadius: 0,
                           textTransform: 'uppercase',
                           fontWeight: 700,
                           background:
-                            item.priority === 'high' ? '#FEE2E2' : item.priority === 'medium' ? '#FEF3C7' : '#F1F5F9',
+                            item.priority === 'high' ? '#FEE2E2' : item.priority === 'medium' ? '#FEF3C7' : 'var(--color-surface-2)',
                           color:
-                            item.priority === 'high' ? '#B91C1C' : item.priority === 'medium' ? '#B45309' : '#475569',
+                            item.priority === 'high' ? '#B91C1C' : item.priority === 'medium' ? '#B45309' : 'var(--color-text-muted)',
                         }}
                       >
                         {item.priority}
                       </span>
                     </td>
-                    <td style={{ padding: '0.75rem 1rem', color: '#475569', maxWidth: '240px' }}>
+                    <td style={{ padding: '0.75rem 1rem', color: 'var(--color-text-muted)', maxWidth: '240px' }}>
                       {item.nextAction || '—'}
                     </td>
                     <td style={{ padding: '0.75rem 1rem', textAlign: 'right' }}>
@@ -510,7 +510,7 @@ export const PipelineTab: React.FC<PipelineTabProps> = ({
                             className="btn-ghost"
                             onClick={() => setCandidateToInspect(matchedProfile)}
                             title="View Skill Passport"
-                            style={{ padding: '0.3rem', color: '#2563EB' }}
+                            style={{ padding: '0.3rem', color: 'var(--color-blue)' }}
                           >
                             <Eye size={14} />
                           </button>
@@ -520,7 +520,7 @@ export const PipelineTab: React.FC<PipelineTabProps> = ({
                           className="btn-ghost"
                           onClick={() => startEditing(item)}
                           title="Edit"
-                          style={{ padding: '0.3rem', color: '#64748B' }}
+                          style={{ padding: '0.3rem', color: 'var(--color-text-muted)' }}
                         >
                           <Edit2 size={14} />
                         </button>
@@ -552,7 +552,7 @@ export const PipelineTab: React.FC<PipelineTabProps> = ({
           aria-labelledby="edit-pipeline-title"
         >
           <div className="modal-dialog" style={{ maxWidth: '480px' }}>
-            <h3 id="edit-pipeline-title" style={{ margin: '0 0 1rem', fontSize: '1.125rem', color: '#0F172A' }}>
+            <h3 id="edit-pipeline-title" style={{ margin: '0 0 1rem', fontSize: '1.125rem', color: 'var(--color-navy)' }}>
               Update Candidate Notes &amp; Next Action
             </h3>
 
@@ -619,10 +619,10 @@ export const PipelineTab: React.FC<PipelineTabProps> = ({
           aria-labelledby="delete-pipeline-title"
         >
           <div className="modal-dialog" style={{ maxWidth: '420px' }}>
-            <h3 id="delete-pipeline-title" style={{ margin: '0 0 0.5rem', fontSize: '1.125rem', color: '#0F172A' }}>
+            <h3 id="delete-pipeline-title" style={{ margin: '0 0 0.5rem', fontSize: '1.125rem', color: 'var(--color-navy)' }}>
               Remove from Active Pipeline?
             </h3>
-            <p style={{ margin: '0 0 1.25rem', fontSize: '0.84rem', color: '#64748B', lineHeight: 1.5 }}>
+            <p style={{ margin: '0 0 1.25rem', fontSize: '0.84rem', color: 'var(--color-text-muted)', lineHeight: 1.5 }}>
               Are you sure you want to remove <strong>{candidateToDelete.candidateName}</strong> from the
               hiring pipeline for <strong>{candidateToDelete.targetRole}</strong>? Their Skill Passport profile
               remains accessible in Talent Search.

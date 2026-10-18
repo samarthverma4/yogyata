@@ -148,10 +148,10 @@ export const HiringPreferencesStep: React.FC<HiringPreferencesStepProps> = ({
                   alignItems: 'center',
                   gap: '0.375rem',
                   padding: '0.35rem 0.75rem',
-                  borderRadius: '20px',
-                  background: '#EFF6FF',
-                  border: '1px solid #BFDBFE',
-                  color: '#1D4ED8',
+                  borderRadius: 0,
+                  background: 'var(--color-blue-tint)',
+                  border: '1px solid var(--color-blue-line)',
+                  color: 'var(--color-blue-hover)',
                   fontSize: '0.8125rem',
                   fontWeight: 500,
                 }}
@@ -200,11 +200,11 @@ export const HiringPreferencesStep: React.FC<HiringPreferencesStepProps> = ({
                     alignItems: 'center',
                     gap: '0.375rem',
                     padding: '0.35rem 0.75rem',
-                    borderRadius: '20px',
+                    borderRadius: 0,
                     fontSize: '0.8125rem',
-                    border: selected ? '1px solid #2563EB' : '1px solid var(--color-border)',
-                    background: selected ? '#EFF6FF' : 'var(--color-surface)',
-                    color: selected ? '#1D4ED8' : 'var(--color-text-primary)',
+                    border: selected ? '1px solid var(--color-blue)' : '1px solid var(--color-border)',
+                    background: selected ? 'var(--color-blue-tint)' : 'var(--color-surface)',
+                    color: selected ? 'var(--color-blue-hover)' : 'var(--color-text-primary)',
                     cursor: 'pointer',
                     fontWeight: selected ? 600 : 400,
                   }}
@@ -256,7 +256,7 @@ export const HiringPreferencesStep: React.FC<HiringPreferencesStepProps> = ({
                   onClick={() => toggleArrayItem('experienceRanges', range)}
                   style={{
                     padding: '0.35rem 0.75rem',
-                    borderRadius: '6px',
+                    borderRadius: 0,
                     fontSize: '0.8125rem',
                     border: selected ? '1px solid #0D9488' : '1px solid var(--color-border)',
                     background: selected ? '#F0FDFA' : 'var(--color-surface)',
@@ -367,10 +367,10 @@ export const HiringPreferencesStep: React.FC<HiringPreferencesStepProps> = ({
                   alignItems: 'center',
                   gap: '0.25rem',
                   padding: '0.25rem 0.55rem',
-                  borderRadius: '16px',
-                  background: '#F1F5F9',
-                  border: '1px solid #CBD5E1',
-                  color: '#334155',
+                  borderRadius: 0,
+                  background: 'var(--color-surface-2)',
+                  border: '1px solid var(--color-border-hover)',
+                  color: 'var(--color-navy)',
                   fontSize: '0.75rem',
                 }}
               >
@@ -378,7 +378,7 @@ export const HiringPreferencesStep: React.FC<HiringPreferencesStepProps> = ({
                 <button
                   type="button"
                   onClick={() => handleRemoveLocation(loc)}
-                  style={{ border: 'none', background: 'transparent', cursor: 'pointer', color: '#94A3B8', padding: 0 }}
+                  style={{ border: 'none', background: 'transparent', cursor: 'pointer', color: 'var(--color-text-faint)', padding: 0 }}
                 >
                   <X size={12} />
                 </button>
@@ -403,11 +403,11 @@ export const HiringPreferencesStep: React.FC<HiringPreferencesStepProps> = ({
                     alignItems: 'center',
                     gap: '0.375rem',
                     padding: '0.35rem 0.75rem',
-                    borderRadius: '20px',
+                    borderRadius: 0,
                     fontSize: '0.8125rem',
-                    border: selected ? '1px solid #7C3AED' : '1px solid var(--color-border)',
-                    background: selected ? '#F5F3FF' : 'var(--color-surface)',
-                    color: selected ? '#6D28D9' : 'var(--color-text-primary)',
+                    border: selected ? '1px solid var(--color-blue)' : '1px solid var(--color-border)',
+                    background: selected ? 'var(--color-blue-tint)' : 'var(--color-surface)',
+                    color: selected ? 'var(--color-blue-hover)' : 'var(--color-text-primary)',
                     cursor: 'pointer',
                     fontWeight: selected ? 600 : 400,
                   }}

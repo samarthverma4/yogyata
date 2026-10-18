@@ -64,15 +64,15 @@ export const CandidateDetailModal: React.FC<CandidateDetailModalProps> = ({
           flexDirection: 'column',
           padding: 0,
           overflow: 'hidden',
-          borderRadius: '12px',
+          borderRadius: 0,
         }}
       >
         {/* Modal Header */}
         <div
           style={{
             padding: '1.25rem 1.5rem',
-            borderBottom: '1px solid #E2E8F0',
-            background: '#F8FAFC',
+            borderBottom: '1px solid var(--color-border)',
+            background: 'var(--color-bg)',
             display: 'flex',
             justifyContent: 'space-between',
             alignItems: 'flex-start',
@@ -84,7 +84,7 @@ export const CandidateDetailModal: React.FC<CandidateDetailModalProps> = ({
                 width: '52px',
                 height: '52px',
                 borderRadius: '50%',
-                background: 'linear-gradient(135deg, #1E293B 0%, #2563EB 100%)',
+                background: 'linear-gradient(135deg, var(--color-navy) 0%, var(--color-blue) 100%)',
                 color: '#FFFFFF',
                 display: 'flex',
                 alignItems: 'center',
@@ -103,7 +103,7 @@ export const CandidateDetailModal: React.FC<CandidateDetailModalProps> = ({
                   style={{
                     margin: 0,
                     fontSize: '1.25rem',
-                    color: '#0F172A',
+                    color: 'var(--color-navy)',
                     fontWeight: 700,
                   }}
                 >
@@ -116,7 +116,7 @@ export const CandidateDetailModal: React.FC<CandidateDetailModalProps> = ({
                   </span>
                 )}
               </div>
-              <p style={{ margin: '0.2rem 0 0', fontSize: '0.875rem', color: '#475569' }}>
+              <p style={{ margin: '0.2rem 0 0', fontSize: '0.875rem', color: 'var(--color-text-muted)' }}>
                 {candidate.headline}
               </p>
               <div
@@ -125,7 +125,7 @@ export const CandidateDetailModal: React.FC<CandidateDetailModalProps> = ({
                   alignItems: 'center',
                   gap: '1rem',
                   fontSize: '0.75rem',
-                  color: '#64748B',
+                  color: 'var(--color-text-muted)',
                   marginTop: '0.35rem',
                   flexWrap: 'wrap',
                 }}
@@ -146,7 +146,7 @@ export const CandidateDetailModal: React.FC<CandidateDetailModalProps> = ({
               className="btn-ghost"
               onClick={() => onToggleSave(candidate.id)}
               title={candidate.isSaved ? 'Remove from bookmarks' : 'Bookmark candidate'}
-              style={{ padding: '0.4rem', color: candidate.isSaved ? '#2563EB' : '#64748B' }}
+              style={{ padding: '0.4rem', color: candidate.isSaved ? 'var(--color-blue)' : 'var(--color-text-muted)' }}
             >
               {candidate.isSaved ? <BookmarkCheck size={18} /> : <Bookmark size={18} />}
             </button>
@@ -155,7 +155,7 @@ export const CandidateDetailModal: React.FC<CandidateDetailModalProps> = ({
               className="btn-ghost"
               onClick={onClose}
               aria-label="Close modal"
-              style={{ padding: '0.4rem', color: '#64748B' }}
+              style={{ padding: '0.4rem', color: 'var(--color-text-muted)' }}
             >
               <X size={18} />
             </button>
@@ -187,7 +187,7 @@ export const CandidateDetailModal: React.FC<CandidateDetailModalProps> = ({
         <div
           style={{
             display: 'flex',
-            borderBottom: '1px solid #E2E8F0',
+            borderBottom: '1px solid var(--color-border)',
             padding: '0 1.5rem',
             background: '#FFFFFF',
           }}
@@ -199,8 +199,8 @@ export const CandidateDetailModal: React.FC<CandidateDetailModalProps> = ({
               padding: '0.75rem 1rem',
               border: 'none',
               background: 'transparent',
-              borderBottom: activeTab === 'evidence' ? '2px solid #2563EB' : '2px solid transparent',
-              color: activeTab === 'evidence' ? '#2563EB' : '#64748B',
+              borderBottom: activeTab === 'evidence' ? '2px solid var(--color-blue)' : '2px solid transparent',
+              color: activeTab === 'evidence' ? 'var(--color-blue)' : 'var(--color-text-muted)',
               fontWeight: activeTab === 'evidence' ? 600 : 500,
               fontSize: '0.84rem',
               cursor: 'pointer',
@@ -219,8 +219,8 @@ export const CandidateDetailModal: React.FC<CandidateDetailModalProps> = ({
               padding: '0.75rem 1rem',
               border: 'none',
               background: 'transparent',
-              borderBottom: activeTab === 'bio' ? '2px solid #2563EB' : '2px solid transparent',
-              color: activeTab === 'bio' ? '#2563EB' : '#64748B',
+              borderBottom: activeTab === 'bio' ? '2px solid var(--color-blue)' : '2px solid transparent',
+              color: activeTab === 'bio' ? 'var(--color-blue)' : 'var(--color-text-muted)',
               fontWeight: activeTab === 'bio' ? 600 : 500,
               fontSize: '0.84rem',
               cursor: 'pointer',
@@ -249,13 +249,13 @@ export const CandidateDetailModal: React.FC<CandidateDetailModalProps> = ({
                   }}
                 >
                   <span className="tier-badge-verified">Verified Evidence</span>
-                  <span style={{ fontSize: '0.75rem', color: '#64748B' }}>
+                  <span style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)' }}>
                     Independently tested, benchmarked, or peer-reviewed challenge submissions
                   </span>
                 </div>
 
                 {verifiedEvidence.length === 0 ? (
-                  <p style={{ fontSize: '0.8125rem', color: '#94A3B8', fontStyle: 'italic' }}>
+                  <p style={{ fontSize: '0.8125rem', color: 'var(--color-text-faint)', fontStyle: 'italic' }}>
                     No verified credentials recorded yet.
                   </p>
                 ) : (
@@ -265,7 +265,7 @@ export const CandidateDetailModal: React.FC<CandidateDetailModalProps> = ({
                         key={idx}
                         style={{
                           background: '#FAFAFA',
-                          border: '1px solid #E2E8F0',
+                          border: '1px solid var(--color-border)',
                           borderLeft: '4px solid #10B981',
                           borderRadius: '0 8px 8px 0',
                           padding: '0.875rem 1rem',
@@ -281,7 +281,7 @@ export const CandidateDetailModal: React.FC<CandidateDetailModalProps> = ({
                           }}
                         >
                           <div>
-                            <span style={{ fontWeight: 600, fontSize: '0.9rem', color: '#0F172A' }}>
+                            <span style={{ fontWeight: 600, fontSize: '0.9rem', color: 'var(--color-navy)' }}>
                               {ev.skillName}
                             </span>
                             {ev.score && (
@@ -292,7 +292,7 @@ export const CandidateDetailModal: React.FC<CandidateDetailModalProps> = ({
                                   background: '#DCFCE7',
                                   color: '#15803D',
                                   padding: '0.15rem 0.45rem',
-                                  borderRadius: '4px',
+                                  borderRadius: 0,
                                   fontWeight: 600,
                                 }}
                               >
@@ -301,13 +301,13 @@ export const CandidateDetailModal: React.FC<CandidateDetailModalProps> = ({
                             )}
                           </div>
                           {ev.verifiedDate && (
-                            <span style={{ fontSize: '0.75rem', color: '#64748B' }}>
+                            <span style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)' }}>
                               Verified: {ev.verifiedDate}
                             </span>
                           )}
                         </div>
 
-                        <p style={{ margin: '0.35rem 0 0.5rem', fontSize: '0.8125rem', color: '#334155', lineHeight: 1.45 }}>
+                        <p style={{ margin: '0.35rem 0 0.5rem', fontSize: '0.8125rem', color: 'var(--color-navy)', lineHeight: 1.45 }}>
                           {ev.description}
                         </p>
 
@@ -318,7 +318,7 @@ export const CandidateDetailModal: React.FC<CandidateDetailModalProps> = ({
                               color: '#065F46',
                               background: '#ECFDF5',
                               padding: '0.35rem 0.6rem',
-                              borderRadius: '4px',
+                              borderRadius: 0,
                               marginBottom: '0.5rem',
                             }}
                           >
@@ -333,7 +333,7 @@ export const CandidateDetailModal: React.FC<CandidateDetailModalProps> = ({
                             rel="noopener noreferrer"
                             style={{
                               fontSize: '0.75rem',
-                              color: '#2563EB',
+                              color: 'var(--color-blue)',
                               textDecoration: 'none',
                               display: 'inline-flex',
                               alignItems: 'center',
@@ -362,13 +362,13 @@ export const CandidateDetailModal: React.FC<CandidateDetailModalProps> = ({
                   }}
                 >
                   <span className="tier-badge-assessed">Assessed Skills</span>
-                  <span style={{ fontSize: '0.75rem', color: '#64748B' }}>
+                  <span style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)' }}>
                     Standardized technical assessment tests and proctored problem sets
                   </span>
                 </div>
 
                 {assessedEvidence.length === 0 ? (
-                  <p style={{ fontSize: '0.8125rem', color: '#94A3B8', fontStyle: 'italic' }}>
+                  <p style={{ fontSize: '0.8125rem', color: 'var(--color-text-faint)', fontStyle: 'italic' }}>
                     No assessment scores recorded.
                   </p>
                 ) : (
@@ -414,7 +414,7 @@ export const CandidateDetailModal: React.FC<CandidateDetailModalProps> = ({
                   }}
                 >
                   <span className="tier-badge-declared">Self-Declared Skills</span>
-                  <span style={{ fontSize: '0.75rem', color: '#64748B' }}>
+                  <span style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)' }}>
                     Candidate self-reported claims (without verified test benchmarks)
                   </span>
                 </div>
@@ -424,11 +424,11 @@ export const CandidateDetailModal: React.FC<CandidateDetailModalProps> = ({
                       key={sk}
                       style={{
                         padding: '0.2rem 0.55rem',
-                        borderRadius: '12px',
-                        background: '#F1F5F9',
-                        border: '1px solid #E2E8F0',
+                        borderRadius: 0,
+                        background: 'var(--color-surface-2)',
+                        border: '1px solid var(--color-border)',
                         fontSize: '0.75rem',
-                        color: '#475569',
+                        color: 'var(--color-text-muted)',
                       }}
                     >
                       {sk}
@@ -442,31 +442,31 @@ export const CandidateDetailModal: React.FC<CandidateDetailModalProps> = ({
           {activeTab === 'bio' && (
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem', fontSize: '0.84rem' }}>
               <div>
-                <h4 style={{ margin: '0 0 0.5rem', fontSize: '0.875rem', color: '#0F172A', fontWeight: 600 }}>
+                <h4 style={{ margin: '0 0 0.5rem', fontSize: '0.875rem', color: 'var(--color-navy)', fontWeight: 600 }}>
                   Candidate Biography
                 </h4>
-                <p style={{ margin: 0, color: '#334155', lineHeight: 1.55 }}>
+                <p style={{ margin: 0, color: 'var(--color-navy)', lineHeight: 1.55 }}>
                   {candidate.bio}
                 </p>
               </div>
 
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '1rem' }}>
-                <div style={{ background: '#F8FAFC', padding: '1rem', borderRadius: '8px', border: '1px solid #E2E8F0' }}>
-                  <h4 style={{ margin: '0 0 0.35rem', fontSize: '0.8125rem', color: '#0F172A', fontWeight: 600 }}>
+                <div style={{ background: 'var(--color-bg)', padding: '1rem', borderRadius: 0, border: '1px solid var(--color-border)' }}>
+                  <h4 style={{ margin: '0 0 0.35rem', fontSize: '0.8125rem', color: 'var(--color-navy)', fontWeight: 600 }}>
                     Career &amp; Domain Interests
                   </h4>
-                  <ul style={{ margin: 0, paddingLeft: '1.25rem', color: '#475569', lineHeight: 1.5 }}>
+                  <ul style={{ margin: 0, paddingLeft: '1.25rem', color: 'var(--color-text-muted)', lineHeight: 1.5 }}>
                     {candidate.careerInterests.map((interest, i) => (
                       <li key={i}>{interest}</li>
                     ))}
                   </ul>
                 </div>
 
-                <div style={{ background: '#F8FAFC', padding: '1rem', borderRadius: '8px', border: '1px solid #E2E8F0' }}>
-                  <h4 style={{ margin: '0 0 0.35rem', fontSize: '0.8125rem', color: '#0F172A', fontWeight: 600 }}>
+                <div style={{ background: 'var(--color-bg)', padding: '1rem', borderRadius: 0, border: '1px solid var(--color-border)' }}>
+                  <h4 style={{ margin: '0 0 0.35rem', fontSize: '0.8125rem', color: 'var(--color-navy)', fontWeight: 600 }}>
                     Employment Preferences
                   </h4>
-                  <ul style={{ margin: 0, paddingLeft: '1.25rem', color: '#475569', lineHeight: 1.5 }}>
+                  <ul style={{ margin: 0, paddingLeft: '1.25rem', color: 'var(--color-text-muted)', lineHeight: 1.5 }}>
                     {candidate.employmentPreferences.map((pref, i) => (
                       <li key={i}>{pref}</li>
                     ))}
@@ -481,8 +481,8 @@ export const CandidateDetailModal: React.FC<CandidateDetailModalProps> = ({
         <div
           style={{
             padding: '1rem 1.5rem',
-            borderTop: '1px solid #E2E8F0',
-            background: '#F8FAFC',
+            borderTop: '1px solid var(--color-border)',
+            background: 'var(--color-bg)',
             display: 'flex',
             justifyContent: 'space-between',
             alignItems: 'center',
@@ -499,7 +499,7 @@ export const CandidateDetailModal: React.FC<CandidateDetailModalProps> = ({
             </div>
           ) : (
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
-              <span style={{ fontSize: '0.8125rem', color: '#64748B', fontWeight: 500 }}>
+              <span style={{ fontSize: '0.8125rem', color: 'var(--color-text-muted)', fontWeight: 500 }}>
                 Add to Pipeline:
               </span>
               <select

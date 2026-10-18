@@ -220,10 +220,10 @@ export const InterviewsTab: React.FC<InterviewsTabProps> = ({
       <div>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '0.75rem' }}>
           <div>
-            <h2 style={{ margin: 0, fontSize: '1.25rem', fontWeight: 700, color: '#0F172A' }}>
+            <h2 style={{ margin: 0, fontSize: '1.25rem', fontWeight: 700, color: 'var(--color-navy)' }}>
               Interview Scheduler
             </h2>
-            <p style={{ margin: '0.25rem 0 0', fontSize: '0.8125rem', color: '#64748B' }}>
+            <p style={{ margin: '0.25rem 0 0', fontSize: '0.8125rem', color: 'var(--color-text-muted)' }}>
               Coordinate technical screening, architecture rounds, and evaluation calls with collision detection.
             </p>
           </div>
@@ -250,12 +250,12 @@ export const InterviewsTab: React.FC<InterviewsTabProps> = ({
       {/* Prototype Notice */}
       <div
         style={{
-          background: '#F8FAFC',
-          border: '1px solid #E2E8F0',
-          borderRadius: '8px',
+          background: 'var(--color-bg)',
+          border: '1px solid var(--color-border)',
+          borderRadius: 0,
           padding: '0.625rem 1rem',
           fontSize: '0.75rem',
-          color: '#64748B',
+          color: 'var(--color-text-muted)',
           display: 'flex',
           alignItems: 'center',
           gap: '0.5rem',
@@ -272,8 +272,8 @@ export const InterviewsTab: React.FC<InterviewsTabProps> = ({
       <div
         style={{
           background: '#FFFFFF',
-          border: '1px solid #E2E8F0',
-          borderRadius: '8px',
+          border: '1px solid var(--color-border)',
+          borderRadius: 0,
           padding: '0.875rem 1rem',
           display: 'flex',
           justifyContent: 'space-between',
@@ -294,10 +294,10 @@ export const InterviewsTab: React.FC<InterviewsTabProps> = ({
                 onClick={() => setFilterStatus(status)}
                 style={{
                   padding: '0.35rem 0.75rem',
-                  borderRadius: '6px',
-                  border: isActive ? '1px solid #D97706' : '1px solid #E2E8F0',
+                  borderRadius: 0,
+                  border: isActive ? '1px solid #D97706' : '1px solid var(--color-border)',
                   background: isActive ? '#FEF3C7' : '#FFFFFF',
-                  color: isActive ? '#B45309' : '#475569',
+                  color: isActive ? '#B45309' : 'var(--color-text-muted)',
                   fontWeight: isActive ? 600 : 500,
                   fontSize: '0.8125rem',
                   cursor: 'pointer',
@@ -311,9 +311,9 @@ export const InterviewsTab: React.FC<InterviewsTabProps> = ({
                 <span
                   style={{
                     fontSize: '0.7rem',
-                    background: isActive ? '#FDE68A' : '#F1F5F9',
+                    background: isActive ? '#FDE68A' : 'var(--color-surface-2)',
                     padding: '0.05rem 0.35rem',
-                    borderRadius: '9999px',
+                    borderRadius: 0,
                   }}
                 >
                   {count}
@@ -327,7 +327,7 @@ export const InterviewsTab: React.FC<InterviewsTabProps> = ({
         <div style={{ position: 'relative', minWidth: '220px' }}>
           <Search
             size={14}
-            style={{ position: 'absolute', left: '0.75rem', top: '50%', transform: 'translateY(-50%)', color: '#94A3B8' }}
+            style={{ position: 'absolute', left: '0.75rem', top: '50%', transform: 'translateY(-50%)', color: 'var(--color-text-faint)' }}
           />
           <input
             type="text"
@@ -346,8 +346,8 @@ export const InterviewsTab: React.FC<InterviewsTabProps> = ({
           <div
             style={{
               background: '#FFFFFF',
-              border: '1px solid #E2E8F0',
-              borderRadius: '8px',
+              border: '1px solid var(--color-border)',
+              borderRadius: 0,
               padding: '3rem 1.5rem',
               textAlign: 'center',
             }}
@@ -357,8 +357,8 @@ export const InterviewsTab: React.FC<InterviewsTabProps> = ({
                 width: '48px',
                 height: '48px',
                 borderRadius: '50%',
-                background: '#F1F5F9',
-                color: '#64748B',
+                background: 'var(--color-surface-2)',
+                color: 'var(--color-text-muted)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
@@ -367,10 +367,10 @@ export const InterviewsTab: React.FC<InterviewsTabProps> = ({
             >
               <Calendar size={22} />
             </div>
-            <h3 style={{ margin: '0 0 0.35rem', fontSize: '1rem', color: '#0F172A' }}>
+            <h3 style={{ margin: '0 0 0.35rem', fontSize: '1rem', color: 'var(--color-navy)' }}>
               No {filterStatus} interviews found
             </h3>
-            <p style={{ margin: '0 0 1rem', fontSize: '0.8125rem', color: '#64748B' }}>
+            <p style={{ margin: '0 0 1rem', fontSize: '0.8125rem', color: 'var(--color-text-muted)' }}>
               {filterStatus === 'scheduled'
                 ? 'Schedule an interview with any candidate from your pipeline.'
                 : `No interviews with status "${filterStatus}".`}
@@ -388,24 +388,24 @@ export const InterviewsTab: React.FC<InterviewsTabProps> = ({
                 key={interview.id}
                 style={{
                   background: '#FFFFFF',
-                  border: '1px solid #E2E8F0',
-                  borderRadius: '8px',
+                  border: '1px solid var(--color-border)',
+                  borderRadius: 0,
                   padding: '1.25rem',
                 }}
               >
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '1rem' }}>
                   <div style={{ flex: 1, minWidth: '260px' }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
-                      <strong style={{ fontSize: '1rem', color: '#0F172A' }}>
+                      <strong style={{ fontSize: '1rem', color: 'var(--color-navy)' }}>
                         {interview.candidateName}
                       </strong>
                       <span
                         style={{
                           fontSize: '0.72rem',
-                          background: '#EFF6FF',
-                          color: '#1D4ED8',
+                          background: 'var(--color-blue-tint)',
+                          color: 'var(--color-blue-hover)',
                           padding: '0.15rem 0.5rem',
-                          borderRadius: '12px',
+                          borderRadius: 0,
                           fontWeight: 600,
                         }}
                       >
@@ -413,7 +413,7 @@ export const InterviewsTab: React.FC<InterviewsTabProps> = ({
                       </span>
                     </div>
 
-                    <div style={{ fontSize: '0.84rem', color: '#475569', marginTop: '0.2rem', fontWeight: 500 }}>
+                    <div style={{ fontSize: '0.84rem', color: 'var(--color-text-muted)', marginTop: '0.2rem', fontWeight: 500 }}>
                       Target Role: {interview.targetRole}
                     </div>
 
@@ -425,7 +425,7 @@ export const InterviewsTab: React.FC<InterviewsTabProps> = ({
                         gap: '1rem',
                         marginTop: '0.5rem',
                         fontSize: '0.8125rem',
-                        color: '#334155',
+                        color: 'var(--color-navy)',
                         flexWrap: 'wrap',
                       }}
                     >
@@ -435,7 +435,7 @@ export const InterviewsTab: React.FC<InterviewsTabProps> = ({
                       </span>
                       <span>•</span>
                       <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.3rem' }}>
-                        <Clock size={14} style={{ color: '#64748B' }} />
+                        <Clock size={14} style={{ color: 'var(--color-text-muted)' }} />
                         {interview.durationMinutes} minutes
                       </span>
                       <span>•</span>
@@ -446,7 +446,7 @@ export const InterviewsTab: React.FC<InterviewsTabProps> = ({
                     </div>
 
                     {/* Agenda & Prep */}
-                    <div style={{ marginTop: '0.75rem', fontSize: '0.8125rem', color: '#475569' }}>
+                    <div style={{ marginTop: '0.75rem', fontSize: '0.8125rem', color: 'var(--color-text-muted)' }}>
                       <strong>Agenda: </strong> {interview.agenda}
                     </div>
 
@@ -455,10 +455,10 @@ export const InterviewsTab: React.FC<InterviewsTabProps> = ({
                         style={{
                           marginTop: '0.35rem',
                           fontSize: '0.75rem',
-                          color: '#64748B',
-                          background: '#F8FAFC',
+                          color: 'var(--color-text-muted)',
+                          background: 'var(--color-bg)',
                           padding: '0.35rem 0.6rem',
-                          borderRadius: '4px',
+                          borderRadius: 0,
                         }}
                       >
                         <strong>Prep: </strong> {interview.prepNotes}
@@ -467,7 +467,7 @@ export const InterviewsTab: React.FC<InterviewsTabProps> = ({
 
                     {/* Cancellation reason if cancelled */}
                     {interview.status === 'cancelled' && interview.cancellationReason && (
-                      <div style={{ marginTop: '0.5rem', fontSize: '0.75rem', color: '#B91C1C', background: '#FEF2F2', padding: '0.35rem 0.6rem', borderRadius: '4px' }}>
+                      <div style={{ marginTop: '0.5rem', fontSize: '0.75rem', color: '#B91C1C', background: '#FEF2F2', padding: '0.35rem 0.6rem', borderRadius: 0 }}>
                         <strong>Cancellation Reason:</strong> {interview.cancellationReason}
                       </div>
                     )}
@@ -525,8 +525,8 @@ export const InterviewsTab: React.FC<InterviewsTabProps> = ({
                           display: 'inline-flex',
                           alignItems: 'center',
                           gap: '0.35rem',
-                          background: '#7C3AED',
-                          borderColor: '#7C3AED',
+                          background: 'var(--color-blue)',
+                          borderColor: 'var(--color-blue)',
                         }}
                       >
                         <FileCheck size={13} />
@@ -541,7 +541,7 @@ export const InterviewsTab: React.FC<InterviewsTabProps> = ({
                         rel="noopener noreferrer"
                         style={{
                           fontSize: '0.75rem',
-                          color: '#2563EB',
+                          color: 'var(--color-blue)',
                           display: 'inline-flex',
                           alignItems: 'center',
                           gap: '0.25rem',
@@ -569,7 +569,7 @@ export const InterviewsTab: React.FC<InterviewsTabProps> = ({
           aria-labelledby="schedule-modal-title"
         >
           <div className="modal-dialog" style={{ maxWidth: '560px' }}>
-            <h3 id="schedule-modal-title" style={{ margin: '0 0 1rem', fontSize: '1.125rem', color: '#0F172A' }}>
+            <h3 id="schedule-modal-title" style={{ margin: '0 0 1rem', fontSize: '1.125rem', color: 'var(--color-navy)' }}>
               {editingInterview ? 'Edit Interview Details' : 'Schedule Technical Interview'}
             </h3>
 
@@ -580,7 +580,7 @@ export const InterviewsTab: React.FC<InterviewsTabProps> = ({
                   border: '1px solid #FECACA',
                   color: '#B91C1C',
                   padding: '0.625rem 0.875rem',
-                  borderRadius: '6px',
+                  borderRadius: 0,
                   fontSize: '0.8125rem',
                   marginBottom: '1rem',
                   display: 'flex',
@@ -773,10 +773,10 @@ export const InterviewsTab: React.FC<InterviewsTabProps> = ({
           aria-labelledby="cancel-interview-title"
         >
           <div className="modal-dialog" style={{ maxWidth: '420px' }}>
-            <h3 id="cancel-interview-title" style={{ margin: '0 0 0.5rem', fontSize: '1.125rem', color: '#0F172A' }}>
+            <h3 id="cancel-interview-title" style={{ margin: '0 0 0.5rem', fontSize: '1.125rem', color: 'var(--color-navy)' }}>
               Cancel Scheduled Interview?
             </h3>
-            <p style={{ margin: '0 0 1rem', fontSize: '0.84rem', color: '#64748B', lineHeight: 1.45 }}>
+            <p style={{ margin: '0 0 1rem', fontSize: '0.84rem', color: 'var(--color-text-muted)', lineHeight: 1.45 }}>
               Are you sure you want to cancel the <strong>{ROUND_LABELS[cancellingInterview.round]}</strong> with{' '}
               <strong>{cancellingInterview.candidateName}</strong> on {cancellingInterview.date}?
             </p>

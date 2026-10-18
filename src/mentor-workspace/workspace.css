@@ -5,9 +5,9 @@
 
 /* Mentor Specific Accent & Badges */
 .badge-mentor-guide {
-  background: #FAF5FF;
-  color: #9333EA;
-  border: 1px solid #E9D5FF;
+  background: var(--color-blue-tint);
+  color: var(--color-blue);
+  border: 1px solid var(--color-blue-line);
 }
 
 .badge-pending {
@@ -29,9 +29,9 @@
 }
 
 .badge-scheduled {
-  background: #EFF6FF;
-  color: #1D4ED8;
-  border: 1px solid #BFDBFE;
+  background: var(--color-blue-tint);
+  color: var(--color-blue-hover);
+  border: 1px solid var(--color-blue-line);
 }
 
 .badge-completed {
@@ -41,9 +41,9 @@
 }
 
 .badge-cancelled {
-  background: #F1F5F9;
-  color: #64748B;
-  border: 1px solid #CBD5E1;
+  background: var(--color-surface-2);
+  color: var(--color-text-muted);
+  border: 1px solid var(--color-border-hover);
 }
 
 /* Mentee Action Items List */
@@ -52,17 +52,17 @@
   align-items: center;
   justify-content: space-between;
   padding: 8px 12px;
-  background: #F8FAFC;
-  border: 1px solid #E2E8F0;
-  border-radius: 6px;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 0;
   margin-bottom: 6px;
   font-size: 0.84rem;
 }
 
 .mentee-action-item.is-done {
-  background: #F1F5F9;
+  background: var(--color-surface-2);
   text-decoration: line-through;
-  color: #94A3B8;
+  color: var(--color-text-faint);
 }
 
 /* Private Reflection Callout */

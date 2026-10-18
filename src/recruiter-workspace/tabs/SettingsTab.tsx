@@ -3,10 +3,8 @@ import {
   Bell,
   Calendar,
   Lock,
-  RotateCcw,
   LogOut,
   Check,
-  AlertTriangle,
 } from 'lucide-react';
 import type { RecruiterSettings, RecruiterProfile } from '../types';
 
@@ -15,7 +13,6 @@ interface SettingsTabProps {
   recruiter: RecruiterProfile;
   availableRoles: string[];
   onSaveSettings: (updated: RecruiterSettings) => void;
-  onResetDemoData: () => void;
   onExitToHome: () => void;
 }
 
@@ -24,11 +21,9 @@ export const SettingsTab: React.FC<SettingsTabProps> = ({
   recruiter: _recruiter,
   availableRoles: _availableRoles,
   onSaveSettings,
-  onResetDemoData,
   onExitToHome,
 }) => {
   const [formData, setFormData] = useState<RecruiterSettings>(settings);
-  const [showResetConfirm, setShowResetConfirm] = useState(false);
   const [saveSuccess, setSaveSuccess] = useState(false);
 
   const handleSave = (e: React.FormEvent) => {
@@ -52,10 +47,10 @@ export const SettingsTab: React.FC<SettingsTabProps> = ({
     <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem', maxWidth: '800px' }}>
       {/* Header */}
       <div>
-        <h2 style={{ margin: 0, fontSize: '1.25rem', fontWeight: 700, color: '#0F172A' }}>
+        <h2 style={{ margin: 0, fontSize: '1.25rem', fontWeight: 700, color: 'var(--color-navy)' }}>
           Workspace Settings &amp; Preferences
         </h2>
-        <p style={{ margin: '0.25rem 0 0', fontSize: '0.8125rem', color: '#64748B' }}>
+        <p style={{ margin: '0.25rem 0 0', fontSize: '0.8125rem', color: 'var(--color-text-muted)' }}>
           Configure default interview durations, candidate visibility, and prototype notifications.
         </p>
       </div>
@@ -67,7 +62,7 @@ export const SettingsTab: React.FC<SettingsTabProps> = ({
             border: '1px solid #BBF7D0',
             color: '#15803D',
             padding: '0.625rem 1rem',
-            borderRadius: '6px',
+            borderRadius: 0,
             fontSize: '0.8125rem',
             display: 'flex',
             alignItems: 'center',
@@ -84,14 +79,14 @@ export const SettingsTab: React.FC<SettingsTabProps> = ({
         <div
           style={{
             background: '#FFFFFF',
-            border: '1px solid #E2E8F0',
-            borderRadius: '8px',
+            border: '1px solid var(--color-border)',
+            borderRadius: 0,
             padding: '1.25rem',
           }}
         >
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '1rem' }}>
             <Calendar size={16} style={{ color: '#D97706' }} />
-            <h3 style={{ margin: 0, fontSize: '0.9375rem', fontWeight: 600, color: '#0F172A' }}>
+            <h3 style={{ margin: 0, fontSize: '0.9375rem', fontWeight: 600, color: 'var(--color-navy)' }}>
               Interview Scheduling Defaults
             </h3>
           </div>
@@ -130,18 +125,18 @@ export const SettingsTab: React.FC<SettingsTabProps> = ({
         <div
           style={{
             background: '#FFFFFF',
-            border: '1px solid #E2E8F0',
-            borderRadius: '8px',
+            border: '1px solid var(--color-border)',
+            borderRadius: 0,
             padding: '1.25rem',
           }}
         >
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.5rem' }}>
-            <Bell size={16} style={{ color: '#2563EB' }} />
-            <h3 style={{ margin: 0, fontSize: '0.9375rem', fontWeight: 600, color: '#0F172A' }}>
+            <Bell size={16} style={{ color: 'var(--color-blue)' }} />
+            <h3 style={{ margin: 0, fontSize: '0.9375rem', fontWeight: 600, color: 'var(--color-navy)' }}>
               Notification Preferences
             </h3>
           </div>
-          <p style={{ margin: '0 0 1rem', fontSize: '0.75rem', color: '#64748B' }}>
+          <p style={{ margin: '0 0 1rem', fontSize: '0.75rem', color: 'var(--color-text-muted)' }}>
             Prototype simulation: Controls in-app banner alerts for pipeline updates. No external emails are sent.
           </p>
 
@@ -179,14 +174,14 @@ export const SettingsTab: React.FC<SettingsTabProps> = ({
         <div
           style={{
             background: '#FFFFFF',
-            border: '1px solid #E2E8F0',
-            borderRadius: '8px',
+            border: '1px solid var(--color-border)',
+            borderRadius: 0,
             padding: '1.25rem',
           }}
         >
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '1rem' }}>
             <Lock size={16} style={{ color: '#15803D' }} />
-            <h3 style={{ margin: 0, fontSize: '0.9375rem', fontWeight: 600, color: '#0F172A' }}>
+            <h3 style={{ margin: 0, fontSize: '0.9375rem', fontWeight: 600, color: 'var(--color-navy)' }}>
               Candidate Data &amp; Visibility
             </h3>
           </div>
@@ -211,102 +206,16 @@ export const SettingsTab: React.FC<SettingsTabProps> = ({
         </div>
       </form>
 
-      {/* Danger Zone: Reset to Demo Data & Switch Role */}
-      <div
-        style={{
-          background: '#FFF5F5',
-          border: '1px solid #FED7D7',
-          borderRadius: '8px',
-          padding: '1.25rem',
-          marginTop: '1rem',
-        }}
-      >
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.5rem' }}>
-          <AlertTriangle size={16} style={{ color: '#E53E3E' }} />
-          <h3 style={{ margin: 0, fontSize: '0.9375rem', fontWeight: 600, color: '#9B2C2C' }}>
-            Prototype Management &amp; Demo Data
-          </h3>
-        </div>
-        <p style={{ margin: '0 0 1rem', fontSize: '0.78rem', color: '#742A2A', lineHeight: 1.45 }}>
-          Reset all recruiter pipeline records, scorecards, and interviews to the original factory seed
-          dataset, or safely exit back to public role selection.
+      {/* Account */}
+      <div className="ws-card" style={{ marginTop: '1rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '1rem', flexWrap: 'wrap' }}>
+        <p className="ws-card-subtitle" style={{ margin: 0 }}>
+          Sign out of the recruiter workspace on this device.
         </p>
-
-        <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
-          <button
-            type="button"
-            className="btn-secondary"
-            onClick={() => setShowResetConfirm(true)}
-            style={{
-              borderColor: '#FEB2B2',
-              color: '#9B2C2C',
-              background: '#FFFFFF',
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '0.35rem',
-              fontSize: '0.8125rem',
-            }}
-          >
-            <RotateCcw size={14} />
-            <span>Reset to Factory Demo Data</span>
-          </button>
-
-          <button
-            type="button"
-            className="btn-secondary"
-            onClick={onExitToHome}
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '0.35rem',
-              fontSize: '0.8125rem',
-            }}
-          >
-            <LogOut size={14} />
-            <span>Return to Role Selection</span>
-          </button>
-        </div>
+        <button type="button" className="ob-btn-secondary" onClick={onExitToHome}>
+          <LogOut size={14} aria-hidden="true" />
+          <span>Sign out</span>
+        </button>
       </div>
-
-      {/* Reset Confirmation Modal */}
-      {showResetConfirm && (
-        <div
-          className="modal-overlay"
-          role="dialog"
-          aria-modal="true"
-          aria-labelledby="reset-modal-title"
-        >
-          <div className="modal-dialog" style={{ maxWidth: '420px' }}>
-            <h3 id="reset-modal-title" style={{ margin: '0 0 0.5rem', fontSize: '1.125rem', color: '#0F172A' }}>
-              Reset Recruiter Demo Data?
-            </h3>
-            <p style={{ margin: '0 0 1.25rem', fontSize: '0.84rem', color: '#64748B', lineHeight: 1.45 }}>
-              This will restore the original demo candidates, pipeline stages, upcoming interviews,
-              and sample scorecards. Any custom notes or scheduled interviews will be reset.
-            </p>
-            <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '0.75rem' }}>
-              <button
-                type="button"
-                className="btn-secondary"
-                onClick={() => setShowResetConfirm(false)}
-              >
-                Cancel
-              </button>
-              <button
-                type="button"
-                className="btn-primary"
-                onClick={() => {
-                  onResetDemoData();
-                  setShowResetConfirm(false);
-                }}
-                style={{ background: '#DC2626', borderColor: '#DC2626' }}
-              >
-                Confirm Reset
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 };

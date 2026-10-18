@@ -1,3 +1,4 @@
+import { scopedKey } from '../lib/storageScope';
 import type {
   FounderWorkspaceState,
   Project,
@@ -361,7 +362,7 @@ export function saveFounderWorkspace(workspace: FounderWorkspaceState): boolean 
       ...workspace,
       lastUpdatedAt: new Date().toISOString(),
     };
-    window.localStorage.setItem(WORKSPACE_STORAGE_KEY, JSON.stringify(payload));
+    window.localStorage.setItem(scopedKey(WORKSPACE_STORAGE_KEY), JSON.stringify(payload));
     return true;
   } catch (err) {
     console.warn('Failed to save founder workspace to localStorage:', err);
@@ -373,7 +374,7 @@ export function loadFounderWorkspace(): FounderWorkspaceState | null {
   if (typeof window === 'undefined' || !window.localStorage) return null;
 
   try {
-    const raw = window.localStorage.getItem(WORKSPACE_STORAGE_KEY);
+    const raw = window.localStorage.getItem(scopedKey(WORKSPACE_STORAGE_KEY));
     if (!raw) return null;
 
     const parsed = JSON.parse(raw) as Partial<FounderWorkspaceState>;
@@ -428,7 +429,7 @@ export function loadFounderWorkspace(): FounderWorkspaceState | null {
 export function clearFounderWorkspace(): void {
   if (typeof window === 'undefined' || !window.localStorage) return;
   try {
-    window.localStorage.removeItem(WORKSPACE_STORAGE_KEY);
+    window.localStorage.removeItem(scopedKey(WORKSPACE_STORAGE_KEY));
   } catch {
     // Ignore cleanup errors
   }

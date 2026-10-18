@@ -1,5 +1,6 @@
 import React from 'react';
 import type { MentorWorkspaceTab, MentorWorkspaceState } from './types';
+import { BrandMark } from '../brand/BrandMark';
 import {
   LayoutDashboard,
   Inbox,
@@ -10,10 +11,12 @@ import {
   Settings,
   LogOut,
   X,
-  GraduationCap,
+  ClipboardCheck,
 } from 'lucide-react';
 
 interface MentorSidebarProps {
+  /** Open skill-assessment requests in the shared mentor queue. */
+  skillReviewCount?: number;
   currentTab: MentorWorkspaceTab;
   onTabChange: (tab: MentorWorkspaceTab) => void;
   workspace: MentorWorkspaceState;
@@ -29,6 +32,7 @@ export const MentorSidebar: React.FC<MentorSidebarProps> = ({
   isOpenOnMobile,
   onCloseMobile,
   onExitToHome,
+  skillReviewCount = 0,
 }) => {
   const { mentor, requests, mentees, sessions, feedback } = workspace;
 
@@ -76,6 +80,13 @@ export const MentorSidebar: React.FC<MentorSidebarProps> = ({
       badge: feedback.length > 0 ? feedback.length : undefined,
     },
     {
+      id: 'skill-reviews',
+      label: 'Skill Reviews',
+      icon: <ClipboardCheck size={18} aria-hidden="true" />,
+      badge: skillReviewCount || undefined,
+      badgeColor: 'amber',
+    },
+    {
       id: 'profile',
       label: 'Mentor Profile',
       icon: <User size={18} aria-hidden="true" />,
@@ -107,7 +118,7 @@ export const MentorSidebar: React.FC<MentorSidebarProps> = ({
         style={{
           width: '260px',
           background: '#FFFFFF',
-          borderRight: '1px solid #E2E8F0',
+          borderRight: '1px solid var(--color-border)',
           display: 'flex',
           flexDirection: 'column',
           flexShrink: 0,
@@ -131,46 +142,13 @@ export const MentorSidebar: React.FC<MentorSidebarProps> = ({
         <div
           style={{
             padding: '18px 20px',
-            borderBottom: '1px solid #E2E8F0',
+            borderBottom: '1px solid var(--color-border)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
           }}
         >
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-            <div
-              style={{
-                width: '32px',
-                height: '32px',
-                borderRadius: '8px',
-                background: '#FAF5FF',
-                border: '1px solid #E9D5FF',
-                color: '#9333EA',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}
-            >
-              <GraduationCap size={18} />
-            </div>
-            <div>
-              <span style={{ fontSize: '1.05rem', fontWeight: 800, color: '#1B2A4E', display: 'block', lineHeight: 1.1 }}>
-                YOGYATA
-              </span>
-              <span
-                style={{
-                  fontSize: '0.66rem',
-                  fontWeight: 700,
-                  color: '#9333EA',
-                  textTransform: 'uppercase',
-                  letterSpacing: '0.06em',
-                  display: 'block',
-                }}
-              >
-                Mentor Workspace
-              </span>
-            </div>
-          </div>
+          <BrandMark sub="Mentor workspace" />
 
           {isOpenOnMobile && (
             <button
@@ -179,7 +157,7 @@ export const MentorSidebar: React.FC<MentorSidebarProps> = ({
               style={{
                 background: 'none',
                 border: 'none',
-                color: '#64748B',
+                color: 'var(--color-text-muted)',
                 cursor: 'pointer',
                 padding: '4px',
               }}
@@ -193,8 +171,8 @@ export const MentorSidebar: React.FC<MentorSidebarProps> = ({
         <div
           style={{
             padding: '14px 18px',
-            background: '#F8FAFC',
-            borderBottom: '1px solid #E2E8F0',
+            background: 'var(--color-bg)',
+            borderBottom: '1px solid var(--color-border)',
             display: 'flex',
             alignItems: 'center',
             gap: '12px',
@@ -205,14 +183,14 @@ export const MentorSidebar: React.FC<MentorSidebarProps> = ({
               width: '38px',
               height: '38px',
               borderRadius: '50%',
-              background: '#EEF2FF',
-              color: '#4F46E5',
+              background: 'var(--color-blue-tint)',
+              color: 'var(--color-blue)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               fontWeight: 800,
               fontSize: '0.9rem',
-              border: '1px solid #E0E7FF',
+              border: '1px solid var(--color-blue-tint)',
               flexShrink: 0,
             }}
           >
@@ -231,7 +209,7 @@ export const MentorSidebar: React.FC<MentorSidebarProps> = ({
                 display: 'block',
                 fontSize: '0.86rem',
                 fontWeight: 700,
-                color: '#1E293B',
+                color: 'var(--color-navy)',
                 whiteSpace: 'nowrap',
                 overflow: 'hidden',
                 textOverflow: 'ellipsis',
@@ -243,7 +221,7 @@ export const MentorSidebar: React.FC<MentorSidebarProps> = ({
               style={{
                 display: 'block',
                 fontSize: '0.74rem',
-                color: '#64748B',
+                color: 'var(--color-text-muted)',
                 whiteSpace: 'nowrap',
                 overflow: 'hidden',
                 textOverflow: 'ellipsis',
@@ -271,10 +249,10 @@ export const MentorSidebar: React.FC<MentorSidebarProps> = ({
                   alignItems: 'center',
                   justifyContent: 'space-between',
                   padding: '9px 12px',
-                  borderRadius: '6px',
+                  borderRadius: 0,
                   border: 'none',
-                  background: isActive ? '#EFF6FF' : 'transparent',
-                  color: isActive ? '#1D4ED8' : '#475569',
+                  background: isActive ? 'var(--color-blue-tint)' : 'transparent',
+                  color: isActive ? 'var(--color-blue-hover)' : 'var(--color-text-muted)',
                   fontWeight: isActive ? 700 : 500,
                   fontSize: '0.85rem',
                   cursor: 'pointer',
@@ -284,7 +262,7 @@ export const MentorSidebar: React.FC<MentorSidebarProps> = ({
                 }}
               >
                 <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                  <span style={{ color: isActive ? '#2563EB' : '#94A3B8' }}>{item.icon}</span>
+                  <span style={{ color: isActive ? 'var(--color-blue)' : 'var(--color-text-faint)' }}>{item.icon}</span>
                   <span>{item.label}</span>
                 </div>
 
@@ -294,19 +272,19 @@ export const MentorSidebar: React.FC<MentorSidebarProps> = ({
                       fontSize: '0.7rem',
                       fontWeight: 700,
                       padding: '2px 7px',
-                      borderRadius: '10px',
+                      borderRadius: 0,
                       background:
                         item.badgeColor === 'amber'
                           ? '#FEF3C7'
                           : item.badgeColor === 'green'
                           ? '#DCFCE7'
-                          : '#DBEAFE',
+                          : 'var(--color-blue-line)',
                       color:
                         item.badgeColor === 'amber'
                           ? '#B45309'
                           : item.badgeColor === 'green'
                           ? '#15803D'
-                          : '#1E40AF',
+                          : 'var(--color-blue-hover)',
                     }}
                   >
                     {item.badge}
@@ -318,7 +296,7 @@ export const MentorSidebar: React.FC<MentorSidebarProps> = ({
         </nav>
 
         {/* Bottom Exit */}
-        <div style={{ padding: '14px 16px', borderTop: '1px solid #E2E8F0' }}>
+        <div style={{ padding: '14px 16px', borderTop: '1px solid var(--color-border)' }}>
           <button
             type="button"
             onClick={onExitToHome}
@@ -328,10 +306,10 @@ export const MentorSidebar: React.FC<MentorSidebarProps> = ({
               alignItems: 'center',
               gap: '10px',
               padding: '8px 12px',
-              borderRadius: '6px',
-              border: '1px solid #E2E8F0',
+              borderRadius: 0,
+              border: '1px solid var(--color-border)',
               background: '#FFFFFF',
-              color: '#64748B',
+              color: 'var(--color-text-muted)',
               fontSize: '0.82rem',
               fontWeight: 600,
               cursor: 'pointer',

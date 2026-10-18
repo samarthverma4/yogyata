@@ -56,7 +56,7 @@ export const MentorVerifyEmailStep: React.FC<MentorVerifyEmailStepProps> = ({
         <span className="mob-step-tag">Step 2 of 6</span>
         <h2 className="mob-step-title">Verify your Email Address</h2>
         <p className="mob-step-subtitle">
-          We simulated a confirmation code sent to <strong style={{ color: '#1B2A4E' }}>{email || 'your email'}</strong>.
+          We simulated a confirmation code sent to <strong style={{ color: 'var(--color-navy)' }}>{email || 'your email'}</strong>.
         </p>
       </div>
 
@@ -86,7 +86,7 @@ export const MentorVerifyEmailStep: React.FC<MentorVerifyEmailStepProps> = ({
                 textAlign: 'center',
                 fontSize: '1.25rem',
                 fontWeight: 700,
-                color: '#1B2A4E',
+                color: 'var(--color-navy)',
               }}
             />
           ))}

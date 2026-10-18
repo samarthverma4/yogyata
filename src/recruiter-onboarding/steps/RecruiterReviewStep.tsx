@@ -54,13 +54,13 @@ export const RecruiterReviewStep: React.FC<RecruiterReviewStepProps> = ({
           style={{
             background: 'var(--color-surface)',
             border: '1px solid var(--color-border)',
-            borderRadius: '8px',
+            borderRadius: 0,
             padding: '1.25rem',
           }}
         >
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.75rem' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 600, color: '#0F172A' }}>
-              <User size={16} style={{ color: '#2563EB' }} />
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 600, color: 'var(--color-navy)' }}>
+              <User size={16} style={{ color: 'var(--color-blue)' }} />
               Recruiter Identity &amp; Account
             </div>
             <button
@@ -98,14 +98,14 @@ export const RecruiterReviewStep: React.FC<RecruiterReviewStepProps> = ({
             {state.profile.linkedInUrl && (
               <div>
                 <span style={{ color: 'var(--color-text-muted)' }}>Profile: </span>
-                <a href={state.profile.linkedInUrl} target="_blank" rel="noopener noreferrer" style={{ color: '#2563EB' }}>
+                <a href={state.profile.linkedInUrl} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--color-blue)' }}>
                   {state.profile.linkedInUrl}
                 </a>
               </div>
             )}
           </div>
           {state.profile.professionalBio && (
-            <div style={{ marginTop: '0.75rem', paddingTop: '0.75rem', borderTop: '1px solid var(--color-border)', fontSize: '0.8125rem', color: '#475569' }}>
+            <div style={{ marginTop: '0.75rem', paddingTop: '0.75rem', borderTop: '1px solid var(--color-border)', fontSize: '0.8125rem', color: 'var(--color-text-muted)' }}>
               <em>"{state.profile.professionalBio}"</em>
             </div>
           )}
@@ -116,12 +116,12 @@ export const RecruiterReviewStep: React.FC<RecruiterReviewStepProps> = ({
           style={{
             background: 'var(--color-surface)',
             border: '1px solid var(--color-border)',
-            borderRadius: '8px',
+            borderRadius: 0,
             padding: '1.25rem',
           }}
         >
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.75rem' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 600, color: '#0F172A' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 600, color: 'var(--color-navy)' }}>
               <Building2 size={16} style={{ color: '#16A34A' }} />
               Company Information
             </div>
@@ -158,7 +158,7 @@ export const RecruiterReviewStep: React.FC<RecruiterReviewStepProps> = ({
             </div>
             <div>
               <span style={{ color: 'var(--color-text-muted)' }}>Website: </span>
-              <a href={state.company.website} target="_blank" rel="noopener noreferrer" style={{ color: '#2563EB' }}>
+              <a href={state.company.website} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--color-blue)' }}>
                 {state.company.website}
               </a>
             </div>
@@ -178,7 +178,7 @@ export const RecruiterReviewStep: React.FC<RecruiterReviewStepProps> = ({
                     color: '#15803D',
                     fontSize: '0.75rem',
                     padding: '0.2rem 0.55rem',
-                    borderRadius: '12px',
+                    borderRadius: 0,
                     fontWeight: 500,
                   }}
                 >
@@ -194,13 +194,13 @@ export const RecruiterReviewStep: React.FC<RecruiterReviewStepProps> = ({
           style={{
             background: 'var(--color-surface)',
             border: '1px solid var(--color-border)',
-            borderRadius: '8px',
+            borderRadius: 0,
             padding: '1.25rem',
           }}
         >
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.75rem' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 600, color: '#0F172A' }}>
-              <Briefcase size={16} style={{ color: '#7C3AED' }} />
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 600, color: 'var(--color-navy)' }}>
+              <Briefcase size={16} style={{ color: 'var(--color-blue)' }} />
               Hiring Preferences &amp; Target Openings
             </div>
             <button
@@ -221,12 +221,12 @@ export const RecruiterReviewStep: React.FC<RecruiterReviewStepProps> = ({
                   <span
                     key={r}
                     style={{
-                      background: '#EFF6FF',
-                      border: '1px solid #BFDBFE',
-                      color: '#1D4ED8',
+                      background: 'var(--color-blue-tint)',
+                      border: '1px solid var(--color-blue-line)',
+                      color: 'var(--color-blue-hover)',
                       fontSize: '0.75rem',
                       padding: '0.2rem 0.55rem',
-                      borderRadius: '12px',
+                      borderRadius: 0,
                       fontWeight: 500,
                     }}
                   >
@@ -243,12 +243,12 @@ export const RecruiterReviewStep: React.FC<RecruiterReviewStepProps> = ({
                   <span
                     key={s}
                     style={{
-                      background: '#F1F5F9',
-                      border: '1px solid #CBD5E1',
-                      color: '#334155',
+                      background: 'var(--color-surface-2)',
+                      border: '1px solid var(--color-border-hover)',
+                      color: 'var(--color-navy)',
                       fontSize: '0.75rem',
                       padding: '0.2rem 0.55rem',
-                      borderRadius: '12px',
+                      borderRadius: 0,
                     }}
                   >
                     {s}
@@ -273,9 +273,9 @@ export const RecruiterReviewStep: React.FC<RecruiterReviewStepProps> = ({
         {/* Guidelines Confirmation Checkbox */}
         <div
           style={{
-            background: '#F8FAFC',
-            border: '1px solid #E2E8F0',
-            borderRadius: '8px',
+            background: 'var(--color-bg)',
+            border: '1px solid var(--color-border)',
+            borderRadius: 0,
             padding: '1rem',
             marginTop: '0.5rem',
           }}
@@ -290,7 +290,7 @@ export const RecruiterReviewStep: React.FC<RecruiterReviewStepProps> = ({
               }}
               style={{ marginTop: '0.2rem', cursor: 'pointer' }}
             />
-            <div style={{ fontSize: '0.8125rem', color: '#1E293B', lineHeight: 1.5 }}>
+            <div style={{ fontSize: '0.8125rem', color: 'var(--color-navy)', lineHeight: 1.5 }}>
               <strong>Fair Hiring &amp; Skill Evidence Agreement:</strong> I confirm that
               candidate evaluations will be grounded in verifiable skill evidence. I acknowledge
               that hiring decisions, interviews, and recruiter notes do not alter or award

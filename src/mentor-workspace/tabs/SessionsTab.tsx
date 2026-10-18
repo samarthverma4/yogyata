@@ -283,10 +283,10 @@ export const SessionsTab: React.FC<SessionsTabProps> = ({
       {/* Header */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '20px' }}>
         <div>
-          <h1 style={{ fontSize: '1.5rem', fontWeight: 800, color: '#1B2A4E', margin: '0 0 6px 0' }}>
+          <h1 style={{ fontSize: '1.5rem', fontWeight: 800, color: 'var(--color-navy)', margin: '0 0 6px 0' }}>
             Mentorship Sessions
           </h1>
-          <p style={{ margin: 0, color: '#64748B', fontSize: '0.88rem' }}>
+          <p style={{ margin: 0, color: 'var(--color-text-muted)', fontSize: '0.88rem' }}>
             Schedule and manage guidance calls, track agendas, and log post-session outcomes.
           </p>
         </div>
@@ -297,10 +297,10 @@ export const SessionsTab: React.FC<SessionsTabProps> = ({
           disabled={activeMentees.length === 0}
           style={{
             padding: '9px 18px',
-            background: activeMentees.length === 0 ? '#94A3B8' : '#2563EB',
+            background: activeMentees.length === 0 ? 'var(--color-text-faint)' : 'var(--color-blue)',
             color: '#FFFFFF',
             border: 'none',
-            borderRadius: '6px',
+            borderRadius: 0,
             fontSize: '0.85rem',
             fontWeight: 600,
             cursor: activeMentees.length === 0 ? 'not-allowed' : 'pointer',
@@ -316,19 +316,19 @@ export const SessionsTab: React.FC<SessionsTabProps> = ({
       {/* Prototype Calendar Disclaimer Banner */}
       <div
         style={{
-          background: '#EFF6FF',
-          border: '1px solid #BFDBFE',
-          borderRadius: '8px',
+          background: 'var(--color-blue-tint)',
+          border: '1px solid var(--color-blue-line)',
+          borderRadius: 0,
           padding: '10px 14px',
           marginBottom: '20px',
           display: 'flex',
           alignItems: 'center',
           gap: '10px',
           fontSize: '0.8125rem',
-          color: '#1E40AF',
+          color: 'var(--color-blue-hover)',
         }}
       >
-        <Info size={16} color="#2563EB" />
+        <Info size={16} color="var(--color-blue)" />
         <span>
           <strong>Frontend Prototype:</strong> Sessions are local demonstration records managed in your browser. Real
           Google Calendar / Outlook synchronization and video links are not included in this phase.
@@ -343,7 +343,7 @@ export const SessionsTab: React.FC<SessionsTabProps> = ({
             border: '1px solid #A7F3D0',
             color: '#065F46',
             padding: '10px 16px',
-            borderRadius: '8px',
+            borderRadius: 0,
             marginBottom: '16px',
             display: 'flex',
             alignItems: 'center',
@@ -366,8 +366,8 @@ export const SessionsTab: React.FC<SessionsTabProps> = ({
           justifyContent: 'space-between',
           alignItems: 'center',
           background: '#FFFFFF',
-          border: '1px solid #E2E8F0',
-          borderRadius: '10px',
+          border: '1px solid var(--color-border)',
+          borderRadius: 0,
           padding: '12px 16px',
           marginBottom: '20px',
         }}
@@ -379,10 +379,10 @@ export const SessionsTab: React.FC<SessionsTabProps> = ({
             onClick={() => setStatusFilter('all')}
             style={{
               padding: '6px 12px',
-              borderRadius: '6px',
-              border: statusFilter === 'all' ? '1px solid #2563EB' : '1px solid #E2E8F0',
-              background: statusFilter === 'all' ? '#EFF6FF' : '#FFFFFF',
-              color: statusFilter === 'all' ? '#1D4ED8' : '#64748B',
+              borderRadius: 0,
+              border: statusFilter === 'all' ? '1px solid var(--color-blue)' : '1px solid var(--color-border)',
+              background: statusFilter === 'all' ? 'var(--color-blue-tint)' : '#FFFFFF',
+              color: statusFilter === 'all' ? 'var(--color-blue-hover)' : 'var(--color-text-muted)',
               fontWeight: 600,
               fontSize: '0.82rem',
               cursor: 'pointer',
@@ -395,10 +395,10 @@ export const SessionsTab: React.FC<SessionsTabProps> = ({
             onClick={() => setStatusFilter('scheduled')}
             style={{
               padding: '6px 12px',
-              borderRadius: '6px',
-              border: statusFilter === 'scheduled' ? '1px solid #059669' : '1px solid #E2E8F0',
+              borderRadius: 0,
+              border: statusFilter === 'scheduled' ? '1px solid #059669' : '1px solid var(--color-border)',
               background: statusFilter === 'scheduled' ? '#ECFDF5' : '#FFFFFF',
-              color: statusFilter === 'scheduled' ? '#065F46' : '#64748B',
+              color: statusFilter === 'scheduled' ? '#065F46' : 'var(--color-text-muted)',
               fontWeight: 600,
               fontSize: '0.82rem',
               cursor: 'pointer',
@@ -411,10 +411,10 @@ export const SessionsTab: React.FC<SessionsTabProps> = ({
             onClick={() => setStatusFilter('completed')}
             style={{
               padding: '6px 12px',
-              borderRadius: '6px',
-              border: statusFilter === 'completed' ? '1px solid #2563EB' : '1px solid #E2E8F0',
-              background: statusFilter === 'completed' ? '#EFF6FF' : '#FFFFFF',
-              color: statusFilter === 'completed' ? '#1D4ED8' : '#64748B',
+              borderRadius: 0,
+              border: statusFilter === 'completed' ? '1px solid var(--color-blue)' : '1px solid var(--color-border)',
+              background: statusFilter === 'completed' ? 'var(--color-blue-tint)' : '#FFFFFF',
+              color: statusFilter === 'completed' ? 'var(--color-blue-hover)' : 'var(--color-text-muted)',
               fontWeight: 600,
               fontSize: '0.82rem',
               cursor: 'pointer',
@@ -427,10 +427,10 @@ export const SessionsTab: React.FC<SessionsTabProps> = ({
             onClick={() => setStatusFilter('cancelled')}
             style={{
               padding: '6px 12px',
-              borderRadius: '6px',
-              border: statusFilter === 'cancelled' ? '1px solid #64748B' : '1px solid #E2E8F0',
-              background: statusFilter === 'cancelled' ? '#F1F5F9' : '#FFFFFF',
-              color: statusFilter === 'cancelled' ? '#334155' : '#64748B',
+              borderRadius: 0,
+              border: statusFilter === 'cancelled' ? '1px solid var(--color-text-muted)' : '1px solid var(--color-border)',
+              background: statusFilter === 'cancelled' ? 'var(--color-surface-2)' : '#FFFFFF',
+              color: statusFilter === 'cancelled' ? 'var(--color-navy)' : 'var(--color-text-muted)',
               fontWeight: 600,
               fontSize: '0.82rem',
               cursor: 'pointer',
@@ -442,16 +442,16 @@ export const SessionsTab: React.FC<SessionsTabProps> = ({
 
         {/* Mentee dropdown filter */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-          <span style={{ fontSize: '0.8rem', color: '#64748B', fontWeight: 600 }}>Filter Mentee:</span>
+          <span style={{ fontSize: '0.8rem', color: 'var(--color-text-muted)', fontWeight: 600 }}>Filter Mentee:</span>
           <select
             value={menteeFilter}
             onChange={(e) => setMenteeFilter(e.target.value)}
             style={{
               padding: '6px 10px',
-              borderRadius: '6px',
-              border: '1px solid #CBD5E1',
+              borderRadius: 0,
+              border: '1px solid var(--color-border-hover)',
               fontSize: '0.82rem',
-              color: '#334155',
+              color: 'var(--color-navy)',
               outline: 'none',
               background: '#FFFFFF',
               cursor: 'pointer',
@@ -472,17 +472,17 @@ export const SessionsTab: React.FC<SessionsTabProps> = ({
         <div
           style={{
             background: '#FFFFFF',
-            border: '1px dashed #CBD5E1',
-            borderRadius: '12px',
+            border: '1px dashed var(--color-border-hover)',
+            borderRadius: 0,
             padding: '48px 24px',
             textAlign: 'center',
           }}
         >
-          <Calendar size={36} style={{ color: '#94A3B8', marginBottom: '10px' }} />
-          <h3 style={{ fontSize: '1rem', fontWeight: 700, color: '#334155', margin: '0 0 6px 0' }}>
+          <Calendar size={36} style={{ color: 'var(--color-text-faint)', marginBottom: '10px' }} />
+          <h3 style={{ fontSize: '1rem', fontWeight: 700, color: 'var(--color-navy)', margin: '0 0 6px 0' }}>
             No sessions match your criteria
           </h3>
-          <p style={{ color: '#64748B', fontSize: '0.84rem', maxWidth: '400px', margin: '0 auto 16px auto' }}>
+          <p style={{ color: 'var(--color-text-muted)', fontSize: '0.84rem', maxWidth: '400px', margin: '0 auto 16px auto' }}>
             {activeMentees.length === 0
               ? 'You need at least one active mentee to schedule sessions. Accept a mentorship application first.'
               : 'Schedule your next 1:1 session or change your filter.'}
@@ -493,10 +493,10 @@ export const SessionsTab: React.FC<SessionsTabProps> = ({
               onClick={handleOpenScheduleModal}
               style={{
                 padding: '8px 16px',
-                background: '#2563EB',
+                background: 'var(--color-blue)',
                 color: '#FFFFFF',
                 border: 'none',
-                borderRadius: '6px',
+                borderRadius: 0,
                 fontSize: '0.82rem',
                 fontWeight: 600,
                 cursor: 'pointer',
@@ -518,8 +518,8 @@ export const SessionsTab: React.FC<SessionsTabProps> = ({
                 key={sess.id}
                 style={{
                   background: '#FFFFFF',
-                  border: '1px solid #E2E8F0',
-                  borderRadius: '10px',
+                  border: '1px solid var(--color-border)',
+                  borderRadius: 0,
                   padding: '18px 22px',
                   boxShadow: '0 1px 3px rgba(0,0,0,0.02)',
                   display: 'flex',
@@ -533,10 +533,10 @@ export const SessionsTab: React.FC<SessionsTabProps> = ({
                     <div
                       style={{
                         padding: '8px 12px',
-                        borderRadius: '8px',
-                        background: isScheduled ? '#EFF6FF' : isCompleted ? '#F0FDF4' : '#F1F5F9',
+                        borderRadius: 0,
+                        background: isScheduled ? 'var(--color-blue-tint)' : isCompleted ? '#F0FDF4' : 'var(--color-surface-2)',
                         border: `1px solid ${
-                          isScheduled ? '#BFDBFE' : isCompleted ? '#BBF7D0' : '#E2E8F0'
+                          isScheduled ? 'var(--color-blue-line)' : isCompleted ? '#BBF7D0' : 'var(--color-border)'
                         }`,
                         textAlign: 'center',
                         minWidth: '65px',
@@ -548,7 +548,7 @@ export const SessionsTab: React.FC<SessionsTabProps> = ({
                           fontSize: '0.7rem',
                           textTransform: 'uppercase',
                           fontWeight: 700,
-                          color: isScheduled ? '#1D4ED8' : isCompleted ? '#166534' : '#64748B',
+                          color: isScheduled ? 'var(--color-blue-hover)' : isCompleted ? '#166534' : 'var(--color-text-muted)',
                         }}
                       >
                         {new Date(sess.date + 'T00:00:00').toLocaleDateString(undefined, {
@@ -560,7 +560,7 @@ export const SessionsTab: React.FC<SessionsTabProps> = ({
                           display: 'block',
                           fontSize: '1.25rem',
                           fontWeight: 800,
-                          color: '#1B2A4E',
+                          color: 'var(--color-navy)',
                           lineHeight: 1.1,
                         }}
                       >
@@ -570,7 +570,7 @@ export const SessionsTab: React.FC<SessionsTabProps> = ({
 
                     <div>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                        <h3 style={{ fontSize: '1.05rem', fontWeight: 700, color: '#1E293B', margin: 0 }}>
+                        <h3 style={{ fontSize: '1.05rem', fontWeight: 700, color: 'var(--color-navy)', margin: 0 }}>
                           {sess.title}
                         </h3>
                         {sess.isDemoRecord && (
@@ -578,9 +578,9 @@ export const SessionsTab: React.FC<SessionsTabProps> = ({
                             style={{
                               fontSize: '0.65rem',
                               padding: '1px 5px',
-                              background: '#F1F5F9',
-                              color: '#64748B',
-                              borderRadius: '4px',
+                              background: 'var(--color-surface-2)',
+                              color: 'var(--color-text-muted)',
+                              borderRadius: 0,
                               fontWeight: 600,
                             }}
                           >
@@ -590,14 +590,14 @@ export const SessionsTab: React.FC<SessionsTabProps> = ({
                       </div>
 
                       <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginTop: '4px' }}>
-                        <span style={{ fontSize: '0.82rem', fontWeight: 600, color: '#2563EB' }}>
+                        <span style={{ fontSize: '0.82rem', fontWeight: 600, color: 'var(--color-blue)' }}>
                           Mentee: {sess.menteeName}
                         </span>
-                        <span style={{ color: '#CBD5E1' }}>•</span>
+                        <span style={{ color: 'var(--color-border-hover)' }}>•</span>
                         <span
                           style={{
                             fontSize: '0.8rem',
-                            color: '#64748B',
+                            color: 'var(--color-text-muted)',
                             display: 'flex',
                             alignItems: 'center',
                             gap: '4px',
@@ -605,8 +605,8 @@ export const SessionsTab: React.FC<SessionsTabProps> = ({
                         >
                           <Clock size={13} /> {sess.startTime} ({sess.durationMinutes} mins)
                         </span>
-                        <span style={{ color: '#CBD5E1' }}>•</span>
-                        <span style={{ fontSize: '0.8rem', color: '#64748B', textTransform: 'capitalize' }}>
+                        <span style={{ color: 'var(--color-border-hover)' }}>•</span>
+                        <span style={{ fontSize: '0.8rem', color: 'var(--color-text-muted)', textTransform: 'capitalize' }}>
                           {sess.sessionFormat} call
                         </span>
                       </div>
@@ -621,10 +621,10 @@ export const SessionsTab: React.FC<SessionsTabProps> = ({
                           fontSize: '0.78rem',
                           fontWeight: 700,
                           padding: '4px 10px',
-                          borderRadius: '20px',
-                          background: '#EFF6FF',
-                          color: '#1D4ED8',
-                          border: '1px solid #BFDBFE',
+                          borderRadius: 0,
+                          background: 'var(--color-blue-tint)',
+                          color: 'var(--color-blue-hover)',
+                          border: '1px solid var(--color-blue-line)',
                         }}
                       >
                         Upcoming
@@ -636,7 +636,7 @@ export const SessionsTab: React.FC<SessionsTabProps> = ({
                           fontSize: '0.78rem',
                           fontWeight: 700,
                           padding: '4px 10px',
-                          borderRadius: '20px',
+                          borderRadius: 0,
                           background: '#F0FDF4',
                           color: '#166534',
                           border: '1px solid #BBF7D0',
@@ -651,10 +651,10 @@ export const SessionsTab: React.FC<SessionsTabProps> = ({
                           fontSize: '0.78rem',
                           fontWeight: 700,
                           padding: '4px 10px',
-                          borderRadius: '20px',
-                          background: '#F1F5F9',
-                          color: '#64748B',
-                          border: '1px solid #CBD5E1',
+                          borderRadius: 0,
+                          background: 'var(--color-surface-2)',
+                          color: 'var(--color-text-muted)',
+                          border: '1px solid var(--color-border-hover)',
                         }}
                       >
                         Cancelled
@@ -664,9 +664,9 @@ export const SessionsTab: React.FC<SessionsTabProps> = ({
                 </div>
 
                 {/* Agenda */}
-                <div style={{ background: '#F8FAFC', padding: '10px 14px', borderRadius: '6px', fontSize: '0.84rem' }}>
-                  <span style={{ fontWeight: 700, color: '#334155' }}>Agenda: </span>
-                  <span style={{ color: '#475569' }}>{sess.agenda}</span>
+                <div style={{ background: 'var(--color-bg)', padding: '10px 14px', borderRadius: 0, fontSize: '0.84rem' }}>
+                  <span style={{ fontWeight: 700, color: 'var(--color-navy)' }}>Agenda: </span>
+                  <span style={{ color: 'var(--color-text-muted)' }}>{sess.agenda}</span>
                 </div>
 
                 {/* Post notes or action items if completed */}
@@ -692,14 +692,14 @@ export const SessionsTab: React.FC<SessionsTabProps> = ({
                     display: 'flex',
                     justifyContent: 'space-between',
                     alignItems: 'center',
-                    borderTop: '1px solid #F1F5F9',
+                    borderTop: '1px solid var(--color-surface-2)',
                     paddingTop: '10px',
                   }}
                 >
                   <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                     {sess.prepNotes && (
-                      <span style={{ fontSize: '0.76rem', color: '#64748B', fontStyle: 'italic' }}>
-                        Prep: {sess.prepNotes}
+                      <span style={{ fontSize: '0.76rem', color: 'var(--color-text-muted)', fontStyle: 'italic' }}>
+                        Link: {sess.prepNotes}
                       </span>
                     )}
                   </div>
@@ -713,11 +713,11 @@ export const SessionsTab: React.FC<SessionsTabProps> = ({
                           style={{
                             padding: '5px 10px',
                             background: '#FFFFFF',
-                            border: '1px solid #CBD5E1',
-                            borderRadius: '5px',
+                            border: '1px solid var(--color-border-hover)',
+                            borderRadius: 0,
                             fontSize: '0.78rem',
                             fontWeight: 600,
-                            color: '#64748B',
+                            color: 'var(--color-text-muted)',
                             cursor: 'pointer',
                           }}
                         >
@@ -729,11 +729,11 @@ export const SessionsTab: React.FC<SessionsTabProps> = ({
                           style={{
                             padding: '5px 10px',
                             background: '#FFFFFF',
-                            border: '1px solid #CBD5E1',
-                            borderRadius: '5px',
+                            border: '1px solid var(--color-border-hover)',
+                            borderRadius: 0,
                             fontSize: '0.78rem',
                             fontWeight: 600,
-                            color: '#334155',
+                            color: 'var(--color-navy)',
                             cursor: 'pointer',
                             display: 'flex',
                             alignItems: 'center',
@@ -749,7 +749,7 @@ export const SessionsTab: React.FC<SessionsTabProps> = ({
                             padding: '5px 12px',
                             background: '#059669',
                             border: 'none',
-                            borderRadius: '5px',
+                            borderRadius: 0,
                             fontSize: '0.78rem',
                             fontWeight: 600,
                             color: '#FFFFFF',
@@ -772,12 +772,12 @@ export const SessionsTab: React.FC<SessionsTabProps> = ({
                         }
                         style={{
                           padding: '5px 12px',
-                          background: '#EFF6FF',
-                          border: '1px solid #BFDBFE',
-                          borderRadius: '5px',
+                          background: 'var(--color-blue-tint)',
+                          border: '1px solid var(--color-blue-line)',
+                          borderRadius: 0,
                           fontSize: '0.78rem',
                           fontWeight: 600,
-                          color: '#1D4ED8',
+                          color: 'var(--color-blue-hover)',
                           cursor: 'pointer',
                           display: 'flex',
                           alignItems: 'center',
@@ -812,7 +812,7 @@ export const SessionsTab: React.FC<SessionsTabProps> = ({
           <div
             style={{
               background: '#FFFFFF',
-              borderRadius: '12px',
+              borderRadius: 0,
               maxWidth: '520px',
               width: '100%',
               boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1)',
@@ -824,13 +824,13 @@ export const SessionsTab: React.FC<SessionsTabProps> = ({
             <div
               style={{
                 padding: '18px 24px',
-                borderBottom: '1px solid #E2E8F0',
+                borderBottom: '1px solid var(--color-border)',
                 display: 'flex',
                 justifyContent: 'space-between',
                 alignItems: 'center',
               }}
             >
-              <h2 style={{ fontSize: '1.15rem', fontWeight: 800, color: '#1B2A4E', margin: 0 }}>
+              <h2 style={{ fontSize: '1.15rem', fontWeight: 800, color: 'var(--color-navy)', margin: 0 }}>
                 {editingSession ? 'Edit Mentorship Session' : 'Schedule Mentorship Session'}
               </h2>
               <button
@@ -839,7 +839,7 @@ export const SessionsTab: React.FC<SessionsTabProps> = ({
                 style={{
                   background: 'none',
                   border: 'none',
-                  color: '#94A3B8',
+                  color: 'var(--color-text-faint)',
                   fontSize: '1.25rem',
                   cursor: 'pointer',
                 }}
@@ -857,7 +857,7 @@ export const SessionsTab: React.FC<SessionsTabProps> = ({
                       border: '1px solid #FECACA',
                       color: '#B91C1C',
                       padding: '8px 12px',
-                      borderRadius: '6px',
+                      borderRadius: 0,
                       fontSize: '0.82rem',
                       display: 'flex',
                       alignItems: 'center',
@@ -871,7 +871,7 @@ export const SessionsTab: React.FC<SessionsTabProps> = ({
 
                 {/* Mentee selection */}
                 <div>
-                  <label style={{ display: 'block', fontSize: '0.78rem', fontWeight: 700, color: '#475569', marginBottom: '4px' }}>
+                  <label style={{ display: 'block', fontSize: '0.78rem', fontWeight: 700, color: 'var(--color-text-muted)', marginBottom: '4px' }}>
                     Mentee *
                   </label>
                   <select
@@ -880,8 +880,8 @@ export const SessionsTab: React.FC<SessionsTabProps> = ({
                     style={{
                       width: '100%',
                       padding: '8px 10px',
-                      borderRadius: '6px',
-                      border: '1px solid #CBD5E1',
+                      borderRadius: 0,
+                      border: '1px solid var(--color-border-hover)',
                       fontSize: '0.85rem',
                     }}
                   >
@@ -895,7 +895,7 @@ export const SessionsTab: React.FC<SessionsTabProps> = ({
 
                 {/* Session Title */}
                 <div>
-                  <label style={{ display: 'block', fontSize: '0.78rem', fontWeight: 700, color: '#475569', marginBottom: '4px' }}>
+                  <label style={{ display: 'block', fontSize: '0.78rem', fontWeight: 700, color: 'var(--color-text-muted)', marginBottom: '4px' }}>
                     Session Title *
                   </label>
                   <input
@@ -906,8 +906,8 @@ export const SessionsTab: React.FC<SessionsTabProps> = ({
                     style={{
                       width: '100%',
                       padding: '8px 10px',
-                      borderRadius: '6px',
-                      border: '1px solid #CBD5E1',
+                      borderRadius: 0,
+                      border: '1px solid var(--color-border-hover)',
                       fontSize: '0.85rem',
                       boxSizing: 'border-box',
                     }}
@@ -917,7 +917,7 @@ export const SessionsTab: React.FC<SessionsTabProps> = ({
                 {/* Date & Time row */}
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '10px' }}>
                   <div>
-                    <label style={{ display: 'block', fontSize: '0.78rem', fontWeight: 700, color: '#475569', marginBottom: '4px' }}>
+                    <label style={{ display: 'block', fontSize: '0.78rem', fontWeight: 700, color: 'var(--color-text-muted)', marginBottom: '4px' }}>
                       Date *
                     </label>
                     <input
@@ -928,15 +928,15 @@ export const SessionsTab: React.FC<SessionsTabProps> = ({
                       style={{
                         width: '100%',
                         padding: '8px',
-                        borderRadius: '6px',
-                        border: '1px solid #CBD5E1',
+                        borderRadius: 0,
+                        border: '1px solid var(--color-border-hover)',
                         fontSize: '0.82rem',
                         boxSizing: 'border-box',
                       }}
                     />
                   </div>
                   <div>
-                    <label style={{ display: 'block', fontSize: '0.78rem', fontWeight: 700, color: '#475569', marginBottom: '4px' }}>
+                    <label style={{ display: 'block', fontSize: '0.78rem', fontWeight: 700, color: 'var(--color-text-muted)', marginBottom: '4px' }}>
                       Start Time *
                     </label>
                     <input
@@ -946,15 +946,15 @@ export const SessionsTab: React.FC<SessionsTabProps> = ({
                       style={{
                         width: '100%',
                         padding: '8px',
-                        borderRadius: '6px',
-                        border: '1px solid #CBD5E1',
+                        borderRadius: 0,
+                        border: '1px solid var(--color-border-hover)',
                         fontSize: '0.82rem',
                         boxSizing: 'border-box',
                       }}
                     />
                   </div>
                   <div>
-                    <label style={{ display: 'block', fontSize: '0.78rem', fontWeight: 700, color: '#475569', marginBottom: '4px' }}>
+                    <label style={{ display: 'block', fontSize: '0.78rem', fontWeight: 700, color: 'var(--color-text-muted)', marginBottom: '4px' }}>
                       Duration
                     </label>
                     <select
@@ -963,8 +963,8 @@ export const SessionsTab: React.FC<SessionsTabProps> = ({
                       style={{
                         width: '100%',
                         padding: '8px',
-                        borderRadius: '6px',
-                        border: '1px solid #CBD5E1',
+                        borderRadius: 0,
+                        border: '1px solid var(--color-border-hover)',
                         fontSize: '0.82rem',
                       }}
                     >
@@ -978,7 +978,7 @@ export const SessionsTab: React.FC<SessionsTabProps> = ({
 
                 {/* Agenda */}
                 <div>
-                  <label style={{ display: 'block', fontSize: '0.78rem', fontWeight: 700, color: '#475569', marginBottom: '4px' }}>
+                  <label style={{ display: 'block', fontSize: '0.78rem', fontWeight: 700, color: 'var(--color-text-muted)', marginBottom: '4px' }}>
                     Agenda & Focus Topics *
                   </label>
                   <textarea
@@ -989,8 +989,8 @@ export const SessionsTab: React.FC<SessionsTabProps> = ({
                     style={{
                       width: '100%',
                       padding: '8px 10px',
-                      borderRadius: '6px',
-                      border: '1px solid #CBD5E1',
+                      borderRadius: 0,
+                      border: '1px solid var(--color-border-hover)',
                       fontSize: '0.84rem',
                       fontFamily: 'inherit',
                       boxSizing: 'border-box',
@@ -998,21 +998,21 @@ export const SessionsTab: React.FC<SessionsTabProps> = ({
                   />
                 </div>
 
-                {/* Preparation notes */}
+                {/* Meeting link, shared with the mentee */}
                 <div>
-                  <label style={{ display: 'block', fontSize: '0.78rem', fontWeight: 700, color: '#475569', marginBottom: '4px' }}>
-                    Preparation Notes for Mentee (Optional)
+                  <label style={{ display: 'block', fontSize: '0.78rem', fontWeight: 700, color: 'var(--color-text-muted)', marginBottom: '4px' }}>
+                    Meeting link (optional, shared with the mentee)
                   </label>
                   <input
-                    type="text"
+                    type="url"
                     value={formPrepNotes}
                     onChange={(e) => setFormPrepNotes(e.target.value)}
-                    placeholder="e.g. Please send GitHub repository link prior to the call."
+                    placeholder="https://meet.google.com/..."
                     style={{
                       width: '100%',
                       padding: '8px 10px',
-                      borderRadius: '6px',
-                      border: '1px solid #CBD5E1',
+                      borderRadius: 0,
+                      border: '1px solid var(--color-border-hover)',
                       fontSize: '0.84rem',
                       boxSizing: 'border-box',
                     }}
@@ -1024,8 +1024,8 @@ export const SessionsTab: React.FC<SessionsTabProps> = ({
               <div
                 style={{
                   padding: '14px 24px',
-                  borderTop: '1px solid #E2E8F0',
-                  background: '#F8FAFC',
+                  borderTop: '1px solid var(--color-border)',
+                  background: 'var(--color-bg)',
                   display: 'flex',
                   justifyContent: 'flex-end',
                   gap: '10px',
@@ -1036,10 +1036,10 @@ export const SessionsTab: React.FC<SessionsTabProps> = ({
                   onClick={() => setIsScheduleModalOpen(false)}
                   style={{
                     padding: '8px 16px',
-                    borderRadius: '6px',
+                    borderRadius: 0,
                     background: '#FFFFFF',
-                    border: '1px solid #CBD5E1',
-                    color: '#475569',
+                    border: '1px solid var(--color-border-hover)',
+                    color: 'var(--color-text-muted)',
                     fontSize: '0.84rem',
                     fontWeight: 600,
                     cursor: 'pointer',
@@ -1051,8 +1051,8 @@ export const SessionsTab: React.FC<SessionsTabProps> = ({
                   type="submit"
                   style={{
                     padding: '8px 18px',
-                    borderRadius: '6px',
-                    background: '#2563EB',
+                    borderRadius: 0,
+                    background: 'var(--color-blue)',
                     border: 'none',
                     color: '#FFFFFF',
                     fontSize: '0.84rem',
@@ -1085,25 +1085,25 @@ export const SessionsTab: React.FC<SessionsTabProps> = ({
           <div
             style={{
               background: '#FFFFFF',
-              borderRadius: '12px',
+              borderRadius: 0,
               maxWidth: '500px',
               width: '100%',
               boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1)',
               overflow: 'hidden',
             }}
           >
-            <div style={{ padding: '18px 24px', borderBottom: '1px solid #E2E8F0' }}>
-              <h2 style={{ fontSize: '1.15rem', fontWeight: 800, color: '#1B2A4E', margin: 0 }}>
+            <div style={{ padding: '18px 24px', borderBottom: '1px solid var(--color-border)' }}>
+              <h2 style={{ fontSize: '1.15rem', fontWeight: 800, color: 'var(--color-navy)', margin: 0 }}>
                 Mark Session Completed
               </h2>
-              <p style={{ margin: '4px 0 0 0', color: '#64748B', fontSize: '0.82rem' }}>
+              <p style={{ margin: '4px 0 0 0', color: 'var(--color-text-muted)', fontSize: '0.82rem' }}>
                 {completingSession.title} with {completingSession.menteeName}
               </p>
             </div>
 
             <div style={{ padding: '20px 24px', display: 'flex', flexDirection: 'column', gap: '14px' }}>
               <div>
-                <label style={{ display: 'block', fontSize: '0.78rem', fontWeight: 700, color: '#475569', marginBottom: '4px' }}>
+                <label style={{ display: 'block', fontSize: '0.78rem', fontWeight: 700, color: 'var(--color-text-muted)', marginBottom: '4px' }}>
                   Post-Session Notes & Summary
                 </label>
                 <textarea
@@ -1114,8 +1114,8 @@ export const SessionsTab: React.FC<SessionsTabProps> = ({
                   style={{
                     width: '100%',
                     padding: '8px 10px',
-                    borderRadius: '6px',
-                    border: '1px solid #CBD5E1',
+                    borderRadius: 0,
+                    border: '1px solid var(--color-border-hover)',
                     fontSize: '0.84rem',
                     fontFamily: 'inherit',
                     boxSizing: 'border-box',
@@ -1124,7 +1124,7 @@ export const SessionsTab: React.FC<SessionsTabProps> = ({
               </div>
 
               <div>
-                <label style={{ display: 'block', fontSize: '0.78rem', fontWeight: 700, color: '#475569', marginBottom: '4px' }}>
+                <label style={{ display: 'block', fontSize: '0.78rem', fontWeight: 700, color: 'var(--color-text-muted)', marginBottom: '4px' }}>
                   Assign Follow-up Action Item (Optional)
                 </label>
                 <input
@@ -1135,8 +1135,8 @@ export const SessionsTab: React.FC<SessionsTabProps> = ({
                   style={{
                     width: '100%',
                     padding: '8px 10px',
-                    borderRadius: '6px',
-                    border: '1px solid #CBD5E1',
+                    borderRadius: 0,
+                    border: '1px solid var(--color-border-hover)',
                     fontSize: '0.84rem',
                     boxSizing: 'border-box',
                   }}
@@ -1147,8 +1147,8 @@ export const SessionsTab: React.FC<SessionsTabProps> = ({
             <div
               style={{
                 padding: '14px 24px',
-                borderTop: '1px solid #E2E8F0',
-                background: '#F8FAFC',
+                borderTop: '1px solid var(--color-border)',
+                background: 'var(--color-bg)',
                 display: 'flex',
                 justifyContent: 'flex-end',
                 gap: '10px',
@@ -1159,10 +1159,10 @@ export const SessionsTab: React.FC<SessionsTabProps> = ({
                 onClick={() => setCompletingSession(null)}
                 style={{
                   padding: '8px 14px',
-                  borderRadius: '6px',
+                  borderRadius: 0,
                   background: '#FFFFFF',
-                  border: '1px solid #CBD5E1',
-                  color: '#475569',
+                  border: '1px solid var(--color-border-hover)',
+                  color: 'var(--color-text-muted)',
                   fontSize: '0.84rem',
                   fontWeight: 600,
                   cursor: 'pointer',
@@ -1175,7 +1175,7 @@ export const SessionsTab: React.FC<SessionsTabProps> = ({
                 onClick={handleConfirmComplete}
                 style={{
                   padding: '8px 18px',
-                  borderRadius: '6px',
+                  borderRadius: 0,
                   background: '#059669',
                   border: 'none',
                   color: '#FFFFFF',
@@ -1208,7 +1208,7 @@ export const SessionsTab: React.FC<SessionsTabProps> = ({
           <div
             style={{
               background: '#FFFFFF',
-              borderRadius: '12px',
+              borderRadius: 0,
               maxWidth: '440px',
               width: '100%',
               boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1)',
@@ -1218,11 +1218,11 @@ export const SessionsTab: React.FC<SessionsTabProps> = ({
           >
             <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '12px' }}>
               <AlertCircle size={22} color="#DC2626" />
-              <h2 style={{ fontSize: '1.15rem', fontWeight: 800, color: '#1B2A4E', margin: 0 }}>
+              <h2 style={{ fontSize: '1.15rem', fontWeight: 800, color: 'var(--color-navy)', margin: 0 }}>
                 Cancel Session?
               </h2>
             </div>
-            <p style={{ margin: '0 0 20px 0', fontSize: '0.85rem', color: '#64748B', lineHeight: 1.5 }}>
+            <p style={{ margin: '0 0 20px 0', fontSize: '0.85rem', color: 'var(--color-text-muted)', lineHeight: 1.5 }}>
               Are you sure you want to cancel "<strong>{cancellingSession.title}</strong>" scheduled with{' '}
               {cancellingSession.menteeName} on {cancellingSession.date}?
             </p>
@@ -1233,10 +1233,10 @@ export const SessionsTab: React.FC<SessionsTabProps> = ({
                 onClick={() => setCancellingSession(null)}
                 style={{
                   padding: '8px 14px',
-                  borderRadius: '6px',
+                  borderRadius: 0,
                   background: '#FFFFFF',
-                  border: '1px solid #CBD5E1',
-                  color: '#475569',
+                  border: '1px solid var(--color-border-hover)',
+                  color: 'var(--color-text-muted)',
                   fontSize: '0.84rem',
                   fontWeight: 600,
                   cursor: 'pointer',
@@ -1249,7 +1249,7 @@ export const SessionsTab: React.FC<SessionsTabProps> = ({
                 onClick={handleConfirmCancel}
                 style={{
                   padding: '8px 18px',
-                  borderRadius: '6px',
+                  borderRadius: 0,
                   background: '#DC2626',
                   border: 'none',
                   color: '#FFFFFF',

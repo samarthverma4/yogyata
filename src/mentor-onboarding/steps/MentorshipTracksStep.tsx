@@ -76,7 +76,7 @@ export const MentorshipTracksStep: React.FC<MentorshipTracksStepProps> = ({
         <div style={{ marginBottom: '2rem' }}>
           <label className="yw-form-label" style={{ display: 'block', marginBottom: '0.625rem' }}>
             Select Mentorship Tracks <span style={{ color: '#DC2626' }}>*</span>{' '}
-            <span style={{ color: '#64748B', fontWeight: 400 }}>(Choose one or more)</span>
+            <span style={{ color: 'var(--color-text-muted)', fontWeight: 400 }}>(Choose one or more)</span>
           </label>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '0.875rem' }}>
             {AVAILABLE_MENTORSHIP_TRACKS.map((track) => {
@@ -87,8 +87,8 @@ export const MentorshipTracksStep: React.FC<MentorshipTracksStepProps> = ({
                   onClick={() => toggleTrack(track.title)}
                   style={{
                     background: isSelected ? '#F0FDF4' : '#FFFFFF',
-                    border: `1.5px solid ${isSelected ? '#16A34A' : '#E2E8F0'}`,
-                    borderRadius: '10px',
+                    border: `1.5px solid ${isSelected ? '#16A34A' : 'var(--color-border)'}`,
+                    borderRadius: 0,
                     padding: '1rem',
                     cursor: 'pointer',
                     transition: 'all 0.15s ease',
@@ -100,7 +100,7 @@ export const MentorshipTracksStep: React.FC<MentorshipTracksStepProps> = ({
                 >
                   <div>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.375rem' }}>
-                      <span style={{ fontWeight: 700, fontSize: '0.9375rem', color: isSelected ? '#166534' : '#1B2A4E' }}>
+                      <span style={{ fontWeight: 700, fontSize: '0.9375rem', color: isSelected ? '#166534' : 'var(--color-navy)' }}>
                         {track.title}
                       </span>
                       <div
@@ -108,7 +108,7 @@ export const MentorshipTracksStep: React.FC<MentorshipTracksStepProps> = ({
                           width: '20px',
                           height: '20px',
                           borderRadius: '50%',
-                          background: isSelected ? '#16A34A' : '#F1F5F9',
+                          background: isSelected ? '#16A34A' : 'var(--color-surface-2)',
                           color: '#FFFFFF',
                           display: 'flex',
                           alignItems: 'center',
@@ -119,7 +119,7 @@ export const MentorshipTracksStep: React.FC<MentorshipTracksStepProps> = ({
                         {isSelected && <Check size={13} strokeWidth={3} />}
                       </div>
                     </div>
-                    <p style={{ margin: 0, fontSize: '0.8125rem', color: '#64748B', lineHeight: 1.45 }}>
+                    <p style={{ margin: 0, fontSize: '0.8125rem', color: 'var(--color-text-muted)', lineHeight: 1.45 }}>
                       {track.description}
                     </p>
                   </div>
@@ -130,9 +130,9 @@ export const MentorshipTracksStep: React.FC<MentorshipTracksStepProps> = ({
         </div>
 
         {/* Cohort & Schedule Controls */}
-        <div className="yw-card" style={{ padding: '1.25rem', marginBottom: '1.5rem', background: '#F8FAFC' }}>
-          <h4 style={{ margin: '0 0 1rem 0', fontSize: '0.9375rem', fontWeight: 700, color: '#1B2A4E', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-            <Compass size={18} color="#2563EB" />
+        <div className="yw-card" style={{ padding: '1.25rem', marginBottom: '1.5rem', background: 'var(--color-bg)' }}>
+          <h4 style={{ margin: '0 0 1rem 0', fontSize: '0.9375rem', fontWeight: 700, color: 'var(--color-navy)', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+            <Compass size={18} color="var(--color-blue)" />
             Session Preferences & Capacity
           </h4>
 
@@ -249,11 +249,11 @@ export const MentorshipTracksStep: React.FC<MentorshipTracksStepProps> = ({
 
         {/* Pricing / Community Mentorship Preference */}
         <div className="yw-card" style={{ padding: '1.25rem', marginBottom: '2rem' }}>
-          <h4 style={{ margin: '0 0 0.5rem 0', fontSize: '0.9375rem', fontWeight: 700, color: '#1B2A4E', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+          <h4 style={{ margin: '0 0 0.5rem 0', fontSize: '0.9375rem', fontWeight: 700, color: 'var(--color-navy)', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
             <DollarSign size={18} color="#D97706" />
             Mentorship Model
           </h4>
-          <p style={{ margin: '0 0 1rem 0', fontSize: '0.8125rem', color: '#64748B' }}>
+          <p style={{ margin: '0 0 1rem 0', fontSize: '0.8125rem', color: 'var(--color-text-muted)' }}>
             YOGYATA prioritizes accessible talent development. Choose your preferred engagement model:
           </p>
 
@@ -281,17 +281,17 @@ export const MentorshipTracksStep: React.FC<MentorshipTracksStepProps> = ({
                   key={m.id}
                   onClick={() => onChange({ ...data, pricingModel: m.id as PricingModel })}
                   style={{
-                    border: `1.5px solid ${isSelected ? '#D97706' : '#E2E8F0'}`,
+                    border: `1.5px solid ${isSelected ? '#D97706' : 'var(--color-border)'}`,
                     background: isSelected ? '#FFFBEB' : '#FFFFFF',
-                    borderRadius: '8px',
+                    borderRadius: 0,
                     padding: '0.875rem',
                     cursor: 'pointer',
                   }}
                 >
-                  <div style={{ fontWeight: 600, fontSize: '0.875rem', color: isSelected ? '#92400E' : '#1B2A4E', marginBottom: '0.25rem' }}>
+                  <div style={{ fontWeight: 600, fontSize: '0.875rem', color: isSelected ? '#92400E' : 'var(--color-navy)', marginBottom: '0.25rem' }}>
                     {m.title}
                   </div>
-                  <p style={{ margin: 0, fontSize: '0.75rem', color: '#64748B', lineHeight: 1.4 }}>
+                  <p style={{ margin: 0, fontSize: '0.75rem', color: 'var(--color-text-muted)', lineHeight: 1.4 }}>
                     {m.desc}
                   </p>
                 </div>

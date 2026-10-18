@@ -50,7 +50,7 @@ export const RecruiterCompleteStep: React.FC<RecruiterCompleteStepProps> = ({
 
       <h2
         className="founder-step-title"
-        style={{ fontSize: '1.5rem', marginBottom: '0.5rem', color: '#0F172A' }}
+        style={{ fontSize: '1.5rem', marginBottom: '0.5rem', color: 'var(--color-navy)' }}
       >
         Recruiter Workspace Ready!
       </h2>
@@ -81,68 +81,68 @@ export const RecruiterCompleteStep: React.FC<RecruiterCompleteStepProps> = ({
       >
         <div
           style={{
-            background: '#F8FAFC',
-            border: '1px solid #E2E8F0',
-            borderRadius: '8px',
+            background: 'var(--color-bg)',
+            border: '1px solid var(--color-border)',
+            borderRadius: 0,
             padding: '1rem',
           }}
         >
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 600, color: '#0F172A', marginBottom: '0.25rem', fontSize: '0.875rem' }}>
-            <Search size={16} style={{ color: '#2563EB' }} />
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 600, color: 'var(--color-navy)', marginBottom: '0.25rem', fontSize: '0.875rem' }}>
+            <Search size={16} style={{ color: 'var(--color-blue)' }} />
             Talent Discovery
           </div>
-          <p style={{ fontSize: '0.75rem', color: '#64748B', margin: 0, lineHeight: 1.4 }}>
+          <p style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)', margin: 0, lineHeight: 1.4 }}>
             Filter candidates by Declared, Assessed, and Verified skill tiers with proof.
           </p>
         </div>
 
         <div
           style={{
-            background: '#F8FAFC',
-            border: '1px solid #E2E8F0',
-            borderRadius: '8px',
+            background: 'var(--color-bg)',
+            border: '1px solid var(--color-border)',
+            borderRadius: 0,
             padding: '1rem',
           }}
         >
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 600, color: '#0F172A', marginBottom: '0.25rem', fontSize: '0.875rem' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 600, color: 'var(--color-navy)', marginBottom: '0.25rem', fontSize: '0.875rem' }}>
             <Layers size={16} style={{ color: '#16A34A' }} />
             Candidate Pipeline
           </div>
-          <p style={{ fontSize: '0.75rem', color: '#64748B', margin: 0, lineHeight: 1.4 }}>
+          <p style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)', margin: 0, lineHeight: 1.4 }}>
             Track talent from Sourced and Screening to Interview, Offer, and Hired stages.
           </p>
         </div>
 
         <div
           style={{
-            background: '#F8FAFC',
-            border: '1px solid #E2E8F0',
-            borderRadius: '8px',
+            background: 'var(--color-bg)',
+            border: '1px solid var(--color-border)',
+            borderRadius: 0,
             padding: '1rem',
           }}
         >
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 600, color: '#0F172A', marginBottom: '0.25rem', fontSize: '0.875rem' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 600, color: 'var(--color-navy)', marginBottom: '0.25rem', fontSize: '0.875rem' }}>
             <Calendar size={16} style={{ color: '#D97706' }} />
             Interview Scheduler
           </div>
-          <p style={{ fontSize: '0.75rem', color: '#64748B', margin: 0, lineHeight: 1.4 }}>
+          <p style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)', margin: 0, lineHeight: 1.4 }}>
             Organize interview rounds, set dates, log agendas, and avoid scheduling collisions.
           </p>
         </div>
 
         <div
           style={{
-            background: '#F8FAFC',
-            border: '1px solid #E2E8F0',
-            borderRadius: '8px',
+            background: 'var(--color-bg)',
+            border: '1px solid var(--color-border)',
+            borderRadius: 0,
             padding: '1rem',
           }}
         >
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 600, color: '#0F172A', marginBottom: '0.25rem', fontSize: '0.875rem' }}>
-            <FileCheck size={16} style={{ color: '#7C3AED' }} />
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 600, color: 'var(--color-navy)', marginBottom: '0.25rem', fontSize: '0.875rem' }}>
+            <FileCheck size={16} style={{ color: 'var(--color-blue)' }} />
             Candidate Scorecards
           </div>
-          <p style={{ fontSize: '0.75rem', color: '#64748B', margin: 0, lineHeight: 1.4 }}>
+          <p style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)', margin: 0, lineHeight: 1.4 }}>
             Standardize hiring criteria with ratings across technical, problem-solving, and communication bars.
           </p>
         </div>
@@ -153,7 +153,7 @@ export const RecruiterCompleteStep: React.FC<RecruiterCompleteStepProps> = ({
         style={{
           background: '#FFFBEB',
           border: '1px solid #FDE68A',
-          borderRadius: '6px',
+          borderRadius: 0,
           padding: '0.75rem 1rem',
           maxWidth: '620px',
           margin: '0 auto 2rem',

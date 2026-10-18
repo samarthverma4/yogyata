@@ -281,7 +281,7 @@ export const CompanyProfileStep: React.FC<CompanyProfileStepProps> = ({
                     alignItems: 'center',
                     gap: '0.375rem',
                     padding: '0.35rem 0.75rem',
-                    borderRadius: '20px',
+                    borderRadius: 0,
                     fontSize: '0.8125rem',
                     border: selected ? '1px solid #16A34A' : '1px solid var(--color-border)',
                     background: selected ? '#F0FDF4' : 'var(--color-surface)',

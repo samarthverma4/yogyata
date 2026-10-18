@@ -1,3 +1,4 @@
+import { BrandMark } from '../brand/BrandMark';
 import React, { useState } from 'react';
 import { Building2, LogOut, Sparkles } from 'lucide-react';
 import { RecruiterProgressIndicator } from './RecruiterProgressIndicator';
@@ -26,20 +27,20 @@ export const RecruiterOnboardingLayout: React.FC<RecruiterOnboardingLayoutProps>
       <header className="founder-onboarding-header">
         <div className="founder-header-inner">
           <div className="founder-logo-area">
-            <span className="founder-brand-name">YOGYATA</span>
+            <BrandMark />
             <span
               className="badge"
               style={{
-                background: '#F0FDF4',
-                color: '#15803D',
-                border: '1px solid #BBF7D0',
+                background: 'var(--color-blue-tint)',
+                color: 'var(--color-blue)',
+                border: '1px solid var(--color-blue-line)',
                 display: 'inline-flex',
                 alignItems: 'center',
                 gap: '0.25rem',
                 fontSize: '0.75rem',
                 fontWeight: 600,
                 padding: '0.2rem 0.55rem',
-                borderRadius: '9999px',
+                borderRadius: 0,
               }}
             >
               <Building2 size={12} />

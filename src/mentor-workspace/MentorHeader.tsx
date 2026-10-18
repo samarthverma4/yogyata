@@ -15,6 +15,7 @@ const TAB_TITLES: Record<MentorWorkspaceTab, string> = {
   mentees: 'Mentee Roster & Progression',
   sessions: 'Scheduled Sessions',
   feedback: 'Learning Feedback & Guidance',
+  'skill-reviews': 'Skill Reviews',
   profile: 'Mentor Profile',
   settings: 'Workspace Settings',
 };
@@ -34,7 +35,7 @@ export const MentorHeader: React.FC<MentorHeaderProps> = ({
       style={{
         height: '64px',
         background: '#FFFFFF',
-        borderBottom: '1px solid #E2E8F0',
+        borderBottom: '1px solid var(--color-border)',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
@@ -53,7 +54,7 @@ export const MentorHeader: React.FC<MentorHeaderProps> = ({
           style={{
             background: 'none',
             border: 'none',
-            color: '#64748B',
+            color: 'var(--color-text-muted)',
             cursor: 'pointer',
             padding: '6px',
             display: 'none', // Will be shown on mobile via media query or default flex if needed
@@ -63,7 +64,7 @@ export const MentorHeader: React.FC<MentorHeaderProps> = ({
           <Menu size={20} />
         </button>
 
-        <h1 style={{ fontSize: '1.15rem', fontWeight: 800, color: '#1B2A4E', margin: 0 }}>
+        <h1 style={{ fontSize: '1.15rem', fontWeight: 800, color: 'var(--color-navy)', margin: 0 }}>
           {TAB_TITLES[currentTab] || 'Mentor Workspace'}
         </h1>
       </div>
@@ -76,11 +77,11 @@ export const MentorHeader: React.FC<MentorHeaderProps> = ({
             alignItems: 'center',
             gap: '8px',
             padding: '5px 12px',
-            borderRadius: '20px',
-            background: '#F8FAFC',
-            border: '1px solid #E2E8F0',
+            borderRadius: 0,
+            background: 'var(--color-bg)',
+            border: '1px solid var(--color-border)',
             fontSize: '0.78rem',
-            color: '#475569',
+            color: 'var(--color-text-muted)',
           }}
         >
           <span
@@ -105,10 +106,10 @@ export const MentorHeader: React.FC<MentorHeaderProps> = ({
             alignItems: 'center',
             gap: '6px',
             padding: '6px 12px',
-            borderRadius: '6px',
-            border: '1px solid #E2E8F0',
+            borderRadius: 0,
+            border: '1px solid var(--color-border)',
             background: '#FFFFFF',
-            color: '#64748B',
+            color: 'var(--color-text-muted)',
             fontSize: '0.8rem',
             fontWeight: 600,
             cursor: 'pointer',
@@ -123,9 +124,9 @@ export const MentorHeader: React.FC<MentorHeaderProps> = ({
             width: '36px',
             height: '36px',
             borderRadius: '50%',
-            background: '#FAF5FF',
-            color: '#9333EA',
-            border: '1px solid #E9D5FF',
+            background: 'var(--color-blue-tint)',
+            color: 'var(--color-blue)',
+            border: '1px solid var(--color-blue-line)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',

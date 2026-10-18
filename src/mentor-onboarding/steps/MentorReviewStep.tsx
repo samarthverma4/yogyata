@@ -58,8 +58,8 @@ export const MentorReviewStep: React.FC<MentorReviewStepProps> = ({
         {/* 1. Account & Profile Card */}
         <div className="yw-card" style={{ marginBottom: '1.25rem' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.875rem' }}>
-            <h3 style={{ margin: 0, fontSize: '1.05rem', fontWeight: 700, color: '#1B2A4E', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-              <User size={18} color="#2563EB" />
+            <h3 style={{ margin: 0, fontSize: '1.05rem', fontWeight: 700, color: 'var(--color-navy)', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+              <User size={18} color="var(--color-blue)" />
               Professional Identity
             </h3>
             <button
@@ -75,34 +75,34 @@ export const MentorReviewStep: React.FC<MentorReviewStepProps> = ({
 
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1rem', fontSize: '0.875rem' }}>
             <div>
-              <span style={{ color: '#64748B', fontSize: '0.75rem', textTransform: 'uppercase', fontWeight: 600 }}>Full Name</span>
-              <div style={{ fontWeight: 700, color: '#1B2A4E', marginTop: '2px' }}>{account.fullName || 'Not provided'}</div>
+              <span style={{ color: 'var(--color-text-muted)', fontSize: '0.75rem', textTransform: 'uppercase', fontWeight: 600 }}>Full Name</span>
+              <div style={{ fontWeight: 700, color: 'var(--color-navy)', marginTop: '2px' }}>{account.fullName || 'Not provided'}</div>
             </div>
             <div>
-              <span style={{ color: '#64748B', fontSize: '0.75rem', textTransform: 'uppercase', fontWeight: 600 }}>Email Address</span>
-              <div style={{ color: '#1B2A4E', marginTop: '2px' }}>{account.email}</div>
+              <span style={{ color: 'var(--color-text-muted)', fontSize: '0.75rem', textTransform: 'uppercase', fontWeight: 600 }}>Email Address</span>
+              <div style={{ color: 'var(--color-navy)', marginTop: '2px' }}>{account.email}</div>
             </div>
             <div>
-              <span style={{ color: '#64748B', fontSize: '0.75rem', textTransform: 'uppercase', fontWeight: 600 }}>Current Role & Org</span>
-              <div style={{ color: '#1B2A4E', marginTop: '2px' }}>
+              <span style={{ color: 'var(--color-text-muted)', fontSize: '0.75rem', textTransform: 'uppercase', fontWeight: 600 }}>Current Role & Org</span>
+              <div style={{ color: 'var(--color-navy)', marginTop: '2px' }}>
                 {profile.currentRole} {profile.organization ? `@ ${profile.organization}` : ''}
               </div>
             </div>
             <div>
-              <span style={{ color: '#64748B', fontSize: '0.75rem', textTransform: 'uppercase', fontWeight: 600 }}>Experience Level</span>
-              <div style={{ color: '#1B2A4E', marginTop: '2px' }}>
+              <span style={{ color: 'var(--color-text-muted)', fontSize: '0.75rem', textTransform: 'uppercase', fontWeight: 600 }}>Experience Level</span>
+              <div style={{ color: 'var(--color-navy)', marginTop: '2px' }}>
                 {profile.yearsOfExperience} years ({expertise.experienceLevel})
               </div>
             </div>
           </div>
 
-          <div style={{ marginTop: '0.875rem', paddingTop: '0.75rem', borderTop: '1px solid #F1F5F9' }}>
-            <span style={{ color: '#64748B', fontSize: '0.75rem', textTransform: 'uppercase', fontWeight: 600 }}>Professional Headline</span>
-            <p style={{ margin: '3px 0 0.5rem 0', fontWeight: 600, color: '#2563EB', fontSize: '0.9rem' }}>
+          <div style={{ marginTop: '0.875rem', paddingTop: '0.75rem', borderTop: '1px solid var(--color-surface-2)' }}>
+            <span style={{ color: 'var(--color-text-muted)', fontSize: '0.75rem', textTransform: 'uppercase', fontWeight: 600 }}>Professional Headline</span>
+            <p style={{ margin: '3px 0 0.5rem 0', fontWeight: 600, color: 'var(--color-blue)', fontSize: '0.9rem' }}>
               {profile.headline}
             </p>
-            <span style={{ color: '#64748B', fontSize: '0.75rem', textTransform: 'uppercase', fontWeight: 600 }}>Bio & Philosophy</span>
-            <p style={{ margin: '3px 0 0 0', color: '#475569', fontSize: '0.84rem', lineHeight: 1.5 }}>
+            <span style={{ color: 'var(--color-text-muted)', fontSize: '0.75rem', textTransform: 'uppercase', fontWeight: 600 }}>Bio & Philosophy</span>
+            <p style={{ margin: '3px 0 0 0', color: 'var(--color-text-muted)', fontSize: '0.84rem', lineHeight: 1.5 }}>
               {profile.bio}
             </p>
           </div>
@@ -111,7 +111,7 @@ export const MentorReviewStep: React.FC<MentorReviewStepProps> = ({
         {/* 2. Expertise & Skills Card */}
         <div className="yw-card" style={{ marginBottom: '1.25rem' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.875rem' }}>
-            <h3 style={{ margin: 0, fontSize: '1.05rem', fontWeight: 700, color: '#1B2A4E', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+            <h3 style={{ margin: 0, fontSize: '1.05rem', fontWeight: 700, color: 'var(--color-navy)', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
               <Award size={18} color="#D97706" />
               Expertise & Competencies
             </h3>
@@ -127,7 +127,7 @@ export const MentorReviewStep: React.FC<MentorReviewStepProps> = ({
           </div>
 
           <div style={{ marginBottom: '0.75rem' }}>
-            <span style={{ fontSize: '0.75rem', color: '#64748B', fontWeight: 600, textTransform: 'uppercase' }}>Focus Areas</span>
+            <span style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)', fontWeight: 600, textTransform: 'uppercase' }}>Focus Areas</span>
             <div style={{ display: 'flex', gap: '0.375rem', flexWrap: 'wrap', marginTop: '4px' }}>
               {expertise.expertiseAreas.map((area) => (
                 <span key={area} className="yw-badge yw-badge-neutral" style={{ fontSize: '0.75rem' }}>
@@ -138,7 +138,7 @@ export const MentorReviewStep: React.FC<MentorReviewStepProps> = ({
           </div>
 
           <div style={{ marginBottom: '0.75rem' }}>
-            <span style={{ fontSize: '0.75rem', color: '#64748B', fontWeight: 600, textTransform: 'uppercase' }}>Key Technologies</span>
+            <span style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)', fontWeight: 600, textTransform: 'uppercase' }}>Key Technologies</span>
             <div style={{ display: 'flex', gap: '0.375rem', flexWrap: 'wrap', marginTop: '4px' }}>
               {expertise.technicalSkills.map((s) => (
                 <span key={s} className="yw-skill-pill yw-skill-assessed" style={{ fontSize: '0.75rem' }}>
@@ -150,12 +150,12 @@ export const MentorReviewStep: React.FC<MentorReviewStepProps> = ({
 
           <div style={{ display: 'flex', gap: '2rem', flexWrap: 'wrap', marginTop: '0.5rem', fontSize: '0.8125rem' }}>
             <div>
-              <strong style={{ color: '#64748B' }}>Industries: </strong>
-              <span style={{ color: '#1B2A4E' }}>{expertise.industries.join(', ') || 'General Software'}</span>
+              <strong style={{ color: 'var(--color-text-muted)' }}>Industries: </strong>
+              <span style={{ color: 'var(--color-navy)' }}>{expertise.industries.join(', ') || 'General Software'}</span>
             </div>
             <div>
-              <strong style={{ color: '#64748B' }}>Languages: </strong>
-              <span style={{ color: '#1B2A4E' }}>{expertise.languages.join(', ')}</span>
+              <strong style={{ color: 'var(--color-text-muted)' }}>Languages: </strong>
+              <span style={{ color: 'var(--color-navy)' }}>{expertise.languages.join(', ')}</span>
             </div>
           </div>
         </div>
@@ -163,7 +163,7 @@ export const MentorReviewStep: React.FC<MentorReviewStepProps> = ({
         {/* 3. Tracks & Schedule Preferences Card */}
         <div className="yw-card" style={{ marginBottom: '1.5rem' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.875rem' }}>
-            <h3 style={{ margin: 0, fontSize: '1.05rem', fontWeight: 700, color: '#1B2A4E', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+            <h3 style={{ margin: 0, fontSize: '1.05rem', fontWeight: 700, color: 'var(--color-navy)', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
               <Compass size={18} color="#059669" />
               Offerings & Availability
             </h3>
@@ -179,7 +179,7 @@ export const MentorReviewStep: React.FC<MentorReviewStepProps> = ({
           </div>
 
           <div style={{ marginBottom: '0.75rem' }}>
-            <span style={{ fontSize: '0.75rem', color: '#64748B', fontWeight: 600, textTransform: 'uppercase' }}>Selected Coaching Tracks</span>
+            <span style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)', fontWeight: 600, textTransform: 'uppercase' }}>Selected Coaching Tracks</span>
             <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', marginTop: '4px' }}>
               {preferences.selectedTracks.map((t) => (
                 <span key={t} className="yw-badge yw-badge-green" style={{ fontSize: '0.75rem' }}>
@@ -191,24 +191,24 @@ export const MentorReviewStep: React.FC<MentorReviewStepProps> = ({
 
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '1rem', fontSize: '0.84rem', marginTop: '0.75rem' }}>
             <div>
-              <strong style={{ color: '#64748B', display: 'block', fontSize: '0.75rem', textTransform: 'uppercase' }}>Target Levels</strong>
-              <span style={{ color: '#1B2A4E' }}>{preferences.preferredMenteeLevels.join(', ')}</span>
+              <strong style={{ color: 'var(--color-text-muted)', display: 'block', fontSize: '0.75rem', textTransform: 'uppercase' }}>Target Levels</strong>
+              <span style={{ color: 'var(--color-navy)' }}>{preferences.preferredMenteeLevels.join(', ')}</span>
             </div>
             <div>
-              <strong style={{ color: '#64748B', display: 'block', fontSize: '0.75rem', textTransform: 'uppercase' }}>Format & Duration</strong>
-              <span style={{ color: '#1B2A4E' }}>
+              <strong style={{ color: 'var(--color-text-muted)', display: 'block', fontSize: '0.75rem', textTransform: 'uppercase' }}>Format & Duration</strong>
+              <span style={{ color: 'var(--color-navy)' }}>
                 {preferences.sessionFormat === 'online' ? 'Online Video' : 'Flexible'} · {preferences.sessionDurationMinutes} min
               </span>
             </div>
             <div>
-              <strong style={{ color: '#64748B', display: 'block', fontSize: '0.75rem', textTransform: 'uppercase' }}>Weekly Commitment</strong>
-              <span style={{ color: '#1B2A4E' }}>
+              <strong style={{ color: 'var(--color-text-muted)', display: 'block', fontSize: '0.75rem', textTransform: 'uppercase' }}>Weekly Commitment</strong>
+              <span style={{ color: 'var(--color-navy)' }}>
                 {preferences.weeklyAvailabilityHours} hrs/week (Max {preferences.maxActiveMentees} active mentees)
               </span>
             </div>
             <div>
-              <strong style={{ color: '#64748B', display: 'block', fontSize: '0.75rem', textTransform: 'uppercase' }}>Pricing Model</strong>
-              <span style={{ color: '#1B2A4E', fontWeight: 600 }}>
+              <strong style={{ color: 'var(--color-text-muted)', display: 'block', fontSize: '0.75rem', textTransform: 'uppercase' }}>Pricing Model</strong>
+              <span style={{ color: 'var(--color-navy)', fontWeight: 600 }}>
                 {preferences.pricingModel === 'free'
                   ? 'Community / Free'
                   : preferences.pricingModel === 'paid'
@@ -220,7 +220,7 @@ export const MentorReviewStep: React.FC<MentorReviewStepProps> = ({
         </div>
 
         {/* Final Acknowledgment */}
-        <div style={{ background: '#F8FAFC', border: '1px solid #E2E8F0', borderRadius: '8px', padding: '1rem', marginBottom: '1.75rem' }}>
+        <div style={{ background: 'var(--color-bg)', border: '1px solid var(--color-border)', borderRadius: 0, padding: '1rem', marginBottom: '1.75rem' }}>
           <label style={{ display: 'flex', alignItems: 'flex-start', gap: '0.625rem', cursor: 'pointer' }}>
             <input
               type="checkbox"
@@ -232,7 +232,7 @@ export const MentorReviewStep: React.FC<MentorReviewStepProps> = ({
               }}
               style={{ marginTop: '3px', width: '16px', height: '16px', cursor: 'pointer' }}
             />
-            <span style={{ fontSize: '0.84rem', color: '#334155', lineHeight: 1.45 }}>
+            <span style={{ fontSize: '0.84rem', color: 'var(--color-navy)', lineHeight: 1.45 }}>
               I confirm that my profile details are accurate and that I understand YOGYATA's evidence standard:
               Mentorship sessions provide coaching and formative feedback, while formal skill verification requires
               explicit evaluation of practical project challenges.

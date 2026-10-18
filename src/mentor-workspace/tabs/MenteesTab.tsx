@@ -182,10 +182,10 @@ export const MenteesTab: React.FC<MenteesTabProps> = ({
     <div className="tab-pane-content" style={{ padding: '24px 32px' }}>
       {/* Header */}
       <div style={{ marginBottom: '20px' }}>
-        <h1 style={{ fontSize: '1.5rem', fontWeight: 800, color: '#1B2A4E', margin: '0 0 6px 0' }}>
+        <h1 style={{ fontSize: '1.5rem', fontWeight: 800, color: 'var(--color-navy)', margin: '0 0 6px 0' }}>
           Mentee Roster & Progression
         </h1>
-        <p style={{ margin: 0, color: '#64748B', fontSize: '0.88rem' }}>
+        <p style={{ margin: 0, color: 'var(--color-text-muted)', fontSize: '0.88rem' }}>
           Track active learner milestones, assign action items, and record private developmental observations.
         </p>
       </div>
@@ -205,8 +205,8 @@ export const MenteesTab: React.FC<MenteesTabProps> = ({
           <div
             style={{
               background: '#FFFFFF',
-              border: '1px solid #E2E8F0',
-              borderRadius: '10px',
+              border: '1px solid var(--color-border)',
+              borderRadius: 0,
               padding: '12px',
               display: 'flex',
               flexDirection: 'column',
@@ -222,7 +222,7 @@ export const MenteesTab: React.FC<MenteesTabProps> = ({
                   left: '10px',
                   top: '50%',
                   transform: 'translateY(-50%)',
-                  color: '#94A3B8',
+                  color: 'var(--color-text-faint)',
                 }}
               />
               <input
@@ -233,8 +233,8 @@ export const MenteesTab: React.FC<MenteesTabProps> = ({
                 style={{
                   width: '100%',
                   padding: '6px 10px 6px 30px',
-                  borderRadius: '6px',
-                  border: '1px solid #E2E8F0',
+                  borderRadius: 0,
+                  border: '1px solid var(--color-border)',
                   fontSize: '0.82rem',
                   outline: 'none',
                   boxSizing: 'border-box',
@@ -250,10 +250,10 @@ export const MenteesTab: React.FC<MenteesTabProps> = ({
                 style={{
                   flex: 1,
                   padding: '5px',
-                  borderRadius: '5px',
-                  border: statusFilter === 'active' ? '1px solid #059669' : '1px solid #E2E8F0',
+                  borderRadius: 0,
+                  border: statusFilter === 'active' ? '1px solid #059669' : '1px solid var(--color-border)',
                   background: statusFilter === 'active' ? '#ECFDF5' : '#FFFFFF',
-                  color: statusFilter === 'active' ? '#065F46' : '#64748B',
+                  color: statusFilter === 'active' ? '#065F46' : 'var(--color-text-muted)',
                   fontWeight: 600,
                   fontSize: '0.76rem',
                   cursor: 'pointer',
@@ -268,10 +268,10 @@ export const MenteesTab: React.FC<MenteesTabProps> = ({
                 style={{
                   flex: 1,
                   padding: '5px',
-                  borderRadius: '5px',
-                  border: statusFilter === 'on-hold' ? '1px solid #D97706' : '1px solid #E2E8F0',
+                  borderRadius: 0,
+                  border: statusFilter === 'on-hold' ? '1px solid #D97706' : '1px solid var(--color-border)',
                   background: statusFilter === 'on-hold' ? '#FFFBEB' : '#FFFFFF',
-                  color: statusFilter === 'on-hold' ? '#92400E' : '#64748B',
+                  color: statusFilter === 'on-hold' ? '#92400E' : 'var(--color-text-muted)',
                   fontWeight: 600,
                   fontSize: '0.76rem',
                   cursor: 'pointer',
@@ -286,10 +286,10 @@ export const MenteesTab: React.FC<MenteesTabProps> = ({
                 style={{
                   flex: 1,
                   padding: '5px',
-                  borderRadius: '5px',
-                  border: statusFilter === 'completed' ? '1px solid #2563EB' : '1px solid #E2E8F0',
-                  background: statusFilter === 'completed' ? '#EFF6FF' : '#FFFFFF',
-                  color: statusFilter === 'completed' ? '#1D4ED8' : '#64748B',
+                  borderRadius: 0,
+                  border: statusFilter === 'completed' ? '1px solid var(--color-blue)' : '1px solid var(--color-border)',
+                  background: statusFilter === 'completed' ? 'var(--color-blue-tint)' : '#FFFFFF',
+                  color: statusFilter === 'completed' ? 'var(--color-blue-hover)' : 'var(--color-text-muted)',
                   fontWeight: 600,
                   fontSize: '0.76rem',
                   cursor: 'pointer',
@@ -306,14 +306,14 @@ export const MenteesTab: React.FC<MenteesTabProps> = ({
             <div
               style={{
                 background: '#FFFFFF',
-                border: '1px dashed #CBD5E1',
-                borderRadius: '8px',
+                border: '1px dashed var(--color-border-hover)',
+                borderRadius: 0,
                 padding: '24px 16px',
                 textAlign: 'center',
               }}
             >
-              <Users size={28} style={{ color: '#94A3B8', marginBottom: '8px' }} />
-              <p style={{ margin: 0, fontSize: '0.82rem', color: '#64748B' }}>
+              <Users size={28} style={{ color: 'var(--color-text-faint)', marginBottom: '8px' }} />
+              <p style={{ margin: 0, fontSize: '0.82rem', color: 'var(--color-text-muted)' }}>
                 No mentees match your filter.
               </p>
             </div>
@@ -327,9 +327,9 @@ export const MenteesTab: React.FC<MenteesTabProps> = ({
                   key={m.id}
                   onClick={() => handleSelectMentee(m.id)}
                   style={{
-                    background: isSelected ? '#EFF6FF' : '#FFFFFF',
-                    border: isSelected ? '1.5px solid #2563EB' : '1px solid #E2E8F0',
-                    borderRadius: '8px',
+                    background: isSelected ? 'var(--color-blue-tint)' : '#FFFFFF',
+                    border: isSelected ? '1.5px solid var(--color-blue)' : '1px solid var(--color-border)',
+                    borderRadius: 0,
                     padding: '12px 14px',
                     cursor: 'pointer',
                     transition: 'all 0.15s ease',
@@ -342,8 +342,8 @@ export const MenteesTab: React.FC<MenteesTabProps> = ({
                         width: '36px',
                         height: '36px',
                         borderRadius: '50%',
-                        background: isSelected ? '#DBEAFE' : '#F1F5F9',
-                        color: isSelected ? '#1E40AF' : '#475569',
+                        background: isSelected ? 'var(--color-blue-line)' : 'var(--color-surface-2)',
+                        color: isSelected ? 'var(--color-blue-hover)' : 'var(--color-text-muted)',
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
@@ -364,7 +364,7 @@ export const MenteesTab: React.FC<MenteesTabProps> = ({
                           style={{
                             fontWeight: 700,
                             fontSize: '0.88rem',
-                            color: '#1E293B',
+                            color: 'var(--color-navy)',
                             whiteSpace: 'nowrap',
                             overflow: 'hidden',
                             textOverflow: 'ellipsis',
@@ -377,19 +377,19 @@ export const MenteesTab: React.FC<MenteesTabProps> = ({
                             fontSize: '0.68rem',
                             fontWeight: 700,
                             padding: '1px 6px',
-                            borderRadius: '10px',
+                            borderRadius: 0,
                             background:
                               m.status === 'active'
                                 ? '#ECFDF5'
                                 : m.status === 'on-hold'
                                 ? '#FFFBEB'
-                                : '#F1F5F9',
+                                : 'var(--color-surface-2)',
                             color:
                               m.status === 'active'
                                 ? '#059669'
                                 : m.status === 'on-hold'
                                 ? '#D97706'
-                                : '#64748B',
+                                : 'var(--color-text-muted)',
                           }}
                         >
                           {m.status}
@@ -399,7 +399,7 @@ export const MenteesTab: React.FC<MenteesTabProps> = ({
                         style={{
                           margin: '2px 0 0 0',
                           fontSize: '0.76rem',
-                          color: '#64748B',
+                          color: 'var(--color-text-muted)',
                           whiteSpace: 'nowrap',
                           overflow: 'hidden',
                           textOverflow: 'ellipsis',
@@ -426,8 +426,8 @@ export const MenteesTab: React.FC<MenteesTabProps> = ({
           <div
             style={{
               background: '#FFFFFF',
-              border: '1px solid #E2E8F0',
-              borderRadius: '12px',
+              border: '1px solid var(--color-border)',
+              borderRadius: 0,
               padding: '24px 28px',
               boxShadow: '0 1px 3px rgba(0,0,0,0.02)',
               display: 'flex',
@@ -441,7 +441,7 @@ export const MenteesTab: React.FC<MenteesTabProps> = ({
                 display: 'flex',
                 justifyContent: 'space-between',
                 alignItems: 'flex-start',
-                borderBottom: '1px solid #F1F5F9',
+                borderBottom: '1px solid var(--color-surface-2)',
                 paddingBottom: '18px',
               }}
             >
@@ -451,14 +451,14 @@ export const MenteesTab: React.FC<MenteesTabProps> = ({
                     width: '52px',
                     height: '52px',
                     borderRadius: '50%',
-                    background: '#EEF2FF',
-                    color: '#4F46E5',
+                    background: 'var(--color-blue-tint)',
+                    color: 'var(--color-blue)',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
                     fontWeight: 800,
                     fontSize: '1.2rem',
-                    border: '1px solid #E0E7FF',
+                    border: '1px solid var(--color-blue-tint)',
                   }}
                 >
                   {activeMentee.menteeName
@@ -470,7 +470,7 @@ export const MenteesTab: React.FC<MenteesTabProps> = ({
                 </div>
                 <div>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                    <h2 style={{ fontSize: '1.25rem', fontWeight: 800, color: '#1B2A4E', margin: 0 }}>
+                    <h2 style={{ fontSize: '1.25rem', fontWeight: 800, color: 'var(--color-navy)', margin: 0 }}>
                       {activeMentee.menteeName}
                     </h2>
                     {activeMentee.isDemoRecord && (
@@ -478,9 +478,9 @@ export const MenteesTab: React.FC<MenteesTabProps> = ({
                         style={{
                           fontSize: '0.68rem',
                           padding: '2px 6px',
-                          background: '#F1F5F9',
-                          color: '#64748B',
-                          borderRadius: '4px',
+                          background: 'var(--color-surface-2)',
+                          color: 'var(--color-text-muted)',
+                          borderRadius: 0,
                           fontWeight: 600,
                         }}
                       >
@@ -488,7 +488,7 @@ export const MenteesTab: React.FC<MenteesTabProps> = ({
                       </span>
                     )}
                   </div>
-                  <span style={{ fontSize: '0.84rem', color: '#64748B' }}>
+                  <span style={{ fontSize: '0.84rem', color: 'var(--color-text-muted)' }}>
                     {activeMentee.menteeEmail} • Mentoring since{' '}
                     {new Date(activeMentee.startDate).toLocaleDateString()}
                   </span>
@@ -502,13 +502,13 @@ export const MenteesTab: React.FC<MenteesTabProps> = ({
                   onChange={(e) => handleStatusChange(e.target.value as MenteeRelationshipStatus)}
                   style={{
                     padding: '6px 10px',
-                    borderRadius: '6px',
-                    border: '1px solid #CBD5E1',
+                    borderRadius: 0,
+                    border: '1px solid var(--color-border-hover)',
                     fontSize: '0.8rem',
                     fontWeight: 600,
-                    color: '#334155',
+                    color: 'var(--color-navy)',
                     outline: 'none',
-                    background: '#F8FAFC',
+                    background: 'var(--color-bg)',
                     cursor: 'pointer',
                   }}
                 >
@@ -524,8 +524,8 @@ export const MenteesTab: React.FC<MenteesTabProps> = ({
                   }
                   style={{
                     padding: '7px 14px',
-                    borderRadius: '6px',
-                    background: '#2563EB',
+                    borderRadius: 0,
+                    background: 'var(--color-blue)',
                     color: '#FFFFFF',
                     border: 'none',
                     fontSize: '0.82rem',
@@ -546,10 +546,10 @@ export const MenteesTab: React.FC<MenteesTabProps> = ({
                   }
                   style={{
                     padding: '7px 12px',
-                    borderRadius: '6px',
+                    borderRadius: 0,
                     background: '#FFFFFF',
-                    color: '#475569',
-                    border: '1px solid #CBD5E1',
+                    color: 'var(--color-text-muted)',
+                    border: '1px solid var(--color-border-hover)',
                     fontSize: '0.82rem',
                     fontWeight: 600,
                     cursor: 'pointer',
@@ -569,37 +569,37 @@ export const MenteesTab: React.FC<MenteesTabProps> = ({
                 display: 'grid',
                 gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
                 gap: '12px',
-                background: '#F8FAFC',
+                background: 'var(--color-bg)',
                 padding: '14px 18px',
-                borderRadius: '8px',
-                border: '1px solid #E2E8F0',
+                borderRadius: 0,
+                border: '1px solid var(--color-border)',
               }}
             >
               <div>
-                <span style={{ fontSize: '0.74rem', textTransform: 'uppercase', color: '#94A3B8', fontWeight: 700 }}>
+                <span style={{ fontSize: '0.74rem', textTransform: 'uppercase', color: 'var(--color-text-faint)', fontWeight: 700 }}>
                   Mentorship Track
                 </span>
-                <p style={{ margin: '3px 0 0 0', fontSize: '0.9rem', fontWeight: 700, color: '#2563EB' }}>
+                <p style={{ margin: '3px 0 0 0', fontSize: '0.9rem', fontWeight: 700, color: 'var(--color-blue)' }}>
                   {activeMentee.mentorshipTrack}
                 </p>
               </div>
               <div>
-                <span style={{ fontSize: '0.74rem', textTransform: 'uppercase', color: '#94A3B8', fontWeight: 700 }}>
+                <span style={{ fontSize: '0.74rem', textTransform: 'uppercase', color: 'var(--color-text-faint)', fontWeight: 700 }}>
                   Career Goal
                 </span>
-                <p style={{ margin: '3px 0 0 0', fontSize: '0.88rem', fontWeight: 600, color: '#334155' }}>
+                <p style={{ margin: '3px 0 0 0', fontSize: '0.88rem', fontWeight: 600, color: 'var(--color-navy)' }}>
                   {activeMentee.careerGoal}
                 </p>
               </div>
               <div>
-                <span style={{ fontSize: '0.74rem', textTransform: 'uppercase', color: '#94A3B8', fontWeight: 700 }}>
+                <span style={{ fontSize: '0.74rem', textTransform: 'uppercase', color: 'var(--color-text-faint)', fontWeight: 700 }}>
                   Next Session
                 </span>
-                <p style={{ margin: '3px 0 0 0', fontSize: '0.86rem', color: '#475569' }}>
+                <p style={{ margin: '3px 0 0 0', fontSize: '0.86rem', color: 'var(--color-text-muted)' }}>
                   {activeMentee.nextSessionDate ? (
                     <span style={{ color: '#059669', fontWeight: 600 }}>{activeMentee.nextSessionDate}</span>
                   ) : (
-                    <span style={{ color: '#94A3B8' }}>None scheduled</span>
+                    <span style={{ color: 'var(--color-text-faint)' }}>None scheduled</span>
                   )}
                 </p>
               </div>
@@ -608,10 +608,10 @@ export const MenteesTab: React.FC<MenteesTabProps> = ({
             {/* Structured Learning Goals */}
             <div>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
-                <h3 style={{ fontSize: '0.95rem', fontWeight: 700, color: '#1E293B', margin: 0 }}>
+                <h3 style={{ fontSize: '0.95rem', fontWeight: 700, color: 'var(--color-navy)', margin: 0 }}>
                   Mentorship Milestones & Goals
                 </h3>
-                <span style={{ fontSize: '0.75rem', color: '#64748B' }}>
+                <span style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)' }}>
                   {activeMentee.goals.length} defined milestone{activeMentee.goals.length === 1 ? '' : 's'}
                 </span>
               </div>
@@ -626,14 +626,14 @@ export const MenteesTab: React.FC<MenteesTabProps> = ({
                       justifyContent: 'space-between',
                       padding: '8px 12px',
                       background: '#FFFFFF',
-                      border: '1px solid #E2E8F0',
-                      borderRadius: '6px',
+                      border: '1px solid var(--color-border)',
+                      borderRadius: 0,
                       fontSize: '0.84rem',
-                      color: '#334155',
+                      color: 'var(--color-navy)',
                     }}
                   >
                     <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                      <Sparkles size={14} color="#2563EB" />
+                      <Sparkles size={14} color="var(--color-blue)" />
                       <span>{goal}</span>
                     </div>
                     <button
@@ -642,7 +642,7 @@ export const MenteesTab: React.FC<MenteesTabProps> = ({
                       style={{
                         background: 'none',
                         border: 'none',
-                        color: '#94A3B8',
+                        color: 'var(--color-text-faint)',
                         cursor: 'pointer',
                         padding: '2px',
                       }}
@@ -664,8 +664,8 @@ export const MenteesTab: React.FC<MenteesTabProps> = ({
                   style={{
                     flex: 1,
                     padding: '8px 12px',
-                    borderRadius: '6px',
-                    border: '1px solid #CBD5E1',
+                    borderRadius: 0,
+                    border: '1px solid var(--color-border-hover)',
                     fontSize: '0.82rem',
                     outline: 'none',
                   }}
@@ -674,12 +674,12 @@ export const MenteesTab: React.FC<MenteesTabProps> = ({
                   type="submit"
                   style={{
                     padding: '8px 14px',
-                    background: '#F1F5F9',
-                    border: '1px solid #CBD5E1',
-                    borderRadius: '6px',
+                    background: 'var(--color-surface-2)',
+                    border: '1px solid var(--color-border-hover)',
+                    borderRadius: 0,
                     fontSize: '0.82rem',
                     fontWeight: 600,
-                    color: '#334155',
+                    color: 'var(--color-navy)',
                     cursor: 'pointer',
                     display: 'flex',
                     alignItems: 'center',
@@ -694,10 +694,10 @@ export const MenteesTab: React.FC<MenteesTabProps> = ({
             {/* Mentee Action Items */}
             <div>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
-                <h3 style={{ fontSize: '0.95rem', fontWeight: 700, color: '#1E293B', margin: 0 }}>
+                <h3 style={{ fontSize: '0.95rem', fontWeight: 700, color: 'var(--color-navy)', margin: 0 }}>
                   Action Items & Assignments
                 </h3>
-                <span style={{ fontSize: '0.75rem', color: '#64748B' }}>
+                <span style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)' }}>
                   {(activeMentee.actionItems || []).filter((a) => a.completed).length} of{' '}
                   {(activeMentee.actionItems || []).length} completed
                 </span>
@@ -705,7 +705,7 @@ export const MenteesTab: React.FC<MenteesTabProps> = ({
 
               <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', marginBottom: '12px' }}>
                 {(activeMentee.actionItems || []).length === 0 ? (
-                  <p style={{ margin: 0, fontSize: '0.82rem', color: '#94A3B8', fontStyle: 'italic' }}>
+                  <p style={{ margin: 0, fontSize: '0.82rem', color: 'var(--color-text-faint)', fontStyle: 'italic' }}>
                     No pending action items assigned.
                   </p>
                 ) : (
@@ -717,9 +717,9 @@ export const MenteesTab: React.FC<MenteesTabProps> = ({
                         alignItems: 'center',
                         justifyContent: 'space-between',
                         padding: '8px 12px',
-                        background: item.completed ? '#F8FAFC' : '#FFFFFF',
-                        border: `1px solid ${item.completed ? '#E2E8F0' : '#CBD5E1'}`,
-                        borderRadius: '6px',
+                        background: item.completed ? 'var(--color-bg)' : '#FFFFFF',
+                        border: `1px solid ${item.completed ? 'var(--color-border)' : 'var(--color-border-hover)'}`,
+                        borderRadius: 0,
                         fontSize: '0.84rem',
                       }}
                     >
@@ -740,7 +740,7 @@ export const MenteesTab: React.FC<MenteesTabProps> = ({
                         />
                         <span
                           style={{
-                            color: item.completed ? '#94A3B8' : '#1E293B',
+                            color: item.completed ? 'var(--color-text-faint)' : 'var(--color-navy)',
                             textDecoration: item.completed ? 'line-through' : 'none',
                           }}
                         >
@@ -751,9 +751,9 @@ export const MenteesTab: React.FC<MenteesTabProps> = ({
                             style={{
                               fontSize: '0.72rem',
                               padding: '2px 6px',
-                              borderRadius: '4px',
-                              background: '#F1F5F9',
-                              color: '#64748B',
+                              borderRadius: 0,
+                              background: 'var(--color-surface-2)',
+                              color: 'var(--color-text-muted)',
                               marginLeft: '6px',
                             }}
                           >
@@ -767,7 +767,7 @@ export const MenteesTab: React.FC<MenteesTabProps> = ({
                         style={{
                           background: 'none',
                           border: 'none',
-                          color: '#94A3B8',
+                          color: 'var(--color-text-faint)',
                           cursor: 'pointer',
                           padding: '2px',
                         }}
@@ -789,8 +789,8 @@ export const MenteesTab: React.FC<MenteesTabProps> = ({
                   style={{
                     flex: 2,
                     padding: '8px 12px',
-                    borderRadius: '6px',
-                    border: '1px solid #CBD5E1',
+                    borderRadius: 0,
+                    border: '1px solid var(--color-border-hover)',
                     fontSize: '0.82rem',
                     outline: 'none',
                   }}
@@ -802,20 +802,20 @@ export const MenteesTab: React.FC<MenteesTabProps> = ({
                   style={{
                     flex: 1,
                     padding: '8px 10px',
-                    borderRadius: '6px',
-                    border: '1px solid #CBD5E1',
+                    borderRadius: 0,
+                    border: '1px solid var(--color-border-hover)',
                     fontSize: '0.82rem',
                     outline: 'none',
-                    color: '#334155',
+                    color: 'var(--color-navy)',
                   }}
                 />
                 <button
                   type="submit"
                   style={{
                     padding: '8px 16px',
-                    background: '#2563EB',
+                    background: 'var(--color-blue)',
                     border: 'none',
-                    borderRadius: '6px',
+                    borderRadius: 0,
                     fontSize: '0.82rem',
                     fontWeight: 600,
                     color: '#FFFFFF',
@@ -832,7 +832,7 @@ export const MenteesTab: React.FC<MenteesTabProps> = ({
               style={{
                 background: '#FFFDF5',
                 border: '1px solid #FDE68A',
-                borderRadius: '8px',
+                borderRadius: 0,
                 padding: '16px',
               }}
             >
@@ -856,7 +856,7 @@ export const MenteesTab: React.FC<MenteesTabProps> = ({
                     padding: '2px 8px',
                     background: '#FEF3C7',
                     color: '#B45309',
-                    borderRadius: '4px',
+                    borderRadius: 0,
                     fontWeight: 600,
                   }}
                 >
@@ -879,7 +879,7 @@ export const MenteesTab: React.FC<MenteesTabProps> = ({
                 style={{
                   width: '100%',
                   padding: '10px 12px',
-                  borderRadius: '6px',
+                  borderRadius: 0,
                   border: '1px solid #FDE68A',
                   fontSize: '0.84rem',
                   fontFamily: 'inherit',
@@ -910,10 +910,10 @@ export const MenteesTab: React.FC<MenteesTabProps> = ({
                   disabled={!isEditingNotes && !notesSavedToast}
                   style={{
                     padding: '6px 14px',
-                    background: isEditingNotes ? '#D97706' : '#F1F5F9',
-                    color: isEditingNotes ? '#FFFFFF' : '#94A3B8',
+                    background: isEditingNotes ? '#D97706' : 'var(--color-surface-2)',
+                    color: isEditingNotes ? '#FFFFFF' : 'var(--color-text-faint)',
                     border: 'none',
-                    borderRadius: '5px',
+                    borderRadius: 0,
                     fontSize: '0.8rem',
                     fontWeight: 600,
                     cursor: isEditingNotes ? 'pointer' : 'default',
@@ -928,17 +928,17 @@ export const MenteesTab: React.FC<MenteesTabProps> = ({
           <div
             style={{
               background: '#FFFFFF',
-              border: '1px dashed #CBD5E1',
-              borderRadius: '12px',
+              border: '1px dashed var(--color-border-hover)',
+              borderRadius: 0,
               padding: '48px 24px',
               textAlign: 'center',
             }}
           >
-            <Users size={36} style={{ color: '#94A3B8', marginBottom: '10px' }} />
-            <h3 style={{ fontSize: '1rem', fontWeight: 700, color: '#334155', margin: '0 0 6px 0' }}>
+            <Users size={36} style={{ color: 'var(--color-text-faint)', marginBottom: '10px' }} />
+            <h3 style={{ fontSize: '1rem', fontWeight: 700, color: 'var(--color-navy)', margin: '0 0 6px 0' }}>
               No Active Mentee Selected
             </h3>
-            <p style={{ color: '#64748B', fontSize: '0.84rem' }}>
+            <p style={{ color: 'var(--color-text-muted)', fontSize: '0.84rem' }}>
               Select a mentee from the left roster or accept a new application from the Requests tab.
             </p>
           </div>

@@ -368,7 +368,7 @@ export const TasksTab: React.FC<TasksTabProps> = ({
                         style={{
                           margin: 0,
                           fontSize: '1.125rem',
-                          color: '#1B2A4E',
+                          color: 'var(--color-navy)',
                           fontWeight: 600,
                           cursor: 'pointer',
                         }}
@@ -385,7 +385,7 @@ export const TasksTab: React.FC<TasksTabProps> = ({
                       )}
                     </div>
 
-                    <p style={{ margin: '0.25rem 0 0.5rem 0', color: '#475569', fontSize: '0.875rem', lineHeight: 1.5 }}>
+                    <p style={{ margin: '0.25rem 0 0.5rem 0', color: 'var(--color-text-muted)', fontSize: '0.875rem', lineHeight: 1.5 }}>
                       {task.problemStatement}
                     </p>
 
@@ -396,7 +396,7 @@ export const TasksTab: React.FC<TasksTabProps> = ({
                         </span>
                       ))}
                       {task.deadline && (
-                        <span style={{ fontSize: '0.8125rem', color: '#64748B', display: 'inline-flex', alignItems: 'center', marginLeft: '0.5rem' }}>
+                        <span style={{ fontSize: '0.8125rem', color: 'var(--color-text-muted)', display: 'inline-flex', alignItems: 'center', marginLeft: '0.5rem' }}>
                           ⏰ Due: {task.deadline}
                         </span>
                       )}
@@ -416,7 +416,7 @@ export const TasksTab: React.FC<TasksTabProps> = ({
                           {subCount} {subCount === 1 ? 'Submission' : 'Submissions'} →
                         </button>
                       ) : (
-                        <span style={{ fontSize: '0.8125rem', color: '#94A3B8' }}>0 submissions</span>
+                        <span style={{ fontSize: '0.8125rem', color: 'var(--color-text-faint)' }}>0 submissions</span>
                       )}
 
                       <button
@@ -459,7 +459,7 @@ export const TasksTab: React.FC<TasksTabProps> = ({
                       style={{
                         background: 'none',
                         border: 'none',
-                        color: '#64748B',
+                        color: 'var(--color-text-muted)',
                         fontSize: '0.8125rem',
                         textDecoration: 'underline',
                         cursor: 'pointer',
@@ -501,49 +501,49 @@ export const TasksTab: React.FC<TasksTabProps> = ({
 
             <div className="yw-modal-body" style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
               <div>
-                <h4 style={{ margin: '0 0 0.25rem 0', fontSize: '0.875rem', textTransform: 'uppercase', color: '#64748B' }}>
+                <h4 style={{ margin: '0 0 0.25rem 0', fontSize: '0.875rem', textTransform: 'uppercase', color: 'var(--color-text-muted)' }}>
                   Problem Statement
                 </h4>
-                <p style={{ margin: 0, color: '#334155', fontSize: '0.9375rem', lineHeight: 1.5 }}>
+                <p style={{ margin: 0, color: 'var(--color-navy)', fontSize: '0.9375rem', lineHeight: 1.5 }}>
                   {viewingTask.problemStatement}
                 </p>
               </div>
 
               <div>
-                <h4 style={{ margin: '0 0 0.25rem 0', fontSize: '0.875rem', textTransform: 'uppercase', color: '#64748B' }}>
+                <h4 style={{ margin: '0 0 0.25rem 0', fontSize: '0.875rem', textTransform: 'uppercase', color: 'var(--color-text-muted)' }}>
                   Expected Deliverable
                 </h4>
-                <p style={{ margin: 0, color: '#334155', fontSize: '0.9375rem', lineHeight: 1.5 }}>
+                <p style={{ margin: 0, color: 'var(--color-navy)', fontSize: '0.9375rem', lineHeight: 1.5 }}>
                   {viewingTask.expectedDeliverable}
                 </p>
               </div>
 
               <div>
-                <h4 style={{ margin: '0 0 0.25rem 0', fontSize: '0.875rem', textTransform: 'uppercase', color: '#64748B' }}>
+                <h4 style={{ margin: '0 0 0.25rem 0', fontSize: '0.875rem', textTransform: 'uppercase', color: 'var(--color-text-muted)' }}>
                   Evaluation Criteria
                 </h4>
-                <p style={{ margin: 0, color: '#334155', fontSize: '0.9375rem', lineHeight: 1.5 }}>
+                <p style={{ margin: 0, color: 'var(--color-navy)', fontSize: '0.9375rem', lineHeight: 1.5 }}>
                   {viewingTask.evaluationCriteria}
                 </p>
               </div>
 
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem', paddingTop: '0.5rem', borderTop: '1px solid #E2E8F0' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem', paddingTop: '0.5rem', borderTop: '1px solid var(--color-border)' }}>
                 <div>
-                  <span style={{ color: '#64748B', fontSize: '0.8125rem' }}>Compensation:</span>
-                  <div style={{ fontWeight: 600, color: '#1B2A4E' }}>
+                  <span style={{ color: 'var(--color-text-muted)', fontSize: '0.8125rem' }}>Compensation:</span>
+                  <div style={{ fontWeight: 600, color: 'var(--color-navy)' }}>
                     {viewingTask.compensationType} {viewingTask.rewardDetails ? `— ${viewingTask.rewardDetails}` : ''}
                   </div>
                 </div>
                 <div>
-                  <span style={{ color: '#64748B', fontSize: '0.8125rem' }}>Target Deadline:</span>
-                  <div style={{ fontWeight: 600, color: '#1B2A4E' }}>
+                  <span style={{ color: 'var(--color-text-muted)', fontSize: '0.8125rem' }}>Target Deadline:</span>
+                  <div style={{ fontWeight: 600, color: 'var(--color-navy)' }}>
                     {viewingTask.deadline || 'No firm deadline'}
                   </div>
                 </div>
               </div>
 
               <div>
-                <h4 style={{ margin: '0 0 0.375rem 0', fontSize: '0.875rem', textTransform: 'uppercase', color: '#64748B' }}>
+                <h4 style={{ margin: '0 0 0.375rem 0', fontSize: '0.875rem', textTransform: 'uppercase', color: 'var(--color-text-muted)' }}>
                   Target Skills Tested
                 </h4>
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.375rem' }}>
@@ -1041,7 +1041,7 @@ export const TasksTab: React.FC<TasksTabProps> = ({
             </div>
 
             <div className="yw-modal-body">
-              <p style={{ color: '#334155', fontSize: '0.9375rem', lineHeight: 1.5 }}>
+              <p style={{ color: 'var(--color-navy)', fontSize: '0.9375rem', lineHeight: 1.5 }}>
                 Are you sure you want to permanently delete this task challenge?
               </p>
               <div

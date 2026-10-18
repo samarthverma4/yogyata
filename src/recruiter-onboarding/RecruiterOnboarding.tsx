@@ -25,14 +25,30 @@ interface RecruiterOnboardingProps {
   onExit: () => void;
   onSignInClick?: () => void;
   onEnterWorkspace: (state: RecruiterOnboardingState) => void;
+  /** Signed-in account: skips the account and domain steps (Supabase handled sign-up and the work email). */
+  account?: { fullName: string; email: string };
+  /** Saves the answers; an error message keeps the recruiter on the review step. */
+  onSave?: (state: RecruiterOnboardingState) => Promise<string | void>;
 }
 
 export const RecruiterOnboarding: React.FC<RecruiterOnboardingProps> = ({
   onExit,
   onSignInClick,
   onEnterWorkspace,
+  account,
+  onSave,
 }) => {
-  const [state, setState] = useState<RecruiterOnboardingState>(() => loadRecruiterDraft());
+  const [saveError, setSaveError] = useState('');
+  const [state, setState] = useState<RecruiterOnboardingState>(() => {
+    const draft = loadRecruiterDraft();
+    if (!account) return draft;
+    return {
+      ...draft,
+      currentStep: draft.currentStep < 3 ? 3 : draft.currentStep,
+      account: { ...draft.account, fullName: account.fullName, workEmail: account.email, isSimulatedVerified: true },
+      profile: { ...draft.profile, recruiterName: draft.profile.recruiterName || account.fullName },
+    };
+  });
 
   // Autosave draft whenever state changes
   useEffect(() => {
@@ -85,14 +101,26 @@ export const RecruiterOnboarding: React.FC<RecruiterOnboardingProps> = ({
   }, []);
 
   const prevStep = useCallback(() => {
+    if (account && state.currentStep <= 3) {
+      onExit();
+      return;
+    }
     setState((prev) => {
       const prevStepNum = Math.max(prev.currentStep - 1, 1) as RecruiterOnboardingStep;
       return { ...prev, currentStep: prevStepNum };
     });
     window.scrollTo({ top: 0, behavior: 'smooth' });
-  }, []);
+  }, [account, onExit, state.currentStep]);
 
-  const handleFinishOnboarding = useCallback(() => {
+  const handleFinishOnboarding = useCallback(async (): Promise<boolean> => {
+    if (onSave) {
+      const err = await onSave(state);
+      if (err) {
+        setSaveError(err);
+        return false;
+      }
+    }
+    setSaveError('');
     const finalState: RecruiterOnboardingState = {
       ...state,
       currentStep: 7,
@@ -100,7 +128,8 @@ export const RecruiterOnboarding: React.FC<RecruiterOnboardingProps> = ({
     };
     setState(finalState);
     saveRecruiterDraft(finalState);
-  }, [state]);
+    return true;
+  }, [onSave, state]);
 
   const handleEnterWorkspaceClicked = useCallback(() => {
     clearRecruiterDraft();
@@ -114,6 +143,11 @@ export const RecruiterOnboarding: React.FC<RecruiterOnboardingProps> = ({
       onExit={onExit}
       onSignInClick={onSignInClick}
     >
+      {saveError && (
+        <p className="yg-sync-error" role="alert">
+          Your profile could not be saved: {saveError}
+        </p>
+      )}
       {state.currentStep === 1 && (
         <RecruiterAccountStep
           data={state.account}
@@ -164,9 +198,8 @@ export const RecruiterOnboarding: React.FC<RecruiterOnboardingProps> = ({
           state={state}
           onJumpToStep={goToStep}
           onAgreeChange={setAgreedToGuidelines}
-          onNext={() => {
-            handleFinishOnboarding();
-            goToStep(7);
+          onNext={async () => {
+            if (await handleFinishOnboarding()) goToStep(7);
           }}
           onBack={prevStep}
         />

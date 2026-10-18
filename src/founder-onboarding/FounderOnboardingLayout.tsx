@@ -3,6 +3,7 @@ import type { FounderOnboardingView } from './types';
 import { FounderProgressIndicator } from './FounderProgressIndicator';
 import { Modal } from '../components/Modal';
 import { Lightbulb, RotateCcw } from 'lucide-react';
+import { BrandMark } from '../brand/BrandMark';
 
 interface FounderOnboardingLayoutProps {
   currentView: FounderOnboardingView;
@@ -43,27 +44,7 @@ export const FounderOnboardingLayout: React.FC<FounderOnboardingLayoutProps> = (
             onClick={onExit}
             aria-label="YOGYATA – return to home"
           >
-            <div className="brand-emblem-wrapper ob-emblem" aria-hidden="true">
-              <svg
-                className="brand-emblem-svg"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M12 2.5L19 6V11.5C19 16 16 19.3 12 21.5C8 19.3 5 16 5 11.5V6L12 2.5Z"
-                  fill="#465FA8"
-                />
-                <path
-                  d="M10.8 14.5L8.5 12.2L9.6 11.1L10.8 12.3L14.4 8.7L15.5 9.8L10.8 14.5Z"
-                  fill="#FFC936"
-                />
-              </svg>
-            </div>
-            <div className="brand-text-group">
-              <span className="brand-title">YOGYATA</span>
-              <span className="brand-tagline-sub">Skills You Can Prove</span>
-            </div>
+            <BrandMark sub="Founder onboarding" />
           </button>
 
           {/* Centre: Role Badge */}

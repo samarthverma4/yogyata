@@ -9,6 +9,8 @@ import {
   Settings,
   X,
   Users,
+  Briefcase,
+  Mail,
 } from 'lucide-react';
 import type { RecruiterWorkspaceTab } from './types';
 
@@ -48,6 +50,8 @@ export const RecruiterSidebar: React.FC<RecruiterSidebarProps> = ({
       icon: Search,
       badge: candidateCount,
     },
+    { id: 'postings', label: 'Job Postings', icon: Briefcase },
+    { id: 'invitations', label: 'Invitations', icon: Mail },
     {
       id: 'pipeline',
       label: 'Candidate Pipeline',
@@ -87,19 +91,19 @@ export const RecruiterSidebar: React.FC<RecruiterSidebarProps> = ({
             justifyContent: 'space-between',
             alignItems: 'center',
             padding: '0 0.5rem 1rem',
-            borderBottom: '1px solid #E2E8F0',
+            borderBottom: '1px solid var(--color-border)',
             marginBottom: '0.75rem',
           }}
         >
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
             <Building2 size={18} style={{ color: '#15803D' }} />
-            <strong style={{ fontSize: '0.9375rem', color: '#0F172A' }}>Recruiter Menu</strong>
+            <strong style={{ fontSize: '0.9375rem', color: 'var(--color-navy)' }}>Recruiter Menu</strong>
           </div>
           <button
             type="button"
             className="btn-ghost"
             onClick={onCloseMobile}
-            style={{ padding: '0.35rem', color: '#64748B' }}
+            style={{ padding: '0.35rem', color: 'var(--color-text-muted)' }}
           >
             <X size={18} />
           </button>
@@ -127,10 +131,10 @@ export const RecruiterSidebar: React.FC<RecruiterSidebarProps> = ({
                     alignItems: 'center',
                     justifyContent: 'space-between',
                     padding: '0.625rem 0.75rem',
-                    borderRadius: '6px',
+                    borderRadius: 0,
                     border: 'none',
                     background: isActive ? '#F0FDF4' : 'transparent',
-                    color: isActive ? '#15803D' : '#475569',
+                    color: isActive ? '#15803D' : 'var(--color-text-muted)',
                     fontWeight: isActive ? 600 : 500,
                     fontSize: '0.84rem',
                     cursor: 'pointer',
@@ -139,7 +143,7 @@ export const RecruiterSidebar: React.FC<RecruiterSidebarProps> = ({
                   }}
                 >
                   <div style={{ display: 'flex', alignItems: 'center', gap: '0.625rem' }}>
-                    <Icon size={17} style={{ color: isActive ? '#15803D' : '#64748B' }} />
+                    <Icon size={17} style={{ color: isActive ? '#15803D' : 'var(--color-text-muted)' }} />
                     <span>{item.label}</span>
                   </div>
 
@@ -148,9 +152,9 @@ export const RecruiterSidebar: React.FC<RecruiterSidebarProps> = ({
                       style={{
                         fontSize: '0.72rem',
                         padding: '0.1rem 0.45rem',
-                        borderRadius: '9999px',
-                        background: isActive ? '#DCFCE7' : '#F1F5F9',
-                        color: isActive ? '#166534' : '#64748B',
+                        borderRadius: 0,
+                        background: isActive ? '#DCFCE7' : 'var(--color-surface-2)',
+                        color: isActive ? '#166534' : 'var(--color-text-muted)',
                         fontWeight: 600,
                       }}
                     >
@@ -169,15 +173,15 @@ export const RecruiterSidebar: React.FC<RecruiterSidebarProps> = ({
         style={{
           marginTop: 'auto',
           padding: '0.875rem',
-          borderRadius: '8px',
-          background: '#F8FAFC',
-          border: '1px solid #E2E8F0',
+          borderRadius: 0,
+          background: 'var(--color-bg)',
+          border: '1px solid var(--color-border)',
           fontSize: '0.75rem',
-          color: '#64748B',
+          color: 'var(--color-text-muted)',
           lineHeight: 1.45,
         }}
       >
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.375rem', color: '#0F172A', fontWeight: 600, marginBottom: '0.25rem' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.375rem', color: 'var(--color-navy)', fontWeight: 600, marginBottom: '0.25rem' }}>
           <Users size={13} style={{ color: '#15803D' }} />
           <span>Talent Pipeline Active</span>
         </div>
@@ -195,7 +199,7 @@ export const RecruiterSidebar: React.FC<RecruiterSidebarProps> = ({
         style={{
           width: '240px',
           background: '#FFFFFF',
-          borderRight: '1px solid #E2E8F0',
+          borderRight: '1px solid var(--color-border)',
           flexShrink: 0,
           minHeight: 'calc(100vh - 61px)',
         }}

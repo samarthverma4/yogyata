@@ -1,3 +1,4 @@
+import { scopedKey } from '../lib/storageScope';
 import type { FounderOnboardingState, FounderOnboardingView } from './types';
 import { INITIAL_FOUNDER_ONBOARDING_STATE } from './types';
 
@@ -91,7 +92,7 @@ export function saveFounderDraft(
     };
 
     const serialized = JSON.stringify(draft);
-    window.localStorage.setItem(FOUNDER_STORAGE_KEY, serialized);
+    window.localStorage.setItem(scopedKey(FOUNDER_STORAGE_KEY), serialized);
 
     return { success: true, imageOmitted };
   } catch {
@@ -122,7 +123,7 @@ export function saveFounderDraft(
         imageOmitted: true,
       };
 
-      window.localStorage.setItem(FOUNDER_STORAGE_KEY, JSON.stringify(fallbackDraft));
+      window.localStorage.setItem(scopedKey(FOUNDER_STORAGE_KEY), JSON.stringify(fallbackDraft));
       return { success: true, imageOmitted: true };
     } catch (innerErr: unknown) {
       const message = innerErr instanceof Error ? innerErr.message : 'Storage quota exceeded.';
@@ -145,7 +146,7 @@ export function loadFounderDraft(): {
   }
 
   try {
-    const raw = window.localStorage.getItem(FOUNDER_STORAGE_KEY);
+    const raw = window.localStorage.getItem(scopedKey(FOUNDER_STORAGE_KEY));
     if (!raw) return null;
 
     const parsed = JSON.parse(raw) as Partial<StoredFounderDraft>;
@@ -217,7 +218,7 @@ export function loadFounderDraft(): {
 export function clearFounderDraft(): void {
   if (typeof window === 'undefined' || !window.localStorage) return;
   try {
-    window.localStorage.removeItem(FOUNDER_STORAGE_KEY);
+    window.localStorage.removeItem(scopedKey(FOUNDER_STORAGE_KEY));
   } catch {
     // Ignore storage errors during cleanup
   }

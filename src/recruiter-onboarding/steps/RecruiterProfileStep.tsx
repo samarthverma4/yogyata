@@ -214,13 +214,13 @@ export const RecruiterProfileStep: React.FC<RecruiterProfileStepProps> = ({
             style={{
               marginTop: '1.5rem',
               padding: '1.25rem',
-              background: '#F8FAFC',
-              border: '1px solid #E2E8F0',
-              borderRadius: '8px',
+              background: 'var(--color-bg)',
+              border: '1px solid var(--color-border)',
+              borderRadius: 0,
             }}
           >
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.75rem', color: '#0F172A', fontSize: '0.8125rem', fontWeight: 600 }}>
-              <Sparkles size={14} style={{ color: '#2563EB' }} />
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.75rem', color: 'var(--color-navy)', fontSize: '0.8125rem', fontWeight: 600 }}>
+              <Sparkles size={14} style={{ color: 'var(--color-blue)' }} />
               Live Candidate-Facing Preview
             </div>
             <div style={{ display: 'flex', gap: '1rem', alignItems: 'flex-start' }}>
@@ -229,7 +229,7 @@ export const RecruiterProfileStep: React.FC<RecruiterProfileStepProps> = ({
                   width: '44px',
                   height: '44px',
                   borderRadius: '50%',
-                  background: 'linear-gradient(135deg, #1E293B 0%, #3B82F6 100%)',
+                  background: 'linear-gradient(135deg, var(--color-navy) 0%, var(--color-blue) 100%)',
                   color: '#FFFFFF',
                   display: 'flex',
                   alignItems: 'center',
@@ -242,16 +242,16 @@ export const RecruiterProfileStep: React.FC<RecruiterProfileStepProps> = ({
                 {displayName.charAt(0).toUpperCase()}
               </div>
               <div style={{ flex: 1, minWidth: 0 }}>
-                <div style={{ fontWeight: 600, fontSize: '0.9375rem', color: '#0F172A' }}>
+                <div style={{ fontWeight: 600, fontSize: '0.9375rem', color: 'var(--color-navy)' }}>
                   {displayName}
                 </div>
-                <div style={{ fontSize: '0.8125rem', color: '#64748B' }}>
+                <div style={{ fontSize: '0.8125rem', color: 'var(--color-text-muted)' }}>
                   {data.jobTitle || 'Technical Talent Acquisition'} • {data.recruitingExperience} exp
                 </div>
-                <div style={{ marginTop: '0.375rem', fontSize: '0.75rem', color: '#2563EB', fontWeight: 500 }}>
+                <div style={{ marginTop: '0.375rem', fontSize: '0.75rem', color: 'var(--color-blue)', fontWeight: 500 }}>
                   Specialization: {data.hiringSpecialization}
                 </div>
-                <p style={{ marginTop: '0.5rem', fontSize: '0.8125rem', color: '#334155', fontStyle: data.professionalBio ? 'normal' : 'italic', lineHeight: 1.4, margin: '0.5rem 0 0' }}>
+                <p style={{ marginTop: '0.5rem', fontSize: '0.8125rem', color: 'var(--color-navy)', fontStyle: data.professionalBio ? 'normal' : 'italic', lineHeight: 1.4, margin: '0.5rem 0 0' }}>
                   {data.professionalBio || 'Bio will appear here as you type...'}
                 </p>
               </div>

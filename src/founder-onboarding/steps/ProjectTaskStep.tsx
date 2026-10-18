@@ -173,7 +173,7 @@ export const ProjectTaskStep: React.FC<ProjectTaskStepProps> = ({
       ) : (
         <div className="ob-form">
           <div className="founder-task-status-row">
-            <span className="ob-dev-badge" style={{ background: '#465FA8' }}>DRAFT PREPARATION</span>
+            <span className="ob-dev-badge" style={{ background: 'var(--color-blue)' }}>DRAFT PREPARATION</span>
             <button
               type="button"
               className="ob-inline-link-btn"
