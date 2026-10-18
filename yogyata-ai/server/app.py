@@ -24,8 +24,9 @@ from pydantic import BaseModel, Field, ValidationError
 
 from yogyata_ai import interview, mentor_recommendation, opportunity_matching, practical_tasks, resume_intelligence, roadmap, skill_gap
 from yogyata_ai.agent import confirm_action, run_agent
-from yogyata_ai.common.taxonomy import get_taxonomy
 from yogyata_ai.practical_tasks.catalog import TaskCatalog
+
+from .vocab import canonical_skill, canonical_skills, resolve_role
 
 
 # ─── Configuration (public values only: the URL and the publishable key) ──────
@@ -49,7 +50,6 @@ ALLOWED_ORIGINS = os.getenv("YOGYATA_WEB_ORIGINS", "http://localhost:5173,http:/
 app = FastAPI(title="Yogyata AI", version="0.1.0", docs_url="/ai/docs", openapi_url="/ai/openapi.json")
 app.add_middleware(CORSMiddleware, allow_origins=ALLOWED_ORIGINS, allow_methods=["GET", "POST"], allow_headers=["Authorization", "Content-Type"])
 
-TAXONOMY = get_taxonomy()
 ROLE_IDS = [r["id"] for r in skill_gap.list_roles()]
 
 
@@ -109,29 +109,49 @@ _EVIDENCE = {"verified": ("task_review", 0.8), "assessed": ("interview_auto", 0.
 
 
 def _canon(name: str) -> str | None:
-    return TAXONOMY.canonical(name)
+    return canonical_skill(name)
 
 
-def guess_role(text: str) -> str:
-    t = (text or "").lower()
-    if re.search(r"\b(ml|machine learning|ai engineer|data scien)", t):
-        return "ml_engineer"
-    if re.search(r"\b(data analy|analyst|bi\b|business intelligence)", t):
-        return "data_analyst"
-    return "full_stack_developer"
+def resolve_role_or_422(requested: str | None, goal: str) -> str:
+    """Pick the role catalog to score against, or refuse.
+
+    Guessing was the previous behaviour, but a student who picked Cybersecurity or Product
+    Manager would silently be scored against the Data Analyst catalog. A wrong readiness
+    number is worse than an honest "not supported yet", so unmapped roles raise 422.
+    """
+    role = resolve_role(requested) or resolve_role(goal)
+    if role is None:
+        raise HTTPException(422, {
+            "error": "unsupported_role",
+            "requested": requested or goal or None,
+            "supported": ROLE_IDS,
+            "hint": "Only these roles have a reviewed skill catalog; pick one or extend skill_gap/data/roles.json.",
+        })
+    return role
 
 
-async def seeker_profile(c: Caller, role_id: str | None) -> tuple[dict[str, Any], str]:
+async def seeker_profile(c: Caller, role_id: str | None) -> tuple[dict[str, Any], str, list[str]]:
+    """Build the package profile. Returns (profile, role_id, unmapped_skill_names).
+
+    Unmapped names are returned so endpoints can tell the student which of their skills the
+    model cannot see; previously an unrecognised name was passed through as a declared skill,
+    where it matched no role catalog and silently counted for nothing.
+    """
     skills = await _rest(c.token, "passport_skills", {"seeker_id": f"eq.{c.user_id}", "select": "skill_name,level,source_submission_id,updated_at"})
     details = await _rest(c.token, "seeker_details", {"id": f"eq.{c.user_id}", "select": "answers"})
     answers = (details[0]["answers"] if details else {}) or {}
     goal = (answers.get("careerGoals") or {}).get("primaryRole", "")
-    role = role_id if role_id in ROLE_IDS else guess_role(goal)
+    role = resolve_role_or_422(role_id, goal)
     prefs = answers.get("jobPrefs") or {}
 
-    declared, evidence = [], []
+    declared, evidence, unmapped = [], [], []
     for s in skills:
-        name = _canon(s["skill_name"]) or s["skill_name"].strip()
+        name = _canon(s["skill_name"])
+        if name is None:
+            raw = (s["skill_name"] or "").strip()
+            if raw and raw not in unmapped:
+                unmapped.append(raw)
+            continue
         declared.append(name)
         if s["level"] in _EVIDENCE:
             source, strength = _EVIDENCE[s["level"]]
@@ -148,7 +168,7 @@ async def seeker_profile(c: Caller, role_id: str | None) -> tuple[dict[str, Any]
         "weekly_hours": 6,
         "timeline_weeks": 8,
     }
-    return profile, role
+    return profile, role, sorted(unmapped)
 
 
 async def opportunities(c: Caller) -> list[dict[str, Any]]:
@@ -204,8 +224,9 @@ def roles() -> list[dict[str, Any]]:
 
 @app.get("/ai/readiness")
 async def readiness(role: str | None = Query(None), c: Caller = Depends(seeker_only)) -> dict[str, Any]:
-    profile, role_id = await seeker_profile(c, role)
-    return _call(skill_gap.analyze_skill_gap, {"profile": profile, "role_id": role_id})
+    profile, role_id, unmapped = await seeker_profile(c, role)
+    return {**_call(skill_gap.analyze_skill_gap, {"profile": profile, "role_id": role_id}),
+            "unmapped_skills": unmapped}
 
 
 class RoadmapIn(BaseModel):
@@ -216,24 +237,25 @@ class RoadmapIn(BaseModel):
 
 @app.post("/ai/roadmap")
 async def ai_roadmap(body: RoadmapIn, c: Caller = Depends(seeker_only)) -> dict[str, Any]:
-    profile, role_id = await seeker_profile(c, body.role)
+    profile, role_id, unmapped = await seeker_profile(c, body.role)
     profile.update(weekly_hours=body.weekly_hours, timeline_weeks=body.timeline_weeks)
-    return _call(roadmap.generate_roadmap, {"profile": profile, "role_id": role_id})
+    return {**_call(roadmap.generate_roadmap, {"profile": profile, "role_id": role_id}),
+            "unmapped_skills": unmapped}
 
 
 @app.get("/ai/matches")
 async def matches(role: str | None = Query(None), c: Caller = Depends(seeker_only)) -> dict[str, Any]:
-    profile, role_id = await seeker_profile(c, role)
+    profile, role_id, unmapped = await seeker_profile(c, role)
     opps = await opportunities(c)
     ranked = _call(opportunity_matching.match_opportunities, {"profile": profile, "opportunities": opps, "top_k": 10}) if opps else {"ranked": [], "excluded": []}
     ms = await mentors(c)
     mentor_rank = _call(mentor_recommendation.recommend_mentors, {"profile": profile, "role_id": role_id, "mentors": ms, "limit": 5}) if ms else {"ranked": []}
-    return {"role_id": role_id, "opportunities": ranked, "mentors": mentor_rank}
+    return {"role_id": role_id, "opportunities": ranked, "mentors": mentor_rank, "unmapped_skills": unmapped}
 
 
 @app.get("/ai/interview/next")
 async def interview_next(role: str | None = Query(None), kind: str = Query("technical"), history: str = Query(""), c: Caller = Depends(seeker_only)) -> dict[str, Any]:
-    _, role_id = await seeker_profile(c, role)
+    _, role_id, _unmapped = await seeker_profile(c, role)
     asked = [{"question_id": q} for q in history.split(",") if q][:30]
     nxt = _call(interview.next_question, {"interview_type": kind, "role": role_id, "history": asked})
     return nxt or {"question": None, "reason": "You have answered every question in this set."}
@@ -256,7 +278,7 @@ class ResumeIn(BaseModel):
 
 @app.post("/ai/resume")
 async def resume(body: ResumeIn, c: Caller = Depends(seeker_only)) -> dict[str, Any]:
-    _, role_id = await seeker_profile(c, body.role)
+    _, role_id, _unmapped = await seeker_profile(c, body.role)
     analysis = _call(resume_intelligence.analyze, {"resume_text": body.resume_text})
     # contact details are personal data the app already has; never echo them back
     parsed = analysis.get("parsed", {})
@@ -284,14 +306,23 @@ class AgentIn(BaseModel):
 
 @app.post("/ai/assistant")
 async def assistant(body: AgentIn, c: Caller = Depends(seeker_only)) -> dict[str, Any]:
-    profile, role_id = await seeker_profile(c, body.role)
-    session = body.session or {
-        "profile": {k: profile[k] for k in ("student_id", "declared_skills", "preferred_work_modes", "weekly_hours", "timeline_weeks")},
-        "evidence": profile["evidence"],
-    }
+    profile, role_id, unmapped = await seeker_profile(c, body.role)
+
+    # The caller may send back a session for continuity, but three of its fields are routes
+    # to forged evidence and are always re-derived from Supabase: `profile` (which carries
+    # its own evidence list), `evidence`, and `review_ledger`. Without this a seeker could
+    # post a session granting themselves task_review evidence at full strength and the agent
+    # would treat the skill as human-verified. Verified evidence comes only from
+    # endorse_submission_skill / mentor_review_skill in Postgres.
+    session = dict(body.session or {})
+    session["profile"] = {k: profile[k] for k in
+                          ("student_id", "declared_skills", "preferred_work_modes", "weekly_hours", "timeline_weeks")}
+    session["evidence"] = profile["evidence"]
+    session.pop("review_ledger", None)
+
     payload = {"target_role": role_id, "goals": profile["goals"] or None, "resume_text": body.resume_text, "opportunities": await opportunities(c),
                "mentors": await mentors(c), "user_message": body.user_message, "session": session}
-    return _call(run_agent, payload)
+    return {**_call(run_agent, payload), "unmapped_skills": unmapped}
 
 
 class ConfirmIn(BaseModel):
@@ -315,12 +346,16 @@ _DELIVERABLE_TERMS = {"README": ["readme"], "tests": ["test", "unit test"], "rep
                       "presentation": ["presentation", "slides"], "documentation": ["documentation", "docs"]}
 
 
-def _task_skills(raw: list[str]) -> list[str]:
-    return list(dict.fromkeys(_canon(s) or s.strip() for s in raw if s and s.strip()))
+def practical_task(row: dict[str, Any]) -> tuple[dict[str, Any], list[str], list[str]]:
+    """Founder task row -> (PracticalTask dict, canonical skills, unmapped skill names).
 
-
-def practical_task(row: dict[str, Any]) -> dict[str, Any]:
-    skills = _task_skills(row.get("required_skills") or [])
+    Required skills are canonicalised through `vocab`; names the taxonomy does not know are
+    returned rather than passed through, because a raw name matches no role catalog and would
+    silently score as nothing. Callers decide what to do with them: the founder is told which
+    of their required skills the model cannot see, and task recommendation skips tasks that
+    have no recognised skill at all.
+    """
+    skills, unmapped = canonical_skills(row.get("required_skills") or [])
     brief = "\n".join(x for x in (row.get("problem_statement"), row.get("expected_deliverable"), row.get("evaluation_criteria")) if x)
     draft = practical_tasks.interpret(brief or row["title"], title=row["title"])
     rubric: list[dict[str, Any]] = []
@@ -334,10 +369,11 @@ def practical_task(row: dict[str, Any]) -> dict[str, Any]:
     rubric += [{**c, "id": f"criterion_{c['id']}"} for c in draft["draft_rubric"]]
     if not draft["draft_rubric"]:
         rubric.append({"id": "criterion_quality", "description": "The linked work meets the task brief", "weight": 2.0, "check": {"type": "human"}})
-    return {"id": row["id"], "title": row["title"], "description": (row.get("problem_statement") or row["title"])[:4000],
+    task = {"id": row["id"], "title": row["title"], "description": (row.get("problem_statement") or row["title"])[:4000],
             "skills": skills or ["General"], "difficulty": draft["difficulty"],
             "estimated_hours": min(200.0, draft["estimated_hours"] or 8.0), "deliverables": draft["deliverables"],
             "rubric": rubric, "source": "startup"}
+    return task, skills, unmapped
 
 
 class SubmissionCheckIn(BaseModel):
@@ -351,11 +387,11 @@ async def submission_check(body: SubmissionCheckIn, c: Caller = Depends(founder_
         "select": "id,notes,task:tasks!inner(id,title,problem_statement,required_skills,expected_deliverable,evaluation_criteria,founder_id)"})
     if not rows:
         raise HTTPException(404, "That submission is not on one of your tasks.")
-    task = practical_task(rows[0]["task"])
+    task, _skills, unmapped = practical_task(rows[0]["task"])
     # emit_evidence stays off: this is a first look for the founder, never evidence on the passport
     out = _call(practical_tasks.evaluate, task, rows[0]["notes"] or "")
     out.pop("suggested_evidence", None)
-    return {"task_title": task["title"], "feedback": out,
+    return {"task_title": task["title"], "feedback": out, "unmapped_skills": unmapped,
             "read_note": "Only the candidate's notes were read. The linked work was not opened, so judge it yourself."}
 
 
@@ -377,9 +413,10 @@ class RoadmapUpdateIn(RoadmapIn):
 
 @app.post("/ai/roadmap/update")
 async def ai_roadmap_update(body: RoadmapUpdateIn, c: Caller = Depends(seeker_only)) -> dict[str, Any]:
-    profile, role_id = await seeker_profile(c, body.role)
+    profile, role_id, unmapped = await seeker_profile(c, body.role)
     profile.update(weekly_hours=body.weekly_hours, timeline_weeks=body.timeline_weeks)
-    return _call(roadmap.update_roadmap, {"profile": profile, "role_id": role_id}, completed_activity_ids=body.completed_activity_ids)
+    return {**_call(roadmap.update_roadmap, {"profile": profile, "role_id": role_id}, completed_activity_ids=body.completed_activity_ids),
+            "unmapped_skills": unmapped}
 
 
 class ResumeCompareIn(BaseModel):
@@ -402,21 +439,21 @@ async def resume_compare(body: ResumeCompareIn, c: Caller = Depends(seeker_only)
 
 @app.get("/ai/tasks-for-you")
 async def tasks_for_you(role: str | None = Query(None), c: Caller = Depends(seeker_only)) -> dict[str, Any]:
-    profile, role_id = await seeker_profile(c, role)
+    profile, role_id, unmapped = await seeker_profile(c, role)
     rows = await _rest(c.token, "tasks", {"status": "eq.published", "select": "id,title,org_name,problem_statement,required_skills,expected_deliverable,evaluation_criteria"})
     mine = await _rest(c.token, "submissions", {"seeker_id": f"eq.{c.user_id}", "select": "task_id"})
     org = {r["id"]: r["org_name"] for r in rows}
     built = []
     for r in rows:
-        t = practical_task(r)
-        t["skills"] = [s for s in t["skills"] if _canon(s) == s]  # the catalog accepts taxonomy skills only
-        if t["skills"]:
-            built.append(t)
+        task, skills, _unmapped = practical_task(r)
+        if skills:  # the catalog accepts taxonomy skills only
+            built.append(task)
     if not built:
-        return {"recommendations": [], "not_recommended": [], "notes": ["No published founder task lists a skill Yogyata AI recognises yet."]}
+        return {"recommendations": [], "not_recommended": [], "unmapped_skills": unmapped,
+                "notes": ["No published founder task lists a skill Yogyata AI recognises yet."]}
     catalog = _call(TaskCatalog.from_dict, {"tasks": built})
     out = _call(practical_tasks.recommend, {"profile": profile, "role_id": role_id, "limit": 5,
                                             "completed_task_ids": [m["task_id"] for m in mine]}, catalog=catalog)
     for rec in out["recommendations"]:
         rec["organisation"] = org.get(rec["task_id"], "")
-    return out
+    return {**out, "unmapped_skills": unmapped}

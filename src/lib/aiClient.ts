@@ -7,6 +7,23 @@ const BASE = (import.meta.env.VITE_AI_URL as string | undefined)?.replace(/\/$/,
 
 export class AiError extends Error {}
 
+/**
+ * The target role has no reviewed skill catalog, so no score is produced. The service
+ * refuses rather than scoring against a different role, which would give a confidently
+ * wrong readiness number.
+ */
+export class UnsupportedRoleError extends AiError {
+  readonly requested: string | null;
+  readonly supported: string[];
+
+  constructor(requested: string | null, supported: string[]) {
+    super(`Readiness is not available for ${requested || 'this role'} yet. Supported: ${supported.join(', ')}.`);
+    this.name = 'UnsupportedRoleError';
+    this.requested = requested;
+    this.supported = supported;
+  }
+}
+
 async function call<T>(path: string, init?: { method?: 'GET' | 'POST'; body?: unknown }): Promise<T> {
   const { data } = await supabase.auth.getSession();
   const token = data.session?.access_token;
@@ -23,7 +40,15 @@ async function call<T>(path: string, init?: { method?: 'GET' | 'POST'; body?: un
   }
   if (res.status === 502 || res.status === 504) throw new AiError('The AI service is not running. Start it with: npm run ai');
   const json = await res.json().catch(() => null);
-  if (!res.ok) throw new AiError((json && (json.detail as string)) || `The AI service answered ${res.status}.`);
+  if (!res.ok) {
+    const detail = json?.detail;
+    // an unsupported role answers with an object, not a string, so it needs unpacking
+    // before the generic branch turns it into "[object Object]"
+    if (res.status === 422 && detail && typeof detail === 'object' && detail.error === 'unsupported_role') {
+      throw new UnsupportedRoleError(detail.requested ?? null, detail.supported ?? []);
+    }
+    throw new AiError(typeof detail === 'string' ? detail : `The AI service answered ${res.status}.`);
+  }
   return json as T;
 }
 
@@ -58,6 +83,8 @@ export interface Readiness {
   evidence_states: Record<string, string[]>;
   notes: string[];
   score_meaning: string;
+  /** Passport skills outside the 46-skill taxonomy: invisible to every score, so worth showing. */
+  unmapped_skills?: string[];
 }
 
 export interface RoadmapItem {
