@@ -22,9 +22,13 @@ One Supabase backend, four workspaces:
 Each role signs in at its own door and lands in its own workspace; typing another role's URL just
 returns you to yours.
 
-| Role-specific sign in | Sign up | Responsive |
-|---|---|---|
-| <img src="docs/screenshots/02-auth-seeker.png" alt="Seeker log in"> | <img src="docs/screenshots/03-auth-signup.png" alt="Mentor sign up"> | <img src="docs/screenshots/05-mobile.png" alt="Mobile layout" width="190"> |
+### The four portals
+
+| **Entrepreneur** — post tasks, publish them, collect submissions | **Seeker** — the Skill Passport, and how each level is earned |
+|---|---|
+| <img src="docs/screenshots/06-portal-entrepreneur.png" alt="Founder workspace listing published and draft tasks with required skills"> | <img src="docs/screenshots/07-portal-seeker.png" alt="Skill Passport showing Declared, Assessed and Verified tiers"> |
+| **Mentor** — incoming requests, with the learner's goal and skills | **Recruiter** — postings that reach every seeker's Opportunities tab |
+| <img src="docs/screenshots/09-portal-mentor.png" alt="Mentor workspace showing a pending mentorship request"> | <img src="docs/screenshots/10-portal-recruiter.png" alt="Recruiter workspace listing two open job postings"> |
 
 ## The idea that holds it together
 
@@ -79,7 +83,16 @@ Seekers then get an **AI Coach** tab and founders get **Check with AI** on the t
 service the rest of the app works normally and those screens explain how to start it.
 
 <p align="center">
-  <img src="docs/screenshots/04-ai-api.png" alt="The AI bridge's OpenAPI documentation listing every endpoint" width="760">
+  <img src="docs/screenshots/08-portal-ai-coach.png" alt="AI Coach tab showing a readiness score with its uncertainty range and per-skill reasons" width="820">
+</p>
+
+The screen above is the model's honesty on display: a readiness score is shown with the range it
+could really be in, a skill with no evidence reads `UNKNOWN YET` with "this is unknown, not a
+judgement that the skill is weak", and a declared-but-unproven skill reads `MISSING_EVIDENCE`. The
+whole surface is visible at `/ai/docs`:
+
+<p align="center">
+  <img src="docs/screenshots/04-ai-api.png" alt="The AI bridge's OpenAPI documentation listing every endpoint" width="700">
 </p>
 
 Two invariants hold the trust model together, and both are covered by tests:
@@ -135,8 +148,8 @@ supabase/tests/          rolled-back SQL tests for the database rules
 The schema itself lives in the Supabase project, not in this repo — there are no migration files, so
 `src/lib/database.types.ts` (generated) is the reference for table and column shapes.
 
-Screenshots in `docs/screenshots/` are of the public screens. The signed-in workspaces are not
-pictured here because capturing them needs a real account.
+Screenshots in `docs/screenshots/` were captured against a running instance, using throwaway demo
+accounts and seeded demo records — no real user's data appears in them.
 
 ## AI assistance
 
