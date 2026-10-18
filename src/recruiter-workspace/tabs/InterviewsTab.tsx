@@ -13,6 +13,7 @@ import {
   ExternalLink,
   Search,
   FileCheck,
+  Sparkles,
 } from 'lucide-react';
 import type {
   Interview,
@@ -32,6 +33,7 @@ interface InterviewsTabProps {
   onUpdateInterview: (id: string, updates: Partial<Interview>) => void;
   onCancelInterview: (id: string, reason: string) => void;
   onTabChange: (tab: RecruiterWorkspaceTab) => void;
+  onLaunchAIArena?: (candidateName: string, role: string) => void;
 }
 
 function getCurrentDateFormatted(): string {
@@ -46,6 +48,7 @@ export const InterviewsTab: React.FC<InterviewsTabProps> = ({
   onUpdateInterview,
   onCancelInterview,
   onTabChange,
+  onLaunchAIArena,
 }) => {
   const [filterStatus, setFilterStatus] = useState<InterviewStatus>('scheduled');
   const [searchQuery, setSearchQuery] = useState('');
@@ -476,7 +479,31 @@ export const InterviewsTab: React.FC<InterviewsTabProps> = ({
                   {/* Actions Column */}
                   <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '0.5rem', flexShrink: 0 }}>
                     {interview.status === 'scheduled' && (
-                      <div style={{ display: 'flex', gap: '0.5rem' }}>
+                      <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', justifyContent: 'flex-end' }}>
+                        {onLaunchAIArena && (
+                          <button
+                            type="button"
+                            onClick={() => onLaunchAIArena(interview.candidateName, interview.targetRole)}
+                            style={{
+                              background: 'linear-gradient(135deg, #0073e6 0%, #1c4980 100%)',
+                              color: '#ffffff',
+                              border: 'none',
+                              borderRadius: '6px',
+                              padding: '0.35rem 0.75rem',
+                              fontSize: '0.75rem',
+                              fontWeight: 700,
+                              display: 'inline-flex',
+                              alignItems: 'center',
+                              gap: '0.3rem',
+                              cursor: 'pointer',
+                              boxShadow: '0 2px 8px rgba(0, 115, 230, 0.25)',
+                            }}
+                          >
+                            <Sparkles size={13} />
+                            <span>Start AI Round</span>
+                          </button>
+                        )}
+
                         <button
                           type="button"
                           className="btn-secondary"
