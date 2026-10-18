@@ -1,0 +1,198 @@
+{
+  "_disclaimer": "DEMONSTRATION DATA. All resumes and job descriptions are synthetic, written by the project author, and all labels were assigned by hand by the same author. Names are invented. This set is tiny and is meant for smoke-testing and sanity checks only; metrics computed on it do NOT estimate real-world performance.",
+  "resumes": {
+    "r1_priya_data": {
+      "file": "resumes/r1_priya_data.txt",
+      "quality_band": 2,
+      "expected_skills": [
+        "Python",
+        "SQL",
+        "Pandas",
+        "NumPy",
+        "scikit-learn",
+        "Tableau",
+        "Statistics",
+        "Data Analysis",
+        "Machine Learning"
+      ],
+      "expected_structure": {
+        "n_education": 1,
+        "graduation_year": 2026,
+        "n_experience": 1,
+        "n_projects": 2,
+        "n_certifications": 0
+      }
+    },
+    "r2_rohan_web": {
+      "file": "resumes/r2_rohan_web.txt",
+      "quality_band": 2,
+      "expected_skills": [
+        "JavaScript",
+        "TypeScript",
+        "React",
+        "Node.js",
+        "MongoDB",
+        "HTML",
+        "CSS",
+        "Git",
+        "Docker",
+        "REST APIs",
+        "AWS"
+      ],
+      "expected_structure": {
+        "n_education": 1,
+        "graduation_year": 2025,
+        "n_experience": 1,
+        "n_projects": 3,
+        "n_certifications": 0
+      }
+    },
+    "r3_ananya_ml": {
+      "file": "resumes/r3_ananya_ml.txt",
+      "quality_band": 2,
+      "expected_skills": [
+        "Python",
+        "PyTorch",
+        "TensorFlow",
+        "NLP",
+        "Computer Vision",
+        "Git",
+        "Linux",
+        "Machine Learning"
+      ],
+      "expected_structure": {
+        "n_education": 1,
+        "graduation_year": 2026,
+        "n_experience": 0,
+        "n_projects": 3,
+        "n_certifications": 0
+      }
+    },
+    "r4_karan_basic": {
+      "file": "resumes/r4_karan_basic.txt",
+      "quality_band": 1,
+      "expected_skills": [
+        "Java",
+        "C++",
+        "SQL",
+        "HTML",
+        "CSS",
+        "Data Structures"
+      ],
+      "expected_structure": {
+        "n_education": 1,
+        "graduation_year": 2026,
+        "n_experience": 0,
+        "n_projects": 3,
+        "n_certifications": 0
+      }
+    },
+    "r5_neha_office": {
+      "file": "resumes/r5_neha_office.txt",
+      "quality_band": 1,
+      "expected_skills": [
+        "Excel",
+        "Statistics",
+        "Power BI",
+        "Communication"
+      ],
+      "expected_structure": {
+        "n_education": 1,
+        "graduation_year": 2024,
+        "n_experience": 1,
+        "n_projects": 0,
+        "n_certifications": 0
+      }
+    },
+    "r6_imran_noskills": {
+      "file": "resumes/r6_imran_noskills.txt",
+      "quality_band": 1,
+      "expected_skills": [
+        "Python",
+        "Flask"
+      ],
+      "expected_structure": {
+        "n_education": 1,
+        "graduation_year": 2025,
+        "n_experience": 0,
+        "n_projects": 3,
+        "n_certifications": 0
+      }
+    },
+    "r7_rahul_minimal": {
+      "file": "resumes/r7_rahul_minimal.txt",
+      "quality_band": 0,
+      "expected_skills": [],
+      "expected_structure": {
+        "n_education": 0,
+        "graduation_year": null,
+        "n_experience": 0,
+        "n_projects": 0,
+        "n_certifications": 0
+      }
+    },
+    "r8_sneha_keywords": {
+      "file": "resumes/r8_sneha_keywords.txt",
+      "quality_band": 0,
+      "expected_skills": [
+        "Python",
+        "Java",
+        "C++",
+        "SQL",
+        "React",
+        "Node.js",
+        "Docker",
+        "AWS",
+        "Machine Learning",
+        "Deep Learning",
+        "NLP",
+        "Tableau",
+        "Excel",
+        "Power BI",
+        "Git",
+        "Teamwork"
+      ],
+      "expected_structure": {
+        "n_education": 0,
+        "graduation_year": null,
+        "n_experience": 0,
+        "n_projects": 0,
+        "n_certifications": 0
+      }
+    }
+  },
+  "job_descriptions": {
+    "jd_data_analyst": {
+      "text": "Data Analyst Intern. You will clean and analyse business data. Required: SQL, Python, Pandas, Excel, and Tableau or Power BI. Statistics knowledge is a plus.",
+      "relevance": {
+        "r1_priya_data": 2,
+        "r5_neha_office": 1,
+        "r3_ananya_ml": 1,
+        "r8_sneha_keywords": 1
+      }
+    },
+    "jd_frontend": {
+      "text": "Frontend Developer Intern. Build user interfaces with JavaScript, React, HTML and CSS. Use Git daily and consume REST APIs.",
+      "relevance": {
+        "r2_rohan_web": 2,
+        "r4_karan_basic": 1,
+        "r8_sneha_keywords": 1
+      }
+    },
+    "jd_ml_intern": {
+      "text": "Machine Learning Intern. Work on NLP and Computer Vision prototypes. Required: Python, PyTorch or TensorFlow, scikit-learn, Git.",
+      "relevance": {
+        "r3_ananya_ml": 2,
+        "r1_priya_data": 1,
+        "r8_sneha_keywords": 1
+      }
+    },
+    "jd_java_junior": {
+      "text": "Junior Java Developer. Required: Java, SQL, Data Structures and Git. Docker is a plus.",
+      "relevance": {
+        "r4_karan_basic": 2,
+        "r8_sneha_keywords": 1
+      }
+    }
+  }
+}

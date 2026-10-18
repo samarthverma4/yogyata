@@ -1,0 +1,28 @@
+{
+  "_disclaimer": "DEMONSTRATION LABELS. Profiles are built from the demo resumes; relevance (0 none, 1 partial, 2 strong fit) and expected eligibility exclusions were assigned by hand by the project author BEFORE running the matcher. Omitted pairs mean 0. Single rater, 12 opportunities: sanity check only.",
+  "profiles": {
+    "r1_priya_data": {"overrides": {"graduation_year": 2026, "cgpa": 8.2},
+      "relevance": {"o01": 2, "o02": 2, "o03": 2, "o08": 2, "o09": 1, "o04": 1},
+      "expected_excluded": ["o06", "o11", "o12"]},
+    "r2_rohan_web": {"overrides": {},
+      "relevance": {"o06": 2, "o05": 2, "o10": 1},
+      "expected_excluded": ["o02", "o03", "o12"]},
+    "r3_ananya_ml": {"overrides": {},
+      "relevance": {"o03": 2, "o04": 2, "o09": 2, "o02": 1, "o10": 1, "o12": 1},
+      "expected_excluded": ["o06", "o11"]},
+    "r4_karan_basic": {"overrides": {},
+      "relevance": {"o07": 2, "o05": 1},
+      "expected_excluded": ["o06", "o11"]},
+    "r5_neha_office": {"overrides": {},
+      "relevance": {"o11": 2, "o01": 1},
+      "expected_excluded": ["o02", "o03", "o05", "o12"]},
+    "r8_sneha_keywords": {"overrides": {}, "relevance": {}, "expected_excluded": [],
+      "note": "keyword-stuffed resume; excluded from ranking metrics because true relevance is unknowable, used for the stuffing-resistance pairs"}
+  },
+  "stuffing_pairs": [
+    {"opportunity": "o01", "honest": "r1_priya_data", "stuffer": "r8_sneha_keywords"},
+    {"opportunity": "o03", "honest": "r3_ananya_ml", "stuffer": "r8_sneha_keywords"},
+    {"opportunity": "o06", "honest": "r2_rohan_web", "stuffer": "r8_sneha_keywords"},
+    {"opportunity": "o07", "honest": "r4_karan_basic", "stuffer": "r8_sneha_keywords"}
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "request": {
+    "resume_text": "<demo resume>",
+    "job_description": "Machine Learning Intern. Required: Python, scikit-learn, Machine Learning. Preferred: Docker, SQL."
+  },
+  "response": {
+    "required_skills": [
+      "Machine Learning",
+      "Python",
+      "scikit-learn"
+    ],
+    "preferred_skills": [
+      "Docker",
+      "SQL"
+    ],
+    "matched_required": [
+      {
+        "skill": "Machine Learning",
+        "support": "mentioned"
+      },
+      {
+        "skill": "Python",
+        "support": "declared_only"
+      }
+    ],
+    "matched_preferred": [],
+    "missing_required": [
+      "scikit-learn"
+    ],
+    "missing_preferred": [
+      "Docker",
+      "SQL"
+    ],
+    "required_coverage": 0.6667,
+    "evidence_weighted_required_coverage": 0.3333,
+    "text_similarity": 0.0555,
+    "alignment_score": 21.4,
+    "notes": [
+      "Matched but not backed by a project/experience: Machine Learning, Python."
+    ],
+    "score_meaning": "Alignment indicator for self-guidance; not a prediction of selection."
+  }
+}

@@ -1,0 +1,1524 @@
+{
+ "_comment": "DEMONSTRATION activity catalog (generic, synthetic). It names kinds of activities, not real courses or URLs. Replace with curated, verified resources before production.",
+ "activities": [
+  {
+   "id": "learn_python",
+   "skill": "Python",
+   "type": "learn",
+   "title": "Learn Python fundamentals",
+   "hours": 8,
+   "objective": "Understand syntax, data structures, functions and error handling.",
+   "expected_evidence": "Self-study only: produces no verified evidence.",
+   "evidence_source": null,
+   "completion_criteria": "You can explain the main ideas of Python in your own words and have worked through examples.",
+   "requires": []
+  },
+  {
+   "id": "practice_python",
+   "skill": "Python",
+   "type": "practice",
+   "title": "Practise Python",
+   "hours": 6,
+   "objective": "Apply Python by doing: write 10 small programs (file parsing, string and list manipulation).",
+   "expected_evidence": "Practice output you can show; not verified until reviewed.",
+   "evidence_source": null,
+   "completion_criteria": "You have completed: write 10 small programs (file parsing, string and list manipulation).",
+   "requires": [
+    "learn_python"
+   ]
+  },
+  {
+   "id": "assess_python",
+   "skill": "Python",
+   "type": "assessment",
+   "title": "Reviewed task: Python",
+   "hours": 3,
+   "objective": "Produce evidence of Python: solve a graded set of Python tasks reviewed by a mentor or reviewer.",
+   "expected_evidence": "A human-reviewed result (task_review). Submission alone does not count as competence.",
+   "evidence_source": "task_review",
+   "requires": [
+    "practice_python"
+   ],
+   "requires_review": true,
+   "completion_criteria": "A reviewer has rated the submission; the rating, not the submission, updates your skill evidence."
+  },
+  {
+   "id": "learn_statistics",
+   "skill": "Statistics",
+   "type": "learn",
+   "title": "Learn Statistics fundamentals",
+   "hours": 8,
+   "objective": "Understand descriptive statistics, distributions, sampling and hypothesis testing.",
+   "expected_evidence": "Self-study only: produces no verified evidence.",
+   "evidence_source": null,
+   "completion_criteria": "You can explain the main ideas of Statistics in your own words and have worked through examples.",
+   "requires": []
+  },
+  {
+   "id": "practice_statistics",
+   "skill": "Statistics",
+   "type": "practice",
+   "title": "Practise Statistics",
+   "hours": 5,
+   "objective": "Apply Statistics by doing: work through a dataset computing summaries and one hypothesis test, explaining each result.",
+   "expected_evidence": "Practice output you can show; not verified until reviewed.",
+   "evidence_source": null,
+   "completion_criteria": "You have completed: work through a dataset computing summaries and one hypothesis test, explaining each result.",
+   "requires": [
+    "learn_statistics"
+   ]
+  },
+  {
+   "id": "assess_statistics",
+   "skill": "Statistics",
+   "type": "assessment",
+   "title": "Reviewed task: Statistics",
+   "hours": 3,
+   "objective": "Produce evidence of Statistics: explain and justify a statistical analysis of a supplied dataset for review.",
+   "expected_evidence": "A human-reviewed result (task_review). Submission alone does not count as competence.",
+   "evidence_source": "task_review",
+   "requires": [
+    "practice_statistics"
+   ],
+   "requires_review": true,
+   "completion_criteria": "A reviewer has rated the submission; the rating, not the submission, updates your skill evidence."
+  },
+  {
+   "id": "learn_pandas",
+   "skill": "Pandas",
+   "type": "learn",
+   "title": "Learn Pandas fundamentals",
+   "hours": 6,
+   "objective": "Understand DataFrames, filtering, groupby, joins and cleaning.",
+   "expected_evidence": "Self-study only: produces no verified evidence.",
+   "evidence_source": null,
+   "completion_criteria": "You can explain the main ideas of Pandas in your own words and have worked through examples.",
+   "requires": []
+  },
+  {
+   "id": "practice_pandas",
+   "skill": "Pandas",
+   "type": "practice",
+   "title": "Practise Pandas",
+   "hours": 5,
+   "objective": "Apply Pandas by doing: clean and summarise a messy CSV with pandas.",
+   "expected_evidence": "Practice output you can show; not verified until reviewed.",
+   "evidence_source": null,
+   "completion_criteria": "You have completed: clean and summarise a messy CSV with pandas.",
+   "requires": [
+    "learn_pandas"
+   ]
+  },
+  {
+   "id": "assess_pandas",
+   "skill": "Pandas",
+   "type": "assessment",
+   "title": "Reviewed task: Pandas",
+   "hours": 3,
+   "objective": "Produce evidence of Pandas: complete a data-cleaning task on a supplied file for review.",
+   "expected_evidence": "A human-reviewed result (task_review). Submission alone does not count as competence.",
+   "evidence_source": "task_review",
+   "requires": [
+    "practice_pandas"
+   ],
+   "requires_review": true,
+   "completion_criteria": "A reviewer has rated the submission; the rating, not the submission, updates your skill evidence."
+  },
+  {
+   "id": "learn_numpy",
+   "skill": "NumPy",
+   "type": "learn",
+   "title": "Learn NumPy fundamentals",
+   "hours": 4,
+   "objective": "Understand arrays, broadcasting and vectorised operations.",
+   "expected_evidence": "Self-study only: produces no verified evidence.",
+   "evidence_source": null,
+   "completion_criteria": "You can explain the main ideas of NumPy in your own words and have worked through examples.",
+   "requires": []
+  },
+  {
+   "id": "practice_numpy",
+   "skill": "NumPy",
+   "type": "practice",
+   "title": "Practise NumPy",
+   "hours": 3,
+   "objective": "Apply NumPy by doing: re-implement a loop-based calculation with vectorised NumPy.",
+   "expected_evidence": "Practice output you can show; not verified until reviewed.",
+   "evidence_source": null,
+   "completion_criteria": "You have completed: re-implement a loop-based calculation with vectorised NumPy.",
+   "requires": [
+    "learn_numpy"
+   ]
+  },
+  {
+   "id": "assess_numpy",
+   "skill": "NumPy",
+   "type": "assessment",
+   "title": "Reviewed task: NumPy",
+   "hours": 2,
+   "objective": "Produce evidence of NumPy: complete a short vectorisation task for review.",
+   "expected_evidence": "A human-reviewed result (task_review). Submission alone does not count as competence.",
+   "evidence_source": "task_review",
+   "requires": [
+    "practice_numpy"
+   ],
+   "requires_review": true,
+   "completion_criteria": "A reviewer has rated the submission; the rating, not the submission, updates your skill evidence."
+  },
+  {
+   "id": "learn_machine_learning",
+   "skill": "Machine Learning",
+   "type": "learn",
+   "title": "Learn Machine Learning fundamentals",
+   "hours": 10,
+   "objective": "Understand supervised learning, overfitting, train/test splits and common algorithms.",
+   "expected_evidence": "Self-study only: produces no verified evidence.",
+   "evidence_source": null,
+   "completion_criteria": "You can explain the main ideas of Machine Learning in your own words and have worked through examples.",
+   "requires": []
+  },
+  {
+   "id": "practice_machine_learning",
+   "skill": "Machine Learning",
+   "type": "practice",
+   "title": "Practise Machine Learning",
+   "hours": 8,
+   "objective": "Apply Machine Learning by doing: train and compare two models on a public-style tabular dataset.",
+   "expected_evidence": "Practice output you can show; not verified until reviewed.",
+   "evidence_source": null,
+   "completion_criteria": "You have completed: train and compare two models on a public-style tabular dataset.",
+   "requires": [
+    "learn_machine_learning"
+   ]
+  },
+  {
+   "id": "assess_machine_learning",
+   "skill": "Machine Learning",
+   "type": "assessment",
+   "title": "Reviewed task: Machine Learning",
+   "hours": 4,
+   "objective": "Produce evidence of Machine Learning: complete an end-to-end modelling task with a written justification, for review.",
+   "expected_evidence": "A human-reviewed result (task_review). Submission alone does not count as competence.",
+   "evidence_source": "task_review",
+   "requires": [
+    "practice_machine_learning"
+   ],
+   "requires_review": true,
+   "completion_criteria": "A reviewer has rated the submission; the rating, not the submission, updates your skill evidence."
+  },
+  {
+   "id": "learn_scikit_learn",
+   "skill": "scikit-learn",
+   "type": "learn",
+   "title": "Learn scikit-learn fundamentals",
+   "hours": 5,
+   "objective": "Understand estimators, pipelines, cross-validation.",
+   "expected_evidence": "Self-study only: produces no verified evidence.",
+   "evidence_source": null,
+   "completion_criteria": "You can explain the main ideas of scikit-learn in your own words and have worked through examples.",
+   "requires": []
+  },
+  {
+   "id": "practice_scikit_learn",
+   "skill": "scikit-learn",
+   "type": "practice",
+   "title": "Practise scikit-learn",
+   "hours": 5,
+   "objective": "Apply scikit-learn by doing: build a preprocessing + model pipeline with cross-validation.",
+   "expected_evidence": "Practice output you can show; not verified until reviewed.",
+   "evidence_source": null,
+   "completion_criteria": "You have completed: build a preprocessing + model pipeline with cross-validation.",
+   "requires": [
+    "learn_scikit_learn"
+   ]
+  },
+  {
+   "id": "assess_scikit_learn",
+   "skill": "scikit-learn",
+   "type": "assessment",
+   "title": "Reviewed task: scikit-learn",
+   "hours": 3,
+   "objective": "Produce evidence of scikit-learn: deliver a reviewed pipeline task.",
+   "expected_evidence": "A human-reviewed result (task_review). Submission alone does not count as competence.",
+   "evidence_source": "task_review",
+   "requires": [
+    "practice_scikit_learn"
+   ],
+   "requires_review": true,
+   "completion_criteria": "A reviewer has rated the submission; the rating, not the submission, updates your skill evidence."
+  },
+  {
+   "id": "learn_model_evaluation",
+   "skill": "Model Evaluation",
+   "type": "learn",
+   "title": "Learn Model Evaluation fundamentals",
+   "hours": 5,
+   "objective": "Understand metrics (precision, recall, F1, ROC-AUC), baselines, leakage.",
+   "expected_evidence": "Self-study only: produces no verified evidence.",
+   "evidence_source": null,
+   "completion_criteria": "You can explain the main ideas of Model Evaluation in your own words and have worked through examples.",
+   "requires": []
+  },
+  {
+   "id": "practice_model_evaluation",
+   "skill": "Model Evaluation",
+   "type": "practice",
+   "title": "Practise Model Evaluation",
+   "hours": 4,
+   "objective": "Apply Model Evaluation by doing: evaluate a classifier on an imbalanced dataset and justify the metric.",
+   "expected_evidence": "Practice output you can show; not verified until reviewed.",
+   "evidence_source": null,
+   "completion_criteria": "You have completed: evaluate a classifier on an imbalanced dataset and justify the metric.",
+   "requires": [
+    "learn_model_evaluation"
+   ]
+  },
+  {
+   "id": "assess_model_evaluation",
+   "skill": "Model Evaluation",
+   "type": "assessment",
+   "title": "Reviewed task: Model Evaluation",
+   "hours": 3,
+   "objective": "Produce evidence of Model Evaluation: submit an evaluation write-up for review.",
+   "expected_evidence": "A human-reviewed result (task_review). Submission alone does not count as competence.",
+   "evidence_source": "task_review",
+   "requires": [
+    "practice_model_evaluation"
+   ],
+   "requires_review": true,
+   "completion_criteria": "A reviewer has rated the submission; the rating, not the submission, updates your skill evidence."
+  },
+  {
+   "id": "learn_feature_engineering",
+   "skill": "Feature Engineering",
+   "type": "learn",
+   "title": "Learn Feature Engineering fundamentals",
+   "hours": 5,
+   "objective": "Understand encoding, scaling, interaction and date features.",
+   "expected_evidence": "Self-study only: produces no verified evidence.",
+   "evidence_source": null,
+   "completion_criteria": "You can explain the main ideas of Feature Engineering in your own words and have worked through examples.",
+   "requires": []
+  },
+  {
+   "id": "practice_feature_engineering",
+   "skill": "Feature Engineering",
+   "type": "practice",
+   "title": "Practise Feature Engineering",
+   "hours": 5,
+   "objective": "Apply Feature Engineering by doing: engineer features for a tabular task and measure the effect.",
+   "expected_evidence": "Practice output you can show; not verified until reviewed.",
+   "evidence_source": null,
+   "completion_criteria": "You have completed: engineer features for a tabular task and measure the effect.",
+   "requires": [
+    "learn_feature_engineering"
+   ]
+  },
+  {
+   "id": "assess_feature_engineering",
+   "skill": "Feature Engineering",
+   "type": "assessment",
+   "title": "Reviewed task: Feature Engineering",
+   "hours": 3,
+   "objective": "Produce evidence of Feature Engineering: deliver a reviewed feature-engineering task.",
+   "expected_evidence": "A human-reviewed result (task_review). Submission alone does not count as competence.",
+   "evidence_source": "task_review",
+   "requires": [
+    "practice_feature_engineering"
+   ],
+   "requires_review": true,
+   "completion_criteria": "A reviewer has rated the submission; the rating, not the submission, updates your skill evidence."
+  },
+  {
+   "id": "learn_deep_learning",
+   "skill": "Deep Learning",
+   "type": "learn",
+   "title": "Learn Deep Learning fundamentals",
+   "hours": 8,
+   "objective": "Understand neural network basics, backpropagation, regularisation.",
+   "expected_evidence": "Self-study only: produces no verified evidence.",
+   "evidence_source": null,
+   "completion_criteria": "You can explain the main ideas of Deep Learning in your own words and have worked through examples.",
+   "requires": []
+  },
+  {
+   "id": "practice_deep_learning",
+   "skill": "Deep Learning",
+   "type": "practice",
+   "title": "Practise Deep Learning",
+   "hours": 6,
+   "objective": "Apply Deep Learning by doing: train a small network and plot learning curves.",
+   "expected_evidence": "Practice output you can show; not verified until reviewed.",
+   "evidence_source": null,
+   "completion_criteria": "You have completed: train a small network and plot learning curves.",
+   "requires": [
+    "learn_deep_learning"
+   ]
+  },
+  {
+   "id": "assess_deep_learning",
+   "skill": "Deep Learning",
+   "type": "assessment",
+   "title": "Reviewed task: Deep Learning",
+   "hours": 3,
+   "objective": "Produce evidence of Deep Learning: explain a trained network's behaviour in a reviewed write-up.",
+   "expected_evidence": "A human-reviewed result (task_review). Submission alone does not count as competence.",
+   "evidence_source": "task_review",
+   "requires": [
+    "practice_deep_learning"
+   ],
+   "requires_review": true,
+   "completion_criteria": "A reviewer has rated the submission; the rating, not the submission, updates your skill evidence."
+  },
+  {
+   "id": "learn_pytorch",
+   "skill": "PyTorch",
+   "type": "learn",
+   "title": "Learn PyTorch fundamentals",
+   "hours": 6,
+   "objective": "Understand tensors, autograd, datasets and training loops.",
+   "expected_evidence": "Self-study only: produces no verified evidence.",
+   "evidence_source": null,
+   "completion_criteria": "You can explain the main ideas of PyTorch in your own words and have worked through examples.",
+   "requires": []
+  },
+  {
+   "id": "practice_pytorch",
+   "skill": "PyTorch",
+   "type": "practice",
+   "title": "Practise PyTorch",
+   "hours": 6,
+   "objective": "Apply PyTorch by doing: write a training loop for a small model.",
+   "expected_evidence": "Practice output you can show; not verified until reviewed.",
+   "evidence_source": null,
+   "completion_criteria": "You have completed: write a training loop for a small model.",
+   "requires": [
+    "learn_pytorch"
+   ]
+  },
+  {
+   "id": "assess_pytorch",
+   "skill": "PyTorch",
+   "type": "assessment",
+   "title": "Reviewed task: PyTorch",
+   "hours": 3,
+   "objective": "Produce evidence of PyTorch: deliver a reviewed PyTorch training task.",
+   "expected_evidence": "A human-reviewed result (task_review). Submission alone does not count as competence.",
+   "evidence_source": "task_review",
+   "requires": [
+    "practice_pytorch"
+   ],
+   "requires_review": true,
+   "completion_criteria": "A reviewer has rated the submission; the rating, not the submission, updates your skill evidence."
+  },
+  {
+   "id": "learn_git",
+   "skill": "Git",
+   "type": "learn",
+   "title": "Learn Git fundamentals",
+   "hours": 3,
+   "objective": "Understand commits, branches, merges and pull requests.",
+   "expected_evidence": "Self-study only: produces no verified evidence.",
+   "evidence_source": null,
+   "completion_criteria": "You can explain the main ideas of Git in your own words and have worked through examples.",
+   "requires": []
+  },
+  {
+   "id": "practice_git",
+   "skill": "Git",
+   "type": "practice",
+   "title": "Practise Git",
+   "hours": 3,
+   "objective": "Apply Git by doing: practise branching and resolving a merge conflict in a sandbox repository.",
+   "expected_evidence": "Practice output you can show; not verified until reviewed.",
+   "evidence_source": null,
+   "completion_criteria": "You have completed: practise branching and resolving a merge conflict in a sandbox repository.",
+   "requires": [
+    "learn_git"
+   ]
+  },
+  {
+   "id": "assess_git",
+   "skill": "Git",
+   "type": "assessment",
+   "title": "Reviewed task: Git",
+   "hours": 2,
+   "objective": "Produce evidence of Git: complete a reviewed Git workflow exercise.",
+   "expected_evidence": "A human-reviewed result (task_review). Submission alone does not count as competence.",
+   "evidence_source": "task_review",
+   "requires": [
+    "practice_git"
+   ],
+   "requires_review": true,
+   "completion_criteria": "A reviewer has rated the submission; the rating, not the submission, updates your skill evidence."
+  },
+  {
+   "id": "learn_sql",
+   "skill": "SQL",
+   "type": "learn",
+   "title": "Learn SQL fundamentals",
+   "hours": 8,
+   "objective": "Understand SELECT, joins, aggregation, subqueries and window functions.",
+   "expected_evidence": "Self-study only: produces no verified evidence.",
+   "evidence_source": null,
+   "completion_criteria": "You can explain the main ideas of SQL in your own words and have worked through examples.",
+   "requires": []
+  },
+  {
+   "id": "practice_sql",
+   "skill": "SQL",
+   "type": "practice",
+   "title": "Practise SQL",
+   "hours": 6,
+   "objective": "Apply SQL by doing: answer 15 query questions against a practice database.",
+   "expected_evidence": "Practice output you can show; not verified until reviewed.",
+   "evidence_source": null,
+   "completion_criteria": "You have completed: answer 15 query questions against a practice database.",
+   "requires": [
+    "learn_sql"
+   ]
+  },
+  {
+   "id": "assess_sql",
+   "skill": "SQL",
+   "type": "assessment",
+   "title": "Reviewed task: SQL",
+   "hours": 3,
+   "objective": "Produce evidence of SQL: complete a reviewed SQL query set.",
+   "expected_evidence": "A human-reviewed result (task_review). Submission alone does not count as competence.",
+   "evidence_source": "task_review",
+   "requires": [
+    "practice_sql"
+   ],
+   "requires_review": true,
+   "completion_criteria": "A reviewer has rated the submission; the rating, not the submission, updates your skill evidence."
+  },
+  {
+   "id": "learn_docker",
+   "skill": "Docker",
+   "type": "learn",
+   "title": "Learn Docker fundamentals",
+   "hours": 4,
+   "objective": "Understand images, containers, volumes and Dockerfiles.",
+   "expected_evidence": "Self-study only: produces no verified evidence.",
+   "evidence_source": null,
+   "completion_criteria": "You can explain the main ideas of Docker in your own words and have worked through examples.",
+   "requires": []
+  },
+  {
+   "id": "practice_docker",
+   "skill": "Docker",
+   "type": "practice",
+   "title": "Practise Docker",
+   "hours": 4,
+   "objective": "Apply Docker by doing: containerise a small script or API.",
+   "expected_evidence": "Practice output you can show; not verified until reviewed.",
+   "evidence_source": null,
+   "completion_criteria": "You have completed: containerise a small script or API.",
+   "requires": [
+    "learn_docker"
+   ]
+  },
+  {
+   "id": "assess_docker",
+   "skill": "Docker",
+   "type": "assessment",
+   "title": "Reviewed task: Docker",
+   "hours": 2,
+   "objective": "Produce evidence of Docker: deliver a reviewed Dockerfile task.",
+   "expected_evidence": "A human-reviewed result (task_review). Submission alone does not count as competence.",
+   "evidence_source": "task_review",
+   "requires": [
+    "practice_docker"
+   ],
+   "requires_review": true,
+   "completion_criteria": "A reviewer has rated the submission; the rating, not the submission, updates your skill evidence."
+  },
+  {
+   "id": "learn_mlops",
+   "skill": "MLOps",
+   "type": "learn",
+   "title": "Learn MLOps fundamentals",
+   "hours": 5,
+   "objective": "Understand experiment tracking, model packaging and monitoring concepts.",
+   "expected_evidence": "Self-study only: produces no verified evidence.",
+   "evidence_source": null,
+   "completion_criteria": "You can explain the main ideas of MLOps in your own words and have worked through examples.",
+   "requires": []
+  },
+  {
+   "id": "practice_mlops",
+   "skill": "MLOps",
+   "type": "practice",
+   "title": "Practise MLOps",
+   "hours": 5,
+   "objective": "Apply MLOps by doing: package a trained model behind a simple prediction function with tests.",
+   "expected_evidence": "Practice output you can show; not verified until reviewed.",
+   "evidence_source": null,
+   "completion_criteria": "You have completed: package a trained model behind a simple prediction function with tests.",
+   "requires": [
+    "learn_mlops"
+   ]
+  },
+  {
+   "id": "assess_mlops",
+   "skill": "MLOps",
+   "type": "assessment",
+   "title": "Reviewed task: MLOps",
+   "hours": 3,
+   "objective": "Produce evidence of MLOps: deliver a reviewed model-packaging task.",
+   "expected_evidence": "A human-reviewed result (task_review). Submission alone does not count as competence.",
+   "evidence_source": "task_review",
+   "requires": [
+    "practice_mlops"
+   ],
+   "requires_review": true,
+   "completion_criteria": "A reviewer has rated the submission; the rating, not the submission, updates your skill evidence."
+  },
+  {
+   "id": "learn_excel",
+   "skill": "Excel",
+   "type": "learn",
+   "title": "Learn Excel fundamentals",
+   "hours": 5,
+   "objective": "Understand formulas, lookups, pivot tables and charts.",
+   "expected_evidence": "Self-study only: produces no verified evidence.",
+   "evidence_source": null,
+   "completion_criteria": "You can explain the main ideas of Excel in your own words and have worked through examples.",
+   "requires": []
+  },
+  {
+   "id": "practice_excel",
+   "skill": "Excel",
+   "type": "practice",
+   "title": "Practise Excel",
+   "hours": 4,
+   "objective": "Apply Excel by doing: build a pivot-table summary for a sample dataset.",
+   "expected_evidence": "Practice output you can show; not verified until reviewed.",
+   "evidence_source": null,
+   "completion_criteria": "You have completed: build a pivot-table summary for a sample dataset.",
+   "requires": [
+    "learn_excel"
+   ]
+  },
+  {
+   "id": "assess_excel",
+   "skill": "Excel",
+   "type": "assessment",
+   "title": "Reviewed task: Excel",
+   "hours": 2,
+   "objective": "Produce evidence of Excel: complete a reviewed spreadsheet analysis task.",
+   "expected_evidence": "A human-reviewed result (task_review). Submission alone does not count as competence.",
+   "evidence_source": "task_review",
+   "requires": [
+    "practice_excel"
+   ],
+   "requires_review": true,
+   "completion_criteria": "A reviewer has rated the submission; the rating, not the submission, updates your skill evidence."
+  },
+  {
+   "id": "learn_data_analysis",
+   "skill": "Data Analysis",
+   "type": "learn",
+   "title": "Learn Data Analysis fundamentals",
+   "hours": 6,
+   "objective": "Understand framing questions, exploratory analysis and communicating findings.",
+   "expected_evidence": "Self-study only: produces no verified evidence.",
+   "evidence_source": null,
+   "completion_criteria": "You can explain the main ideas of Data Analysis in your own words and have worked through examples.",
+   "requires": []
+  },
+  {
+   "id": "practice_data_analysis",
+   "skill": "Data Analysis",
+   "type": "practice",
+   "title": "Practise Data Analysis",
+   "hours": 6,
+   "objective": "Apply Data Analysis by doing: explore a dataset and write a one-page findings note.",
+   "expected_evidence": "Practice output you can show; not verified until reviewed.",
+   "evidence_source": null,
+   "completion_criteria": "You have completed: explore a dataset and write a one-page findings note.",
+   "requires": [
+    "learn_data_analysis"
+   ]
+  },
+  {
+   "id": "assess_data_analysis",
+   "skill": "Data Analysis",
+   "type": "assessment",
+   "title": "Reviewed task: Data Analysis",
+   "hours": 3,
+   "objective": "Produce evidence of Data Analysis: submit an analysis note for review.",
+   "expected_evidence": "A human-reviewed result (task_review). Submission alone does not count as competence.",
+   "evidence_source": "task_review",
+   "requires": [
+    "practice_data_analysis"
+   ],
+   "requires_review": true,
+   "completion_criteria": "A reviewer has rated the submission; the rating, not the submission, updates your skill evidence."
+  },
+  {
+   "id": "learn_data_visualization",
+   "skill": "Data Visualization",
+   "type": "learn",
+   "title": "Learn Data Visualization fundamentals",
+   "hours": 4,
+   "objective": "Understand choosing chart types and avoiding misleading visuals.",
+   "expected_evidence": "Self-study only: produces no verified evidence.",
+   "evidence_source": null,
+   "completion_criteria": "You can explain the main ideas of Data Visualization in your own words and have worked through examples.",
+   "requires": []
+  },
+  {
+   "id": "practice_data_visualization",
+   "skill": "Data Visualization",
+   "type": "practice",
+   "title": "Practise Data Visualization",
+   "hours": 4,
+   "objective": "Apply Data Visualization by doing: produce three charts for a dataset with written takeaways.",
+   "expected_evidence": "Practice output you can show; not verified until reviewed.",
+   "evidence_source": null,
+   "completion_criteria": "You have completed: produce three charts for a dataset with written takeaways.",
+   "requires": [
+    "learn_data_visualization"
+   ]
+  },
+  {
+   "id": "assess_data_visualization",
+   "skill": "Data Visualization",
+   "type": "assessment",
+   "title": "Reviewed task: Data Visualization",
+   "hours": 3,
+   "objective": "Produce evidence of Data Visualization: submit a visualisation set for review.",
+   "expected_evidence": "A human-reviewed result (task_review). Submission alone does not count as competence.",
+   "evidence_source": "task_review",
+   "requires": [
+    "practice_data_visualization"
+   ],
+   "requires_review": true,
+   "completion_criteria": "A reviewer has rated the submission; the rating, not the submission, updates your skill evidence."
+  },
+  {
+   "id": "learn_tableau",
+   "skill": "Tableau",
+   "type": "learn",
+   "title": "Learn Tableau fundamentals",
+   "hours": 5,
+   "objective": "Understand connecting data, calculated fields and dashboards.",
+   "expected_evidence": "Self-study only: produces no verified evidence.",
+   "evidence_source": null,
+   "completion_criteria": "You can explain the main ideas of Tableau in your own words and have worked through examples.",
+   "requires": []
+  },
+  {
+   "id": "practice_tableau",
+   "skill": "Tableau",
+   "type": "practice",
+   "title": "Practise Tableau",
+   "hours": 5,
+   "objective": "Apply Tableau by doing: build a simple dashboard from a sample file.",
+   "expected_evidence": "Practice output you can show; not verified until reviewed.",
+   "evidence_source": null,
+   "completion_criteria": "You have completed: build a simple dashboard from a sample file.",
+   "requires": [
+    "learn_tableau"
+   ]
+  },
+  {
+   "id": "assess_tableau",
+   "skill": "Tableau",
+   "type": "assessment",
+   "title": "Reviewed task: Tableau",
+   "hours": 3,
+   "objective": "Produce evidence of Tableau: submit a dashboard for review.",
+   "expected_evidence": "A human-reviewed result (task_review). Submission alone does not count as competence.",
+   "evidence_source": "task_review",
+   "requires": [
+    "practice_tableau"
+   ],
+   "requires_review": true,
+   "completion_criteria": "A reviewer has rated the submission; the rating, not the submission, updates your skill evidence."
+  },
+  {
+   "id": "learn_power_bi",
+   "skill": "Power BI",
+   "type": "learn",
+   "title": "Learn Power BI fundamentals",
+   "hours": 5,
+   "objective": "Understand data model, measures and report pages.",
+   "expected_evidence": "Self-study only: produces no verified evidence.",
+   "evidence_source": null,
+   "completion_criteria": "You can explain the main ideas of Power BI in your own words and have worked through examples.",
+   "requires": []
+  },
+  {
+   "id": "practice_power_bi",
+   "skill": "Power BI",
+   "type": "practice",
+   "title": "Practise Power BI",
+   "hours": 5,
+   "objective": "Apply Power BI by doing: build a small report from a sample file.",
+   "expected_evidence": "Practice output you can show; not verified until reviewed.",
+   "evidence_source": null,
+   "completion_criteria": "You have completed: build a small report from a sample file.",
+   "requires": [
+    "learn_power_bi"
+   ]
+  },
+  {
+   "id": "assess_power_bi",
+   "skill": "Power BI",
+   "type": "assessment",
+   "title": "Reviewed task: Power BI",
+   "hours": 3,
+   "objective": "Produce evidence of Power BI: submit a report for review.",
+   "expected_evidence": "A human-reviewed result (task_review). Submission alone does not count as competence.",
+   "evidence_source": "task_review",
+   "requires": [
+    "practice_power_bi"
+   ],
+   "requires_review": true,
+   "completion_criteria": "A reviewer has rated the submission; the rating, not the submission, updates your skill evidence."
+  },
+  {
+   "id": "learn_communication",
+   "skill": "Communication",
+   "type": "learn",
+   "title": "Learn Communication fundamentals",
+   "hours": 3,
+   "objective": "Understand structuring explanations of technical work for non-technical readers.",
+   "expected_evidence": "Self-study only: produces no verified evidence.",
+   "evidence_source": null,
+   "completion_criteria": "You can explain the main ideas of Communication in your own words and have worked through examples.",
+   "requires": []
+  },
+  {
+   "id": "practice_communication",
+   "skill": "Communication",
+   "type": "practice",
+   "title": "Practise Communication",
+   "hours": 3,
+   "objective": "Apply Communication by doing: write and rehearse a 3-minute project explanation.",
+   "expected_evidence": "Practice output you can show; not verified until reviewed.",
+   "evidence_source": null,
+   "completion_criteria": "You have completed: write and rehearse a 3-minute project explanation.",
+   "requires": [
+    "learn_communication"
+   ]
+  },
+  {
+   "id": "assess_communication",
+   "skill": "Communication",
+   "type": "assessment",
+   "title": "Reviewed task: Communication",
+   "hours": 2,
+   "objective": "Produce evidence of Communication: deliver a recorded or written explanation for review.",
+   "expected_evidence": "A human-reviewed result (task_review). Submission alone does not count as competence.",
+   "evidence_source": "task_review",
+   "requires": [
+    "practice_communication"
+   ],
+   "requires_review": true,
+   "completion_criteria": "A reviewer has rated the submission; the rating, not the submission, updates your skill evidence."
+  },
+  {
+   "id": "learn_javascript",
+   "skill": "JavaScript",
+   "type": "learn",
+   "title": "Learn JavaScript fundamentals",
+   "hours": 8,
+   "objective": "Understand language fundamentals, async code and the DOM.",
+   "expected_evidence": "Self-study only: produces no verified evidence.",
+   "evidence_source": null,
+   "completion_criteria": "You can explain the main ideas of JavaScript in your own words and have worked through examples.",
+   "requires": []
+  },
+  {
+   "id": "practice_javascript",
+   "skill": "JavaScript",
+   "type": "practice",
+   "title": "Practise JavaScript",
+   "hours": 6,
+   "objective": "Apply JavaScript by doing: write small DOM and fetch-based exercises.",
+   "expected_evidence": "Practice output you can show; not verified until reviewed.",
+   "evidence_source": null,
+   "completion_criteria": "You have completed: write small DOM and fetch-based exercises.",
+   "requires": [
+    "learn_javascript"
+   ]
+  },
+  {
+   "id": "assess_javascript",
+   "skill": "JavaScript",
+   "type": "assessment",
+   "title": "Reviewed task: JavaScript",
+   "hours": 3,
+   "objective": "Produce evidence of JavaScript: complete a reviewed JavaScript task set.",
+   "expected_evidence": "A human-reviewed result (task_review). Submission alone does not count as competence.",
+   "evidence_source": "task_review",
+   "requires": [
+    "practice_javascript"
+   ],
+   "requires_review": true,
+   "completion_criteria": "A reviewer has rated the submission; the rating, not the submission, updates your skill evidence."
+  },
+  {
+   "id": "learn_html",
+   "skill": "HTML",
+   "type": "learn",
+   "title": "Learn HTML fundamentals",
+   "hours": 3,
+   "objective": "Understand semantic markup, forms and accessibility basics.",
+   "expected_evidence": "Self-study only: produces no verified evidence.",
+   "evidence_source": null,
+   "completion_criteria": "You can explain the main ideas of HTML in your own words and have worked through examples.",
+   "requires": []
+  },
+  {
+   "id": "practice_html",
+   "skill": "HTML",
+   "type": "practice",
+   "title": "Practise HTML",
+   "hours": 3,
+   "objective": "Apply HTML by doing: mark up a multi-section page semantically.",
+   "expected_evidence": "Practice output you can show; not verified until reviewed.",
+   "evidence_source": null,
+   "completion_criteria": "You have completed: mark up a multi-section page semantically.",
+   "requires": [
+    "learn_html"
+   ]
+  },
+  {
+   "id": "assess_html",
+   "skill": "HTML",
+   "type": "assessment",
+   "title": "Reviewed task: HTML",
+   "hours": 2,
+   "objective": "Produce evidence of HTML: submit a reviewed page.",
+   "expected_evidence": "A human-reviewed result (task_review). Submission alone does not count as competence.",
+   "evidence_source": "task_review",
+   "requires": [
+    "practice_html"
+   ],
+   "requires_review": true,
+   "completion_criteria": "A reviewer has rated the submission; the rating, not the submission, updates your skill evidence."
+  },
+  {
+   "id": "learn_css",
+   "skill": "CSS",
+   "type": "learn",
+   "title": "Learn CSS fundamentals",
+   "hours": 4,
+   "objective": "Understand selectors, box model, flexbox and grid.",
+   "expected_evidence": "Self-study only: produces no verified evidence.",
+   "evidence_source": null,
+   "completion_criteria": "You can explain the main ideas of CSS in your own words and have worked through examples.",
+   "requires": []
+  },
+  {
+   "id": "practice_css",
+   "skill": "CSS",
+   "type": "practice",
+   "title": "Practise CSS",
+   "hours": 4,
+   "objective": "Apply CSS by doing: reproduce a layout from a description.",
+   "expected_evidence": "Practice output you can show; not verified until reviewed.",
+   "evidence_source": null,
+   "completion_criteria": "You have completed: reproduce a layout from a description.",
+   "requires": [
+    "learn_css"
+   ]
+  },
+  {
+   "id": "assess_css",
+   "skill": "CSS",
+   "type": "assessment",
+   "title": "Reviewed task: CSS",
+   "hours": 2,
+   "objective": "Produce evidence of CSS: submit a reviewed responsive layout.",
+   "expected_evidence": "A human-reviewed result (task_review). Submission alone does not count as competence.",
+   "evidence_source": "task_review",
+   "requires": [
+    "practice_css"
+   ],
+   "requires_review": true,
+   "completion_criteria": "A reviewer has rated the submission; the rating, not the submission, updates your skill evidence."
+  },
+  {
+   "id": "learn_react",
+   "skill": "React",
+   "type": "learn",
+   "title": "Learn React fundamentals",
+   "hours": 8,
+   "objective": "Understand components, state, props and effects.",
+   "expected_evidence": "Self-study only: produces no verified evidence.",
+   "evidence_source": null,
+   "completion_criteria": "You can explain the main ideas of React in your own words and have worked through examples.",
+   "requires": []
+  },
+  {
+   "id": "practice_react",
+   "skill": "React",
+   "type": "practice",
+   "title": "Practise React",
+   "hours": 7,
+   "objective": "Apply React by doing: build a small stateful component set.",
+   "expected_evidence": "Practice output you can show; not verified until reviewed.",
+   "evidence_source": null,
+   "completion_criteria": "You have completed: build a small stateful component set.",
+   "requires": [
+    "learn_react"
+   ]
+  },
+  {
+   "id": "assess_react",
+   "skill": "React",
+   "type": "assessment",
+   "title": "Reviewed task: React",
+   "hours": 3,
+   "objective": "Produce evidence of React: deliver a reviewed React task.",
+   "expected_evidence": "A human-reviewed result (task_review). Submission alone does not count as competence.",
+   "evidence_source": "task_review",
+   "requires": [
+    "practice_react"
+   ],
+   "requires_review": true,
+   "completion_criteria": "A reviewer has rated the submission; the rating, not the submission, updates your skill evidence."
+  },
+  {
+   "id": "learn_node_js",
+   "skill": "Node.js",
+   "type": "learn",
+   "title": "Learn Node.js fundamentals",
+   "hours": 6,
+   "objective": "Understand modules, the event loop and building a basic server.",
+   "expected_evidence": "Self-study only: produces no verified evidence.",
+   "evidence_source": null,
+   "completion_criteria": "You can explain the main ideas of Node.js in your own words and have worked through examples.",
+   "requires": []
+  },
+  {
+   "id": "practice_node_js",
+   "skill": "Node.js",
+   "type": "practice",
+   "title": "Practise Node.js",
+   "hours": 6,
+   "objective": "Apply Node.js by doing: build a small server with routes.",
+   "expected_evidence": "Practice output you can show; not verified until reviewed.",
+   "evidence_source": null,
+   "completion_criteria": "You have completed: build a small server with routes.",
+   "requires": [
+    "learn_node_js"
+   ]
+  },
+  {
+   "id": "assess_node_js",
+   "skill": "Node.js",
+   "type": "assessment",
+   "title": "Reviewed task: Node.js",
+   "hours": 3,
+   "objective": "Produce evidence of Node.js: deliver a reviewed Node.js task.",
+   "expected_evidence": "A human-reviewed result (task_review). Submission alone does not count as competence.",
+   "evidence_source": "task_review",
+   "requires": [
+    "practice_node_js"
+   ],
+   "requires_review": true,
+   "completion_criteria": "A reviewer has rated the submission; the rating, not the submission, updates your skill evidence."
+  },
+  {
+   "id": "learn_rest_apis",
+   "skill": "REST APIs",
+   "type": "learn",
+   "title": "Learn REST APIs fundamentals",
+   "hours": 5,
+   "objective": "Understand resources, verbs, status codes and validation.",
+   "expected_evidence": "Self-study only: produces no verified evidence.",
+   "evidence_source": null,
+   "completion_criteria": "You can explain the main ideas of REST APIs in your own words and have worked through examples.",
+   "requires": []
+  },
+  {
+   "id": "practice_rest_apis",
+   "skill": "REST APIs",
+   "type": "practice",
+   "title": "Practise REST APIs",
+   "hours": 6,
+   "objective": "Apply REST APIs by doing: design and implement a small CRUD API.",
+   "expected_evidence": "Practice output you can show; not verified until reviewed.",
+   "evidence_source": null,
+   "completion_criteria": "You have completed: design and implement a small CRUD API.",
+   "requires": [
+    "learn_rest_apis"
+   ]
+  },
+  {
+   "id": "assess_rest_apis",
+   "skill": "REST APIs",
+   "type": "assessment",
+   "title": "Reviewed task: REST APIs",
+   "hours": 3,
+   "objective": "Produce evidence of REST APIs: deliver a reviewed API design and implementation.",
+   "expected_evidence": "A human-reviewed result (task_review). Submission alone does not count as competence.",
+   "evidence_source": "task_review",
+   "requires": [
+    "practice_rest_apis"
+   ],
+   "requires_review": true,
+   "completion_criteria": "A reviewer has rated the submission; the rating, not the submission, updates your skill evidence."
+  },
+  {
+   "id": "learn_mongodb",
+   "skill": "MongoDB",
+   "type": "learn",
+   "title": "Learn MongoDB fundamentals",
+   "hours": 4,
+   "objective": "Understand documents, queries and schema design trade-offs.",
+   "expected_evidence": "Self-study only: produces no verified evidence.",
+   "evidence_source": null,
+   "completion_criteria": "You can explain the main ideas of MongoDB in your own words and have worked through examples.",
+   "requires": []
+  },
+  {
+   "id": "practice_mongodb",
+   "skill": "MongoDB",
+   "type": "practice",
+   "title": "Practise MongoDB",
+   "hours": 4,
+   "objective": "Apply MongoDB by doing: model and query a small collection.",
+   "expected_evidence": "Practice output you can show; not verified until reviewed.",
+   "evidence_source": null,
+   "completion_criteria": "You have completed: model and query a small collection.",
+   "requires": [
+    "learn_mongodb"
+   ]
+  },
+  {
+   "id": "assess_mongodb",
+   "skill": "MongoDB",
+   "type": "assessment",
+   "title": "Reviewed task: MongoDB",
+   "hours": 2,
+   "objective": "Produce evidence of MongoDB: deliver a reviewed MongoDB modelling task.",
+   "expected_evidence": "A human-reviewed result (task_review). Submission alone does not count as competence.",
+   "evidence_source": "task_review",
+   "requires": [
+    "practice_mongodb"
+   ],
+   "requires_review": true,
+   "completion_criteria": "A reviewer has rated the submission; the rating, not the submission, updates your skill evidence."
+  },
+  {
+   "id": "learn_dbms",
+   "skill": "DBMS",
+   "type": "learn",
+   "title": "Learn DBMS fundamentals",
+   "hours": 6,
+   "objective": "Understand relational modelling, normalisation, transactions and indexes.",
+   "expected_evidence": "Self-study only: produces no verified evidence.",
+   "evidence_source": null,
+   "completion_criteria": "You can explain the main ideas of DBMS in your own words and have worked through examples.",
+   "requires": []
+  },
+  {
+   "id": "practice_dbms",
+   "skill": "DBMS",
+   "type": "practice",
+   "title": "Practise DBMS",
+   "hours": 4,
+   "objective": "Apply DBMS by doing: normalise a sample schema and justify the design.",
+   "expected_evidence": "Practice output you can show; not verified until reviewed.",
+   "evidence_source": null,
+   "completion_criteria": "You have completed: normalise a sample schema and justify the design.",
+   "requires": [
+    "learn_dbms"
+   ]
+  },
+  {
+   "id": "assess_dbms",
+   "skill": "DBMS",
+   "type": "assessment",
+   "title": "Reviewed task: DBMS",
+   "hours": 3,
+   "objective": "Produce evidence of DBMS: submit a reviewed schema design.",
+   "expected_evidence": "A human-reviewed result (task_review). Submission alone does not count as competence.",
+   "evidence_source": "task_review",
+   "requires": [
+    "practice_dbms"
+   ],
+   "requires_review": true,
+   "completion_criteria": "A reviewer has rated the submission; the rating, not the submission, updates your skill evidence."
+  },
+  {
+   "id": "learn_typescript",
+   "skill": "TypeScript",
+   "type": "learn",
+   "title": "Learn TypeScript fundamentals",
+   "hours": 5,
+   "objective": "Understand types, interfaces and generics.",
+   "expected_evidence": "Self-study only: produces no verified evidence.",
+   "evidence_source": null,
+   "completion_criteria": "You can explain the main ideas of TypeScript in your own words and have worked through examples.",
+   "requires": []
+  },
+  {
+   "id": "practice_typescript",
+   "skill": "TypeScript",
+   "type": "practice",
+   "title": "Practise TypeScript",
+   "hours": 4,
+   "objective": "Apply TypeScript by doing: convert a small JavaScript module to TypeScript.",
+   "expected_evidence": "Practice output you can show; not verified until reviewed.",
+   "evidence_source": null,
+   "completion_criteria": "You have completed: convert a small JavaScript module to TypeScript.",
+   "requires": [
+    "learn_typescript"
+   ]
+  },
+  {
+   "id": "assess_typescript",
+   "skill": "TypeScript",
+   "type": "assessment",
+   "title": "Reviewed task: TypeScript",
+   "hours": 2,
+   "objective": "Produce evidence of TypeScript: deliver a reviewed TypeScript task.",
+   "expected_evidence": "A human-reviewed result (task_review). Submission alone does not count as competence.",
+   "evidence_source": "task_review",
+   "requires": [
+    "practice_typescript"
+   ],
+   "requires_review": true,
+   "completion_criteria": "A reviewer has rated the submission; the rating, not the submission, updates your skill evidence."
+  },
+  {
+   "id": "learn_unit_testing",
+   "skill": "Unit Testing",
+   "type": "learn",
+   "title": "Learn Unit Testing fundamentals",
+   "hours": 4,
+   "objective": "Understand test structure, fixtures, mocking and coverage trade-offs.",
+   "expected_evidence": "Self-study only: produces no verified evidence.",
+   "evidence_source": null,
+   "completion_criteria": "You can explain the main ideas of Unit Testing in your own words and have worked through examples.",
+   "requires": []
+  },
+  {
+   "id": "practice_unit_testing",
+   "skill": "Unit Testing",
+   "type": "practice",
+   "title": "Practise Unit Testing",
+   "hours": 4,
+   "objective": "Apply Unit Testing by doing: write tests for an existing small module.",
+   "expected_evidence": "Practice output you can show; not verified until reviewed.",
+   "evidence_source": null,
+   "completion_criteria": "You have completed: write tests for an existing small module.",
+   "requires": [
+    "learn_unit_testing"
+   ]
+  },
+  {
+   "id": "assess_unit_testing",
+   "skill": "Unit Testing",
+   "type": "assessment",
+   "title": "Reviewed task: Unit Testing",
+   "hours": 2,
+   "objective": "Produce evidence of Unit Testing: deliver a reviewed test suite.",
+   "expected_evidence": "A human-reviewed result (task_review). Submission alone does not count as competence.",
+   "evidence_source": "task_review",
+   "requires": [
+    "practice_unit_testing"
+   ],
+   "requires_review": true,
+   "completion_criteria": "A reviewer has rated the submission; the rating, not the submission, updates your skill evidence."
+  },
+  {
+   "id": "interview_dbms",
+   "skill": "DBMS",
+   "type": "interview_practice",
+   "title": "Mock interview questions: DBMS",
+   "hours": 1,
+   "objective": "Answer practice interview questions on DBMS to get an automated, unverified read on your current level.",
+   "expected_evidence": "Automated interview evaluation (interview_auto): provisional, not verified.",
+   "evidence_source": "interview_auto",
+   "completion_criteria": "You answered at least three questions and reviewed the feedback.",
+   "requires": []
+  },
+  {
+   "id": "interview_data_analysis",
+   "skill": "Data Analysis",
+   "type": "interview_practice",
+   "title": "Mock interview questions: Data Analysis",
+   "hours": 1,
+   "objective": "Answer practice interview questions on Data Analysis to get an automated, unverified read on your current level.",
+   "expected_evidence": "Automated interview evaluation (interview_auto): provisional, not verified.",
+   "evidence_source": "interview_auto",
+   "completion_criteria": "You answered at least three questions and reviewed the feedback.",
+   "requires": []
+  },
+  {
+   "id": "interview_data_visualization",
+   "skill": "Data Visualization",
+   "type": "interview_practice",
+   "title": "Mock interview questions: Data Visualization",
+   "hours": 1,
+   "objective": "Answer practice interview questions on Data Visualization to get an automated, unverified read on your current level.",
+   "expected_evidence": "Automated interview evaluation (interview_auto): provisional, not verified.",
+   "evidence_source": "interview_auto",
+   "completion_criteria": "You answered at least three questions and reviewed the feedback.",
+   "requires": []
+  },
+  {
+   "id": "interview_git",
+   "skill": "Git",
+   "type": "interview_practice",
+   "title": "Mock interview questions: Git",
+   "hours": 1,
+   "objective": "Answer practice interview questions on Git to get an automated, unverified read on your current level.",
+   "expected_evidence": "Automated interview evaluation (interview_auto): provisional, not verified.",
+   "evidence_source": "interview_auto",
+   "completion_criteria": "You answered at least three questions and reviewed the feedback.",
+   "requires": []
+  },
+  {
+   "id": "interview_javascript",
+   "skill": "JavaScript",
+   "type": "interview_practice",
+   "title": "Mock interview questions: JavaScript",
+   "hours": 1,
+   "objective": "Answer practice interview questions on JavaScript to get an automated, unverified read on your current level.",
+   "expected_evidence": "Automated interview evaluation (interview_auto): provisional, not verified.",
+   "evidence_source": "interview_auto",
+   "completion_criteria": "You answered at least three questions and reviewed the feedback.",
+   "requires": []
+  },
+  {
+   "id": "interview_machine_learning",
+   "skill": "Machine Learning",
+   "type": "interview_practice",
+   "title": "Mock interview questions: Machine Learning",
+   "hours": 1,
+   "objective": "Answer practice interview questions on Machine Learning to get an automated, unverified read on your current level.",
+   "expected_evidence": "Automated interview evaluation (interview_auto): provisional, not verified.",
+   "evidence_source": "interview_auto",
+   "completion_criteria": "You answered at least three questions and reviewed the feedback.",
+   "requires": []
+  },
+  {
+   "id": "interview_model_evaluation",
+   "skill": "Model Evaluation",
+   "type": "interview_practice",
+   "title": "Mock interview questions: Model Evaluation",
+   "hours": 1,
+   "objective": "Answer practice interview questions on Model Evaluation to get an automated, unverified read on your current level.",
+   "expected_evidence": "Automated interview evaluation (interview_auto): provisional, not verified.",
+   "evidence_source": "interview_auto",
+   "completion_criteria": "You answered at least three questions and reviewed the feedback.",
+   "requires": []
+  },
+  {
+   "id": "interview_python",
+   "skill": "Python",
+   "type": "interview_practice",
+   "title": "Mock interview questions: Python",
+   "hours": 1,
+   "objective": "Answer practice interview questions on Python to get an automated, unverified read on your current level.",
+   "expected_evidence": "Automated interview evaluation (interview_auto): provisional, not verified.",
+   "evidence_source": "interview_auto",
+   "completion_criteria": "You answered at least three questions and reviewed the feedback.",
+   "requires": []
+  },
+  {
+   "id": "interview_rest_apis",
+   "skill": "REST APIs",
+   "type": "interview_practice",
+   "title": "Mock interview questions: REST APIs",
+   "hours": 1,
+   "objective": "Answer practice interview questions on REST APIs to get an automated, unverified read on your current level.",
+   "expected_evidence": "Automated interview evaluation (interview_auto): provisional, not verified.",
+   "evidence_source": "interview_auto",
+   "completion_criteria": "You answered at least three questions and reviewed the feedback.",
+   "requires": []
+  },
+  {
+   "id": "interview_react",
+   "skill": "React",
+   "type": "interview_practice",
+   "title": "Mock interview questions: React",
+   "hours": 1,
+   "objective": "Answer practice interview questions on React to get an automated, unverified read on your current level.",
+   "expected_evidence": "Automated interview evaluation (interview_auto): provisional, not verified.",
+   "evidence_source": "interview_auto",
+   "completion_criteria": "You answered at least three questions and reviewed the feedback.",
+   "requires": []
+  },
+  {
+   "id": "interview_sql",
+   "skill": "SQL",
+   "type": "interview_practice",
+   "title": "Mock interview questions: SQL",
+   "hours": 1,
+   "objective": "Answer practice interview questions on SQL to get an automated, unverified read on your current level.",
+   "expected_evidence": "Automated interview evaluation (interview_auto): provisional, not verified.",
+   "evidence_source": "interview_auto",
+   "completion_criteria": "You answered at least three questions and reviewed the feedback.",
+   "requires": []
+  },
+  {
+   "id": "interview_statistics",
+   "skill": "Statistics",
+   "type": "interview_practice",
+   "title": "Mock interview questions: Statistics",
+   "hours": 1,
+   "objective": "Answer practice interview questions on Statistics to get an automated, unverified read on your current level.",
+   "expected_evidence": "Automated interview evaluation (interview_auto): provisional, not verified.",
+   "evidence_source": "interview_auto",
+   "completion_criteria": "You answered at least three questions and reviewed the feedback.",
+   "requires": []
+  },
+  {
+   "id": "project_machine_learning",
+   "skill": "Machine Learning",
+   "type": "project",
+   "title": "Mini ML project with a written report",
+   "hours": 14,
+   "objective": "Build a portfolio-quality Machine Learning project and document decisions, limits and results.",
+   "expected_evidence": "Portfolio artefact; counts as evidence only after portfolio review (portfolio_review).",
+   "evidence_source": "portfolio_review",
+   "completion_criteria": "The project is documented and a reviewer has assessed it.",
+   "requires": [
+    "practice_machine_learning"
+   ],
+   "requires_review": true
+  },
+  {
+   "id": "project_sql",
+   "skill": "SQL",
+   "type": "project",
+   "title": "Analytics project on a practice database",
+   "hours": 14,
+   "objective": "Build a portfolio-quality SQL project and document decisions, limits and results.",
+   "expected_evidence": "Portfolio artefact; counts as evidence only after portfolio review (portfolio_review).",
+   "evidence_source": "portfolio_review",
+   "completion_criteria": "The project is documented and a reviewer has assessed it.",
+   "requires": [
+    "practice_sql"
+   ],
+   "requires_review": true
+  },
+  {
+   "id": "project_react",
+   "skill": "React",
+   "type": "project",
+   "title": "Small multi-page React app",
+   "hours": 14,
+   "objective": "Build a portfolio-quality React project and document decisions, limits and results.",
+   "expected_evidence": "Portfolio artefact; counts as evidence only after portfolio review (portfolio_review).",
+   "evidence_source": "portfolio_review",
+   "completion_criteria": "The project is documented and a reviewer has assessed it.",
+   "requires": [
+    "practice_react"
+   ],
+   "requires_review": true
+  },
+  {
+   "id": "project_data_analysis",
+   "skill": "Data Analysis",
+   "type": "project",
+   "title": "End-to-end analysis portfolio piece",
+   "hours": 14,
+   "objective": "Build a portfolio-quality Data Analysis project and document decisions, limits and results.",
+   "expected_evidence": "Portfolio artefact; counts as evidence only after portfolio review (portfolio_review).",
+   "evidence_source": "portfolio_review",
+   "completion_criteria": "The project is documented and a reviewer has assessed it.",
+   "requires": [
+    "practice_data_analysis"
+   ],
+   "requires_review": true
+  },
+  {
+   "id": "project_rest_apis",
+   "skill": "REST APIs",
+   "type": "project",
+   "title": "Documented API project",
+   "hours": 14,
+   "objective": "Build a portfolio-quality REST APIs project and document decisions, limits and results.",
+   "expected_evidence": "Portfolio artefact; counts as evidence only after portfolio review (portfolio_review).",
+   "evidence_source": "portfolio_review",
+   "completion_criteria": "The project is documented and a reviewer has assessed it.",
+   "requires": [
+    "practice_rest_apis"
+   ],
+   "requires_review": true
+  },
+  {
+   "id": "mentor_machine_learning",
+   "skill": "Machine Learning",
+   "type": "mentor_review",
+   "title": "Mentor review session: Machine Learning",
+   "hours": 1,
+   "objective": "Discuss your Machine Learning progress and get expert feedback. A suggestion only; nothing is booked by this system.",
+   "expected_evidence": "Mentor feedback; counts as evidence only if recorded as an interview_review/task_review by the platform.",
+   "evidence_source": "interview_review",
+   "completion_criteria": "A session took place and the mentor recorded a review through the platform.",
+   "requires": [],
+   "paid_possible": true,
+   "external_action_required": true
+  },
+  {
+   "id": "mentor_sql",
+   "skill": "SQL",
+   "type": "mentor_review",
+   "title": "Mentor review session: SQL",
+   "hours": 1,
+   "objective": "Discuss your SQL progress and get expert feedback. A suggestion only; nothing is booked by this system.",
+   "expected_evidence": "Mentor feedback; counts as evidence only if recorded as an interview_review/task_review by the platform.",
+   "evidence_source": "interview_review",
+   "completion_criteria": "A session took place and the mentor recorded a review through the platform.",
+   "requires": [],
+   "paid_possible": true,
+   "external_action_required": true
+  },
+  {
+   "id": "mentor_python",
+   "skill": "Python",
+   "type": "mentor_review",
+   "title": "Mentor review session: Python",
+   "hours": 1,
+   "objective": "Discuss your Python progress and get expert feedback. A suggestion only; nothing is booked by this system.",
+   "expected_evidence": "Mentor feedback; counts as evidence only if recorded as an interview_review/task_review by the platform.",
+   "evidence_source": "interview_review",
+   "completion_criteria": "A session took place and the mentor recorded a review through the platform.",
+   "requires": [],
+   "paid_possible": true,
+   "external_action_required": true
+  },
+  {
+   "id": "mentor_react",
+   "skill": "React",
+   "type": "mentor_review",
+   "title": "Mentor review session: React",
+   "hours": 1,
+   "objective": "Discuss your React progress and get expert feedback. A suggestion only; nothing is booked by this system.",
+   "expected_evidence": "Mentor feedback; counts as evidence only if recorded as an interview_review/task_review by the platform.",
+   "evidence_source": "interview_review",
+   "completion_criteria": "A session took place and the mentor recorded a review through the platform.",
+   "requires": [],
+   "paid_possible": true,
+   "external_action_required": true
+  },
+  {
+   "id": "mentor_data_analysis",
+   "skill": "Data Analysis",
+   "type": "mentor_review",
+   "title": "Mentor review session: Data Analysis",
+   "hours": 1,
+   "objective": "Discuss your Data Analysis progress and get expert feedback. A suggestion only; nothing is booked by this system.",
+   "expected_evidence": "Mentor feedback; counts as evidence only if recorded as an interview_review/task_review by the platform.",
+   "evidence_source": "interview_review",
+   "completion_criteria": "A session took place and the mentor recorded a review through the platform.",
+   "requires": [],
+   "paid_possible": true,
+   "external_action_required": true
+  }
+ ]
+}

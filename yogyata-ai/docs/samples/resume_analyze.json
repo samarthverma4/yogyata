@@ -1,0 +1,152 @@
+{
+  "request": {
+    "resume_text": "<demo resume r3_ananya_ml.txt>"
+  },
+  "response": {
+    "parsed": {
+      "contact": {
+        "email": "ananya.iyer@example.com",
+        "phone": "9876501234",
+        "links": [
+          "github.com/ananya-demo"
+        ]
+      },
+      "sections": {
+        "header": "Ananya Iyer\nananya.iyer@example.com | 9876501234 | github.com/ananya-demo",
+        "education": "B.Tech Artificial Intelligence, Demo University, 2026",
+        "skills": "Python, PyTorch, TensorFlow, NLP, Computer Vision, Git, Linux",
+        "projects": "- Trained a sentiment classifier with PyTorch reaching 91% accuracy on a 10,000-review dataset\n- Built an OpenCV pipeline detecting defects in 500 sample images with 88% precision\n- Created a text summarization prototype for NLP coursework, presented to 40 classmates",
+        "achievements": "- Won 2nd place among 30 teams at a college hackathon\n- Led a 4-member team for the machine learning club"
+      },
+      "skills": [
+        {
+          "name": "Computer Vision",
+          "category": "ml",
+          "mentions": 2,
+          "in_skills_section": true,
+          "in_experience_or_projects": true,
+          "in_quantified_bullet": true,
+          "support": "evidenced"
+        },
+        {
+          "name": "NLP",
+          "category": "ml",
+          "mentions": 2,
+          "in_skills_section": true,
+          "in_experience_or_projects": true,
+          "in_quantified_bullet": true,
+          "support": "evidenced"
+        },
+        {
+          "name": "PyTorch",
+          "category": "ml",
+          "mentions": 2,
+          "in_skills_section": true,
+          "in_experience_or_projects": true,
+          "in_quantified_bullet": true,
+          "support": "evidenced"
+        },
+        {
+          "_truncated": 5
+        }
+      ],
+      "education_mentioned": true,
+      "graduation_year": 2026,
+      "word_count": 90,
+      "bullet_count": 5,
+      "quantified_bullet_count": 5,
+      "action_verb_bullet_count": 5,
+      "education": [
+        {
+          "degree": "B.Tech Artificial Intelligence",
+          "institution": "Demo University",
+          "year": 2026,
+          "cgpa": null,
+          "raw": "B.Tech Artificial Intelligence, Demo University, 2026"
+        }
+      ],
+      "experience": [],
+      "projects": [
+        {
+          "name": null,
+          "descriptions": [
+            "Trained a sentiment classifier with PyTorch reaching 91% accuracy on a 10,000-review dataset"
+          ],
+          "skills": [
+            "PyTorch"
+          ]
+        },
+        {
+          "name": null,
+          "descriptions": [
+            "Built an OpenCV pipeline detecting defects in 500 sample images with 88% precision"
+          ],
+          "skills": [
+            "Computer Vision"
+          ]
+        },
+        {
+          "name": null,
+          "descriptions": [
+            "Created a text summarization prototype for NLP coursework, presented to 40 classmates"
+          ],
+          "skills": [
+            "NLP"
+          ]
+        }
+      ],
+      "certifications": [],
+      "achievements": [
+        "Won 2nd place among 30 teams at a college hackathon",
+        "Led a 4-member team for the machine learning club"
+      ]
+    },
+    "overall_score": 86.7,
+    "components": [
+      {
+        "name": "completeness",
+        "score": 100.0,
+        "weight": 0.25,
+        "detail": "email, phone, links, and education/experience-or-projects/skills sections"
+      },
+      {
+        "name": "skills",
+        "score": 75.0,
+        "weight": 0.3,
+        "detail": "8 skills detected, 3 with applied evidence"
+      },
+      {
+        "name": "impact",
+        "score": 100.0,
+        "weight": 0.3,
+        "detail": "5/5 bullets quantified, 5/5 start with an action verb"
+      },
+      {
+        "name": "structure",
+        "score": 61.0,
+        "weight": 0.15,
+        "detail": "90 words, 5 bullets (target ~150-700 words, 8+ bullets)"
+      }
+    ],
+    "suggestions": [
+      {
+        "severity": "medium",
+        "message": "Show applied use of listed skills in projects: Git, Linux, Python, TensorFlow."
+      }
+    ],
+    "warnings": [],
+    "information_gaps": [
+      {
+        "kind": "missing",
+        "field": "education.cgpa",
+        "message": "No CGPA stated for 'B.Tech Artificial Intelligence' (optional, but some opportunities filter on it)."
+      },
+      {
+        "kind": "ambiguous",
+        "field": "skills.evidence",
+        "message": "Skills listed without any project/experience context: Git, Linux, Python, TensorFlow."
+      }
+    ],
+    "method": "rule-based + tf-idf (no trained model)"
+  }
+}

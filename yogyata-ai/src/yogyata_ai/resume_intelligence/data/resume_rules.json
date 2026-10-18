@@ -1,0 +1,82 @@
+{
+ "_comment": "Resume-parsing rules (not skills).",
+ "action_verbs": [
+  "built",
+  "developed",
+  "designed",
+  "implemented",
+  "created",
+  "led",
+  "launched",
+  "improved",
+  "reduced",
+  "increased",
+  "automated",
+  "analyzed",
+  "analysed",
+  "optimized",
+  "optimised",
+  "deployed",
+  "trained",
+  "managed",
+  "organized",
+  "organised",
+  "delivered",
+  "wrote",
+  "engineered",
+  "migrated",
+  "integrated",
+  "architected",
+  "mentored",
+  "streamlined",
+  "achieved",
+  "won"
+ ],
+ "section_aliases": {
+  "summary": [
+   "summary",
+   "objective",
+   "profile",
+   "about me",
+   "career objective"
+  ],
+  "education": [
+   "education",
+   "academic background",
+   "academics",
+   "qualifications"
+  ],
+  "experience": [
+   "experience",
+   "work experience",
+   "professional experience",
+   "internships",
+   "internship",
+   "employment"
+  ],
+  "projects": [
+   "projects",
+   "academic projects",
+   "personal projects",
+   "key projects"
+  ],
+  "skills": [
+   "skills",
+   "technical skills",
+   "core competencies",
+   "skills & tools",
+   "tools & technologies"
+  ],
+  "achievements": [
+   "achievements",
+   "awards",
+   "honors",
+   "honours",
+   "certifications",
+   "certificates",
+   "extracurricular",
+   "extracurriculars",
+   "positions of responsibility"
+  ]
+ }
+}

@@ -1,0 +1,51 @@
+{
+  "request": {
+    "task_id": "t_sql_sales",
+    "submission_text": "I used an inner join ... GROUP BY region ... COALESCE for NULL ..."
+  },
+  "response": {
+    "task_id": "t_sql_sales",
+    "status": "preliminary_unverified",
+    "human_review_required": true,
+    "criteria": [
+      {
+        "id": "joins",
+        "description": "Uses joins across tables",
+        "weight": 2.0,
+        "automated_status": "found",
+        "detail": "1/1 expected concept group(s) mentioned (need 1)."
+      },
+      {
+        "id": "aggregation",
+        "description": "Aggregates with GROUP BY and an aggregate function",
+        "weight": 2.0,
+        "automated_status": "found",
+        "detail": "2/2 expected concept group(s) mentioned (need 2)."
+      },
+      {
+        "id": "nulls",
+        "description": "Considers NULL handling",
+        "weight": 1.0,
+        "automated_status": "found",
+        "detail": "1/1 expected concept group(s) mentioned (need 1)."
+      },
+      {
+        "_truncated": 2
+      }
+    ],
+    "indicative_completeness": 0.833,
+    "checkable_weight_share": 0.667,
+    "flags": [
+      "very_short_submission"
+    ],
+    "suggestions": [
+      "Address: explains the approach in prose"
+    ],
+    "suggested_evidence": [],
+    "notes": [
+      "Preliminary and unverified: presence of expected elements is not evidence of correctness or competence.",
+      "33% of the rubric weight can only be judged by a human reviewer."
+    ],
+    "method": "deterministic rubric checks (keywords, sections, length); no model judges correctness"
+  }
+}

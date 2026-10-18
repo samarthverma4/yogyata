@@ -1,0 +1,183 @@
+{
+  "request": {
+    "profile": {
+      "declared_skills": [
+        "Python",
+        "SQL"
+      ],
+      "target_role": "data_analyst",
+      "weekly_hours": 6,
+      "timeline_weeks": 6,
+      "budget_per_session_inr": 700,
+      "goals": "data analyst internship",
+      "evidence": [
+        {
+          "skill": "Python",
+          "source": "resume_evidence",
+          "strength": 0.65
+        },
+        {
+          "skill": "SQL",
+          "source": "task_review",
+          "strength": 0.3,
+          "ref_id": "t1"
+        }
+      ]
+    },
+    "opportunities": "<12 demo opportunities>",
+    "top_k": 3
+  },
+  "response": {
+    "ranked": [
+      {
+        "opportunity_id": "o12",
+        "type": "internship",
+        "title": "Data Science Intern (CGPA 9.0 and above)",
+        "rank": 1,
+        "score": 29.0,
+        "eligibility_status": "eligibility_unknown",
+        "components": {
+          "text_similarity": 0.172,
+          "preference_fit": 0.5,
+          "required_coverage": 0.287
+        },
+        "matched_skills": [
+          {
+            "skill": "Python",
+            "level": "demonstrated",
+            "credit": 0.86
+          }
+        ],
+        "missing_skills": [
+          "Machine Learning",
+          "Statistics"
+        ],
+        "weakly_supported_skills": [],
+        "unknown_eligibility": [
+          {
+            "rule": "graduation_year",
+            "status": "unknown",
+            "detail": "Requires graduation year in [2026]; your graduation year is not provided."
+          },
+          {
+            "rule": "min_cgpa",
+            "status": "unknown",
+            "detail": "Requires CGPA >= 9.0; your CGPA is not provided."
+          }
+        ],
+        "explanation": [
+          "Covers 1/3 required skills: Python.",
+          "Missing required skills: Machine Learning, Statistics.",
+          "Eligibility unknown: Requires graduation year in [2026]; your graduation year is not provided.",
+          "Eligibility unknown: Requires CGPA >= 9.0; your CGPA is not provided."
+        ],
+        "is_demo": true,
+        "score_meaning": "Fit indicator used only for ranking; it is not a probability of being hired or selected."
+      },
+      {
+        "opportunity_id": "o02",
+        "type": "internship",
+        "title": "Data Analyst Intern",
+        "rank": 2,
+        "score": 28.7,
+        "eligibility_status": "eligibility_unknown",
+        "components": {
+          "text_similarity": 0.151,
+          "preference_fit": 0.5,
+          "required_coverage": 0.387,
+          "preferred_coverage": 0.0
+        },
+        "matched_skills": [
+          {
+            "skill": "SQL",
+            "level": "verified",
+            "credit": 0.3
+          },
+          {
+            "skill": "Python",
+            "level": "demonstrated",
+            "credit": 0.86
+          }
+        ],
+        "missing_skills": [
+          "Pandas"
+        ],
+        "weakly_supported_skills": [
+          "SQL"
+        ],
+        "unknown_eligibility": [
+          {
+            "rule": "graduation_year",
+            "status": "unknown",
+            "detail": "Requires graduation year in [2026, 2027, 2028]; your graduation year is not provided."
+          }
+        ],
+        "explanation": [
+          "Covers 2/3 required skills: SQL, Python.",
+          "Missing required skills: Pandas.",
+          "Listed but not backed by evidence (or evidence shows weakness): SQL.",
+          "Eligibility unknown: Requires graduation year in [2026, 2027, 2028]; your graduation year is not provided."
+        ],
+        "is_demo": true,
+        "score_meaning": "Fit indicator used only for ranking; it is not a probability of being hired or selected."
+      },
+      {
+        "opportunity_id": "o01",
+        "type": "job",
+        "title": "Junior Data Analyst",
+        "rank": 3,
+        "score": 28.6,
+        "eligibility_status": "eligibility_unknown",
+        "components": {
+          "text_similarity": 0.147,
+          "preference_fit": 0.5,
+          "required_coverage": 0.387,
+          "preferred_coverage": 0.0
+        },
+        "matched_skills": [
+          {
+            "skill": "SQL",
+            "level": "verified",
+            "credit": 0.3
+          },
+          {
+            "skill": "Python",
+            "level": "demonstrated",
+            "credit": 0.86
+          }
+        ],
+        "missing_skills": [
+          "Excel"
+        ],
+        "weakly_supported_skills": [
+          "SQL"
+        ],
+        "unknown_eligibility": [
+          {
+            "rule": "graduation_year",
+            "status": "unknown",
+            "detail": "Requires graduation year in [2024, 2025, 2026]; your graduation year is not provided."
+          }
+        ],
+        "explanation": [
+          "Covers 2/3 required skills: SQL, Python.",
+          "Missing required skills: Excel.",
+          "Listed but not backed by evidence (or evidence shows weakness): SQL.",
+          "Eligibility unknown: Requires graduation year in [2024, 2025, 2026]; your graduation year is not provided."
+        ],
+        "is_demo": true,
+        "score_meaning": "Fit indicator used only for ranking; it is not a probability of being hired or selected."
+      }
+    ],
+    "excluded": [],
+    "warnings": [],
+    "backend_status": "tfidf",
+    "weights_used": {
+      "required_coverage": 0.45,
+      "preferred_coverage": 0.15,
+      "text_similarity": 0.25,
+      "preference_fit": 0.15
+    },
+    "method": "hybrid: deterministic eligibility + evidence-weighted skill coverage + text similarity"
+  }
+}

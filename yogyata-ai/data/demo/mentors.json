@@ -1,0 +1,334 @@
+{
+ "_disclaimer": "SYNTHETIC DEMO MENTORS. None of these are real people; prices, ratings and availability are invented for testing only.",
+ "mentors": [
+  {
+   "id": "dm1",
+   "headline": "Applied ML practitioner (synthetic)",
+   "bio": "Builds and evaluates machine learning models for tabular problems. Mentors on scikit-learn, model evaluation and avoiding leakage.",
+   "expertise": {
+    "Machine Learning": 5,
+    "scikit-learn": 5,
+    "Model Evaluation": 4,
+    "Python": 4,
+    "Statistics": 3
+   },
+   "roles": [
+    "ml_engineer"
+   ],
+   "years_experience": 7,
+   "languages": [
+    "English",
+    "Hindi"
+   ],
+   "price_per_session_inr": 800,
+   "availability": [
+    {
+     "day": "Sat",
+     "start": "10:00",
+     "end": "13:00"
+    },
+    {
+     "day": "Sun",
+     "start": "16:00",
+     "end": "18:00"
+    }
+   ],
+   "rating": 4.8,
+   "n_reviews": 40,
+   "accepting_students": true,
+   "is_demo_data": true
+  },
+  {
+   "id": "dm2",
+   "headline": "Data analyst lead (synthetic)",
+   "bio": "Teaches SQL, Excel and dashboard storytelling to early-career analysts. Strong on communicating findings.",
+   "expertise": {
+    "SQL": 5,
+    "Excel": 4,
+    "Data Analysis": 5,
+    "Data Visualization": 4,
+    "Communication": 4,
+    "Tableau": 3
+   },
+   "roles": [
+    "data_analyst"
+   ],
+   "years_experience": 9,
+   "languages": [
+    "English"
+   ],
+   "price_per_session_inr": 600,
+   "availability": [
+    {
+     "day": "Wed",
+     "start": "19:00",
+     "end": "21:00"
+    },
+    {
+     "day": "Sat",
+     "start": "09:00",
+     "end": "11:00"
+    }
+   ],
+   "rating": 4.5,
+   "n_reviews": 25,
+   "accepting_students": true,
+   "is_demo_data": true
+  },
+  {
+   "id": "dm3",
+   "headline": "Full-stack engineer (synthetic)",
+   "bio": "Helps students build React and Node applications and design clean REST APIs with tests.",
+   "expertise": {
+    "React": 5,
+    "JavaScript": 5,
+    "Node.js": 4,
+    "REST APIs": 4,
+    "Unit Testing": 3,
+    "TypeScript": 3
+   },
+   "roles": [
+    "full_stack_developer"
+   ],
+   "years_experience": 6,
+   "languages": [
+    "English",
+    "Tamil"
+   ],
+   "price_per_session_inr": 1000,
+   "availability": [
+    {
+     "day": "Fri",
+     "start": "18:00",
+     "end": "20:00"
+    },
+    {
+     "day": "Sun",
+     "start": "10:00",
+     "end": "12:00"
+    }
+   ],
+   "rating": 4.9,
+   "n_reviews": 3,
+   "accepting_students": true,
+   "is_demo_data": true
+  },
+  {
+   "id": "dm4",
+   "headline": "Statistics educator (synthetic)",
+   "bio": "Explains statistics, hypothesis testing and experiment design to analysts and ML learners.",
+   "expertise": {
+    "Statistics": 5,
+    "Data Analysis": 4,
+    "Python": 3,
+    "Pandas": 3
+   },
+   "roles": [
+    "data_analyst",
+    "ml_engineer"
+   ],
+   "years_experience": 5,
+   "languages": [
+    "English",
+    "Hindi"
+   ],
+   "price_per_session_inr": 500,
+   "availability": [
+    {
+     "day": "Tue",
+     "start": "20:00",
+     "end": "22:00"
+    },
+    {
+     "day": "Sat",
+     "start": "10:00",
+     "end": "12:00"
+    }
+   ],
+   "rating": null,
+   "n_reviews": 0,
+   "accepting_students": true,
+   "is_demo_data": true
+  },
+  {
+   "id": "dm5",
+   "headline": "DevOps and MLOps engineer (synthetic)",
+   "bio": "Docker, Git workflows and packaging models for deployment.",
+   "expertise": {
+    "Docker": 5,
+    "Git": 5,
+    "MLOps": 4,
+    "Python": 3
+   },
+   "roles": [
+    "ml_engineer",
+    "full_stack_developer"
+   ],
+   "years_experience": 8,
+   "languages": [
+    "English"
+   ],
+   "price_per_session_inr": 1200,
+   "availability": [
+    {
+     "day": "Sun",
+     "start": "09:00",
+     "end": "12:00"
+    }
+   ],
+   "rating": 4.2,
+   "n_reviews": 12,
+   "accepting_students": true,
+   "is_demo_data": true
+  },
+  {
+   "id": "dm6",
+   "headline": "Database and SQL mentor (synthetic)",
+   "bio": "Relational design, SQL, normalisation and DBMS fundamentals; also MongoDB basics.",
+   "expertise": {
+    "SQL": 5,
+    "DBMS": 5,
+    "MongoDB": 3,
+    "Data Analysis": 2
+   },
+   "roles": [
+    "data_analyst",
+    "full_stack_developer"
+   ],
+   "years_experience": 10,
+   "languages": [
+    "English",
+    "Hindi"
+   ],
+   "price_per_session_inr": 700,
+   "availability": [
+    {
+     "day": "Thu",
+     "start": "19:00",
+     "end": "21:00"
+    }
+   ],
+   "rating": null,
+   "n_reviews": 0,
+   "accepting_students": true,
+   "is_demo_data": true
+  },
+  {
+   "id": "dm7",
+   "headline": "Deep learning researcher (synthetic)",
+   "bio": "Neural networks, PyTorch, training diagnostics.",
+   "expertise": {
+    "Deep Learning": 5,
+    "PyTorch": 5,
+    "Machine Learning": 4,
+    "Python": 4,
+    "NumPy": 4
+   },
+   "roles": [
+    "ml_engineer"
+   ],
+   "years_experience": 4,
+   "languages": [
+    "English"
+   ],
+   "price_per_session_inr": null,
+   "availability": null,
+   "rating": null,
+   "n_reviews": 0,
+   "accepting_students": true,
+   "is_demo_data": true
+  },
+  {
+   "id": "dm8",
+   "headline": "Career coach for freshers (synthetic)",
+   "bio": "Interview preparation, communication, resumes and general career planning.",
+   "expertise": {
+    "Communication": 5,
+    "Problem Solving": 3
+   },
+   "roles": [],
+   "years_experience": 12,
+   "languages": [
+    "English",
+    "Hindi"
+   ],
+   "price_per_session_inr": 400,
+   "availability": [
+    {
+     "day": "Mon",
+     "start": "20:00",
+     "end": "21:30"
+    },
+    {
+     "day": "Sat",
+     "start": "09:00",
+     "end": "10:00"
+    }
+   ],
+   "rating": 4.7,
+   "n_reviews": 60,
+   "accepting_students": true,
+   "is_demo_data": true
+  },
+  {
+   "id": "dm9",
+   "headline": "Front-end specialist (synthetic)",
+   "bio": "HTML, CSS, JavaScript and React UI work.",
+   "expertise": {
+    "HTML": 5,
+    "CSS": 5,
+    "JavaScript": 4,
+    "React": 4
+   },
+   "roles": [
+    "full_stack_developer"
+   ],
+   "years_experience": 5,
+   "languages": [
+    "English"
+   ],
+   "price_per_session_inr": 650,
+   "availability": [
+    {
+     "day": "Sat",
+     "start": "14:00",
+     "end": "17:00"
+    }
+   ],
+   "rating": 4.6,
+   "n_reviews": 8,
+   "accepting_students": true,
+   "is_demo_data": true
+  },
+  {
+   "id": "dm10",
+   "headline": "BI developer, currently full (synthetic)",
+   "bio": "Power BI and Tableau dashboards.",
+   "expertise": {
+    "Power BI": 5,
+    "Tableau": 5,
+    "Data Visualization": 5,
+    "Excel": 4
+   },
+   "roles": [
+    "data_analyst"
+   ],
+   "years_experience": 7,
+   "languages": [
+    "English"
+   ],
+   "price_per_session_inr": 900,
+   "availability": [
+    {
+     "day": "Sun",
+     "start": "10:00",
+     "end": "12:00"
+    }
+   ],
+   "rating": 4.4,
+   "n_reviews": 30,
+   "accepting_students": false,
+   "is_demo_data": true
+  }
+ ]
+}

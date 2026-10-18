@@ -1,0 +1,1072 @@
+{
+ "_comment": "DEMONSTRATION practical-task catalog and rubrics, synthetic and author-written. Not real startup tasks. Criteria of type 'human' can only be judged by a reviewer.",
+ "tasks": [
+  {
+   "id": "t_sql_sales",
+   "title": "Sales analysis with SQL",
+   "description": "Answer five business questions about a supplied sales database using SQL, and explain each query.",
+   "skills": [
+    "SQL",
+    "Data Analysis"
+   ],
+   "difficulty": "intermediate",
+   "estimated_hours": 4,
+   "prerequisite_skills": [],
+   "deliverables": [
+    "queries",
+    "written explanation"
+   ],
+   "rubric": [
+    {
+     "id": "joins",
+     "description": "Uses joins across tables",
+     "weight": 2,
+     "check": {
+      "type": "concepts",
+      "groups": [
+       [
+        "join",
+        "inner join",
+        "left join"
+       ]
+      ]
+     }
+    },
+    {
+     "id": "aggregation",
+     "description": "Aggregates with GROUP BY and an aggregate function",
+     "weight": 2,
+     "check": {
+      "type": "concepts",
+      "groups": [
+       [
+        "group by",
+        "groupby"
+       ],
+       [
+        "sum",
+        "count",
+        "avg",
+        "average"
+       ]
+      ],
+      "min_groups": 2
+     }
+    },
+    {
+     "id": "nulls",
+     "description": "Considers NULL handling",
+     "weight": 1,
+     "check": {
+      "type": "concepts",
+      "groups": [
+       [
+        "null",
+        "coalesce",
+        "is null"
+       ]
+      ]
+     }
+    },
+    {
+     "id": "explanation",
+     "description": "Explains the approach in prose",
+     "weight": 1,
+     "check": {
+      "type": "min_words",
+      "n": 80
+     }
+    },
+    {
+     "id": "result_correctness",
+     "description": "Query results are correct",
+     "weight": 3,
+     "check": {
+      "type": "human"
+     }
+    }
+   ],
+   "source": "synthetic_demo"
+  },
+  {
+   "id": "t_pandas_clean",
+   "title": "Clean a messy CSV with pandas",
+   "description": "Clean a supplied CSV (missing values, duplicates, inconsistent types) and document your decisions.",
+   "skills": [
+    "Pandas",
+    "Python"
+   ],
+   "difficulty": "beginner",
+   "estimated_hours": 3,
+   "prerequisite_skills": [],
+   "deliverables": [
+    "notebook or script",
+    "decision notes"
+   ],
+   "rubric": [
+    {
+     "id": "missing",
+     "description": "Handles missing values",
+     "weight": 2,
+     "check": {
+      "type": "concepts",
+      "groups": [
+       [
+        "missing",
+        "nan",
+        "null",
+        "fillna",
+        "dropna",
+        "impute"
+       ]
+      ]
+     }
+    },
+    {
+     "id": "duplicates",
+     "description": "Handles duplicates",
+     "weight": 1,
+     "check": {
+      "type": "concepts",
+      "groups": [
+       [
+        "duplicate",
+        "drop_duplicates"
+       ]
+      ]
+     }
+    },
+    {
+     "id": "decisions",
+     "description": "Documents decisions and assumptions",
+     "weight": 2,
+     "check": {
+      "type": "section",
+      "patterns": [
+       "assumption",
+       "decision",
+       "approach",
+       "why"
+      ]
+     }
+    },
+    {
+     "id": "result_correctness",
+     "description": "Cleaned data is correct",
+     "weight": 3,
+     "check": {
+      "type": "human"
+     }
+    }
+   ],
+   "source": "synthetic_demo"
+  },
+  {
+   "id": "t_eda_report",
+   "title": "Exploratory analysis report",
+   "description": "Explore a supplied dataset and write a short report with findings and limitations.",
+   "skills": [
+    "Data Analysis",
+    "Statistics",
+    "Data Visualization"
+   ],
+   "difficulty": "intermediate",
+   "estimated_hours": 6,
+   "prerequisite_skills": [],
+   "deliverables": [
+    "report"
+   ],
+   "rubric": [
+    {
+     "id": "objective",
+     "description": "States the question being answered",
+     "weight": 1,
+     "check": {
+      "type": "section",
+      "patterns": [
+       "objective",
+       "question",
+       "goal"
+      ]
+     }
+    },
+    {
+     "id": "findings",
+     "description": "Reports findings",
+     "weight": 2,
+     "check": {
+      "type": "section",
+      "patterns": [
+       "finding",
+       "result",
+       "insight"
+      ]
+     }
+    },
+    {
+     "id": "stats",
+     "description": "Uses descriptive statistics",
+     "weight": 2,
+     "check": {
+      "type": "concepts",
+      "groups": [
+       [
+        "mean",
+        "median",
+        "distribution",
+        "correlation",
+        "outlier",
+        "variance",
+        "standard deviation"
+       ]
+      ],
+      "min_groups": 2
+     }
+    },
+    {
+     "id": "limits",
+     "description": "States limitations",
+     "weight": 1,
+     "check": {
+      "type": "section",
+      "patterns": [
+       "limitation",
+       "caveat"
+      ]
+     }
+    },
+    {
+     "id": "insight_quality",
+     "description": "Insights are valid and useful",
+     "weight": 3,
+     "check": {
+      "type": "human"
+     }
+    }
+   ],
+   "source": "synthetic_demo"
+  },
+  {
+   "id": "t_ml_classifier",
+   "title": "Train and evaluate a classifier",
+   "description": "Build a classifier on a supplied tabular dataset and write up the approach and evaluation honestly.",
+   "skills": [
+    "Machine Learning",
+    "scikit-learn",
+    "Model Evaluation"
+   ],
+   "difficulty": "intermediate",
+   "estimated_hours": 8,
+   "prerequisite_skills": [
+    "Python",
+    "Pandas"
+   ],
+   "deliverables": [
+    "code",
+    "write-up"
+   ],
+   "rubric": [
+    {
+     "id": "split",
+     "description": "Separates evaluation data (train/test or cross-validation)",
+     "weight": 2,
+     "check": {
+      "type": "concepts",
+      "groups": [
+       [
+        "train test split",
+        "train/test",
+        "cross-validation",
+        "cross validation",
+        "holdout",
+        "hold-out"
+       ]
+      ]
+     }
+    },
+    {
+     "id": "metrics",
+     "description": "Uses appropriate metrics",
+     "weight": 2,
+     "check": {
+      "type": "concepts",
+      "groups": [
+       [
+        "precision",
+        "recall",
+        "f1",
+        "roc",
+        "auc",
+        "accuracy"
+       ]
+      ]
+     }
+    },
+    {
+     "id": "baseline",
+     "description": "Compares with a baseline",
+     "weight": 1,
+     "check": {
+      "type": "concepts",
+      "groups": [
+       [
+        "baseline"
+       ]
+      ]
+     }
+    },
+    {
+     "id": "leakage",
+     "description": "Discusses overfitting or leakage",
+     "weight": 1,
+     "check": {
+      "type": "concepts",
+      "groups": [
+       [
+        "overfit",
+        "overfitting",
+        "leakage"
+       ]
+      ]
+     }
+    },
+    {
+     "id": "limits",
+     "description": "States limitations",
+     "weight": 1,
+     "check": {
+      "type": "section",
+      "patterns": [
+       "limitation",
+       "caveat"
+      ]
+     }
+    },
+    {
+     "id": "code_quality",
+     "description": "Code correctness and clarity",
+     "weight": 3,
+     "check": {
+      "type": "human"
+     }
+    }
+   ],
+   "source": "synthetic_demo"
+  },
+  {
+   "id": "t_git_flow",
+   "title": "Git branching exercise",
+   "description": "Perform and describe a branch, merge and conflict-resolution workflow in a sandbox repository.",
+   "skills": [
+    "Git"
+   ],
+   "difficulty": "beginner",
+   "estimated_hours": 2,
+   "prerequisite_skills": [],
+   "deliverables": [
+    "workflow notes"
+   ],
+   "rubric": [
+    {
+     "id": "branch",
+     "description": "Uses branches",
+     "weight": 1,
+     "check": {
+      "type": "concepts",
+      "groups": [
+       [
+        "branch"
+       ]
+      ]
+     }
+    },
+    {
+     "id": "merge",
+     "description": "Merges via merge, rebase or pull request",
+     "weight": 1,
+     "check": {
+      "type": "concepts",
+      "groups": [
+       [
+        "merge",
+        "pull request",
+        "rebase"
+       ]
+      ]
+     }
+    },
+    {
+     "id": "conflict",
+     "description": "Resolves a conflict",
+     "weight": 2,
+     "check": {
+      "type": "concepts",
+      "groups": [
+       [
+        "conflict"
+       ]
+      ]
+     }
+    },
+    {
+     "id": "repo_state",
+     "description": "Repository history is clean and correct",
+     "weight": 2,
+     "check": {
+      "type": "human"
+     }
+    }
+   ],
+   "source": "synthetic_demo"
+  },
+  {
+   "id": "t_rest_api",
+   "title": "Small CRUD API",
+   "description": "Design and implement a small CRUD REST API with validation and a README.",
+   "skills": [
+    "REST APIs",
+    "Node.js"
+   ],
+   "difficulty": "intermediate",
+   "estimated_hours": 8,
+   "prerequisite_skills": [
+    "JavaScript"
+   ],
+   "deliverables": [
+    "code",
+    "README"
+   ],
+   "rubric": [
+    {
+     "id": "endpoints",
+     "description": "Defines resource endpoints and verbs",
+     "weight": 2,
+     "check": {
+      "type": "concepts",
+      "groups": [
+       [
+        "endpoint",
+        "route"
+       ],
+       [
+        "get",
+        "post",
+        "put",
+        "delete",
+        "patch"
+       ]
+      ],
+      "min_groups": 2
+     }
+    },
+    {
+     "id": "status",
+     "description": "Uses meaningful status codes",
+     "weight": 1,
+     "check": {
+      "type": "concepts",
+      "groups": [
+       [
+        "status code",
+        "200",
+        "201",
+        "400",
+        "404"
+       ]
+      ]
+     }
+    },
+    {
+     "id": "validation",
+     "description": "Validates input",
+     "weight": 1,
+     "check": {
+      "type": "concepts",
+      "groups": [
+       [
+        "validation",
+        "validate"
+       ]
+      ]
+     }
+    },
+    {
+     "id": "readme",
+     "description": "Provides a README with usage",
+     "weight": 1,
+     "check": {
+      "type": "section",
+      "patterns": [
+       "usage",
+       "readme",
+       "how to run"
+      ]
+     }
+    },
+    {
+     "id": "code_quality",
+     "description": "Code correctness",
+     "weight": 3,
+     "check": {
+      "type": "human"
+     }
+    }
+   ],
+   "source": "synthetic_demo"
+  },
+  {
+   "id": "t_react_ui",
+   "title": "Stateful React component set",
+   "description": "Build a small set of React components with props, state and an effect.",
+   "skills": [
+    "React",
+    "JavaScript"
+   ],
+   "difficulty": "intermediate",
+   "estimated_hours": 6,
+   "prerequisite_skills": [
+    "JavaScript",
+    "HTML"
+   ],
+   "deliverables": [
+    "code"
+   ],
+   "rubric": [
+    {
+     "id": "components",
+     "description": "Composes components with props",
+     "weight": 2,
+     "check": {
+      "type": "concepts",
+      "groups": [
+       [
+        "component"
+       ],
+       [
+        "props"
+       ]
+      ],
+      "min_groups": 2
+     }
+    },
+    {
+     "id": "state",
+     "description": "Manages state",
+     "weight": 1,
+     "check": {
+      "type": "concepts",
+      "groups": [
+       [
+        "state",
+        "usestate"
+       ]
+      ]
+     }
+    },
+    {
+     "id": "effect",
+     "description": "Uses effects appropriately",
+     "weight": 1,
+     "check": {
+      "type": "concepts",
+      "groups": [
+       [
+        "effect",
+        "useeffect"
+       ]
+      ]
+     }
+    },
+    {
+     "id": "code_quality",
+     "description": "Code correctness and clarity",
+     "weight": 3,
+     "check": {
+      "type": "human"
+     }
+    }
+   ],
+   "source": "synthetic_demo"
+  },
+  {
+   "id": "t_stats_ab",
+   "title": "A/B test analysis",
+   "description": "Analyse a supplied A/B test result and explain your conclusion and its limits.",
+   "skills": [
+    "Statistics"
+   ],
+   "difficulty": "intermediate",
+   "estimated_hours": 4,
+   "prerequisite_skills": [],
+   "deliverables": [
+    "analysis note"
+   ],
+   "rubric": [
+    {
+     "id": "hypothesis",
+     "description": "States hypotheses",
+     "weight": 1,
+     "check": {
+      "type": "concepts",
+      "groups": [
+       [
+        "hypothesis",
+        "null hypothesis"
+       ]
+      ]
+     }
+    },
+    {
+     "id": "inference",
+     "description": "Uses a p-value or confidence interval",
+     "weight": 2,
+     "check": {
+      "type": "concepts",
+      "groups": [
+       [
+        "p-value",
+        "p value",
+        "confidence interval"
+       ]
+      ]
+     }
+    },
+    {
+     "id": "power",
+     "description": "Considers sample size or power",
+     "weight": 1,
+     "check": {
+      "type": "concepts",
+      "groups": [
+       [
+        "sample size",
+        "power"
+       ]
+      ]
+     }
+    },
+    {
+     "id": "assumptions",
+     "description": "States assumptions",
+     "weight": 1,
+     "check": {
+      "type": "concepts",
+      "groups": [
+       [
+        "assumption"
+       ]
+      ]
+     }
+    },
+    {
+     "id": "conclusion_validity",
+     "description": "Conclusion is statistically valid",
+     "weight": 3,
+     "check": {
+      "type": "human"
+     }
+    }
+   ],
+   "source": "synthetic_demo"
+  },
+  {
+   "id": "t_dashboard",
+   "title": "Single-page dashboard",
+   "description": "Build a one-page dashboard for a stated audience from a supplied dataset.",
+   "skills": [
+    "Data Visualization",
+    "Tableau",
+    "Power BI"
+   ],
+   "difficulty": "beginner",
+   "estimated_hours": 5,
+   "prerequisite_skills": [],
+   "deliverables": [
+    "dashboard file",
+    "design notes"
+   ],
+   "rubric": [
+    {
+     "id": "audience",
+     "description": "States purpose and audience",
+     "weight": 1,
+     "check": {
+      "type": "section",
+      "patterns": [
+       "purpose",
+       "audience"
+      ]
+     }
+    },
+    {
+     "id": "interaction",
+     "description": "Uses filters or drill-down",
+     "weight": 1,
+     "check": {
+      "type": "concepts",
+      "groups": [
+       [
+        "filter",
+        "drill"
+       ]
+      ]
+     }
+    },
+    {
+     "id": "chart_choice",
+     "description": "Explains chart choices",
+     "weight": 1,
+     "check": {
+      "type": "concepts",
+      "groups": [
+       [
+        "bar",
+        "line",
+        "scatter",
+        "chart"
+       ]
+      ]
+     }
+    },
+    {
+     "id": "design_quality",
+     "description": "Dashboard is clear and accurate",
+     "weight": 3,
+     "check": {
+      "type": "human"
+     }
+    }
+   ],
+   "source": "synthetic_demo"
+  },
+  {
+   "id": "t_docker_svc",
+   "title": "Containerise a small service",
+   "description": "Write a Dockerfile for a supplied small service and explain it.",
+   "skills": [
+    "Docker"
+   ],
+   "difficulty": "beginner",
+   "estimated_hours": 3,
+   "prerequisite_skills": [],
+   "deliverables": [
+    "Dockerfile",
+    "notes"
+   ],
+   "rubric": [
+    {
+     "id": "dockerfile",
+     "description": "Describes the Dockerfile and image",
+     "weight": 2,
+     "check": {
+      "type": "concepts",
+      "groups": [
+       [
+        "dockerfile"
+       ],
+       [
+        "image"
+       ]
+      ],
+      "min_groups": 2
+     }
+    },
+    {
+     "id": "runtime",
+     "description": "Handles ports and configuration",
+     "weight": 1,
+     "check": {
+      "type": "concepts",
+      "groups": [
+       [
+        "port",
+        "expose",
+        "env",
+        "volume"
+       ]
+      ]
+     }
+    },
+    {
+     "id": "works",
+     "description": "Container builds and runs correctly",
+     "weight": 3,
+     "check": {
+      "type": "human"
+     }
+    }
+   ],
+   "source": "synthetic_demo"
+  },
+  {
+   "id": "t_unit_tests",
+   "title": "Write unit tests for a module",
+   "description": "Write a unit test suite for a supplied small module.",
+   "skills": [
+    "Unit Testing"
+   ],
+   "difficulty": "beginner",
+   "estimated_hours": 3,
+   "prerequisite_skills": [],
+   "deliverables": [
+    "test code"
+   ],
+   "rubric": [
+    {
+     "id": "asserts",
+     "description": "Uses assertions",
+     "weight": 1,
+     "check": {
+      "type": "concepts",
+      "groups": [
+       [
+        "assert"
+       ]
+      ]
+     }
+    },
+    {
+     "id": "isolation",
+     "description": "Uses fixtures or mocks",
+     "weight": 1,
+     "check": {
+      "type": "concepts",
+      "groups": [
+       [
+        "fixture",
+        "mock"
+       ]
+      ]
+     }
+    },
+    {
+     "id": "edge",
+     "description": "Covers edge cases",
+     "weight": 2,
+     "check": {
+      "type": "concepts",
+      "groups": [
+       [
+        "edge case",
+        "boundary",
+        "empty",
+        "invalid"
+       ]
+      ]
+     }
+    },
+    {
+     "id": "test_quality",
+     "description": "Tests are meaningful and correct",
+     "weight": 3,
+     "check": {
+      "type": "human"
+     }
+    }
+   ],
+   "source": "synthetic_demo"
+  },
+  {
+   "id": "t_feature_eng",
+   "title": "Feature engineering study",
+   "description": "Engineer features for a supplied tabular task and measure their effect.",
+   "skills": [
+    "Feature Engineering",
+    "Pandas"
+   ],
+   "difficulty": "intermediate",
+   "estimated_hours": 5,
+   "prerequisite_skills": [
+    "Python"
+   ],
+   "deliverables": [
+    "notebook",
+    "notes"
+   ],
+   "rubric": [
+    {
+     "id": "transforms",
+     "description": "Describes transformations",
+     "weight": 2,
+     "check": {
+      "type": "concepts",
+      "groups": [
+       [
+        "encoding",
+        "one-hot",
+        "scaling",
+        "normalis",
+        "normaliz",
+        "interaction",
+        "bin"
+       ]
+      ]
+     }
+    },
+    {
+     "id": "effect",
+     "description": "Measures the effect of features",
+     "weight": 2,
+     "check": {
+      "type": "concepts",
+      "groups": [
+       [
+        "improve",
+        "compared",
+        "ablation",
+        "before and after",
+        "baseline"
+       ]
+      ]
+     }
+    },
+    {
+     "id": "rigor",
+     "description": "Rigour and leakage avoidance",
+     "weight": 3,
+     "check": {
+      "type": "human"
+     }
+    }
+   ],
+   "source": "synthetic_demo"
+  },
+  {
+   "id": "t_python_cli",
+   "title": "Command-line tool in Python",
+   "description": "Write a small command-line tool with error handling and tests.",
+   "skills": [
+    "Python",
+    "Unit Testing"
+   ],
+   "difficulty": "beginner",
+   "estimated_hours": 3,
+   "prerequisite_skills": [],
+   "deliverables": [
+    "code"
+   ],
+   "rubric": [
+    {
+     "id": "structure",
+     "description": "Uses functions",
+     "weight": 1,
+     "check": {
+      "type": "concepts",
+      "groups": [
+       [
+        "function",
+        "def "
+       ]
+      ]
+     }
+    },
+    {
+     "id": "errors",
+     "description": "Handles errors",
+     "weight": 2,
+     "check": {
+      "type": "concepts",
+      "groups": [
+       [
+        "exception",
+        "try",
+        "error handling",
+        "raise"
+       ]
+      ]
+     }
+    },
+    {
+     "id": "tests",
+     "description": "Includes tests",
+     "weight": 1,
+     "check": {
+      "type": "concepts",
+      "groups": [
+       [
+        "test",
+        "pytest",
+        "unittest"
+       ]
+      ]
+     }
+    },
+    {
+     "id": "code_quality",
+     "description": "Code correctness and clarity",
+     "weight": 3,
+     "check": {
+      "type": "human"
+     }
+    }
+   ],
+   "source": "synthetic_demo"
+  },
+  {
+   "id": "t_excel_pivot",
+   "title": "Pivot-table summary",
+   "description": "Summarise a supplied dataset with pivot tables and write three observations.",
+   "skills": [
+    "Excel"
+   ],
+   "difficulty": "beginner",
+   "estimated_hours": 2,
+   "prerequisite_skills": [],
+   "deliverables": [
+    "workbook",
+    "observations"
+   ],
+   "rubric": [
+    {
+     "id": "pivot",
+     "description": "Uses pivot tables",
+     "weight": 2,
+     "check": {
+      "type": "concepts",
+      "groups": [
+       [
+        "pivot"
+       ]
+      ]
+     }
+    },
+    {
+     "id": "lookup",
+     "description": "Uses lookup or conditional formulas",
+     "weight": 1,
+     "check": {
+      "type": "concepts",
+      "groups": [
+       [
+        "vlookup",
+        "xlookup",
+        "index",
+        "match",
+        "sumif",
+        "countif"
+       ]
+      ]
+     }
+    },
+    {
+     "id": "observations",
+     "description": "Writes observations",
+     "weight": 1,
+     "check": {
+      "type": "min_words",
+      "n": 60
+     }
+    },
+    {
+     "id": "accuracy",
+     "description": "Numbers are correct",
+     "weight": 3,
+     "check": {
+      "type": "human"
+     }
+    }
+   ],
+   "source": "synthetic_demo"
+  }
+ ]
+}

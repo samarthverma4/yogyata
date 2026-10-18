@@ -1,0 +1,66 @@
+{
+  "request": {
+    "resume_text": "<demo resume>",
+    "target_role": "ml_engineer"
+  },
+  "response": {
+    "student_id": null,
+    "target_role": "ml_engineer",
+    "goals": "",
+    "declared_skills": [
+      "Computer Vision",
+      "NLP",
+      "PyTorch",
+      {
+        "_truncated": 5
+      }
+    ],
+    "education": {
+      "degree": "B.Tech Artificial Intelligence",
+      "graduation_year": 2026,
+      "cgpa": null
+    },
+    "experience_years": null,
+    "location": null,
+    "preferred_work_modes": [],
+    "preferred_opportunity_types": [],
+    "weekly_hours": null,
+    "timeline_weeks": null,
+    "budget_per_session_inr": null,
+    "evidence": [
+      {
+        "skill": "Computer Vision",
+        "source": "declared",
+        "strength": 0.2,
+        "ref_id": null,
+        "note": "listed on resume",
+        "assessed_at": null,
+        "capped_from": null
+      },
+      {
+        "skill": "Computer Vision",
+        "source": "resume_evidence",
+        "strength": 0.65,
+        "ref_id": null,
+        "note": "used in a described project/experience (self-reported)",
+        "assessed_at": null,
+        "capped_from": null
+      },
+      {
+        "skill": "NLP",
+        "source": "declared",
+        "strength": 0.2,
+        "ref_id": null,
+        "note": "listed on resume",
+        "assessed_at": null,
+        "capped_from": null
+      },
+      {
+        "_truncated": 8
+      }
+    ],
+    "assessment_attempts": [],
+    "completed_activity_ids": [],
+    "profile_text": ""
+  }
+}

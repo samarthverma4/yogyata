@@ -1,0 +1,31 @@
+{
+  "request": {
+    "item_id": "t_sql_sales",
+    "reviewer_id": "reviewer-1",
+    "criterion_scores": {
+      "joins": 1,
+      "aggregation": 0.5,
+      "result_correctness": 0.8
+    }
+  },
+  "response": [
+    {
+      "skill": "SQL",
+      "source": "task_review",
+      "strength": 0.771,
+      "ref_id": "t_sql_sales:reviewer-1",
+      "note": "human-reviewed",
+      "assessed_at": null,
+      "capped_from": null
+    },
+    {
+      "skill": "Data Analysis",
+      "source": "task_review",
+      "strength": 0.771,
+      "ref_id": "t_sql_sales:reviewer-1",
+      "note": "human-reviewed",
+      "assessed_at": null,
+      "capped_from": null
+    }
+  ]
+}

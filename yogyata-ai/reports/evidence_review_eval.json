@@ -1,0 +1,16 @@
+{
+  "disclaimer": "Invariant checks of deterministic rules over demo scenarios x caps x scores; internal consistency only.",
+  "checks": {
+    "E1_state_status_mapping_consistent": "9/9",
+    "E2_every_skill_in_exactly_one_state": "9/9",
+    "E3_unassessed_never_weakness": "9/9",
+    "E4_cap_never_exceeded_any_role": "225/225",
+    "E5_applied_never_above_original_and_in_range": "225/225",
+    "E6_duplicate_is_noop": "225/225",
+    "E7_audit_chain_intact_and_append_only": "225/225",
+    "E8_capped_review_never_labelled_weakness": "88/88",
+    "E9_cap_monotone_in_score": "225/225"
+  },
+  "all_checks_pass": true,
+  "failures": []
+}

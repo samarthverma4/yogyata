@@ -1,0 +1,205 @@
+{
+  "disclaimer": "DEMONSTRATION submissions written by the project author with author-assigned ratings of how many of the REQUIRED ELEMENTS are present (0=almost none .. 3=all). Ratings are not judgements of technical correctness. Tiny and circular: for sanity checking only.",
+  "n_normal": 16,
+  "spearman_completeness_vs_author_rating": 0.926,
+  "spearman_per_task": {
+    "t_git_flow": 0.894,
+    "t_ml_classifier": 1.0,
+    "t_sql_sales": 0.949,
+    "t_stats_ab": 0.949
+  },
+  "mean_completeness_rating3": 1.0,
+  "mean_completeness_rating0": 0.0,
+  "stuffing_handled": "3/3",
+  "injection_flagged_no_evidence": "2/2",
+  "integrity_always_human_review_and_capped_evidence": true,
+  "recommendation_checks": {
+    "no_task_for_all_met_skills": 9,
+    "no_unrelated_tasks": 9,
+    "n": 9
+  },
+  "rows": [
+    {
+      "id": "s1",
+      "kind": "normal",
+      "rating": 3,
+      "completeness": 1.0,
+      "flags": []
+    },
+    {
+      "id": "s2",
+      "kind": "normal",
+      "rating": 2,
+      "completeness": 0.583,
+      "flags": []
+    },
+    {
+      "id": "s3",
+      "kind": "normal",
+      "rating": 1,
+      "completeness": 0.0,
+      "flags": [
+        "very_short_submission"
+      ]
+    },
+    {
+      "id": "s4",
+      "kind": "normal",
+      "rating": 0,
+      "completeness": 0.0,
+      "flags": [
+        "very_short_submission"
+      ]
+    },
+    {
+      "id": "s5",
+      "kind": "stuffed",
+      "rating": 0,
+      "completeness": 0.208,
+      "flags": [
+        "keyword_list_without_explanation",
+        "very_short_submission"
+      ]
+    },
+    {
+      "id": "s6",
+      "kind": "injection",
+      "rating": 0,
+      "completeness": 0.0,
+      "flags": [
+        "possible_prompt_injection: instruction_override, self_grading (text treated as data; scores unaffected)",
+        "very_short_submission"
+      ]
+    },
+    {
+      "id": "m1",
+      "kind": "normal",
+      "rating": 3,
+      "completeness": 1.0,
+      "flags": []
+    },
+    {
+      "id": "m2",
+      "kind": "normal",
+      "rating": 2,
+      "completeness": 0.857,
+      "flags": []
+    },
+    {
+      "id": "m3",
+      "kind": "normal",
+      "rating": 1,
+      "completeness": 0.286,
+      "flags": [
+        "very_short_submission"
+      ]
+    },
+    {
+      "id": "m4",
+      "kind": "normal",
+      "rating": 0,
+      "completeness": 0.0,
+      "flags": [
+        "very_short_submission"
+      ]
+    },
+    {
+      "id": "m5",
+      "kind": "stuffed",
+      "rating": 0,
+      "completeness": 0.214,
+      "flags": [
+        "keyword_list_without_explanation",
+        "very_short_submission"
+      ]
+    },
+    {
+      "id": "g1",
+      "kind": "normal",
+      "rating": 3,
+      "completeness": 1.0,
+      "flags": []
+    },
+    {
+      "id": "g2",
+      "kind": "normal",
+      "rating": 2,
+      "completeness": 1.0,
+      "flags": [
+        "very_short_submission"
+      ]
+    },
+    {
+      "id": "g3",
+      "kind": "normal",
+      "rating": 1,
+      "completeness": 0.0,
+      "flags": [
+        "very_short_submission"
+      ]
+    },
+    {
+      "id": "g4",
+      "kind": "normal",
+      "rating": 0,
+      "completeness": 0.0,
+      "flags": [
+        "very_short_submission"
+      ]
+    },
+    {
+      "id": "t1",
+      "kind": "normal",
+      "rating": 3,
+      "completeness": 1.0,
+      "flags": []
+    },
+    {
+      "id": "t2",
+      "kind": "normal",
+      "rating": 2,
+      "completeness": 0.8,
+      "flags": [
+        "very_short_submission"
+      ]
+    },
+    {
+      "id": "t3",
+      "kind": "normal",
+      "rating": 1,
+      "completeness": 0.0,
+      "flags": [
+        "very_short_submission"
+      ]
+    },
+    {
+      "id": "t4",
+      "kind": "normal",
+      "rating": 0,
+      "completeness": 0.0,
+      "flags": [
+        "very_short_submission"
+      ]
+    },
+    {
+      "id": "t5",
+      "kind": "stuffed",
+      "rating": 0,
+      "completeness": 0.25,
+      "flags": [
+        "keyword_list_without_explanation",
+        "very_short_submission"
+      ]
+    },
+    {
+      "id": "t6",
+      "kind": "injection",
+      "rating": 0,
+      "completeness": 0.0,
+      "flags": [
+        "possible_prompt_injection: prompt_exfiltration, tool_directive, self_grading (text treated as data; scores unaffected)",
+        "very_short_submission"
+      ]
+    }
+  ]
+}

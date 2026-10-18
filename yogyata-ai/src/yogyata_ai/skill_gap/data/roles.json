@@ -1,0 +1,56 @@
+{
+  "_comment": "DEMONSTRATION role competency requirements written by the project author. Importance is 1-5. Not derived from labour-market data; have domain experts review before production use.",
+  "roles": {
+    "ml_engineer": {
+      "title": "Machine Learning Engineer (entry level)",
+      "skills": [
+        {"skill": "Python", "importance": 5},
+        {"skill": "Statistics", "importance": 4},
+        {"skill": "Pandas", "importance": 4, "prerequisites": ["Python"]},
+        {"skill": "NumPy", "importance": 3, "prerequisites": ["Python"]},
+        {"skill": "Machine Learning", "importance": 5, "prerequisites": ["Python", "Statistics"]},
+        {"skill": "scikit-learn", "importance": 4, "prerequisites": ["Python", "Machine Learning"]},
+        {"skill": "Model Evaluation", "importance": 4, "prerequisites": ["Machine Learning", "Statistics"]},
+        {"skill": "Feature Engineering", "importance": 3, "prerequisites": ["Pandas", "Machine Learning"]},
+        {"skill": "Deep Learning", "importance": 3, "prerequisites": ["Machine Learning"]},
+        {"skill": "PyTorch", "importance": 3, "prerequisites": ["Python", "Deep Learning"]},
+        {"skill": "Git", "importance": 3},
+        {"skill": "SQL", "importance": 2},
+        {"skill": "Docker", "importance": 2},
+        {"skill": "MLOps", "importance": 2, "prerequisites": ["Docker", "Git"]}
+      ]
+    },
+    "data_analyst": {
+      "title": "Data Analyst (entry level)",
+      "skills": [
+        {"skill": "SQL", "importance": 5},
+        {"skill": "Excel", "importance": 4},
+        {"skill": "Python", "importance": 4},
+        {"skill": "Pandas", "importance": 4, "prerequisites": ["Python"]},
+        {"skill": "Statistics", "importance": 4},
+        {"skill": "Data Analysis", "importance": 5, "prerequisites": ["Statistics"]},
+        {"skill": "Data Visualization", "importance": 4},
+        {"skill": "Tableau", "importance": 3, "prerequisites": ["Data Visualization"]},
+        {"skill": "Power BI", "importance": 3, "prerequisites": ["Data Visualization"]},
+        {"skill": "Communication", "importance": 3}
+      ]
+    },
+    "full_stack_developer": {
+      "title": "Full Stack Developer (entry level)",
+      "skills": [
+        {"skill": "JavaScript", "importance": 5},
+        {"skill": "HTML", "importance": 4},
+        {"skill": "CSS", "importance": 4},
+        {"skill": "React", "importance": 5, "prerequisites": ["JavaScript", "HTML", "CSS"]},
+        {"skill": "Node.js", "importance": 4, "prerequisites": ["JavaScript"]},
+        {"skill": "REST APIs", "importance": 4, "prerequisites": ["JavaScript"]},
+        {"skill": "MongoDB", "importance": 3},
+        {"skill": "DBMS", "importance": 3},
+        {"skill": "TypeScript", "importance": 3, "prerequisites": ["JavaScript"]},
+        {"skill": "Git", "importance": 4},
+        {"skill": "Unit Testing", "importance": 3},
+        {"skill": "Docker", "importance": 2}
+      ]
+    }
+  }
+}

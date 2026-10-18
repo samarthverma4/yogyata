@@ -1,0 +1,17 @@
+{
+  "request": {
+    "session": "<session returned by agent_run>",
+    "action_id": "act_1",
+    "user_confirmed": true
+  },
+  "response": {
+    "session": "<updated session>",
+    "handoff": {
+      "action_id": "act_1",
+      "kind": "save_roadmap",
+      "target_id": "data_analyst",
+      "executed": false
+    },
+    "message": "Confirmed by the user. The backend is responsible for carrying this out; nothing was executed here."
+  }
+}

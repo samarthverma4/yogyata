@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "yogyata-ai"
+version = "0.2.0"
+description = "AI/ML and agentic components for the Yogyata career platform (independent Python package)."
+requires-python = ">=3.10"
+dependencies = [
+    "pydantic>=2.5",
+    "pandas>=2.0",
+    "numpy>=1.24",
+    "scikit-learn>=1.3",
+]
+
+[project.optional-dependencies]
+embeddings = ["sentence-transformers>=2.7"]
+dev = ["pytest>=7.4"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+yogyata_ai = ["resume_intelligence/data/*.json", "common/data/*.json", "*/data/*.json"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]

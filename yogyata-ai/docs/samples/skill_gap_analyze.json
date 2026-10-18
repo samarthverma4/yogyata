@@ -1,0 +1,225 @@
+{
+  "request": {
+    "profile": {
+      "declared_skills": [
+        "Python",
+        "SQL"
+      ],
+      "target_role": "data_analyst",
+      "weekly_hours": 6,
+      "timeline_weeks": 6,
+      "budget_per_session_inr": 700,
+      "goals": "data analyst internship",
+      "evidence": [
+        {
+          "skill": "Python",
+          "source": "resume_evidence",
+          "strength": 0.65
+        },
+        {
+          "skill": "SQL",
+          "source": "task_review",
+          "strength": 0.3,
+          "ref_id": "t1"
+        }
+      ]
+    },
+    "role_id": "data_analyst"
+  },
+  "response": {
+    "role_id": "data_analyst",
+    "role_title": "Data Analyst (entry level)",
+    "readiness_score": 9.5,
+    "readiness_min": 9.5,
+    "readiness_max": 91.0,
+    "assessed_coverage": 0.128,
+    "verified_coverage": 0.128,
+    "evidence_sufficiency": "low",
+    "skills": [
+      {
+        "skill": "SQL",
+        "importance": 5,
+        "level": "verified",
+        "strength": 0.3,
+        "credit": 0.3,
+        "status": "demonstrated_weakness",
+        "confidence": "high",
+        "evidence_sources": [
+          "task_review"
+        ],
+        "prerequisites": [],
+        "blocked_by": [],
+        "unlocks": 0,
+        "priority": 100.0,
+        "explanation": "SQL (importance 5/5): Human-reviewed result shows weak performance (strength 0.30; sources: task_review).",
+        "evidence_state": "partially_demonstrated",
+        "evidence_state_reason": "human-reviewed assessment strength 0.30 < 0.600",
+        "last_assessed_at": null,
+        "evidence_stale": false,
+        "evidence_conflict": false,
+        "evidence_notes": []
+      },
+      {
+        "skill": "Excel",
+        "importance": 4,
+        "level": "none",
+        "strength": null,
+        "credit": 0.0,
+        "status": "unassessed",
+        "confidence": "none",
+        "evidence_sources": [],
+        "prerequisites": [],
+        "blocked_by": [],
+        "unlocks": 0,
+        "priority": 56.0,
+        "explanation": "Excel (importance 4/5): no information (not listed, no evidence). This is unknown, not a judgement that the skill is weak.",
+        "evidence_state": "not_assessed",
+        "evidence_state_reason": "no claim, assessment or attempt (unknown, not weak)",
+        "last_assessed_at": null,
+        "evidence_stale": false,
+        "evidence_conflict": false,
+        "evidence_notes": []
+      },
+      {
+        "skill": "Python",
+        "importance": 4,
+        "level": "demonstrated",
+        "strength": 0.65,
+        "credit": 0.55,
+        "status": "self_reported_use",
+        "confidence": "low",
+        "evidence_sources": [
+          "resume_evidence"
+        ],
+        "prerequisites": [],
+        "blocked_by": [],
+        "unlocks": 1,
+        "priority": 26.4,
+        "explanation": "Python (importance 4/5): used in described projects (self-reported) but not yet assessed or reviewed.",
+        "evidence_state": "mentioned_unverified",
+        "evidence_state_reason": "claimed in profile/resume only; nothing has assessed it",
+        "last_assessed_at": null,
+        "evidence_stale": false,
+        "evidence_conflict": false,
+        "evidence_notes": []
+      },
+      {
+        "_truncated": 7
+      }
+    ],
+    "priority_gaps": [
+      {
+        "skill": "SQL",
+        "importance": 5,
+        "level": "verified",
+        "strength": 0.3,
+        "credit": 0.3,
+        "status": "demonstrated_weakness",
+        "confidence": "high",
+        "evidence_sources": [
+          "task_review"
+        ],
+        "prerequisites": [],
+        "blocked_by": [],
+        "unlocks": 0,
+        "priority": 100.0,
+        "explanation": "SQL (importance 5/5): Human-reviewed result shows weak performance (strength 0.30; sources: task_review).",
+        "evidence_state": "partially_demonstrated",
+        "evidence_state_reason": "human-reviewed assessment strength 0.30 < 0.600",
+        "last_assessed_at": null,
+        "evidence_stale": false,
+        "evidence_conflict": false,
+        "evidence_notes": []
+      },
+      {
+        "skill": "Data Analysis",
+        "importance": 5,
+        "level": "none",
+        "strength": null,
+        "credit": 0.0,
+        "status": "unassessed",
+        "confidence": "none",
+        "evidence_sources": [],
+        "prerequisites": [
+          "Statistics"
+        ],
+        "blocked_by": [
+          "Statistics"
+        ],
+        "unlocks": 0,
+        "priority": 70.0,
+        "explanation": "Data Analysis (importance 5/5): no information (not listed, no evidence). This is unknown, not a judgement that the skill is weak. Build prerequisites first: Statistics.",
+        "evidence_state": "not_assessed",
+        "evidence_state_reason": "no claim, assessment or attempt (unknown, not weak)",
+        "last_assessed_at": null,
+        "evidence_stale": false,
+        "evidence_conflict": false,
+        "evidence_notes": []
+      },
+      {
+        "skill": "Data Visualization",
+        "importance": 4,
+        "level": "none",
+        "strength": null,
+        "credit": 0.0,
+        "status": "unassessed",
+        "confidence": "none",
+        "evidence_sources": [],
+        "prerequisites": [],
+        "blocked_by": [],
+        "unlocks": 2,
+        "priority": 67.2,
+        "explanation": "Data Visualization (importance 4/5): no information (not listed, no evidence). This is unknown, not a judgement that the skill is weak.",
+        "evidence_state": "not_assessed",
+        "evidence_state_reason": "no claim, assessment or attempt (unknown, not weak)",
+        "last_assessed_at": null,
+        "evidence_stale": false,
+        "evidence_conflict": false,
+        "evidence_notes": []
+      },
+      {
+        "_truncated": 5
+      }
+    ],
+    "demonstrated_weaknesses": [
+      "SQL"
+    ],
+    "missing_evidence": [],
+    "unassessed": [
+      "Excel",
+      "Pandas",
+      "Statistics",
+      {
+        "_truncated": 5
+      }
+    ],
+    "self_reported_use": [
+      "Python"
+    ],
+    "met": [],
+    "evidence_states": {
+      "demonstrated": [],
+      "partially_demonstrated": [
+        "SQL"
+      ],
+      "mentioned_unverified": [
+        "Python"
+      ],
+      "not_assessed": [
+        "Excel",
+        "Pandas",
+        "Statistics",
+        {
+          "_truncated": 5
+        }
+      ],
+      "missing_evidence": []
+    },
+    "as_of": null,
+    "notes": [
+      "Few skills have assessed or reviewed evidence; treat this report as provisional."
+    ],
+    "method": "deterministic rules (transparent scoring; no trained model)",
+    "score_meaning": "Evidence-based progress indicator for guidance; not a measure of employability or a hiring probability."
+  }
+}

@@ -1,0 +1,170 @@
+{
+  "request": {
+    "profile": {
+      "declared_skills": [
+        "Python",
+        "SQL"
+      ],
+      "target_role": "data_analyst",
+      "weekly_hours": 6,
+      "timeline_weeks": 6,
+      "budget_per_session_inr": 700,
+      "goals": "data analyst internship",
+      "evidence": [
+        {
+          "skill": "Python",
+          "source": "resume_evidence",
+          "strength": 0.65
+        },
+        {
+          "skill": "SQL",
+          "source": "task_review",
+          "strength": 0.3,
+          "ref_id": "t1"
+        }
+      ]
+    },
+    "role_id": "data_analyst",
+    "mentors": "<10 synthetic demo mentors>",
+    "availability": [
+      {
+        "day": "Sat",
+        "start": "10:00",
+        "end": "11:30"
+      }
+    ],
+    "limit": 3
+  },
+  "response": {
+    "ranked": [
+      {
+        "mentor_id": "dm2",
+        "score": 66.3,
+        "components": {
+          "gap_fit": 0.654,
+          "text": 0.298,
+          "role": 1.0,
+          "experience": 0.9,
+          "rating": 0.804
+        },
+        "matched_skills": [
+          {
+            "skill": "SQL",
+            "mentor_depth": 5,
+            "student_status": "demonstrated_weakness",
+            "priority": 100.0
+          },
+          {
+            "skill": "Data Analysis",
+            "mentor_depth": 5,
+            "student_status": "unassessed",
+            "priority": 70.0
+          },
+          {
+            "skill": "Data Visualization",
+            "mentor_depth": 4,
+            "student_status": "unassessed",
+            "priority": 67.2
+          },
+          {
+            "skill": "Excel",
+            "mentor_depth": 4,
+            "student_status": "unassessed",
+            "priority": 56.0
+          }
+        ],
+        "reasons": [
+          "Covers SQL (depth 5/5), a demonstrated weakness gap for you",
+          "Covers Data Analysis (depth 5/5), a unassessed gap for you",
+          "Covers Data Visualization (depth 4/5), a unassessed gap for you",
+          "Experienced in the Data Analyst (entry level) path"
+        ],
+        "unknowns": [],
+        "price_per_session_inr": 600.0,
+        "next_step": "Review the profile and, if you wish, request a session through the platform. This system has not booked or paid for anything."
+      },
+      {
+        "mentor_id": "dm4",
+        "score": 41.4,
+        "components": {
+          "gap_fit": 0.368,
+          "text": 0.16,
+          "role": 1.0,
+          "experience": 0.5
+        },
+        "matched_skills": [
+          {
+            "skill": "Data Analysis",
+            "mentor_depth": 4,
+            "student_status": "unassessed",
+            "priority": 70.0
+          },
+          {
+            "skill": "Statistics",
+            "mentor_depth": 5,
+            "student_status": "unassessed",
+            "priority": 61.6
+          },
+          {
+            "skill": "Pandas",
+            "mentor_depth": 3,
+            "student_status": "unassessed",
+            "priority": 56.0
+          }
+        ],
+        "reasons": [
+          "Covers Data Analysis (depth 4/5), a unassessed gap for you",
+          "Covers Statistics (depth 5/5), a unassessed gap for you",
+          "Covers Pandas (depth 3/5), a unassessed gap for you",
+          "Experienced in the Data Analyst (entry level) path"
+        ],
+        "unknowns": [],
+        "price_per_session_inr": 500.0,
+        "next_step": "Review the profile and, if you wish, request a session through the platform. This system has not booked or paid for anything."
+      }
+    ],
+    "excluded": [
+      {
+        "mentor_id": "dm1",
+        "reason": "price 800 exceeds budget 700"
+      },
+      {
+        "mentor_id": "dm3",
+        "reason": "price 1000 exceeds budget 700"
+      },
+      {
+        "mentor_id": "dm5",
+        "reason": "price 1200 exceeds budget 700"
+      },
+      {
+        "_truncated": 5
+      }
+    ],
+    "target_skills": [
+      {
+        "skill": "SQL",
+        "priority": 100.0,
+        "status": "demonstrated_weakness"
+      },
+      {
+        "skill": "Data Analysis",
+        "priority": 70.0,
+        "status": "unassessed"
+      },
+      {
+        "skill": "Data Visualization",
+        "priority": 67.2,
+        "status": "unassessed"
+      },
+      {
+        "_truncated": 3
+      }
+    ],
+    "warnings": [
+      "Some mentors are labelled demo/synthetic data and are not real people."
+    ],
+    "backend_status": "tfidf",
+    "booking_performed": false,
+    "score_meaning": "Relevance of a mentor's declared expertise to this student's current gaps; not a prediction of outcomes or a quality rating."
+  }
+}

@@ -1,0 +1,89 @@
+{
+  "disclaimer": "DEMONSTRATION DATA. Answers were written by the project author and the 'human_overall' ratings (0-100) were assigned by the same author BEFORE running the evaluator. They are a single rater's judgements, not a validated gold standard, so agreement metrics are sanity checks only. Replace with answers rated by several qualified reviewers.",
+  "overall": {
+    "n": 25,
+    "mae": 6.8,
+    "spearman": 0.952,
+    "within_15": 0.92
+  },
+  "technical": {
+    "n": 18,
+    "mae": 8.4,
+    "spearman": 0.946,
+    "within_15": 0.889
+  },
+  "hr": {
+    "n": 7,
+    "mae": 2.9,
+    "spearman": 0.991,
+    "within_15": 1.0
+  },
+  "mean_score_by_category": {
+    "generic": 22.5,
+    "misconception": 25.0,
+    "off_topic": 0.0,
+    "partial": 41.5,
+    "short": 9.3,
+    "strong": 85.7,
+    "stuffed": 34.0,
+    "vague": 22.1
+  },
+  "largest_errors": [
+    {
+      "id": "a16",
+      "category": "partial",
+      "human": 50,
+      "model": 29.3,
+      "abs_err": 20.7
+    },
+    {
+      "id": "a14",
+      "category": "misconception",
+      "human": 15,
+      "model": 35.2,
+      "abs_err": 20.2
+    },
+    {
+      "id": "a11",
+      "category": "partial",
+      "human": 50,
+      "model": 36.1,
+      "abs_err": 13.9
+    },
+    {
+      "id": "a07",
+      "category": "partial",
+      "human": 55,
+      "model": 43.2,
+      "abs_err": 11.8
+    },
+    {
+      "id": "a03",
+      "category": "stuffed",
+      "human": 25,
+      "model": 35.7,
+      "abs_err": 10.7
+    }
+  ],
+  "keyword_stuffing_check": {
+    "cases": [
+      {
+        "question_id": "ml_overfitting",
+        "stuffed": 35.7,
+        "strong": 92.5,
+        "stuffed_below_strong_by": 56.8
+      },
+      {
+        "question_id": "py_list_vs_tuple",
+        "stuffed": 32.3,
+        "strong": 98.8,
+        "stuffed_below_strong_by": 66.5
+      }
+    ],
+    "all_below_strong_by_20_plus": true
+  },
+  "confidence_counts": {
+    "medium": 17,
+    "low": 8
+  }
+}

@@ -1,0 +1,267 @@
+{
+  "_comment": "DEMONSTRATION question bank written by the project author for development and testing. Not a validated assessment instrument. Replace/extend with reviewed content before real use.",
+  "questions": [
+    {
+      "id": "py_list_vs_tuple", "type": "technical", "roles": ["any"], "topic": "python", "difficulty": 1,
+      "text": "What is the difference between a list and a tuple in Python, and when would you use each?",
+      "skills": ["Python"],
+      "reference_answer": "Lists are mutable so elements can be changed, added or removed after creation, while tuples are immutable and cannot be modified. Because tuples are immutable and hashable they can be used as dictionary keys or set elements, which lists cannot. Use a list for a collection that changes, and a tuple for a fixed record such as coordinates.",
+      "concepts": [
+        {"name": "mutability", "aliases": ["mutable", "immutable", "cannot be changed", "can be modified", "can't be changed", "cannot be modified", "unchangeable"], "weight": 3, "explanation": "lists are mutable, tuples are immutable"},
+        {"name": "hashability", "aliases": ["hashable", "dictionary key", "dict key", "set element", "used as keys", "as a key"], "weight": 2, "explanation": "tuples can be dict keys because they are hashable"},
+        {"name": "use cases", "aliases": ["fixed", "record", "coordinates", "collection that changes", "heterogeneous", "read-only", "constant data"], "weight": 1, "required": false, "explanation": "choose by whether data should change"}
+      ],
+      "misconceptions": [{"pattern": "tuples?\\s+(are|is)\\s+mutable", "explanation": "Tuples are immutable."}],
+      "follow_ups": {"hashability": "Why can a tuple be used as a dictionary key but a list cannot?", "mutability": "What happens if you try to assign to an element of a tuple?"}
+    },
+    {
+      "id": "sql_join_types", "type": "technical", "roles": ["data_analyst", "full_stack_developer", "ml_engineer"], "topic": "sql", "difficulty": 1,
+      "text": "Explain INNER JOIN versus LEFT JOIN in SQL with an example of when each is appropriate.",
+      "skills": ["SQL"],
+      "reference_answer": "An inner join returns only rows that have matching values in both tables. A left join returns every row from the left table and the matching rows from the right table, filling the right-side columns with NULL where there is no match. Use an inner join when you only want matched records, and a left join when you must keep all records from the left table, for example all customers including those with no orders.",
+      "concepts": [
+        {"name": "inner join matches only", "aliases": ["inner join returns only", "only matching", "only the matching", "matching rows in both", "matches in both", "rows that match"], "weight": 3, "explanation": "inner join keeps only matched rows"},
+        {"name": "left join keeps all left rows", "aliases": ["all rows from the left", "all the rows from the left", "every row from the left", "all records from the left", "all rows of the left", "keeps all left", "all customers"], "weight": 3, "explanation": "left join keeps all left rows"},
+        {"name": "null for unmatched", "aliases": ["null"], "weight": 2, "explanation": "unmatched right-side columns are NULL"},
+        {"name": "example", "aliases": ["for example", "for instance", "e.g.", "customers and orders", "customers without orders"], "weight": 1, "required": false, "explanation": "a concrete scenario"}
+      ],
+      "misconceptions": [
+        {"pattern": "left join\\s+(returns|gives|keeps)\\s+(only\\s+)?(the\\s+)?matching", "explanation": "A left join keeps all left rows, not only matching ones."},
+        {"pattern": "inner join\\s+(returns|gives|keeps)\\s+all", "explanation": "An inner join returns only matched rows."}
+      ],
+      "follow_ups": {"null for unmatched": "What value do unmatched right-side columns take in a LEFT JOIN, and how would you filter for them?"}
+    },
+    {
+      "id": "sql_group_having", "type": "technical", "roles": ["data_analyst", "full_stack_developer"], "topic": "sql", "difficulty": 2,
+      "text": "What is the difference between WHERE and HAVING in SQL?",
+      "skills": ["SQL"],
+      "reference_answer": "WHERE filters individual rows before any grouping or aggregation happens, so it cannot use aggregate functions like SUM or COUNT. HAVING filters groups after GROUP BY has aggregated the rows, so it can use aggregate functions. For example, WHERE selects orders from 2025, then GROUP BY customer, then HAVING keeps customers whose total is above 1000.",
+      "concepts": [
+        {"name": "where filters rows before grouping", "aliases": ["before grouping", "before group by", "filters rows", "filters individual rows", "row level", "row-level"], "weight": 3, "explanation": "WHERE acts on rows before aggregation"},
+        {"name": "having filters groups after aggregation", "aliases": ["after grouping", "after group by", "filters groups", "after aggregation", "group level", "on aggregated"], "weight": 3, "explanation": "HAVING acts on groups after aggregation"},
+        {"name": "aggregate functions", "aliases": ["aggregate", "sum", "count", "avg"], "weight": 2, "explanation": "only HAVING can use aggregates"}
+      ],
+      "misconceptions": [{"pattern": "where\\s+(can|is used to)\\s+(filter\\s+)?(use\\s+)?(aggregate|groups)", "explanation": "WHERE cannot filter on aggregates; HAVING does."}]
+    },
+    {
+      "id": "ml_overfitting", "type": "technical", "roles": ["ml_engineer", "data_analyst"], "topic": "ml_basics", "difficulty": 1,
+      "text": "What is overfitting in machine learning, why does it happen, and how can you reduce it?",
+      "skills": ["Machine Learning"],
+      "reference_answer": "Overfitting is when a model learns the training data too closely, including noise, so it performs well on training data but poorly on unseen data. It happens when the model is too complex for the amount of data, or the data is noisy or small. It can be reduced with more data, a simpler model, regularization, cross-validation, early stopping or dropout.",
+      "concepts": [
+        {"name": "poor generalisation", "aliases": ["unseen data", "new data", "test data", "generalize", "generalise", "generalization", "generalisation", "memorize", "memorise", "memorizes", "memorises"], "weight": 3, "explanation": "good on training data, bad on unseen data"},
+        {"name": "causes", "aliases": ["too complex", "complex model", "model complexity", "noise", "small dataset", "too little data", "too many features", "too many parameters"], "weight": 2, "explanation": "complexity, noise or little data"},
+        {"name": "remedies", "aliases": ["regularization", "regularisation", "cross-validation", "cross validation", "more data", "early stopping", "dropout", "simpler model", "pruning", "l1", "l2"], "weight": 2, "explanation": "techniques that reduce overfitting"}
+      ],
+      "misconceptions": [{"pattern": "overfitting\\s+(is|means|happens)\\s+(when\\s+)?(the\\s+)?model\\s+(performs|does|works)\\s+(badly|poorly|bad)\\s+on\\s+(the\\s+)?training", "explanation": "Overfitting is good training performance with poor performance on unseen data."}],
+      "follow_ups": {"remedies": "Pick one technique to reduce overfitting and explain why it works.", "poor generalisation": "How would you detect overfitting from training and validation curves?"}
+    },
+    {
+      "id": "ml_bias_variance", "type": "technical", "roles": ["ml_engineer"], "topic": "ml_basics", "difficulty": 2,
+      "text": "Explain the bias-variance trade-off.",
+      "skills": ["Machine Learning"],
+      "reference_answer": "Bias is error from overly simple assumptions, which causes underfitting. Variance is error from sensitivity to the particular training data, which causes overfitting. Making a model more complex typically lowers bias but raises variance, so you look for the complexity that minimises total error on unseen data.",
+      "concepts": [
+        {"name": "bias and underfitting", "aliases": ["underfit", "underfitting", "too simple", "simplistic assumptions", "high bias"], "weight": 2, "explanation": "high bias means underfitting"},
+        {"name": "variance and overfitting", "aliases": ["overfit", "overfitting", "sensitive to training", "high variance", "sensitivity to"], "weight": 2, "explanation": "high variance means overfitting"},
+        {"name": "trade-off with complexity", "aliases": ["trade-off", "tradeoff", "trade off", "as complexity increases", "more complex", "model complexity"], "weight": 3, "explanation": "complexity lowers bias but raises variance"},
+        {"name": "total error", "aliases": ["total error", "generalization error", "generalisation error", "minimise", "minimize", "sweet spot", "balance"], "weight": 1, "required": false, "explanation": "aim to minimise total error"}
+      ],
+      "misconceptions": [{"pattern": "high bias\\s+(means|is|causes)\\s+overfit", "explanation": "High bias corresponds to underfitting; high variance to overfitting."}]
+    },
+    {
+      "id": "ml_precision_recall", "type": "technical", "roles": ["ml_engineer", "data_analyst"], "topic": "evaluation", "difficulty": 2,
+      "text": "What are precision and recall, and why can accuracy be misleading on imbalanced data?",
+      "skills": ["Model Evaluation", "Machine Learning"],
+      "reference_answer": "Precision is the fraction of predicted positives that are actually positive, TP divided by TP plus FP. Recall is the fraction of actual positives that the model finds, TP divided by TP plus FN. On imbalanced data a model that always predicts the majority class can have high accuracy but zero recall, so precision, recall and F1 give a better picture, and there is a trade-off controlled by the decision threshold.",
+      "concepts": [
+        {"name": "precision definition", "aliases": ["predicted positives", "tp / (tp + fp)", "tp/(tp+fp)", "of the predicted positive", "of those predicted positive", "correct among predicted"], "weight": 2, "explanation": "precision = TP/(TP+FP)"},
+        {"name": "recall definition", "aliases": ["actual positives", "tp / (tp + fn)", "tp/(tp+fn)", "of the actual positive", "true positive rate", "found out of all"], "weight": 2, "explanation": "recall = TP/(TP+FN)"},
+        {"name": "accuracy misleading when imbalanced", "aliases": ["imbalanced", "imbalance", "majority class", "skewed", "class imbalance"], "weight": 3, "explanation": "accuracy can be high while missing the minority class"},
+        {"name": "trade-off or f1", "aliases": ["f1", "trade-off", "tradeoff", "threshold"], "weight": 1, "required": false, "explanation": "precision and recall trade off"}
+      ],
+      "misconceptions": [{"pattern": "precision\\s*(=|is|means)\\s*tp\\s*/\\s*\\(?\\s*tp\\s*\\+\\s*fn", "explanation": "Precision uses false positives in the denominator; recall uses false negatives."}]
+    },
+    {
+      "id": "ml_train_test_split", "type": "technical", "roles": ["ml_engineer", "data_analyst"], "topic": "evaluation", "difficulty": 1,
+      "text": "Why do we split data into training and test sets, and what is data leakage?",
+      "skills": ["Model Evaluation"],
+      "reference_answer": "We hold out a test set that the model never sees during training so we can estimate how it performs on unseen data. Data leakage is when information from the test or future data influences training, for example scaling using statistics from the whole dataset, which makes results look better than they will be in practice. Hyperparameters are tuned on a validation set or with cross-validation, and the test set is used once at the end.",
+      "concepts": [
+        {"name": "held-out unseen data", "aliases": ["unseen data", "never seen", "hold out", "held out", "held-out", "estimate performance", "generalization", "generalisation"], "weight": 3, "explanation": "test set estimates performance on unseen data"},
+        {"name": "data leakage", "aliases": ["leakage", "leak", "information from the test", "future data"], "weight": 3, "explanation": "test information influencing training inflates results"},
+        {"name": "validation or cross-validation", "aliases": ["validation set", "cross-validation", "cross validation", "validation data", "tune hyperparameters"], "weight": 2, "required": false, "explanation": "tune on validation, not test"}
+      ],
+      "misconceptions": [{"pattern": "tune\\s+(the\\s+)?(hyper-?parameters\\s+)?(on|using)\\s+(the\\s+)?test\\s+(set|data)", "explanation": "Tuning on the test set leaks information; use a validation set."}]
+    },
+    {
+      "id": "stats_p_value", "type": "technical", "roles": ["data_analyst", "ml_engineer"], "topic": "statistics", "difficulty": 2,
+      "text": "What does a p-value tell you in a hypothesis test?",
+      "skills": ["Statistics"],
+      "reference_answer": "The p-value is the probability of observing data at least as extreme as what we saw, assuming the null hypothesis is true. A small p-value, below a chosen significance level such as 0.05, is evidence against the null hypothesis. It is not the probability that the null hypothesis is true, and it does not measure the size or importance of an effect.",
+      "concepts": [
+        {"name": "probability under the null", "aliases": ["assuming the null", "if the null", "null hypothesis is true", "under the null", "given the null"], "weight": 3, "explanation": "p-value is computed assuming the null is true"},
+        {"name": "as extreme or more extreme data", "aliases": ["as extreme", "more extreme", "at least as extreme", "observed data", "observing"], "weight": 2, "explanation": "probability of data at least as extreme"},
+        {"name": "significance threshold", "aliases": ["significance level", "alpha", "0.05", "threshold", "reject the null"], "weight": 2, "explanation": "compared to alpha to decide"},
+        {"name": "not effect size", "aliases": ["effect size", "not the probability that", "does not measure", "doesn't measure", "practical significance"], "weight": 1, "required": false, "explanation": "p-value is not effect size"}
+      ],
+      "misconceptions": [{"pattern": "p[- ]?value\\s+(is|means|tells)[^.]{0,40}probability\\s+(that\\s+)?(the\\s+)?null\\s+(hypothesis\\s+)?is\\s+(true|correct)", "explanation": "A p-value is not the probability that the null hypothesis is true."}]
+    },
+    {
+      "id": "stats_mean_median", "type": "technical", "roles": ["data_analyst"], "topic": "statistics", "difficulty": 1,
+      "text": "When would you report the median instead of the mean?",
+      "skills": ["Statistics"],
+      "reference_answer": "The mean is sensitive to outliers and skewed data, while the median is robust because it depends only on the middle value. For skewed data such as incomes or house prices, the median better represents a typical value, so I would report the median or both.",
+      "concepts": [
+        {"name": "outlier sensitivity", "aliases": ["outlier", "outliers", "extreme values", "sensitive to", "robust"], "weight": 3, "explanation": "mean is sensitive to outliers; median is robust"},
+        {"name": "skewed distributions", "aliases": ["skewed", "skewness", "long tail", "income", "house prices", "salary", "salaries"], "weight": 2, "explanation": "median represents typical value in skewed data"},
+        {"name": "typical value", "aliases": ["typical", "middle value", "representative", "central tendency"], "weight": 1, "required": false, "explanation": "median is the middle value"}
+      ],
+      "misconceptions": [{"pattern": "median\\s+(is|are)\\s+(more\\s+)?sensitive\\s+to\\s+outliers", "explanation": "The mean is sensitive to outliers; the median is robust."}]
+    },
+    {
+      "id": "js_closures", "type": "technical", "roles": ["full_stack_developer"], "topic": "javascript", "difficulty": 2,
+      "text": "What is a closure in JavaScript and what is it useful for?",
+      "skills": ["JavaScript"],
+      "reference_answer": "A closure is a function together with the variables from its surrounding lexical scope that it keeps access to even after the outer function has returned. Closures are useful for private state such as counters, for callbacks and event handlers, and for function factories.",
+      "concepts": [
+        {"name": "lexical scope retention", "aliases": ["lexical scope", "outer function", "surrounding scope", "remembers", "retains access", "has access to variables", "enclosing"], "weight": 3, "explanation": "inner function keeps access to outer variables"},
+        {"name": "persists after outer returns", "aliases": ["after the outer function", "after it returns", "even after", "outer function has returned", "returned"], "weight": 2, "explanation": "access persists after the outer function returns"},
+        {"name": "uses", "aliases": ["private", "counter", "callback", "event handler", "factory", "data privacy", "encapsulation"], "weight": 2, "explanation": "private state, callbacks, factories"}
+      ],
+      "misconceptions": []
+    },
+    {
+      "id": "rest_http_methods", "type": "technical", "roles": ["full_stack_developer"], "topic": "rest_api", "difficulty": 1,
+      "text": "Describe the main HTTP methods used in a REST API and what each is for.",
+      "skills": ["REST APIs"],
+      "reference_answer": "GET reads a resource and is safe and idempotent. POST creates a new resource and is not idempotent. PUT replaces a resource and is idempotent, PATCH partially updates it, and DELETE removes it. Responses use status codes such as 200 for success, 201 for created and 404 for not found.",
+      "concepts": [
+        {"name": "GET reads", "aliases": ["get is used to read", "get reads", "get retrieves", "get to read", "get request to fetch", "get fetches", "to retrieve", "to read"], "weight": 2, "explanation": "GET retrieves resources"},
+        {"name": "POST creates", "aliases": ["post creates", "post is used to create", "post to create", "create a new", "creates a new"], "weight": 2, "explanation": "POST creates resources"},
+        {"name": "PUT or PATCH updates", "aliases": ["put replaces", "put updates", "patch", "put is used to update", "update", "replace"], "weight": 2, "explanation": "PUT replaces, PATCH updates partially"},
+        {"name": "DELETE removes", "aliases": ["delete removes", "delete deletes", "delete is used to", "remove a resource"], "weight": 1, "explanation": "DELETE removes resources"},
+        {"name": "idempotency or status codes", "aliases": ["idempotent", "status code", "200", "201", "404"], "weight": 1, "required": false, "explanation": "idempotency and status codes"}
+      ],
+      "misconceptions": [{"pattern": "\\bget\\s+(is|can be)\\s+used\\s+to\\s+(create|delete|update)", "explanation": "GET should only read; it must not change data."}]
+    },
+    {
+      "id": "react_state_props", "type": "technical", "roles": ["full_stack_developer"], "topic": "react", "difficulty": 1,
+      "text": "What is the difference between props and state in React?",
+      "skills": ["React"],
+      "reference_answer": "Props are inputs passed from a parent component to a child and are read-only for the child. State is data owned and managed inside a component that can change over time, and updating it with useState or setState triggers a re-render. Data flows one way, from parent to child through props.",
+      "concepts": [
+        {"name": "props passed from parent, read-only", "aliases": ["passed from the parent", "passed down", "from parent to child", "read-only", "read only", "immutable", "cannot be modified"], "weight": 3, "explanation": "props are read-only inputs from the parent"},
+        {"name": "state is internal and changes", "aliases": ["internal", "managed within", "owned by the component", "local", "usestate", "setstate", "can change"], "weight": 3, "explanation": "state is internal, mutable data"},
+        {"name": "re-render", "aliases": ["re-render", "rerender", "re-renders", "triggers a render", "updates the ui"], "weight": 2, "explanation": "state updates trigger re-render"}
+      ],
+      "misconceptions": [{"pattern": "props\\s+(can be|are)\\s+(modified|changed|mutated)\\s+by\\s+(the\\s+)?child", "explanation": "A child must not modify its props."}]
+    },
+    {
+      "id": "git_merge_rebase", "type": "technical", "roles": ["full_stack_developer", "ml_engineer"], "topic": "git", "difficulty": 2,
+      "text": "What is the difference between git merge and git rebase?",
+      "skills": ["Git"],
+      "reference_answer": "Merge combines branches by creating a merge commit and preserves the original history. Rebase replays your commits on top of another branch, rewriting history to produce a linear history. Because rebase rewrites commits, you should not rebase branches that others have already pulled.",
+      "concepts": [
+        {"name": "merge commit preserves history", "aliases": ["merge commit", "preserves history", "keeps history", "non-destructive"], "weight": 3, "explanation": "merge preserves history with a merge commit"},
+        {"name": "rebase rewrites for linear history", "aliases": ["linear history", "rewrites history", "replays", "replay", "on top of", "rewrite"], "weight": 3, "explanation": "rebase replays commits to give linear history"},
+        {"name": "avoid rebasing shared branches", "aliases": ["shared branch", "public branch", "already pushed", "already pulled", "golden rule", "force push"], "weight": 2, "required": false, "explanation": "do not rebase shared history"}
+      ],
+      "misconceptions": []
+    },
+    {
+      "id": "dsa_hash_table", "type": "technical", "roles": ["any"], "topic": "data_structures", "difficulty": 2,
+      "text": "How does a hash table work, and what happens when two keys collide?",
+      "skills": ["Data Structures"],
+      "reference_answer": "A hash table applies a hash function to a key to compute an index into an array of buckets, giving average O(1) lookup, insertion and deletion. When two keys hash to the same index that is a collision, handled by chaining, where each bucket holds a list, or by open addressing, which probes for another slot. In the worst case with many collisions, operations degrade to O(n).",
+      "concepts": [
+        {"name": "hash function to index", "aliases": ["hash function", "hashes the key", "index", "bucket", "array"], "weight": 3, "explanation": "hash function maps key to a bucket index"},
+        {"name": "collision handling", "aliases": ["chaining", "open addressing", "linear probing", "probing", "linked list", "separate chaining"], "weight": 3, "explanation": "collisions resolved by chaining or probing"},
+        {"name": "complexity", "aliases": ["o(1)", "constant time", "average case", "o(n)", "worst case"], "weight": 2, "explanation": "average O(1), worst O(n)"}
+      ],
+      "misconceptions": [{"pattern": "hash\\s*(table|map)s?\\s+(always|guarantee)[^.]{0,30}o\\(1\\)", "explanation": "O(1) is the average case; the worst case is O(n)."}]
+    },
+    {
+      "id": "dbms_normalization", "type": "technical", "roles": ["full_stack_developer", "data_analyst"], "topic": "dbms", "difficulty": 2,
+      "text": "What is database normalization and why is it used?",
+      "skills": ["DBMS"],
+      "reference_answer": "Normalization organises tables to reduce redundancy and avoid insert, update and delete anomalies, using normal forms such as 1NF, 2NF and 3NF. The trade-off is that more joins are needed, so some systems denormalize selected tables to improve read performance.",
+      "concepts": [
+        {"name": "reduces redundancy", "aliases": ["redundancy", "duplicate data", "duplication", "repeated data"], "weight": 3, "explanation": "normalization removes redundant data"},
+        {"name": "anomalies", "aliases": ["anomaly", "anomalies", "insert anomaly", "update anomaly", "delete anomaly", "consistency", "integrity"], "weight": 3, "explanation": "prevents insert/update/delete anomalies"},
+        {"name": "normal forms", "aliases": ["1nf", "2nf", "3nf", "bcnf", "normal form", "normal forms"], "weight": 2, "explanation": "1NF, 2NF, 3NF"},
+        {"name": "denormalization trade-off", "aliases": ["denormalize", "denormalise", "denormalization", "denormalisation", "more joins", "trade-off", "read performance"], "weight": 1, "required": false, "explanation": "trade-off with join cost"}
+      ],
+      "misconceptions": []
+    },
+    {
+      "id": "oop_pillars", "type": "technical", "roles": ["any"], "topic": "oop", "difficulty": 1,
+      "text": "Explain the four pillars of object-oriented programming.",
+      "skills": ["OOP"],
+      "reference_answer": "Encapsulation bundles data and methods and hides internal details behind an interface. Abstraction exposes only essential behaviour. Inheritance lets a class reuse and extend another class. Polymorphism lets different classes be used through the same interface with different behaviour.",
+      "concepts": [
+        {"name": "encapsulation", "aliases": ["encapsulation", "hides internal", "bundles data", "private"], "weight": 2, "explanation": "bundle data and methods, hide details"},
+        {"name": "abstraction", "aliases": ["abstraction", "essential", "hides complexity"], "weight": 2, "explanation": "expose essential behaviour"},
+        {"name": "inheritance", "aliases": ["inheritance", "inherit", "extends", "subclass", "reuse"], "weight": 2, "explanation": "reuse and extend classes"},
+        {"name": "polymorphism", "aliases": ["polymorphism", "overriding", "overloading", "same interface"], "weight": 2, "explanation": "same interface, different behaviour"}
+      ],
+      "misconceptions": []
+    },
+    {
+      "id": "da_data_cleaning", "type": "technical", "roles": ["data_analyst"], "topic": "data_analysis", "difficulty": 1,
+      "text": "You receive a messy dataset. What steps do you take to clean it before analysis?",
+      "skills": ["Data Analysis"],
+      "reference_answer": "I first profile the data to see types, ranges and missing values. I handle missing values by imputing or dropping depending on how much is missing and why, remove duplicates, fix inconsistent formats and categories, and investigate outliers rather than deleting them blindly. Then I validate the result against known totals and document every change so the work is reproducible.",
+      "concepts": [
+        {"name": "missing values", "aliases": ["missing values", "missing data", "impute", "imputation", "null values", "drop rows", "nan"], "weight": 3, "explanation": "handle missing data deliberately"},
+        {"name": "duplicates and inconsistent formats", "aliases": ["duplicate", "duplicates", "inconsistent", "standardize", "standardise", "formats", "typos", "data types"], "weight": 2, "explanation": "remove duplicates, fix formats"},
+        {"name": "outliers investigated", "aliases": ["outlier", "outliers", "anomalies", "investigate"], "weight": 2, "explanation": "investigate outliers"},
+        {"name": "validate and document", "aliases": ["validate", "validation", "document", "reproducible", "log changes", "sanity check", "check totals"], "weight": 2, "explanation": "validate and document changes"}
+      ],
+      "misconceptions": [{"pattern": "(delete|remove|drop)\\s+(all\\s+)?(the\\s+)?outliers?\\s+(always|without)", "explanation": "Outliers should be investigated, not removed blindly."}]
+    },
+    {
+      "id": "da_viz_choice", "type": "technical", "roles": ["data_analyst"], "topic": "data_visualization", "difficulty": 1,
+      "text": "How do you choose an appropriate chart type for a dataset?",
+      "skills": ["Data Visualization"],
+      "reference_answer": "I start from the question being answered. Bar charts compare categories, line charts show trends over time, scatter plots show the relationship between two numeric variables, and histograms show distributions. I avoid cluttered or 3D charts, label axes and units, and keep the audience in mind.",
+      "concepts": [
+        {"name": "start from the question", "aliases": ["question", "message", "audience", "purpose", "what story"], "weight": 2, "explanation": "choice depends on the question and audience"},
+        {"name": "chart-to-task mapping", "aliases": ["bar chart", "line chart", "scatter", "histogram", "trends over time", "compare categories", "distribution", "relationship"], "weight": 3, "explanation": "bar for categories, line for time, scatter for relationships"},
+        {"name": "clarity practices", "aliases": ["label", "axes", "units", "clutter", "avoid 3d", "clean", "colour", "color"], "weight": 1, "required": false, "explanation": "label axes, avoid clutter"}
+      ],
+      "misconceptions": []
+    },
+
+    {
+      "id": "hr_tell_me_about_yourself", "type": "hr", "roles": ["any"], "topic": "self_introduction", "difficulty": 1,
+      "text": "Tell me about yourself.",
+      "hr_focus": ["education", "studying", "student", "skills", "project", "internship", "interested", "goal", "role", "experience", "learning"]
+    },
+    {
+      "id": "hr_strengths_weaknesses", "type": "hr", "roles": ["any"], "topic": "self_awareness", "difficulty": 1,
+      "text": "What are your strengths and one weakness you are working on?",
+      "hr_focus": ["strength", "good at", "weakness", "improve", "improving", "working on", "learned", "feedback", "practice"]
+    },
+    {
+      "id": "hr_team_conflict", "type": "hr", "roles": ["any"], "topic": "teamwork", "difficulty": 2,
+      "text": "Describe a time you had a disagreement in a team and how you handled it.",
+      "hr_focus": ["team", "disagreement", "conflict", "resolved", "listened", "discussed", "compromise", "communicate", "agreed", "outcome"]
+    },
+    {
+      "id": "hr_failure_learning", "type": "hr", "roles": ["any"], "topic": "resilience", "difficulty": 2,
+      "text": "Tell me about a time something you worked on did not go as planned. What did you learn?",
+      "hr_focus": ["mistake", "failed", "failure", "went wrong", "learned", "learnt", "changed", "next time", "improved", "lesson"]
+    },
+    {
+      "id": "hr_why_this_role", "type": "hr", "roles": ["any"], "topic": "motivation", "difficulty": 1,
+      "text": "Why are you interested in this role?",
+      "hr_focus": ["role", "interest", "interested", "skills", "grow", "growth", "learn", "contribute", "company", "career", "goal"]
+    },
+    {
+      "id": "hr_initiative_leadership", "type": "hr", "roles": ["any"], "topic": "leadership", "difficulty": 2,
+      "text": "Give an example of a time you took the initiative or led others.",
+      "hr_focus": ["led", "initiative", "organised", "organized", "responsibility", "team", "decided", "delegated", "outcome", "result"]
+    }
+  ]
+}
